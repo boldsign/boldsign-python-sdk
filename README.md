@@ -216,6 +216,7 @@ Class | Method | HTTP request | Description
  - [Font](docs/Font.md)
  - [FormField](docs/FormField.md)
  - [FormGroup](docs/FormGroup.md)
+ - [FormulaFieldSettings](docs/FormulaFieldSettings.md)
  - [IdVerification](docs/IdVerification.md)
  - [IdentityVerificationSettings](docs/IdentityVerificationSettings.md)
  - [ImageInfo](docs/ImageInfo.md)

@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **form_fields** | [**List[TemplateFormFields]**](TemplateFormFields.md) |  | [optional] 
 **enable_edit_recipients** | **bool** |  | [optional] 
 **enable_delete_recipients** | **bool** |  | [optional] 
+**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 
 ## Example
 

@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **offset** | [**TextTagOffset**](TextTagOffset.md) |  | [optional] 
 **label** | **str** |  | [optional] 
 **tab_index** | **int** |  | [optional] 
+**formula_field_settings** | [**FormulaFieldSettings**](FormulaFieldSettings.md) |  | [optional] 
 
 ## Example
 

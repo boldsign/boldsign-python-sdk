@@ -71,8 +71,8 @@ class CustomFormField(BaseModel):
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company']):
-            raise ValueError("must be one of enum values ('Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company')")
+        if value not in set(['Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula']):
+            raise ValueError("must be one of enum values ('Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula')")
         return value
 
     @field_validator('font')

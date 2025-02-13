@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.font import Font
+from boldsign.models.formula_field_settings import FormulaFieldSettings
 from boldsign.models.image_info import ImageInfo
 from boldsign.models.size import Size
 from boldsign.models.text_tag_offset import TextTagOffset
@@ -60,13 +61,14 @@ class TextTagDefinition(BaseModel):
     offset: Optional[TextTagOffset] = None
     label: Optional[StrictStr] = None
     tab_index: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=-1)]] = Field(default=None, alias="tabIndex")
-    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex"]
+    formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
+    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "formulaFieldSettings"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company']):
-            raise ValueError("must be one of enum values ('Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company')")
+        if value not in set(['Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula']):
+            raise ValueError("must be one of enum values ('Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula')")
         return value
 
     model_config = ConfigDict(
@@ -158,7 +160,8 @@ class TextTagDefinition(BaseModel):
             "isReadOnly": obj.get("isReadOnly"),
             "offset": TextTagOffset.from_dict(obj["offset"]) if obj.get("offset") is not None else None,
             "label": obj.get("label"),
-            "tabIndex": obj.get("tabIndex")
+            "tabIndex": obj.get("tabIndex"),
+            "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None
         })
         return _obj
 
@@ -198,6 +201,7 @@ class TextTagDefinition(BaseModel):
             "offset": "(TextTagOffset,)",
             "label": "(str,)",
             "tab_index": "(int,)",
+            "formula_field_settings": "(FormulaFieldSettings,)",
         }
 
     @classmethod

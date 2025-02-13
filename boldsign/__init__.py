@@ -103,6 +103,7 @@ from boldsign.models.file_info import FileInfo
 from boldsign.models.font import Font
 from boldsign.models.form_field import FormField
 from boldsign.models.form_group import FormGroup
+from boldsign.models.formula_field_settings import FormulaFieldSettings
 from boldsign.models.id_verification import IdVerification
 from boldsign.models.identity_verification_settings import IdentityVerificationSettings
 from boldsign.models.image_info import ImageInfo

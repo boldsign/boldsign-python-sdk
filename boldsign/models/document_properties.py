@@ -29,6 +29,7 @@ from boldsign.models.document_reassign import DocumentReassign
 from boldsign.models.document_sender_detail import DocumentSenderDetail
 from boldsign.models.document_signer_details import DocumentSignerDetails
 from boldsign.models.form_group import FormGroup
+from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.reminder_settings import ReminderSettings
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
@@ -78,7 +79,8 @@ class DocumentProperties(BaseModel):
     meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
     enable_audit_trail_localization: Optional[StrictBool] = Field(default=None, alias="enableAuditTrailLocalization")
     download_file_name: Optional[StrictStr] = Field(default=None, alias="downloadFileName")
-    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "enableAuditTrailLocalization", "downloadFileName"]
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
+    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "enableAuditTrailLocalization", "downloadFileName", "recipientNotificationSettings"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -224,7 +226,8 @@ class DocumentProperties(BaseModel):
             "documentDownloadOption": obj.get("documentDownloadOption"),
             "metaData": obj.get("metaData"),
             "enableAuditTrailLocalization": obj.get("enableAuditTrailLocalization"),
-            "downloadFileName": obj.get("downloadFileName")
+            "downloadFileName": obj.get("downloadFileName"),
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None
         })
         return _obj
 
@@ -279,6 +282,7 @@ class DocumentProperties(BaseModel):
             "meta_data": "(Dict[str, Optional[str]],)",
             "enable_audit_trail_localization": "(bool,)",
             "download_file_name": "(str,)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
         }
 
     @classmethod

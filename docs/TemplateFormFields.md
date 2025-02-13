@@ -41,6 +41,7 @@ Name | Type | Description | Notes
 **hyperlink_text** | **str** |  | [optional] 
 **background_hex_color** | **str** |  | [optional] 
 **tab_index** | **int** |  | [optional] 
+**formula_field_settings** | [**FormulaFieldSettings**](FormulaFieldSettings.md) |  | [optional] 
 
 ## Example
 

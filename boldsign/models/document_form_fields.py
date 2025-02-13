@@ -24,6 +24,7 @@ from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.conditional_rule import ConditionalRule
 from boldsign.models.editable_date_field_settings import EditableDateFieldSettings
 from boldsign.models.file_info import FileInfo
+from boldsign.models.formula_field_settings import FormulaFieldSettings
 from boldsign.models.image_info import ImageInfo
 from boldsign.models.rectangle import Rectangle
 from typing import Optional, Set, Tuple
@@ -71,7 +72,8 @@ class DocumentFormFields(BaseModel):
     character_spacing: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="characterSpacing")
     background_hex_color: Optional[StrictStr] = Field(default=None, alias="backgroundHexColor")
     tab_index: Optional[StrictInt] = Field(default=None, alias="tabIndex")
-    __properties: ClassVar[List[str]] = ["id", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontColor", "isUnderline", "isItalic", "isBold", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "fileInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "bounds", "pageNumber", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex"]
+    formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
+    __properties: ClassVar[List[str]] = ["id", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontColor", "isUnderline", "isItalic", "isBold", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "fileInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "bounds", "pageNumber", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings"]
 
     @field_validator('validationtype')
     def validationtype_validate_enum(cls, value):
@@ -204,7 +206,8 @@ class DocumentFormFields(BaseModel):
             "textDirection": obj.get("textDirection"),
             "characterSpacing": obj.get("characterSpacing"),
             "backgroundHexColor": obj.get("backgroundHexColor"),
-            "tabIndex": obj.get("tabIndex")
+            "tabIndex": obj.get("tabIndex"),
+            "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None
         })
         return _obj
 
@@ -256,6 +259,7 @@ class DocumentFormFields(BaseModel):
             "character_spacing": "(float,)",
             "background_hex_color": "(str,)",
             "tab_index": "(int,)",
+            "formula_field_settings": "(FormulaFieldSettings,)",
         }
 
     @classmethod

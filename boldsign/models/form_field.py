@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.conditional_rule import ConditionalRule
 from boldsign.models.editable_date_field_settings import EditableDateFieldSettings
+from boldsign.models.formula_field_settings import FormulaFieldSettings
 from boldsign.models.image_info import ImageInfo
 from boldsign.models.rectangle import Rectangle
 from typing import Optional, Set, Tuple
@@ -72,13 +73,14 @@ class FormField(BaseModel):
     character_spacing: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="characterSpacing")
     background_hex_color: Optional[StrictStr] = Field(default=None, alias="backgroundHexColor")
     tab_index: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=-1)]] = Field(default=None, alias="tabIndex")
-    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex"]
+    formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
+    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings"]
 
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company']):
-            raise ValueError("must be one of enum values ('Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company')")
+        if value not in set(['Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula']):
+            raise ValueError("must be one of enum values ('Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula')")
         return value
 
     @field_validator('font')
@@ -223,7 +225,8 @@ class FormField(BaseModel):
             "textDirection": obj.get("textDirection"),
             "characterSpacing": obj.get("characterSpacing"),
             "backgroundHexColor": obj.get("backgroundHexColor"),
-            "tabIndex": obj.get("tabIndex")
+            "tabIndex": obj.get("tabIndex"),
+            "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None
         })
         return _obj
 
@@ -276,6 +279,7 @@ class FormField(BaseModel):
             "character_spacing": "(float,)",
             "background_hex_color": "(str,)",
             "tab_index": "(int,)",
+            "formula_field_settings": "(FormulaFieldSettings,)",
         }
 
     @classmethod

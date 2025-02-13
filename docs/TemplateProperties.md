@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **template_labels** | **List[str]** |  | [optional] 
 **behalf_of** | [**BehalfOf**](BehalfOf.md) |  | [optional] 
 **document_download_option** | **str** |  | [optional] 
+**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 
 ## Example
 

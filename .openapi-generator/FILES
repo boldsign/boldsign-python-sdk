@@ -82,6 +82,7 @@ boldsign/models/file_info.py
 boldsign/models/font.py
 boldsign/models/form_field.py
 boldsign/models/form_group.py
+boldsign/models/formula_field_settings.py
 boldsign/models/id_verification.py
 boldsign/models/identity_verification_settings.py
 boldsign/models/image_info.py
@@ -204,6 +205,7 @@ docs/FileInfo.md
 docs/Font.md
 docs/FormField.md
 docs/FormGroup.md
+docs/FormulaFieldSettings.md
 docs/IdVerification.md
 docs/IdentityVerificationSettings.md
 docs/ImageInfo.md

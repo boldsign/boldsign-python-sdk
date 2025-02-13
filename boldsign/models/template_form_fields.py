@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.conditional_rule import ConditionalRule
 from boldsign.models.editable_date_field_settings import EditableDateFieldSettings
+from boldsign.models.formula_field_settings import FormulaFieldSettings
 from boldsign.models.image_info import ImageInfo
 from boldsign.models.rectangle import Rectangle
 from typing import Optional, Set, Tuple
@@ -71,7 +72,8 @@ class TemplateFormFields(BaseModel):
     hyperlink_text: Optional[StrictStr] = Field(default=None, alias="hyperlinkText")
     background_hex_color: Optional[StrictStr] = Field(default=None, alias="backgroundHexColor")
     tab_index: Optional[StrictInt] = Field(default=None, alias="tabIndex")
-    __properties: ClassVar[List[str]] = ["id", "fieldType", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontHexColor", "isUnderLineFont", "isItalicFont", "isBoldFont", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "dropdownOptions", "bounds", "pageNumber", "conditionalRules", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "hyperlinkText", "backgroundHexColor", "tabIndex"]
+    formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
+    __properties: ClassVar[List[str]] = ["id", "fieldType", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontHexColor", "isUnderLineFont", "isItalicFont", "isBoldFont", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "dropdownOptions", "bounds", "pageNumber", "conditionalRules", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "hyperlinkText", "backgroundHexColor", "tabIndex", "formulaFieldSettings"]
 
     @field_validator('validationtype')
     def validationtype_validate_enum(cls, value):
@@ -205,7 +207,8 @@ class TemplateFormFields(BaseModel):
             "characterLimit": obj.get("characterLimit"),
             "hyperlinkText": obj.get("hyperlinkText"),
             "backgroundHexColor": obj.get("backgroundHexColor"),
-            "tabIndex": obj.get("tabIndex")
+            "tabIndex": obj.get("tabIndex"),
+            "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None
         })
         return _obj
 
@@ -258,6 +261,7 @@ class TemplateFormFields(BaseModel):
             "hyperlink_text": "(str,)",
             "background_hex_color": "(str,)",
             "tab_index": "(int,)",
+            "formula_field_settings": "(FormulaFieldSettings,)",
         }
 
     @classmethod

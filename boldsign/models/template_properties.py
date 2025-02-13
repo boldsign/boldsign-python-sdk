@@ -24,6 +24,7 @@ from boldsign.models.behalf_of import BehalfOf
 from boldsign.models.document_files import DocumentFiles
 from boldsign.models.document_info import DocumentInfo
 from boldsign.models.form_group import FormGroup
+from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.roles import Roles
 from boldsign.models.template_form_fields import TemplateFormFields
 from boldsign.models.template_sender_detail import TemplateSenderDetail
@@ -64,7 +65,8 @@ class TemplateProperties(BaseModel):
     template_labels: Optional[List[StrictStr]] = Field(default=None, alias="templateLabels")
     behalf_of: Optional[BehalfOf] = Field(default=None, alias="behalfOf")
     document_download_option: Optional[StrictStr] = Field(default=None, alias="documentDownloadOption")
-    __properties: ClassVar[List[str]] = ["templateId", "title", "description", "documentTitle", "documentMessage", "files", "roles", "formGroups", "commonFields", "cCDetails", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "EnablePrintAndSign", "enableSigningOrder", "createdDate", "createdBy", "sharedTemplateDetail", "documentInfo", "labels", "templateLabels", "behalfOf", "documentDownloadOption"]
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
+    __properties: ClassVar[List[str]] = ["templateId", "title", "description", "documentTitle", "documentMessage", "files", "roles", "formGroups", "commonFields", "cCDetails", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "EnablePrintAndSign", "enableSigningOrder", "createdDate", "createdBy", "sharedTemplateDetail", "documentInfo", "labels", "templateLabels", "behalfOf", "documentDownloadOption", "recipientNotificationSettings"]
 
     @field_validator('document_download_option')
     def document_download_option_validate_enum(cls, value):
@@ -168,7 +170,8 @@ class TemplateProperties(BaseModel):
             "labels": obj.get("labels"),
             "templateLabels": obj.get("templateLabels"),
             "behalfOf": BehalfOf.from_dict(obj["behalfOf"]) if obj.get("behalfOf") is not None else None,
-            "documentDownloadOption": obj.get("documentDownloadOption")
+            "documentDownloadOption": obj.get("documentDownloadOption"),
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None
         })
         return _obj
 
@@ -211,6 +214,7 @@ class TemplateProperties(BaseModel):
             "template_labels": "(List[str],)",
             "behalf_of": "(BehalfOf,)",
             "document_download_option": "(str,)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
         }
 
     @classmethod
