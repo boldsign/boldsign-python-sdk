@@ -18,31 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
 from pydantic import StrictBool
 from typing import Union
 
-class RecipientNotificationSettings(BaseModel):
+class Base64File(BaseModel):
     """
-    RecipientNotificationSettings
+    Base64File
     """ # noqa: E501
-    signature_request: Optional[StrictBool] = Field(default=True, alias="signatureRequest")
-    declined: Optional[StrictBool] = True
-    revoked: Optional[StrictBool] = True
-    signed: Optional[StrictBool] = True
-    completed: Optional[StrictBool] = True
-    expired: Optional[StrictBool] = True
-    reassigned: Optional[StrictBool] = True
-    deleted: Optional[StrictBool] = True
-    reminders: Optional[StrictBool] = True
-    edit_recipient: Optional[StrictBool] = Field(default=True, alias="editRecipient")
-    edit_document: Optional[StrictBool] = Field(default=True, alias="editDocument")
-    viewed: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["signatureRequest", "declined", "revoked", "signed", "completed", "expired", "reassigned", "deleted", "reminders", "editRecipient", "editDocument", "viewed"]
+    var_base64: Annotated[str, Field(min_length=1, strict=True)] = Field(alias="base64")
+    file_name: Optional[StrictStr] = Field(default=None, alias="fileName")
+    __properties: ClassVar[List[str]] = ["base64", "fileName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,7 +71,7 @@ class RecipientNotificationSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RecipientNotificationSettings from a JSON string"""
+        """Create an instance of Base64File from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self, excluded_fields: Set[str] = None) -> Dict[str, Any]:
@@ -103,7 +94,7 @@ class RecipientNotificationSettings(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RecipientNotificationSettings from a dict"""
+        """Create an instance of Base64File from a dict"""
         if obj is None:
             return None
 
@@ -111,18 +102,8 @@ class RecipientNotificationSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "signatureRequest": obj.get("signatureRequest") if obj.get("signatureRequest") is not None else True,
-            "declined": obj.get("declined") if obj.get("declined") is not None else True,
-            "revoked": obj.get("revoked") if obj.get("revoked") is not None else True,
-            "signed": obj.get("signed") if obj.get("signed") is not None else True,
-            "completed": obj.get("completed") if obj.get("completed") is not None else True,
-            "expired": obj.get("expired") if obj.get("expired") is not None else True,
-            "reassigned": obj.get("reassigned") if obj.get("reassigned") is not None else True,
-            "deleted": obj.get("deleted") if obj.get("deleted") is not None else True,
-            "reminders": obj.get("reminders") if obj.get("reminders") is not None else True,
-            "editRecipient": obj.get("editRecipient") if obj.get("editRecipient") is not None else True,
-            "editDocument": obj.get("editDocument") if obj.get("editDocument") is not None else True,
-            "viewed": obj.get("viewed")
+            "base64": obj.get("base64"),
+            "fileName": obj.get("fileName")
         })
         return _obj
 
@@ -139,18 +120,8 @@ class RecipientNotificationSettings(BaseModel):
     @classmethod
     def openapi_types(cls) -> Dict[str, str]:
         return {
-            "signature_request": "(bool,)",
-            "declined": "(bool,)",
-            "revoked": "(bool,)",
-            "signed": "(bool,)",
-            "completed": "(bool,)",
-            "expired": "(bool,)",
-            "reassigned": "(bool,)",
-            "deleted": "(bool,)",
-            "reminders": "(bool,)",
-            "edit_recipient": "(bool,)",
-            "edit_document": "(bool,)",
-            "viewed": "(bool,)",
+            "var_base64": "(str,)",
+            "file_name": "(str,)",
         }
 
     @classmethod

@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **files** | **List[io.IOBase]** |  | [optional] 
 **file_urls** | **List[str]** |  | [optional] 
 **template_ids** | **List[str]** |  | [optional] 
+**use_text_tags** | **bool** |  | [optional] 
+**text_tag_definitions** | [**List[TextTagDefinition]**](TextTagDefinition.md) |  | [optional] 
 **document_id** | **str** |  | [optional] 
 **title** | **str** |  | [optional] 
 **message** | **str** |  | [optional] 

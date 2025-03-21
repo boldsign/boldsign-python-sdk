@@ -75,11 +75,12 @@ class EmbeddedDocumentRequest(BaseModel):
     on_behalf_of: Optional[StrictStr] = Field(default=None, alias="onBehalfOf")
     auto_detect_fields: Optional[StrictBool] = Field(default=False, alias="AutoDetectFields")
     document_download_option: Optional[StrictStr] = Field(default=None, alias="documentDownloadOption")
+    is_sandbox: Optional[StrictBool] = Field(default=None, alias="isSandbox")
     meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
     enable_audit_trail_localization: Optional[StrictBool] = Field(default=None, alias="enableAuditTrailLocalization")
     download_file_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=250)]] = Field(default=None, alias="downloadFileName")
-    __properties: ClassVar[List[str]] = ["redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "showTooltip", "embeddedSendLinkValidTill", "files", "title", "message", "signers", "cc", "enableSigningOrder", "expiryDays", "expiryDateType", "expiryValue", "reminderSettings", "enableEmbeddedSigning", "disableEmails", "disableSMS", "brandId", "hideDocumentId", "labels", "fileUrls", "sendLinkValidTill", "useTextTags", "textTagDefinitions", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "documentInfo", "onBehalfOf", "AutoDetectFields", "documentDownloadOption", "metaData", "formGroups", "enableAuditTrailLocalization", "downloadFileName"]
+    __properties: ClassVar[List[str]] = ["redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "showTooltip", "embeddedSendLinkValidTill", "files", "title", "message", "signers", "cc", "enableSigningOrder", "expiryDays", "expiryDateType", "expiryValue", "reminderSettings", "enableEmbeddedSigning", "disableEmails", "disableSMS", "brandId", "hideDocumentId", "labels", "fileUrls", "sendLinkValidTill", "useTextTags", "textTagDefinitions", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "documentInfo", "onBehalfOf", "AutoDetectFields", "documentDownloadOption", "isSandbox", "metaData", "formGroups", "enableAuditTrailLocalization", "downloadFileName"]
 
     @field_validator('send_view_option')
     def send_view_option_validate_enum(cls, value):
@@ -225,6 +226,7 @@ class EmbeddedDocumentRequest(BaseModel):
             "onBehalfOf": obj.get("onBehalfOf"),
             "AutoDetectFields": obj.get("AutoDetectFields") if obj.get("AutoDetectFields") is not None else False,
             "documentDownloadOption": obj.get("documentDownloadOption"),
+            "isSandbox": obj.get("isSandbox"),
             "metaData": obj.get("metaData"),
             "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None,
             "enableAuditTrailLocalization": obj.get("enableAuditTrailLocalization"),
@@ -282,6 +284,7 @@ class EmbeddedDocumentRequest(BaseModel):
             "on_behalf_of": "(str,)",
             "auto_detect_fields": "(bool,)",
             "document_download_option": "(str,)",
+            "is_sandbox": "(bool,)",
             "meta_data": "(Dict[str, Optional[str]],)",
             "form_groups": "(List[FormGroup],)",
             "enable_audit_trail_localization": "(bool,)",

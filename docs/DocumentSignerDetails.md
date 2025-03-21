@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **id_verification** | [**IdVerification**](IdVerification.md) |  | [optional] 
 **recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 **authentication_retry_count** | **int** |  | [optional] 
+**enable_qes** | **bool** |  | [optional] 
 
 ## Example
 

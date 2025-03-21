@@ -55,7 +55,8 @@ class Role(BaseModel):
     language: Optional[StrictInt] = Field(default=None, description="<p>Description:</p><ul><li><i>0</i> - None</li><li><i>1</i> - English</li><li><i>2</i> - Spanish</li><li><i>3</i> - German</li><li><i>4</i> - French</li><li><i>5</i> - Romanian</li><li><i>6</i> - Norwegian</li><li><i>7</i> - Bulgarian</li><li><i>8</i> - Italian</li><li><i>9</i> - Danish</li><li><i>10</i> - Polish</li><li><i>11</i> - Portuguese</li><li><i>12</i> - Czech</li><li><i>13</i> - Dutch</li><li><i>14</i> - Swedish</li><li><i>15</i> - Russian</li></ul>")
     locale: Optional[StrictStr] = None
     authentication_retry_count: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = Field(default=None, alias="authenticationRetryCount")
-    __properties: ClassVar[List[str]] = ["roleIndex", "signerName", "signerOrder", "signerEmail", "hostEmail", "privateMessage", "authenticationCode", "enableEmailOTP", "authenticationType", "phoneNumber", "deliveryMode", "signerType", "signerRole", "allowFieldConfiguration", "formFields", "existingFormFields", "identityVerificationSettings", "language", "locale", "authenticationRetryCount"]
+    enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
+    __properties: ClassVar[List[str]] = ["roleIndex", "signerName", "signerOrder", "signerEmail", "hostEmail", "privateMessage", "authenticationCode", "enableEmailOTP", "authenticationType", "phoneNumber", "deliveryMode", "signerType", "signerRole", "allowFieldConfiguration", "formFields", "existingFormFields", "identityVerificationSettings", "language", "locale", "authenticationRetryCount", "enableQes"]
 
     @field_validator('authentication_type')
     def authentication_type_validate_enum(cls, value):
@@ -193,7 +194,8 @@ class Role(BaseModel):
             "identityVerificationSettings": IdentityVerificationSettings.from_dict(obj["identityVerificationSettings"]) if obj.get("identityVerificationSettings") is not None else None,
             "language": obj.get("language"),
             "locale": obj.get("locale"),
-            "authenticationRetryCount": obj.get("authenticationRetryCount")
+            "authenticationRetryCount": obj.get("authenticationRetryCount"),
+            "enableQes": obj.get("enableQes")
         })
         return _obj
 
@@ -230,6 +232,7 @@ class Role(BaseModel):
             "language": "(int,)",
             "locale": "(str,)",
             "authentication_retry_count": "(int,)",
+            "enable_qes": "(bool,)",
         }
 
     @classmethod

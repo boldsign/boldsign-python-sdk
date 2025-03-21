@@ -19,6 +19,7 @@ from boldsign.models.access_code_detail import AccessCodeDetail
 from boldsign.models.access_code_details import AccessCodeDetails
 from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.audit_trail import AuditTrail
+from boldsign.models.base64_file import Base64File
 from boldsign.models.behalf_document import BehalfDocument
 from boldsign.models.behalf_document_records import BehalfDocumentRecords
 from boldsign.models.behalf_of import BehalfOf

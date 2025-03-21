@@ -24,7 +24,7 @@ from pathlib import Path
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "boldsign"
-VERSION = "1.0.0"
+VERSION = "1.0.0b6"
 
 # Check if a version was passed via command-line arguments
 if "--version" in sys.argv:
@@ -52,7 +52,7 @@ setup(
     description="BoldSign API",
     author="BoldSign",
     author_email="support@boldsign.com",
-    url="https://github.com/boldsign/api-csharp-sdk",
+    url="https://github.com/boldsign/boldsign-python-sdk",
     keywords=["boldsign", "api", "sdk", "BoldSign API"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),

@@ -7,8 +7,8 @@ import time
 from boldsign.rest import ApiException
 import time
 
-APIKey = os.getenv('BoldSignAPIKey')
-url = os.getenv('BoldSignURL')
+APIKey = os.getenv('API_KEY')
+url = os.getenv('HOST_URL')
 
 @pytest.mark.integration
 class TestBrandApi(unittest.TestCase):
@@ -54,7 +54,7 @@ class TestBrandApi(unittest.TestCase):
             assert False, f"Unexpected exception occurred: {str(e)}"
         finally:
             time.sleep(10)
-    
+
     @pytest.mark.run(order=54)
     def test_edit_brand_positive(self):
         try:

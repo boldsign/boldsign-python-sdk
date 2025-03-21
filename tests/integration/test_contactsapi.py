@@ -6,8 +6,8 @@ import time
 from boldsign.rest import ApiException
 from random import randint
 
-APIKey = os.getenv('BoldSignAPIKey')
-url = os.getenv('BoldSignURL')
+APIKey = os.getenv('API_KEY')
+url = os.getenv('HOST_URL')
 
 @pytest.mark.integration
 class TestContactsApi(unittest.TestCase):
@@ -40,10 +40,11 @@ class TestContactsApi(unittest.TestCase):
                 email= email_Id,
                 name= User_name
             )
-            
+            print(contacts_details)
             create_contacts_response = self.contacts_api.create_contact(
                 contact_details= [contacts_details]
             )
+            print(TestContactsApi.emailId)
         except ApiException as e:
             print("\nException when calling BoldSign API: %s" % e)
             assert False, f"API Exception occurred: {str(e)}"
@@ -66,6 +67,7 @@ class TestContactsApi(unittest.TestCase):
                 email= email_Id,
                 name= User_name
             )
+
             
             create_contacts_response = self.contacts_api.create_contact(
                 contact_details=[contacts_details]
@@ -86,7 +88,7 @@ class TestContactsApi(unittest.TestCase):
 
             # Define parameters for contact user list
             Page =1
-            Page_size = 20
+            Page_size = 100
             
                         
             contact_user_list_response = self.contacts_api.contact_user_list(
@@ -95,20 +97,21 @@ class TestContactsApi(unittest.TestCase):
             )
             assert contact_user_list_response is not None
             assert contact_user_list_response.result is not None
-            contactsList = contact_user_list_response.result         
+            contactsList = contact_user_list_response.result
             assert isinstance(contact_user_list_response, boldsign.ContactsList)
 
             for contacts in contactsList:
                 if contacts.email == TestContactsApi.emailId:
                     TestContactsApi.contact_id = contacts.id
-                    print(contacts.email)
+                    # print(contacts.email)
+                    print(f"Contact Email: {TestContactsApi.emailId}, Contact ID: {TestContactsApi.contact_id}")
 
         except ApiException as e:
             print("\nException when calling BoldSign API: %s" % e)
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"     
+            assert False, f"Unexpected exception occurred: {str(e)}"
             
     @pytest.mark.run(order=66)
     def test_get_contact_positive(self):
@@ -158,7 +161,7 @@ class TestContactsApi(unittest.TestCase):
     def test_update_contact_positive(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
-
+            print(f"ContactId: {TestContactsApi.contact_id}")
             # Define parameters for update contact
             contactsId = TestContactsApi.contact_id
 
@@ -246,7 +249,7 @@ class TestContactsApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"id\":[\"Provide a valid Contact Id\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"    
+            assert False, f"Unexpected exception occurred: {str(e)}"
 
 
 if __name__ == '__main__':

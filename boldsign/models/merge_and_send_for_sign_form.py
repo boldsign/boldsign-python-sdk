@@ -26,6 +26,7 @@ from boldsign.models.document_info import DocumentInfo
 from boldsign.models.form_group import FormGroup
 from boldsign.models.reminder_settings import ReminderSettings
 from boldsign.models.role import Role
+from boldsign.models.text_tag_definition import TextTagDefinition
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
@@ -39,6 +40,8 @@ class MergeAndSendForSignForm(BaseModel):
     files: Optional[List[Union[StrictBytes, StrictStr]]] = None
     file_urls: Optional[List[StrictStr]] = Field(default=None, alias="fileUrls")
     template_ids: Optional[List[StrictStr]] = Field(default=None, alias="templateIds")
+    use_text_tags: Optional[StrictBool] = Field(default=None, alias="useTextTags")
+    text_tag_definitions: Optional[List[TextTagDefinition]] = Field(default=None, alias="textTagDefinitions")
     document_id: Optional[StrictStr] = Field(default=None, alias="documentId")
     title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=256)]] = None
     message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=5000)]] = None
@@ -67,7 +70,7 @@ class MergeAndSendForSignForm(BaseModel):
     remove_form_fields: Optional[List[StrictStr]] = Field(default=None, alias="removeFormFields")
     enable_audit_trail_localization: Optional[StrictBool] = Field(default=None, alias="enableAuditTrailLocalization")
     download_file_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=250)]] = Field(default=None, alias="downloadFileName")
-    __properties: ClassVar[List[str]] = ["files", "fileUrls", "templateIds", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "enableAuditTrailLocalization", "downloadFileName"]
+    __properties: ClassVar[List[str]] = ["files", "fileUrls", "templateIds", "useTextTags", "textTagDefinitions", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "enableAuditTrailLocalization", "downloadFileName"]
 
     @field_validator('expiry_date_type')
     def expiry_date_type_validate_enum(cls, value):
@@ -159,6 +162,8 @@ class MergeAndSendForSignForm(BaseModel):
             "files": obj.get("files"),
             "fileUrls": obj.get("fileUrls"),
             "templateIds": obj.get("templateIds"),
+            "useTextTags": obj.get("useTextTags"),
+            "textTagDefinitions": [TextTagDefinition.from_dict(_item) for _item in obj["textTagDefinitions"]] if obj.get("textTagDefinitions") is not None else None,
             "documentId": obj.get("documentId"),
             "title": obj.get("title"),
             "message": obj.get("message"),
@@ -206,6 +211,8 @@ class MergeAndSendForSignForm(BaseModel):
             "files": "(List[io.IOBase],)",
             "file_urls": "(List[str],)",
             "template_ids": "(List[str],)",
+            "use_text_tags": "(bool,)",
+            "text_tag_definitions": "(List[TextTagDefinition],)",
             "document_id": "(str,)",
             "title": "(str,)",
             "message": "(str,)",
@@ -242,6 +249,7 @@ class MergeAndSendForSignForm(BaseModel):
             "files",
             "file_urls",
             "template_ids",
+            "text_tag_definitions",
             "roles",
             "labels",
             "cc",

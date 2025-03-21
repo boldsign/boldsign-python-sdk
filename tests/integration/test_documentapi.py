@@ -8,8 +8,8 @@ import base64
 from boldsign.rest import ApiException
 from datetime import datetime, timedelta, timezone
 
-APIKey = os.getenv('BoldSignAPIKey')
-url = os.getenv('BoldSignURL')
+APIKey = os.getenv('API_KEY')
+url = os.getenv('HOST_URL')
 
 @pytest.mark.integration
 class TestDocumentApi(unittest.TestCase):

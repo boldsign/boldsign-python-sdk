@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **enable_edit_recipients** | **bool** |  | [optional] 
 **enable_delete_recipients** | **bool** |  | [optional] 
 **recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
+**enable_qes** | **bool** |  | [optional] 
 
 ## Example
 

@@ -23,6 +23,7 @@ boldsign/models/access_code_detail.py
 boldsign/models/access_code_details.py
 boldsign/models/attachment_info.py
 boldsign/models/audit_trail.py
+boldsign/models/base64_file.py
 boldsign/models/behalf_document.py
 boldsign/models/behalf_document_records.py
 boldsign/models/behalf_of.py
@@ -142,6 +143,7 @@ docs/AccessCodeDetail.md
 docs/AccessCodeDetails.md
 docs/AttachmentInfo.md
 docs/AuditTrail.md
+docs/Base64File.md
 docs/BehalfDocument.md
 docs/BehalfDocumentRecords.md
 docs/BehalfOf.md

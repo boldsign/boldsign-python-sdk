@@ -1,4 +1,6 @@
 import unittest
+from boldsign.api.teams_api import TeamsApi
+from boldsign.models.team_list_response import TeamListResponse
 import pytest
 import boldsign
 import os
@@ -6,8 +8,8 @@ import time
 from boldsign.rest import ApiException
 from random import randint
 
-APIKey = os.getenv('BoldSignAPIKey')
-url = os.getenv('BoldSignURL')
+APIKey = os.getenv('API_KEY')
+url = os.getenv('HOST_URL')
 
 @pytest.mark.integration
 class TestUsersApi(unittest.TestCase):
@@ -37,12 +39,12 @@ class TestUsersApi(unittest.TestCase):
             team_Name =  TestUsersApi.team_Name
             create_team_requests = boldsign.CreateTeamRequest(
                 teamName=team_Name
-            )   
-            
+            )
+            print(team_Name)
             create_team_response = self.teams_api.create_team(
                 create_team_request= create_team_requests
             )
-            assert create_team_response is not None           
+            assert create_team_response is not None
 
         except ApiException as e:
             print("\nException when calling BoldSign API: %s" % e)
@@ -53,7 +55,6 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(10)
 
-    
     @pytest.mark.run(order=79)
     def test_create_teams_negative(self):
         try:
@@ -76,37 +77,70 @@ class TestUsersApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}" 
-            
+
     @pytest.mark.run(order=80)
     def test_get_user_list_positive(self):
         try:
-            self.teams_api = boldsign.TeamsApi(self.api_client)
+            # Initialize the Teams API client
+            self.teams_api = TeamsApi(self.api_client)
 
             # Define parameters for contact teams list
-            Page =1
-            Page_size = 20
-            
-                        
+            Page = 1
+            Page_size = 100
+
+            # Make the API call to retrieve the teams list
             teams_list_response = self.teams_api.list_teams(
                 page=Page,
                 page_size=Page_size
             )
-            assert teams_list_response is not None
-            assert teams_list_response.results is not None
-            TeamsList = teams_list_response.results
-            assert isinstance(teams_list_response, boldsign.TeamListResponse)
 
-            for teams in TeamsList:
-                if teams.team_name == TestUsersApi.team_Name:
-                    TestUsersApi.team_id = teams.team_id
+            # Assert that the response is not None
+            assert teams_list_response is not None, "Response is None"
+
+            # Assert that the response contains results
+            assert teams_list_response.results is not None, "Results are None"
+
+            # Store the list of teams
+            TeamsList = teams_list_response.results
+
+            # Assert that the response is of type TeamListResponse
+            assert isinstance(teams_list_response, TeamListResponse), \
+                "Response is not of type TeamListResponse"
+
+            # Log the list of team names to help with debugging
+            print(f"Teams List: {[team.team_name for team in TeamsList]}")
+
+            # Initialize created_team_id as None
+            created_team_id = None
+
+            # Loop through the teams list to find the team by name
+            for team in TeamsList:
+                if team.team_name == TestUsersApi.team_Name:
+                    created_team_id = team.team_id
+                    TestUsersApi.team_id = created_team_id
+                    print(f"Found team with ID: {created_team_id}")
+                    break
+
+            # If created_team_id is still None, log an error and raise an exception
+            if created_team_id is None:
+                raise ValueError(f"Team with name {TestUsersApi.team_Name} not found in the list.")
+
+            # Assert that the team ID was found
+            assert created_team_id is not None, "Created team ID was not found."
+
+            # Print the team ID for verification
+            print(f"Team ID: {created_team_id}")
 
         except ApiException as e:
-            print("\nException when calling BoldSign API: %s" % e)
+            # Catch BoldSign API exceptions
+            print(f"\nException when calling BoldSign API: {e}")
             assert False, f"API Exception occurred: {str(e)}"
+
         except Exception as e:
-            print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"     
-            
+            # Catch all other exceptions
+            print(f"\nException when calling BoldSign: {e}")
+            assert False, f"Unexpected exception occurred: {str(e)}"
+
     @pytest.mark.run(order=81)
     def test_get_team_list_negative(self):
         try:
@@ -128,15 +162,18 @@ class TestUsersApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"PageSize\":[\"Provide a valid page size between 1 and 100\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"     
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+
     @pytest.mark.run(order=82)
     def test_get_team_positive(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
-
+            
+            
             # Define parameters for get team
             teamId = TestUsersApi.team_id
+            print(f"teamid: {teamId}")
+
                         
             get_team_response = self.teams_api.get_team(
                 team_id=teamId
@@ -151,7 +188,7 @@ class TestUsersApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"                
+            assert False, f"Unexpected exception occurred: {str(e)}"
             
     @pytest.mark.run(order=83)
     def test_get_team_negative(self):
@@ -175,10 +212,10 @@ class TestUsersApi(unittest.TestCase):
 
     @pytest.mark.run(order=84)
     def test_update_team_positive(self):
-        try:           
+        try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
             
-           # Define parameters for update team
+            # Define parameters for update team
             team_Id = TestUsersApi.team_id
             team_Name = TestUsersApi.team_Name
             update_team_request = boldsign.TeamUpdateRequest(
@@ -203,7 +240,7 @@ class TestUsersApi(unittest.TestCase):
         try:           
             self.teams_api = boldsign.TeamsApi(self.api_client)
             
-           # Define parameters for update team
+            # Define parameters for update team
             team_Id = "WrongTeamId"
             update_team_request = boldsign.TeamUpdateRequest(
                 teamId= team_Id,

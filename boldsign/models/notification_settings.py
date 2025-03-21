@@ -41,7 +41,8 @@ class NotificationSettings(BaseModel):
     expired: Optional[StrictBool] = True
     authentication_failed: Optional[StrictBool] = Field(default=True, alias="authenticationFailed")
     reminders: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["viewed", "sent", "deliveryFailed", "declined", "revoked", "reassigned", "completed", "signed", "expired", "authenticationFailed", "reminders"]
+    attach_signed_document: Optional[StrictBool] = Field(default=False, alias="attachSignedDocument")
+    __properties: ClassVar[List[str]] = ["viewed", "sent", "deliveryFailed", "declined", "revoked", "reassigned", "completed", "signed", "expired", "authenticationFailed", "reminders", "attachSignedDocument"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,7 +121,8 @@ class NotificationSettings(BaseModel):
             "signed": obj.get("signed") if obj.get("signed") is not None else True,
             "expired": obj.get("expired") if obj.get("expired") is not None else True,
             "authenticationFailed": obj.get("authenticationFailed") if obj.get("authenticationFailed") is not None else True,
-            "reminders": obj.get("reminders") if obj.get("reminders") is not None else True
+            "reminders": obj.get("reminders") if obj.get("reminders") is not None else True,
+            "attachSignedDocument": obj.get("attachSignedDocument") if obj.get("attachSignedDocument") is not None else False
         })
         return _obj
 
@@ -148,6 +150,7 @@ class NotificationSettings(BaseModel):
             "expired": "(bool,)",
             "authentication_failed": "(bool,)",
             "reminders": "(bool,)",
+            "attach_signed_document": "(bool,)",
         }
 
     @classmethod

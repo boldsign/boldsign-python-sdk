@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **reminders** | **bool** |  | [optional] [default to True]
 **edit_recipient** | **bool** |  | [optional] [default to True]
 **edit_document** | **bool** |  | [optional] [default to True]
+**viewed** | **bool** |  | [optional] 
 
 ## Example
 

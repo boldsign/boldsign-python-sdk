@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **form_fields** | [**List[FormField]**](FormField.md) |  | [optional] 
 **allow_role_edit** | **bool** |  | [optional] 
 **allow_role_delete** | **bool** |  | [optional] 
+**enable_qes** | **bool** |  | [optional] 
 
 ## Example
 

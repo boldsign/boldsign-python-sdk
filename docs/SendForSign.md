@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **on_behalf_of** | **str** |  | [optional] 
 **auto_detect_fields** | **bool** |  | [optional] [default to False]
 **document_download_option** | **str** |  | [optional] 
+**is_sandbox** | **bool** |  | [optional] 
 **meta_data** | **Dict[str, Optional[str]]** |  | [optional] 
 **form_groups** | [**List[FormGroup]**](FormGroup.md) |  | [optional] 
 **enable_audit_trail_localization** | **bool** |  | [optional] 

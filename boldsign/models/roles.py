@@ -55,7 +55,8 @@ class Roles(BaseModel):
     enable_edit_recipients: Optional[StrictBool] = Field(default=None, alias="enableEditRecipients")
     enable_delete_recipients: Optional[StrictBool] = Field(default=None, alias="enableDeleteRecipients")
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
-    __properties: ClassVar[List[str]] = ["name", "index", "defaultSignerName", "defaultSignerEmail", "phoneNumber", "signerOrder", "signerType", "hostEmail", "hostName", "language", "locale", "allowRoleEdit", "allowRoleDelete", "enableAccessCode", "enableEmailOTP", "imposeAuthentication", "deliveryMode", "allowFieldConfiguration", "formFields", "enableEditRecipients", "enableDeleteRecipients", "recipientNotificationSettings"]
+    enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
+    __properties: ClassVar[List[str]] = ["name", "index", "defaultSignerName", "defaultSignerEmail", "phoneNumber", "signerOrder", "signerType", "hostEmail", "hostName", "language", "locale", "allowRoleEdit", "allowRoleDelete", "enableAccessCode", "enableEmailOTP", "imposeAuthentication", "deliveryMode", "allowFieldConfiguration", "formFields", "enableEditRecipients", "enableDeleteRecipients", "recipientNotificationSettings", "enableQes"]
 
     @field_validator('signer_type')
     def signer_type_validate_enum(cls, value):
@@ -195,7 +196,8 @@ class Roles(BaseModel):
             "formFields": [TemplateFormFields.from_dict(_item) for _item in obj["formFields"]] if obj.get("formFields") is not None else None,
             "enableEditRecipients": obj.get("enableEditRecipients"),
             "enableDeleteRecipients": obj.get("enableDeleteRecipients"),
-            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
+            "enableQes": obj.get("enableQes")
         })
         return _obj
 
@@ -234,6 +236,7 @@ class Roles(BaseModel):
             "enable_edit_recipients": "(bool,)",
             "enable_delete_recipients": "(bool,)",
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
+            "enable_qes": "(bool,)",
         }
 
     @classmethod

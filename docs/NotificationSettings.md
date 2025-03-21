@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **expired** | **bool** |  | [optional] [default to True]
 **authentication_failed** | **bool** |  | [optional] [default to True]
 **reminders** | **bool** |  | [optional] [default to True]
+**attach_signed_document** | **bool** |  | [optional] [default to False]
 
 ## Example
 

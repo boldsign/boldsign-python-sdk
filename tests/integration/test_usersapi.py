@@ -8,8 +8,8 @@ import boldsign.models.users_details
 from boldsign.rest import ApiException
 from random import randint
 
-APIKey = os.getenv('BoldSignAPIKey')
-url = os.getenv('BoldSignURL')
+APIKey = os.getenv('API_KEY')
+url = os.getenv('HOST_URL')
 
 @pytest.mark.integration
 class TestUsersApi(unittest.TestCase):

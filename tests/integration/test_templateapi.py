@@ -6,8 +6,8 @@ import base64
 from boldsign.rest import ApiException
 import time
 
-APIKey = os.getenv('BoldSignAPIKey')
-url = os.getenv('BoldSignURL')
+APIKey = os.getenv('API_KEY')
+url = os.getenv('HOST_URL')
 
 @pytest.mark.integration
 class TestTemplateApi(unittest.TestCase):

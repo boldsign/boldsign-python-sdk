@@ -58,7 +58,8 @@ class DocumentSignerDetails(BaseModel):
     id_verification: Optional[IdVerification] = Field(default=None, alias="idVerification")
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     authentication_retry_count: Optional[StrictInt] = Field(default=None, alias="authenticationRetryCount")
-    __properties: ClassVar[List[str]] = ["signerName", "signerRole", "signerEmail", "status", "enableAccessCode", "isAuthenticationFailed", "enableEmailOTP", "authenticationType", "isDeliveryFailed", "isViewed", "order", "signerType", "hostEmail", "hostName", "isReassigned", "privateMessage", "allowFieldConfiguration", "formFields", "language", "locale", "phoneNumber", "idVerification", "recipientNotificationSettings", "authenticationRetryCount"]
+    enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
+    __properties: ClassVar[List[str]] = ["signerName", "signerRole", "signerEmail", "status", "enableAccessCode", "isAuthenticationFailed", "enableEmailOTP", "authenticationType", "isDeliveryFailed", "isViewed", "order", "signerType", "hostEmail", "hostName", "isReassigned", "privateMessage", "allowFieldConfiguration", "formFields", "language", "locale", "phoneNumber", "idVerification", "recipientNotificationSettings", "authenticationRetryCount", "enableQes"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -200,7 +201,8 @@ class DocumentSignerDetails(BaseModel):
             "phoneNumber": PhoneNumber.from_dict(obj["phoneNumber"]) if obj.get("phoneNumber") is not None else None,
             "idVerification": IdVerification.from_dict(obj["idVerification"]) if obj.get("idVerification") is not None else None,
             "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
-            "authenticationRetryCount": obj.get("authenticationRetryCount")
+            "authenticationRetryCount": obj.get("authenticationRetryCount"),
+            "enableQes": obj.get("enableQes")
         })
         return _obj
 
@@ -241,6 +243,7 @@ class DocumentSignerDetails(BaseModel):
             "id_verification": "(IdVerification,)",
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "authentication_retry_count": "(int,)",
+            "enable_qes": "(bool,)",
         }
 
     @classmethod

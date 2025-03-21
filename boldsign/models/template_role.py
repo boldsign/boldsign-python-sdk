@@ -49,7 +49,8 @@ class TemplateRole(BaseModel):
     form_fields: Optional[List[FormField]] = Field(default=None, alias="formFields")
     allow_role_edit: Optional[StrictBool] = Field(default=None, alias="allowRoleEdit")
     allow_role_delete: Optional[StrictBool] = Field(default=None, alias="allowRoleDelete")
-    __properties: ClassVar[List[str]] = ["index", "name", "defaultSignerName", "defaultSignerEmail", "signerOrder", "signerType", "hostEmail", "language", "locale", "imposeAuthentication", "phoneNumber", "deliveryMode", "allowFieldConfiguration", "formFields", "allowRoleEdit", "allowRoleDelete"]
+    enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
+    __properties: ClassVar[List[str]] = ["index", "name", "defaultSignerName", "defaultSignerEmail", "signerOrder", "signerType", "hostEmail", "language", "locale", "imposeAuthentication", "phoneNumber", "deliveryMode", "allowFieldConfiguration", "formFields", "allowRoleEdit", "allowRoleDelete", "enableQes"]
 
     @field_validator('signer_type')
     def signer_type_validate_enum(cls, value):
@@ -183,7 +184,8 @@ class TemplateRole(BaseModel):
             "allowFieldConfiguration": obj.get("allowFieldConfiguration"),
             "formFields": [FormField.from_dict(_item) for _item in obj["formFields"]] if obj.get("formFields") is not None else None,
             "allowRoleEdit": obj.get("allowRoleEdit"),
-            "allowRoleDelete": obj.get("allowRoleDelete")
+            "allowRoleDelete": obj.get("allowRoleDelete"),
+            "enableQes": obj.get("enableQes")
         })
         return _obj
 
@@ -216,6 +218,7 @@ class TemplateRole(BaseModel):
             "form_fields": "(List[FormField],)",
             "allow_role_edit": "(bool,)",
             "allow_role_delete": "(bool,)",
+            "enable_qes": "(bool,)",
         }
 
     @classmethod
