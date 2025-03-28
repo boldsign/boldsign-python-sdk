@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **background_hex_color** | **str** |  | [optional] 
 **tab_index** | **int** |  | [optional] 
 **formula_field_settings** | [**FormulaFieldSettings**](FormulaFieldSettings.md) |  | [optional] 
+**resize_option** | **str** |  | [optional] 
 
 ## Example
 

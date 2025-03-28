@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **labels** | **List[str]** |  | [optional] 
 **cursor** | **int** |  | [optional] 
 **brand_id** | **str** |  | [optional] 
+**scheduled_send_time** | **int** |  | [optional] 
 
 ## Example
 

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **labels** | **List[str]** |  | [optional] 
 **template_labels** | **List[str]** |  | [optional] 
 **form_groups** | [**List[FormGroup]**](FormGroup.md) |  | [optional] 
+**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 
 ## Example
 

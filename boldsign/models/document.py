@@ -48,7 +48,8 @@ class Document(BaseModel):
     labels: Optional[List[StrictStr]] = None
     cursor: Optional[StrictInt] = None
     brand_id: Optional[StrictStr] = Field(default=None, alias="brandId")
-    __properties: ClassVar[List[str]] = ["documentId", "senderDetail", "ccDetails", "createdDate", "activityDate", "activityBy", "messageTitle", "status", "signerDetails", "expiryDate", "enableSigningOrder", "isDeleted", "labels", "cursor", "brandId"]
+    scheduled_send_time: Optional[StrictInt] = Field(default=None, alias="scheduledSendTime")
+    __properties: ClassVar[List[str]] = ["documentId", "senderDetail", "ccDetails", "createdDate", "activityDate", "activityBy", "messageTitle", "status", "signerDetails", "expiryDate", "enableSigningOrder", "isDeleted", "labels", "cursor", "brandId", "scheduledSendTime"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -56,8 +57,8 @@ class Document(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft']):
-            raise ValueError("must be one of enum values ('InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft')")
+        if value not in set(['InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft', 'Scheduled']):
+            raise ValueError("must be one of enum values ('InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft', 'Scheduled')")
         return value
 
     model_config = ConfigDict(
@@ -141,7 +142,8 @@ class Document(BaseModel):
             "isDeleted": obj.get("isDeleted"),
             "labels": obj.get("labels"),
             "cursor": obj.get("cursor"),
-            "brandId": obj.get("brandId")
+            "brandId": obj.get("brandId"),
+            "scheduledSendTime": obj.get("scheduledSendTime")
         })
         return _obj
 
@@ -173,6 +175,7 @@ class Document(BaseModel):
             "labels": "(List[str],)",
             "cursor": "(int,)",
             "brand_id": "(str,)",
+            "scheduled_send_time": "(int,)",
         }
 
     @classmethod

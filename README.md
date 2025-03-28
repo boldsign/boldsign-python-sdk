@@ -227,7 +227,6 @@ Class | Method | HTTP request | Description
  - [PhoneNumber](docs/PhoneNumber.md)
  - [PrefillField](docs/PrefillField.md)
  - [PrefillFieldRequest](docs/PrefillFieldRequest.md)
- - [ProblemDetails](docs/ProblemDetails.md)
  - [RecipientNotificationSettings](docs/RecipientNotificationSettings.md)
  - [Rectangle](docs/Rectangle.md)
  - [ReminderMessage](docs/ReminderMessage.md)

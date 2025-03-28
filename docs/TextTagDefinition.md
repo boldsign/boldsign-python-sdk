@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **label** | **str** |  | [optional] 
 **tab_index** | **int** |  | [optional] 
 **formula_field_settings** | [**FormulaFieldSettings**](FormulaFieldSettings.md) |  | [optional] 
+**resize_option** | **str** |  | [optional] 
 
 ## Example
 

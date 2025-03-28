@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **id_prefix** | **str** |  | [optional] 
 **restrict_id_prefix_change** | **bool** |  | [optional] [default to False]
 **background_hex_color** | **str** |  | [optional] 
+**resize_option** | **str** |  | [optional] 
 
 ## Example
 

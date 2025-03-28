@@ -26,6 +26,7 @@ from boldsign.models.document_cc import DocumentCC
 from boldsign.models.document_info import DocumentInfo
 from boldsign.models.document_signer import DocumentSigner
 from boldsign.models.form_group import FormGroup
+from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.reminder_settings import ReminderSettings
 from boldsign.models.text_tag_definition import TextTagDefinition
 from typing import Optional, Set, Tuple
@@ -67,10 +68,13 @@ class SendForSign(BaseModel):
     document_download_option: Optional[StrictStr] = Field(default=None, alias="documentDownloadOption")
     is_sandbox: Optional[StrictBool] = Field(default=None, alias="isSandbox")
     meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
     enable_audit_trail_localization: Optional[StrictBool] = Field(default=None, alias="enableAuditTrailLocalization")
     download_file_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=250)]] = Field(default=None, alias="downloadFileName")
-    __properties: ClassVar[List[str]] = ["files", "title", "message", "signers", "cc", "enableSigningOrder", "expiryDays", "expiryDateType", "expiryValue", "reminderSettings", "enableEmbeddedSigning", "disableEmails", "disableSMS", "brandId", "hideDocumentId", "labels", "fileUrls", "sendLinkValidTill", "useTextTags", "textTagDefinitions", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "documentInfo", "onBehalfOf", "AutoDetectFields", "documentDownloadOption", "isSandbox", "metaData", "formGroups", "enableAuditTrailLocalization", "downloadFileName"]
+    scheduled_send_time: Optional[StrictInt] = Field(default=None, alias="scheduledSendTime")
+    allow_scheduled_send: Optional[StrictBool] = Field(default=False, alias="allowScheduledSend")
+    __properties: ClassVar[List[str]] = ["files", "title", "message", "signers", "cc", "enableSigningOrder", "expiryDays", "expiryDateType", "expiryValue", "reminderSettings", "enableEmbeddedSigning", "disableEmails", "disableSMS", "brandId", "hideDocumentId", "labels", "fileUrls", "sendLinkValidTill", "useTextTags", "textTagDefinitions", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "documentInfo", "onBehalfOf", "AutoDetectFields", "documentDownloadOption", "isSandbox", "metaData", "recipientNotificationSettings", "formGroups", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend"]
 
     @field_validator('expiry_date_type')
     def expiry_date_type_validate_enum(cls, value):
@@ -188,9 +192,12 @@ class SendForSign(BaseModel):
             "documentDownloadOption": obj.get("documentDownloadOption"),
             "isSandbox": obj.get("isSandbox"),
             "metaData": obj.get("metaData"),
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None,
             "enableAuditTrailLocalization": obj.get("enableAuditTrailLocalization"),
-            "downloadFileName": obj.get("downloadFileName")
+            "downloadFileName": obj.get("downloadFileName"),
+            "scheduledSendTime": obj.get("scheduledSendTime"),
+            "allowScheduledSend": obj.get("allowScheduledSend") if obj.get("allowScheduledSend") is not None else False
         })
         return _obj
 
@@ -236,9 +243,12 @@ class SendForSign(BaseModel):
             "document_download_option": "(str,)",
             "is_sandbox": "(bool,)",
             "meta_data": "(Dict[str, Optional[str]],)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "form_groups": "(List[FormGroup],)",
             "enable_audit_trail_localization": "(bool,)",
             "download_file_name": "(str,)",
+            "scheduled_send_time": "(int,)",
+            "allow_scheduled_send": "(bool,)",
         }
 
     @classmethod

@@ -62,13 +62,24 @@ class TextTagDefinition(BaseModel):
     label: Optional[StrictStr] = None
     tab_index: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=-1)]] = Field(default=None, alias="tabIndex")
     formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
-    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "formulaFieldSettings"]
+    resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
+    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "formulaFieldSettings", "resizeOption"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula']):
             raise ValueError("must be one of enum values ('Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula')")
+        return value
+
+    @field_validator('resize_option')
+    def resize_option_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont']):
+            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont')")
         return value
 
     model_config = ConfigDict(
@@ -161,7 +172,8 @@ class TextTagDefinition(BaseModel):
             "offset": TextTagOffset.from_dict(obj["offset"]) if obj.get("offset") is not None else None,
             "label": obj.get("label"),
             "tabIndex": obj.get("tabIndex"),
-            "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None
+            "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
+            "resizeOption": obj.get("resizeOption")
         })
         return _obj
 
@@ -202,6 +214,7 @@ class TextTagDefinition(BaseModel):
             "label": "(str,)",
             "tab_index": "(int,)",
             "formula_field_settings": "(FormulaFieldSettings,)",
+            "resize_option": "(str,)",
         }
 
     @classmethod

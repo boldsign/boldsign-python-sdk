@@ -102,6 +102,7 @@ class CustomFieldApi:
             '200': "CustomFieldMessage",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -170,6 +171,7 @@ class CustomFieldApi:
             '200': "CustomFieldMessage",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -238,6 +240,7 @@ class CustomFieldApi:
             '200': "CustomFieldMessage",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -768,6 +771,7 @@ class CustomFieldApi:
             '200': "DeleteCustomFieldReply",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -836,6 +840,7 @@ class CustomFieldApi:
             '200': "DeleteCustomFieldReply",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -904,6 +909,7 @@ class CustomFieldApi:
             '200': "DeleteCustomFieldReply",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1076,6 +1082,7 @@ class CustomFieldApi:
             '200': "CustomFieldMessage",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1148,6 +1155,7 @@ class CustomFieldApi:
             '200': "CustomFieldMessage",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1220,6 +1228,7 @@ class CustomFieldApi:
             '200': "CustomFieldMessage",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,

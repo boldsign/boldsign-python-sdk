@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from boldsign.models.form_field import FormField
 from boldsign.models.phone_number import PhoneNumber
+from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
@@ -49,8 +50,9 @@ class TemplateRole(BaseModel):
     form_fields: Optional[List[FormField]] = Field(default=None, alias="formFields")
     allow_role_edit: Optional[StrictBool] = Field(default=None, alias="allowRoleEdit")
     allow_role_delete: Optional[StrictBool] = Field(default=None, alias="allowRoleDelete")
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
-    __properties: ClassVar[List[str]] = ["index", "name", "defaultSignerName", "defaultSignerEmail", "signerOrder", "signerType", "hostEmail", "language", "locale", "imposeAuthentication", "phoneNumber", "deliveryMode", "allowFieldConfiguration", "formFields", "allowRoleEdit", "allowRoleDelete", "enableQes"]
+    __properties: ClassVar[List[str]] = ["index", "name", "defaultSignerName", "defaultSignerEmail", "signerOrder", "signerType", "hostEmail", "language", "locale", "imposeAuthentication", "phoneNumber", "deliveryMode", "allowFieldConfiguration", "formFields", "allowRoleEdit", "allowRoleDelete", "recipientNotificationSettings", "enableQes"]
 
     @field_validator('signer_type')
     def signer_type_validate_enum(cls, value):
@@ -185,6 +187,7 @@ class TemplateRole(BaseModel):
             "formFields": [FormField.from_dict(_item) for _item in obj["formFields"]] if obj.get("formFields") is not None else None,
             "allowRoleEdit": obj.get("allowRoleEdit"),
             "allowRoleDelete": obj.get("allowRoleDelete"),
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "enableQes": obj.get("enableQes")
         })
         return _obj
@@ -218,6 +221,7 @@ class TemplateRole(BaseModel):
             "form_fields": "(List[FormField],)",
             "allow_role_edit": "(bool,)",
             "allow_role_delete": "(bool,)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "enable_qes": "(bool,)",
         }
 

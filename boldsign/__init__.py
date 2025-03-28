@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.0b6"
+__version__ = "1.0.0b7"
 
 # import apis into sdk package
 from boldsign.api.branding_api import BrandingApi
@@ -114,7 +114,6 @@ from boldsign.models.page_details import PageDetails
 from boldsign.models.phone_number import PhoneNumber
 from boldsign.models.prefill_field import PrefillField
 from boldsign.models.prefill_field_request import PrefillFieldRequest
-from boldsign.models.problem_details import ProblemDetails
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.rectangle import Rectangle
 from boldsign.models.reminder_message import ReminderMessage

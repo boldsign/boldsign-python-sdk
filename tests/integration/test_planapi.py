@@ -31,7 +31,7 @@ class TestPlanApi(unittest.TestCase):
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
         finally:
-            time.sleep(10)
+            time.sleep(5)
 
 
 if __name__ == '__main__':

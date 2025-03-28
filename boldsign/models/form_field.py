@@ -74,7 +74,8 @@ class FormField(BaseModel):
     background_hex_color: Optional[StrictStr] = Field(default=None, alias="backgroundHexColor")
     tab_index: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=-1)]] = Field(default=None, alias="tabIndex")
     formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
-    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings"]
+    resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
+    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption"]
 
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
@@ -121,6 +122,16 @@ class FormField(BaseModel):
 
         if value not in set(['LTR', 'RTL']):
             raise ValueError("must be one of enum values ('LTR', 'RTL')")
+        return value
+
+    @field_validator('resize_option')
+    def resize_option_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont']):
+            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont')")
         return value
 
     model_config = ConfigDict(
@@ -226,7 +237,8 @@ class FormField(BaseModel):
             "characterSpacing": obj.get("characterSpacing"),
             "backgroundHexColor": obj.get("backgroundHexColor"),
             "tabIndex": obj.get("tabIndex"),
-            "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None
+            "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
+            "resizeOption": obj.get("resizeOption")
         })
         return _obj
 
@@ -280,6 +292,7 @@ class FormField(BaseModel):
             "background_hex_color": "(str,)",
             "tab_index": "(int,)",
             "formula_field_settings": "(FormulaFieldSettings,)",
+            "resize_option": "(str,)",
         }
 
     @classmethod

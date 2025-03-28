@@ -32,7 +32,6 @@ from boldsign.models.document_tags import DocumentTags
 from boldsign.models.embedded_document_request import EmbeddedDocumentRequest
 from boldsign.models.embedded_send_created import EmbeddedSendCreated
 from boldsign.models.embedded_signing_link import EmbeddedSigningLink
-from boldsign.models.error_result import ErrorResult
 from boldsign.models.extend_expiry import ExtendExpiry
 from boldsign.models.prefill_field_request import PrefillFieldRequest
 from boldsign.models.reminder_message import ReminderMessage
@@ -1784,7 +1783,7 @@ class DocumentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ErrorResult:
+    ) -> None:
         """Change recipient details of a document.
 
 
@@ -1824,8 +1823,9 @@ class DocumentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
             '401': "ErrorResult",
-            '200': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1855,7 +1855,7 @@ class DocumentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ErrorResult]:
+    ) -> ApiResponse[None]:
         """Change recipient details of a document.
 
 
@@ -1895,8 +1895,9 @@ class DocumentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
             '401': "ErrorResult",
-            '200': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1966,8 +1967,9 @@ class DocumentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
             '401': "ErrorResult",
-            '200': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2238,6 +2240,8 @@ class DocumentApi:
             '201': "EmbeddedSendCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2306,6 +2310,8 @@ class DocumentApi:
             '201': "EmbeddedSendCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2374,6 +2380,8 @@ class DocumentApi:
             '201': "EmbeddedSendCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7429,6 +7437,8 @@ class DocumentApi:
             '201': "DocumentCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7497,6 +7507,8 @@ class DocumentApi:
             '201': "DocumentCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7565,6 +7577,8 @@ class DocumentApi:
             '201': "DocumentCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,

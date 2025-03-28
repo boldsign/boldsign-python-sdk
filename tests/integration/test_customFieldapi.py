@@ -101,6 +101,8 @@ class TestCustomFieldsApi(unittest.TestCase):
         except Exception as e:
             logger.error("Unexpected exception during custom field creation: %s", str(e))
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=74)
     def test_edit_custom_field(self):
@@ -136,6 +138,8 @@ class TestCustomFieldsApi(unittest.TestCase):
         except Exception as e:
             logger.error("Unexpected exception during custom field update: %s", str(e))
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=75)
     def test_list_custom_fields(self):
@@ -153,6 +157,8 @@ class TestCustomFieldsApi(unittest.TestCase):
         except Exception as e:
             logger.error("Unexpected exception during listing custom fields: %s", str(e))
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=76)
     def test_delete_custom_field(self):
@@ -171,7 +177,9 @@ class TestCustomFieldsApi(unittest.TestCase):
         except Exception as e:
             logger.error("Unexpected exception during custom field deletion: %s", str(e))
             assert False, f"Unexpected exception occurred: {str(e)}"
-                        
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=77)
     def test_delete_brand(self):
         try:
@@ -193,7 +201,8 @@ class TestCustomFieldsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"   
-
+        finally:
+            time.sleep(5)
 
 if __name__ == '__main__':
     unittest.main()

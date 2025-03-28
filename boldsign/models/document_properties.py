@@ -77,10 +77,11 @@ class DocumentProperties(BaseModel):
     expiry_value: Optional[StrictInt] = Field(default=None, alias="expiryValue")
     document_download_option: Optional[StrictStr] = Field(default=None, alias="documentDownloadOption")
     meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     enable_audit_trail_localization: Optional[StrictBool] = Field(default=None, alias="enableAuditTrailLocalization")
     download_file_name: Optional[StrictStr] = Field(default=None, alias="downloadFileName")
-    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
-    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "enableAuditTrailLocalization", "downloadFileName", "recipientNotificationSettings"]
+    scheduled_send_time: Optional[StrictInt] = Field(default=None, alias="scheduledSendTime")
+    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -88,8 +89,8 @@ class DocumentProperties(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft']):
-            raise ValueError("must be one of enum values ('InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft')")
+        if value not in set(['InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft', 'Scheduled']):
+            raise ValueError("must be one of enum values ('InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft', 'Scheduled')")
         return value
 
     @field_validator('activity_action')
@@ -98,8 +99,8 @@ class DocumentProperties(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Viewed', 'Signed', 'Reassigned', 'Declined', 'Revoked', 'Expired', 'Downloaded', 'DownloadedForPrintSign', 'InitiatePrintAndSign', 'InitiateFormSign', 'CancelPrintAndSign', 'CompletePrintAndSign', 'Reviewed', 'None', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted']):
-            raise ValueError("must be one of enum values ('Viewed', 'Signed', 'Reassigned', 'Declined', 'Revoked', 'Expired', 'Downloaded', 'DownloadedForPrintSign', 'InitiatePrintAndSign', 'InitiateFormSign', 'CancelPrintAndSign', 'CompletePrintAndSign', 'Reviewed', 'None', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted')")
+        if value not in set(['Viewed', 'Signed', 'Reassigned', 'Declined', 'Revoked', 'Expired', 'Downloaded', 'DownloadedForPrintSign', 'InitiatePrintAndSign', 'InitiateFormSign', 'CancelPrintAndSign', 'CompletePrintAndSign', 'Reviewed', 'None', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'DocumentScheduled']):
+            raise ValueError("must be one of enum values ('Viewed', 'Signed', 'Reassigned', 'Declined', 'Revoked', 'Expired', 'Downloaded', 'DownloadedForPrintSign', 'InitiatePrintAndSign', 'InitiateFormSign', 'CancelPrintAndSign', 'CompletePrintAndSign', 'Reviewed', 'None', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'DocumentScheduled')")
         return value
 
     @field_validator('expiry_date_type')
@@ -225,9 +226,10 @@ class DocumentProperties(BaseModel):
             "expiryValue": obj.get("expiryValue"),
             "documentDownloadOption": obj.get("documentDownloadOption"),
             "metaData": obj.get("metaData"),
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "enableAuditTrailLocalization": obj.get("enableAuditTrailLocalization"),
             "downloadFileName": obj.get("downloadFileName"),
-            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None
+            "scheduledSendTime": obj.get("scheduledSendTime")
         })
         return _obj
 
@@ -280,9 +282,10 @@ class DocumentProperties(BaseModel):
             "expiry_value": "(int,)",
             "document_download_option": "(str,)",
             "meta_data": "(Dict[str, Optional[str]],)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "enable_audit_trail_localization": "(bool,)",
             "download_file_name": "(str,)",
-            "recipient_notification_settings": "(RecipientNotificationSettings,)",
+            "scheduled_send_time": "(int,)",
         }
 
     @classmethod

@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from boldsign.models.document_cc import DocumentCC
 from boldsign.models.document_info import DocumentInfo
 from boldsign.models.form_group import FormGroup
+from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.template_role import TemplateRole
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
@@ -53,7 +54,8 @@ class EditTemplateRequest(BaseModel):
     labels: Optional[List[StrictStr]] = None
     template_labels: Optional[List[StrictStr]] = Field(default=None, alias="templateLabels")
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
-    __properties: ClassVar[List[str]] = ["title", "description", "documentTitle", "documentMessage", "roles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "onBehalfOf", "labels", "templateLabels", "formGroups"]
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
+    __properties: ClassVar[List[str]] = ["title", "description", "documentTitle", "documentMessage", "roles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "onBehalfOf", "labels", "templateLabels", "formGroups", "recipientNotificationSettings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -139,7 +141,8 @@ class EditTemplateRequest(BaseModel):
             "onBehalfOf": obj.get("onBehalfOf"),
             "labels": obj.get("labels"),
             "templateLabels": obj.get("templateLabels"),
-            "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None
+            "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None,
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None
         })
         return _obj
 
@@ -174,6 +177,7 @@ class EditTemplateRequest(BaseModel):
             "labels": "(List[str],)",
             "template_labels": "(List[str],)",
             "form_groups": "(List[FormGroup],)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
         }
 
     @classmethod

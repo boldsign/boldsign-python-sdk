@@ -66,7 +66,8 @@ class CustomFormField(BaseModel):
     id_prefix: Optional[StrictStr] = Field(default=None, alias="idPrefix")
     restrict_id_prefix_change: Optional[StrictBool] = Field(default=False, alias="restrictIdPrefixChange")
     background_hex_color: Optional[StrictStr] = Field(default=None, alias="backgroundHexColor")
-    __properties: ClassVar[List[str]] = ["fieldType", "width", "height", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "idPrefix", "restrictIdPrefixChange", "backgroundHexColor"]
+    resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
+    __properties: ClassVar[List[str]] = ["fieldType", "width", "height", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "idPrefix", "restrictIdPrefixChange", "backgroundHexColor", "resizeOption"]
 
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
@@ -113,6 +114,16 @@ class CustomFormField(BaseModel):
 
         if value not in set(['LTR', 'RTL']):
             raise ValueError("must be one of enum values ('LTR', 'RTL')")
+        return value
+
+    @field_validator('resize_option')
+    def resize_option_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont']):
+            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont')")
         return value
 
     model_config = ConfigDict(
@@ -213,7 +224,8 @@ class CustomFormField(BaseModel):
             "characterSpacing": obj.get("characterSpacing"),
             "idPrefix": obj.get("idPrefix"),
             "restrictIdPrefixChange": obj.get("restrictIdPrefixChange") if obj.get("restrictIdPrefixChange") is not None else False,
-            "backgroundHexColor": obj.get("backgroundHexColor")
+            "backgroundHexColor": obj.get("backgroundHexColor"),
+            "resizeOption": obj.get("resizeOption")
         })
         return _obj
 
@@ -262,6 +274,7 @@ class CustomFormField(BaseModel):
             "id_prefix": "(str,)",
             "restrict_id_prefix_change": "(bool,)",
             "background_hex_color": "(str,)",
+            "resize_option": "(str,)",
         }
 
     @classmethod

@@ -25,6 +25,7 @@ from typing_extensions import Annotated
 from boldsign.models.document_cc import DocumentCC
 from boldsign.models.document_info import DocumentInfo
 from boldsign.models.form_group import FormGroup
+from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.template_role import TemplateRole
 from boldsign.models.text_tag_definition import TextTagDefinition
 from typing import Optional, Set, Tuple
@@ -71,8 +72,9 @@ class EmbeddedCreateTemplateRequest(BaseModel):
     on_behalf_of: Optional[StrictStr] = Field(default=None, alias="onBehalfOf")
     labels: Optional[List[StrictStr]] = None
     template_labels: Optional[List[StrictStr]] = Field(default=None, alias="templateLabels")
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
-    __properties: ClassVar[List[str]] = ["title", "redirectUrl", "showToolbar", "viewOption", "showSaveButton", "locale", "showSendButton", "showCreateButton", "showPreviewButton", "showNavigationButtons", "linkValidTill", "showTooltip", "description", "documentTitle", "documentMessage", "files", "fileUrls", "roles", "allowModifyFiles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndAssign", "enableSigningOrder", "documentInfo", "useTextTags", "textTagDefinitions", "autoDetectFields", "onBehalfOf", "labels", "templateLabels", "formGroups"]
+    __properties: ClassVar[List[str]] = ["title", "redirectUrl", "showToolbar", "viewOption", "showSaveButton", "locale", "showSendButton", "showCreateButton", "showPreviewButton", "showNavigationButtons", "linkValidTill", "showTooltip", "description", "documentTitle", "documentMessage", "files", "fileUrls", "roles", "allowModifyFiles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndAssign", "enableSigningOrder", "documentInfo", "useTextTags", "textTagDefinitions", "autoDetectFields", "onBehalfOf", "labels", "templateLabels", "recipientNotificationSettings", "formGroups"]
 
     @field_validator('view_option')
     def view_option_validate_enum(cls, value):
@@ -195,6 +197,7 @@ class EmbeddedCreateTemplateRequest(BaseModel):
             "onBehalfOf": obj.get("onBehalfOf"),
             "labels": obj.get("labels"),
             "templateLabels": obj.get("templateLabels"),
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None
         })
         return _obj
@@ -246,6 +249,7 @@ class EmbeddedCreateTemplateRequest(BaseModel):
             "on_behalf_of": "(str,)",
             "labels": "(List[str],)",
             "template_labels": "(List[str],)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "form_groups": "(List[FormGroup],)",
         }
 

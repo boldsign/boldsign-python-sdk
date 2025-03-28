@@ -320,7 +320,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **change_recipient**
-> ErrorResult change_recipient(document_id, change_recipient)
+> change_recipient(document_id, change_recipient)
 
 Change recipient details of a document.
 
@@ -332,7 +332,6 @@ Change recipient details of a document.
 ```python
 import boldsign
 from boldsign.models.change_recipient import ChangeRecipient
-from boldsign.models.error_result import ErrorResult
 from boldsign.rest import ApiException
 from pprint import pprint
 
@@ -349,9 +348,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
     try:
         # Change recipient details of a document.
-        api_response = api_instance.change_recipient(document_id, change_recipient)
-        print("The response of DocumentApi->change_recipient:\n")
-        pprint(api_response)
+        api_instance.change_recipient(document_id, change_recipient)
     except Exception as e:
         print("Exception when calling DocumentApi->change_recipient: %s\n" % e)
 ```
@@ -368,7 +365,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ErrorResult**](ErrorResult.md)
+void (empty response body)
 
 ### Authorization
 
@@ -383,8 +380,9 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+**204** | No Content |  -  |
 **401** | Unauthorized |  -  |
-**200** | OK |  -  |
+**403** | Forbidden |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -453,6 +451,8 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**400** | Bad Request |  -  |
+**422** | Unprocessable Content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1427,6 +1427,8 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**400** | Bad Request |  -  |
+**422** | Unprocessable Content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

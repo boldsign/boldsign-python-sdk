@@ -93,7 +93,6 @@ boldsign/models/page_details.py
 boldsign/models/phone_number.py
 boldsign/models/prefill_field.py
 boldsign/models/prefill_field_request.py
-boldsign/models/problem_details.py
 boldsign/models/recipient_notification_settings.py
 boldsign/models/rectangle.py
 boldsign/models/reminder_message.py
@@ -218,7 +217,6 @@ docs/PhoneNumber.md
 docs/PlanApi.md
 docs/PrefillField.md
 docs/PrefillFieldRequest.md
-docs/ProblemDetails.md
 docs/RecipientNotificationSettings.md
 docs/Rectangle.md
 docs/ReminderMessage.md

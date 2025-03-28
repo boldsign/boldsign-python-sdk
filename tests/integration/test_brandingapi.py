@@ -53,7 +53,7 @@ class TestBrandApi(unittest.TestCase):
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
         finally:
-            time.sleep(10)
+            time.sleep(5)
 
     @pytest.mark.run(order=54)
     def test_edit_brand_positive(self):
@@ -77,8 +77,9 @@ class TestBrandApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"   
-  
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
     
     @pytest.mark.run(order=55)
     def test_edit_brand_negative(self):
@@ -100,8 +101,10 @@ class TestBrandApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"brandId\":[\"Provide a valid brand ID\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"        
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=56)
     def test_brand_list_positive(self):
         try:
@@ -116,9 +119,10 @@ class TestBrandApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"   
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
-                   
     @pytest.mark.run(order=57)
     def test_get_brand_positive(self):
         try:
@@ -140,7 +144,9 @@ class TestBrandApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"   
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=58)
     def test_get_brand_negative(self):
@@ -160,7 +166,9 @@ class TestBrandApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"brandId\":[\"Provide a valid brand ID\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"        
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
                         
     @pytest.mark.run(order=59)
@@ -183,7 +191,9 @@ class TestBrandApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"   
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=60)
     def test_reset_default_brand_negative(self):
@@ -204,7 +214,9 @@ class TestBrandApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-                        
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=61)
     def test_delete_brand_positive(self):
         try:
@@ -225,7 +237,9 @@ class TestBrandApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"   
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=62)
     def test_delete__brand_negative(self):
@@ -245,7 +259,9 @@ class TestBrandApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"brandId\":[\"Provide a valid brand ID\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"           
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
 
 if __name__ == '__main__':

@@ -94,7 +94,8 @@ class BrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BrandingRecords",
-            '401': "ProblemDetails",
+            '401': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -157,7 +158,8 @@ class BrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BrandingRecords",
-            '401': "ProblemDetails",
+            '401': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -220,7 +222,8 @@ class BrandingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BrandingRecords",
-            '401': "ProblemDetails",
+            '401': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -453,6 +456,7 @@ class BrandingApi:
             '200': "BrandCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -629,6 +633,7 @@ class BrandingApi:
             '200': "BrandCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -805,6 +810,7 @@ class BrandingApi:
             '200': "BrandCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1481,6 +1487,7 @@ class BrandingApi:
             '200': "BrandCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1661,6 +1668,7 @@ class BrandingApi:
             '200': "BrandCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1841,6 +1849,7 @@ class BrandingApi:
             '200': "BrandCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2106,6 +2115,7 @@ class BrandingApi:
             '200': "ViewBrandDetails",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2174,6 +2184,7 @@ class BrandingApi:
             '200': "ViewBrandDetails",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2242,6 +2253,7 @@ class BrandingApi:
             '200': "ViewBrandDetails",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,

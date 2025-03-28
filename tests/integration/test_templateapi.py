@@ -77,6 +77,8 @@ class TestTemplateApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert e is None  # make the test case fail in case of an API exception    
+        finally:
+            time.sleep(5)
    
     @pytest.mark.run(order=42)
     def test_create_template_positive(self):
@@ -310,7 +312,8 @@ class TestTemplateApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-
+        finally:
+            time.sleep(5)
    
     @pytest.mark.run(order=45)
     def testTemplateDownload(self):
@@ -347,7 +350,6 @@ class TestTemplateApi(unittest.TestCase):
             assert False, f"Unexpected exception occurred: {str(e)}"
         finally:
             time.sleep(5)
-
  
     @pytest.mark.run(order=46)
     def test_send_using_template_best_case(self):
@@ -469,6 +471,8 @@ class TestTemplateApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
  
     #How to request signature by email and SMS when sending document from template?
     @pytest.mark.run(order=48)
@@ -666,6 +670,8 @@ class TestTemplateApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
 if __name__ == '__main__':
     unittest.main()

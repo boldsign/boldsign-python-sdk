@@ -41,9 +41,10 @@ Name | Type | Description | Notes
 **expiry_value** | **int** |  | [optional] 
 **document_download_option** | **str** |  | [optional] 
 **meta_data** | **Dict[str, Optional[str]]** |  | [optional] 
+**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 **enable_audit_trail_localization** | **bool** |  | [optional] 
 **download_file_name** | **str** |  | [optional] 
-**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
+**scheduled_send_time** | **int** |  | [optional] 
 
 ## Example
 

@@ -79,6 +79,8 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"  
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=100)
     def test_update_sender_identities_positive(self):
@@ -104,7 +106,9 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"     
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=101)
     def test_update_sender_identities_negative(self):
         try:
@@ -129,7 +133,9 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"       
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=102)
     def test_list_sender_identities_positive(self):
         try:
@@ -153,7 +159,9 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"   
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=103)
     def test_list_sender_identities_negative(self):
         try:
@@ -175,7 +183,9 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"  
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=104)
     def test_resend_invitation_sender_identities_positive(self):
         try:
@@ -195,7 +205,9 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"        
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=105)
     def test_resend_invitation_sender_identities_negative(self):
         try:
@@ -216,7 +228,9 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"            
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=106)
     def test_re_request_sender_identities_negative(self):
         try:
@@ -237,7 +251,9 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"     
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=107)
     def test_delete_sender_identities_positive(self):
         try:
@@ -257,7 +273,9 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"        
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=108)
     def test_delete_sender_identities_negative(self):
         try:
@@ -278,7 +296,8 @@ class TestSenderIdentitysApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"  
-
+        finally:
+            time.sleep(5)
 
 if __name__ == '__main__':
     unittest.main()

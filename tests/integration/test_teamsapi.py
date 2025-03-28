@@ -77,6 +77,8 @@ class TestUsersApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}" 
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=80)
     def test_get_user_list_positive(self):
@@ -140,6 +142,8 @@ class TestUsersApi(unittest.TestCase):
             # Catch all other exceptions
             print(f"\nException when calling BoldSign: {e}")
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=81)
     def test_get_team_list_negative(self):
@@ -163,6 +167,8 @@ class TestUsersApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=82)
     def test_get_team_positive(self):
@@ -189,7 +195,9 @@ class TestUsersApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=83)
     def test_get_team_negative(self):
         try:
@@ -209,6 +217,8 @@ class TestUsersApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"          
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=84)
     def test_update_team_positive(self):
@@ -234,7 +244,9 @@ class TestUsersApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"     
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=85)
     def test_update_team_negative(self):
         try:           
@@ -258,7 +270,8 @@ class TestUsersApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"  
-
+        finally:
+            time.sleep(5)
 
 if __name__ == '__main__':
     unittest.main()

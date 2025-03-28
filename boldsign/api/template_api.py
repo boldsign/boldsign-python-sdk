@@ -514,8 +514,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedSendCreated",
             '201': "EmbeddedSendCreated",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -585,8 +586,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedSendCreated",
             '201': "EmbeddedSendCreated",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -656,8 +658,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedSendCreated",
             '201': "EmbeddedSendCreated",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -848,8 +851,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedTemplateCreated",
             '201': "EmbeddedTemplateCreated",
+            '401': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -915,8 +919,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedTemplateCreated",
             '201': "EmbeddedTemplateCreated",
+            '401': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -982,8 +987,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedTemplateCreated",
             '201': "EmbeddedTemplateCreated",
+            '401': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1172,6 +1178,7 @@ class TemplateApi:
             '201': "TemplateCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1240,6 +1247,7 @@ class TemplateApi:
             '201': "TemplateCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1308,6 +1316,7 @@ class TemplateApi:
             '201': "TemplateCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1899,8 +1908,8 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '401': "ProblemDetails",
-            '403': "ProblemDetails",
+            '401': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1971,8 +1980,8 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '401': "ProblemDetails",
-            '403': "ProblemDetails",
+            '401': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2043,8 +2052,8 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '401': "ProblemDetails",
-            '403': "ProblemDetails",
+            '401': "ErrorResult",
+            '403': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2463,6 +2472,9 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
+            '400': "ErrorResult",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2533,6 +2545,9 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
+            '400': "ErrorResult",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2603,6 +2618,9 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
+            '400': "ErrorResult",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2692,6 +2710,13 @@ class TemplateApi:
             _body_params = edit_template_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2828,8 +2853,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedTemplateEdited",
             '201': "EmbeddedTemplateEdited",
+            '400': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2899,8 +2925,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedTemplateEdited",
             '201': "EmbeddedTemplateEdited",
+            '400': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2970,8 +2997,9 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbeddedTemplateEdited",
             '201': "EmbeddedTemplateEdited",
+            '400': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3464,7 +3492,7 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TemplateRecords",
-            '401': "ProblemDetails",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3567,7 +3595,7 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TemplateRecords",
-            '401': "ProblemDetails",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3670,7 +3698,7 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TemplateRecords",
-            '401': "ProblemDetails",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3865,6 +3893,8 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3931,6 +3961,8 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3997,6 +4029,8 @@ class TemplateApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '422': "ErrorResult",
+            '401': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4081,6 +4115,13 @@ class TemplateApi:
             _body_params = merge_and_send_for_sign_form
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -4179,8 +4220,8 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentCreated",
             '201': "DocumentCreated",
+            '401': "ErrorResult",
             '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
@@ -4251,8 +4292,8 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentCreated",
             '201': "DocumentCreated",
+            '401': "ErrorResult",
             '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(
@@ -4323,8 +4364,8 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentCreated",
             '201': "DocumentCreated",
+            '401': "ErrorResult",
             '422': "ErrorResult",
         }
         response_data = self.api_client.call_api(

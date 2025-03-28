@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **on_behalf_of** | **str** |  | [optional] 
 **labels** | **List[str]** |  | [optional] 
 **template_labels** | **List[str]** |  | [optional] 
+**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 **form_groups** | [**List[FormGroup]**](FormGroup.md) |  | [optional] 
 
 ## Example

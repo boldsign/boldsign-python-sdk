@@ -1,4 +1,5 @@
 import unittest
+
 import pytest
 import boldsign
 import os
@@ -44,7 +45,7 @@ class TestUsersApi(unittest.TestCase):
                 create_user= [create_user_request]
             )
             print("TestUserID:"+TestUsersApi.emailId)
-            assert create_user_response is None           
+            assert create_user_response is None
 
         except ApiException as e:
             print("\nException when calling BoldSign API: %s" % e)
@@ -76,8 +77,10 @@ class TestUsersApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"[0]\":[\"The email property does not contain a valid email address\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}" 
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=88)
     def test_get_user_list_positive(self):
         try:
@@ -107,8 +110,10 @@ class TestUsersApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"     
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=89)
     def test_get_user_list_negative(self):
         try:
@@ -117,8 +122,7 @@ class TestUsersApi(unittest.TestCase):
             # Define parameters for contact user list
             Page =250
             Page_size = 250
-            
-                        
+
             user_list_response = self.user_api.list_users(
                 page=Page,
                 page_size=Page_size
@@ -130,8 +134,10 @@ class TestUsersApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"PageSize\":[\"Provide a valid page size between 1 and 100\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"     
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=90)
     def test_get_user_positive(self):
         try:
@@ -140,7 +146,7 @@ class TestUsersApi(unittest.TestCase):
 
             # Define parameters for get user
             userId = TestUsersApi.user_id
-                        
+
             get_user_response = self.user_api.get_user(
                 user_id=userId
             )
@@ -153,8 +159,10 @@ class TestUsersApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"                
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=91)
     def test_get_user_negative(self):
         try:
@@ -173,14 +181,16 @@ class TestUsersApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"userId\":[\"Provide valid user id.\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"   
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=93)
     def test_update_user_negative(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
             
-           # Define parameters for update user
+            # Define parameters for update user
             user_Id = "WrongUserID"
             update_user_request = boldsign.UpdateUser(
                 userId= user_Id
@@ -196,8 +206,10 @@ class TestUsersApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"UserId\":[\"Provide valid user id.\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"  
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=94)
     def test_resend_invitation_user_positive(self):
         try:
@@ -207,7 +219,7 @@ class TestUsersApi(unittest.TestCase):
             user_Id = TestUsersApi.user_id
             
             resend_invitation_response = self.user_api.resend_invitation(
-               user_id= user_Id
+                user_id= user_Id
             )
             assert resend_invitation_response is None
 
@@ -216,18 +228,20 @@ class TestUsersApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"        
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=95)
     def test_resend_invitation_user_negative(self):
-        try:            
+        try:
             self.user_api = boldsign.UserApi(self.api_client)
             
             # Define parameters for resend_invitation
             user_Id = "WrongUserID"
             
             resend_invitation_response = self.user_api.resend_invitation(
-               user_id= user_Id
+                user_id= user_Id
             )
 
         except ApiException as e:
@@ -236,18 +250,20 @@ class TestUsersApi(unittest.TestCase):
             assert e.body.startswith("{\"errors\":{\"UserId\":[\"Provide valid user id.\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"            
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=96)
     def test_cancel_invitation_positive(self):
-        try:            
+        try:
             self.user_api = boldsign.UserApi(self.api_client)
             
             # Define parameters for user cancel invitation
             userId = TestUsersApi.user_id
             
             cancel_invitation_user_response = self.user_api.cancel_invitation(
-              user_id=userId
+                user_id=userId
             )
             assert cancel_invitation_user_response is None
 
@@ -256,28 +272,31 @@ class TestUsersApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"              
-            
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=97)
     def test_cancel_invitation_negative(self):
-        try:            
+        try:
             self.user_api = boldsign.UserApi(self.api_client)
             
             # Define parameters for user cancel invitation
             userId = "WrongUserID"
             
             cancel_invitation_user_response = self.user_api.cancel_invitation(
-              user_id=userId
+                user_id=userId
             )
-           
+
         except ApiException as e:
             assert e.status == 400
             assert e.reason == "Bad Request"
             assert e.body.startswith("{\"errors\":{\"UserId\":[\"Provide valid user id.\"]},")
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"     
-
+            assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
 if __name__ == '__main__':
     unittest.main()

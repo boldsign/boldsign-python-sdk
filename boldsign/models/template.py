@@ -61,8 +61,8 @@ class Template(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft']):
-            raise ValueError("must be one of enum values ('InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft')")
+        if value not in set(['InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft', 'Scheduled']):
+            raise ValueError("must be one of enum values ('InProgress', 'Completed', 'Declined', 'Expired', 'Revoked', 'Draft', 'Scheduled')")
         return value
 
     @field_validator('access_type')

@@ -74,6 +74,7 @@ void (empty response body)
 **201** | Created |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

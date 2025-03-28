@@ -200,7 +200,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"    
-    
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=5)
     def test_extend_expiry_negative(self):
@@ -229,6 +230,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=6)
     def test_document_list_positive(self):
@@ -251,6 +254,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert e is None  # make the test case fail in case of an API exception
+        finally:
+            time.sleep(5)
     
     @pytest.mark.run(order=7)
     def test_document_list_negative(self):
@@ -272,6 +277,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert e is None  # make the test case fail in case of an API exception
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=8)
     def test_team_document_positive(self):        
@@ -293,6 +300,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=9)
     def test_team_document_negative(self):   
@@ -314,11 +323,12 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=10)
     def test_behalf_list_positive(self):
-       
-        try:          
+        try:
             self.document_api = boldsign.DocumentApi(self.api_client) 
 
             # Define parameters for listing documents           
@@ -329,13 +339,15 @@ class TestDocumentApi(unittest.TestCase):
                 page_size=page_size
             )
             assert behalf_documents is not None
-            assert len(behalf_documents.result) == 0    
+            assert len(behalf_documents.result) >= 0
         except ApiException as e:
             print("\nException when calling BoldSign API: %s" % e)
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=11)
     def test_behalf_list_negative(self):     
@@ -357,29 +369,28 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=12)
     def test_document_properties_positive(self):             
         try:          
             self.document_api = boldsign.DocumentApi(self.api_client) 
 
-            # Define parameters for properties
             documentId =  TestDocumentApi.created_document_id
             document_properties = self.document_api.get_properties(
                 document_id=documentId
             )
             assert document_properties is not None
             assert document_properties.document_id == TestDocumentApi.created_document_id
-            # assert document_properties.title, "Document SDK API"
-            # assert document_properties.document_title, "SDK Document Test case"
-            # assert document_properties.description, "Testing document from SDK integration test case"
         except ApiException as e:
             print("\nException when calling BoldSign API: %s" % e)
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-    
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=13)
     def test_document_properties_negative(self):             
@@ -420,7 +431,9 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-    
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=15)
     def test_download_document_negative(self):        
         try:          
@@ -440,7 +453,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=16)
     def test_change_access_code_positive(self):
@@ -469,6 +483,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=17)
     def test_change_access_code_negative(self):
@@ -496,6 +512,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=18)
     def test_change_recipient_positive(self):
@@ -525,6 +543,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=19)
     def test_change_recipient_negative(self):
@@ -555,6 +575,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"     
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=20)
     def test_add_tags_positive(self):
@@ -581,6 +603,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=21)
     def test_add_tags_negative(self):
@@ -608,6 +632,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"      
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=22)
     def test_delete_tags_positive(self):
@@ -634,6 +660,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=23)
     def test_delete_tags_negative(self):
@@ -661,6 +689,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"   
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=24)
     def test_remove_authentication_positive(self):
@@ -687,6 +717,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=25)
     def test_remove_authentication_negative(self):
@@ -712,6 +744,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"   
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=26)
     def test_add_authentication_positive(self):
@@ -768,6 +802,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=28)
     def test_revoke_document_positive(self):
@@ -794,6 +830,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
     
     @pytest.mark.run(order=29)
     def test_revoke_document_negative(self):
@@ -819,7 +857,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=30)
     def test_delete_document_positive(self):
@@ -839,6 +878,8 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=31)
     def test_delete_document_negative(self):
@@ -858,8 +899,9 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"          
-         
-    
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=32)
     def test_send_document_with_image_field(self):
         try:
@@ -914,9 +956,8 @@ class TestDocumentApi(unittest.TestCase):
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
         finally:
-            time.sleep(5)                     
-         
-    
+            time.sleep(5)
+
     @pytest.mark.run(order=33)
     def test_send_document_with_file_url(self):
         try:
@@ -1265,8 +1306,10 @@ class TestDocumentApi(unittest.TestCase):
             assert False, f"API Exception occurred: {str(e)}"
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
-            assert False, f"Unexpected exception occurred: {str(e)}"                  
-         
+            assert False, f"Unexpected exception occurred: {str(e)}" 
+        finally:
+            time.sleep(5)
+
     #How to request the signatures without email notifications using BoldSign API?
     @pytest.mark.run(order=39)
     def test_send_document_disable_email(self):

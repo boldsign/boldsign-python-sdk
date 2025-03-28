@@ -99,6 +99,7 @@ class SenderIdentitiesApi:
             '201': None,
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -167,6 +168,7 @@ class SenderIdentitiesApi:
             '201': None,
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -235,6 +237,7 @@ class SenderIdentitiesApi:
             '201': None,
             '401': "ErrorResult",
             '403': "ErrorResult",
+            '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(
             *_param,

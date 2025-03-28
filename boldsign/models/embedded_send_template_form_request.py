@@ -25,6 +25,7 @@ from typing_extensions import Annotated
 from boldsign.models.document_cc import DocumentCC
 from boldsign.models.document_info import DocumentInfo
 from boldsign.models.form_group import FormGroup
+from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.reminder_settings import ReminderSettings
 from boldsign.models.role import Role
 from typing import Optional, Set, Tuple
@@ -73,11 +74,14 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
     role_removal_indices: Optional[List[StrictInt]] = Field(default=None, alias="roleRemovalIndices")
     document_download_option: Optional[StrictStr] = Field(default=None, alias="documentDownloadOption")
     meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
     remove_form_fields: Optional[List[StrictStr]] = Field(default=None, alias="removeFormFields")
     enable_audit_trail_localization: Optional[StrictBool] = Field(default=None, alias="enableAuditTrailLocalization")
     download_file_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=250)]] = Field(default=None, alias="downloadFileName")
-    __properties: ClassVar[List[str]] = ["files", "fileUrls", "redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "sendLinkValidTill", "showTooltip", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "enableAuditTrailLocalization", "downloadFileName"]
+    scheduled_send_time: Optional[StrictInt] = Field(default=None, alias="scheduledSendTime")
+    allow_scheduled_send: Optional[StrictBool] = Field(default=False, alias="allowScheduledSend")
+    __properties: ClassVar[List[str]] = ["files", "fileUrls", "redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "sendLinkValidTill", "showTooltip", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "recipientNotificationSettings", "formGroups", "removeFormFields", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend"]
 
     @field_validator('send_view_option')
     def send_view_option_validate_enum(cls, value):
@@ -222,10 +226,13 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
             "roleRemovalIndices": obj.get("roleRemovalIndices"),
             "documentDownloadOption": obj.get("documentDownloadOption"),
             "metaData": obj.get("metaData"),
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None,
             "removeFormFields": obj.get("removeFormFields"),
             "enableAuditTrailLocalization": obj.get("enableAuditTrailLocalization"),
-            "downloadFileName": obj.get("downloadFileName")
+            "downloadFileName": obj.get("downloadFileName"),
+            "scheduledSendTime": obj.get("scheduledSendTime"),
+            "allowScheduledSend": obj.get("allowScheduledSend") if obj.get("allowScheduledSend") is not None else False
         })
         return _obj
 
@@ -278,10 +285,13 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
             "role_removal_indices": "(List[int],)",
             "document_download_option": "(str,)",
             "meta_data": "(Dict[str, Optional[str]],)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "form_groups": "(List[FormGroup],)",
             "remove_form_fields": "(List[str],)",
             "enable_audit_trail_localization": "(bool,)",
             "download_file_name": "(str,)",
+            "scheduled_send_time": "(int,)",
+            "allow_scheduled_send": "(bool,)",
         }
 
     @classmethod

@@ -80,6 +80,8 @@ class TestContactsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"  
+        finally:
+            time.sleep(5)
 
     @pytest.mark.run(order=65)
     def test_get_brand_positive(self):
@@ -112,7 +114,9 @@ class TestContactsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=66)
     def test_get_contact_positive(self):
         try:
@@ -136,7 +140,9 @@ class TestContactsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"       
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=67)
     def test_get_contact_negative(self):
         try:
@@ -156,7 +162,9 @@ class TestContactsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"   
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=68)
     def test_update_contact_positive(self):
         try:
@@ -182,7 +190,9 @@ class TestContactsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"       
-            
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=69)
     def test_update_contact_negative(self):
         try:
@@ -208,8 +218,9 @@ class TestContactsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"   
+        finally:
+            time.sleep(5)
 
-      
     @pytest.mark.run(order=70)
     def test_delete_contacts_positive(self):
         try:
@@ -229,8 +240,9 @@ class TestContactsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"        
-  
-    
+        finally:
+            time.sleep(5)
+
     @pytest.mark.run(order=71)
     def test_delete_contacts_negative(self):
         try:
@@ -250,7 +262,8 @@ class TestContactsApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
-
+        finally:
+            time.sleep(5)
 
 if __name__ == '__main__':
     unittest.main()
