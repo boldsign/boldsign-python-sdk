@@ -39,7 +39,8 @@ class SenderIdentityViewModel(BaseModel):
     notification_settings: Optional[NotificationSettings] = Field(default=None, alias="notificationSettings")
     brand_id: Optional[StrictStr] = Field(default=None, alias="brandId")
     redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
-    __properties: ClassVar[List[str]] = ["name", "email", "status", "createdBy", "approvedDate", "notificationSettings", "brandId", "redirectUrl"]
+    meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
+    __properties: ClassVar[List[str]] = ["name", "email", "status", "createdBy", "approvedDate", "notificationSettings", "brandId", "redirectUrl", "metaData"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -115,7 +116,8 @@ class SenderIdentityViewModel(BaseModel):
             "approvedDate": obj.get("approvedDate"),
             "notificationSettings": NotificationSettings.from_dict(obj["notificationSettings"]) if obj.get("notificationSettings") is not None else None,
             "brandId": obj.get("brandId"),
-            "redirectUrl": obj.get("redirectUrl")
+            "redirectUrl": obj.get("redirectUrl"),
+            "metaData": obj.get("metaData")
         })
         return _obj
 
@@ -140,6 +142,7 @@ class SenderIdentityViewModel(BaseModel):
             "notification_settings": "(NotificationSettings,)",
             "brand_id": "(str,)",
             "redirect_url": "(str,)",
+            "meta_data": "(Dict[str, Optional[str]],)",
         }
 
     @classmethod

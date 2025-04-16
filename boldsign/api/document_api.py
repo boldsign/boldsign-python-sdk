@@ -5304,6 +5304,7 @@ class DocumentApi:
         sent_by: Optional[List[StrictStr]] = None,
         recipients: Optional[List[StrictStr]] = None,
         transmit_type: Optional[StrictStr] = None,
+        date_filter_type: Annotated[Optional[StrictStr], Field(description="Date Filter as SentBetween and ExpiresOn.")] = None,
         page_size: Annotated[Optional[StrictInt], Field(description="Page size specified in get document list request.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Start date of the document")] = None,
         status: Annotated[Optional[List[StrictStr]], Field(description="Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft.")] = None,
@@ -5336,6 +5337,8 @@ class DocumentApi:
         :type recipients: List[str]
         :param transmit_type:
         :type transmit_type: str
+        :param date_filter_type: Date Filter as SentBetween and ExpiresOn.
+        :type date_filter_type: str
         :param page_size: Page size specified in get document list request.
         :type page_size: int
         :param start_date: Start date of the document
@@ -5379,6 +5382,7 @@ class DocumentApi:
             sent_by=sent_by,
             recipients=recipients,
             transmit_type=transmit_type,
+            date_filter_type=date_filter_type,
             page_size=page_size,
             start_date=start_date,
             status=status,
@@ -5415,6 +5419,7 @@ class DocumentApi:
         sent_by: Optional[List[StrictStr]] = None,
         recipients: Optional[List[StrictStr]] = None,
         transmit_type: Optional[StrictStr] = None,
+        date_filter_type: Annotated[Optional[StrictStr], Field(description="Date Filter as SentBetween and ExpiresOn.")] = None,
         page_size: Annotated[Optional[StrictInt], Field(description="Page size specified in get document list request.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Start date of the document")] = None,
         status: Annotated[Optional[List[StrictStr]], Field(description="Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft.")] = None,
@@ -5447,6 +5452,8 @@ class DocumentApi:
         :type recipients: List[str]
         :param transmit_type:
         :type transmit_type: str
+        :param date_filter_type: Date Filter as SentBetween and ExpiresOn.
+        :type date_filter_type: str
         :param page_size: Page size specified in get document list request.
         :type page_size: int
         :param start_date: Start date of the document
@@ -5490,6 +5497,7 @@ class DocumentApi:
             sent_by=sent_by,
             recipients=recipients,
             transmit_type=transmit_type,
+            date_filter_type=date_filter_type,
             page_size=page_size,
             start_date=start_date,
             status=status,
@@ -5526,6 +5534,7 @@ class DocumentApi:
         sent_by: Optional[List[StrictStr]] = None,
         recipients: Optional[List[StrictStr]] = None,
         transmit_type: Optional[StrictStr] = None,
+        date_filter_type: Annotated[Optional[StrictStr], Field(description="Date Filter as SentBetween and ExpiresOn.")] = None,
         page_size: Annotated[Optional[StrictInt], Field(description="Page size specified in get document list request.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Start date of the document")] = None,
         status: Annotated[Optional[List[StrictStr]], Field(description="Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft.")] = None,
@@ -5558,6 +5567,8 @@ class DocumentApi:
         :type recipients: List[str]
         :param transmit_type:
         :type transmit_type: str
+        :param date_filter_type: Date Filter as SentBetween and ExpiresOn.
+        :type date_filter_type: str
         :param page_size: Page size specified in get document list request.
         :type page_size: int
         :param start_date: Start date of the document
@@ -5601,6 +5612,7 @@ class DocumentApi:
             sent_by=sent_by,
             recipients=recipients,
             transmit_type=transmit_type,
+            date_filter_type=date_filter_type,
             page_size=page_size,
             start_date=start_date,
             status=status,
@@ -5632,6 +5644,7 @@ class DocumentApi:
         sent_by,
         recipients,
         transmit_type,
+        date_filter_type,
         page_size,
         start_date,
         status,
@@ -5676,6 +5689,10 @@ class DocumentApi:
         if transmit_type is not None:
             
             _query_params.append(('TransmitType', transmit_type))
+            
+        if date_filter_type is not None:
+            
+            _query_params.append(('DateFilterType', date_filter_type))
             
         if page_size is not None:
             
@@ -7718,6 +7735,7 @@ class DocumentApi:
         user_id: Annotated[Optional[List[StrictStr]], Field(description="UserId of the  Team document.")] = None,
         team_id: Annotated[Optional[List[StrictStr]], Field(description="TeamId  of the  Team document.")] = None,
         transmit_type: Annotated[Optional[StrictStr], Field(description="Transmit type as Sent, Received and Both.")] = None,
+        date_filter_type: Annotated[Optional[StrictStr], Field(description="Date Filter as SentBetween and Expiring.")] = None,
         page_size: Annotated[Optional[StrictInt], Field(description="Page size specified in get document list request.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Start date of the document")] = None,
         status: Annotated[Optional[List[StrictStr]], Field(description="Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft.")] = None,
@@ -7750,6 +7768,8 @@ class DocumentApi:
         :type team_id: List[str]
         :param transmit_type: Transmit type as Sent, Received and Both.
         :type transmit_type: str
+        :param date_filter_type: Date Filter as SentBetween and Expiring.
+        :type date_filter_type: str
         :param page_size: Page size specified in get document list request.
         :type page_size: int
         :param start_date: Start date of the document
@@ -7793,6 +7813,7 @@ class DocumentApi:
             user_id=user_id,
             team_id=team_id,
             transmit_type=transmit_type,
+            date_filter_type=date_filter_type,
             page_size=page_size,
             start_date=start_date,
             status=status,
@@ -7830,6 +7851,7 @@ class DocumentApi:
         user_id: Annotated[Optional[List[StrictStr]], Field(description="UserId of the  Team document.")] = None,
         team_id: Annotated[Optional[List[StrictStr]], Field(description="TeamId  of the  Team document.")] = None,
         transmit_type: Annotated[Optional[StrictStr], Field(description="Transmit type as Sent, Received and Both.")] = None,
+        date_filter_type: Annotated[Optional[StrictStr], Field(description="Date Filter as SentBetween and Expiring.")] = None,
         page_size: Annotated[Optional[StrictInt], Field(description="Page size specified in get document list request.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Start date of the document")] = None,
         status: Annotated[Optional[List[StrictStr]], Field(description="Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft.")] = None,
@@ -7862,6 +7884,8 @@ class DocumentApi:
         :type team_id: List[str]
         :param transmit_type: Transmit type as Sent, Received and Both.
         :type transmit_type: str
+        :param date_filter_type: Date Filter as SentBetween and Expiring.
+        :type date_filter_type: str
         :param page_size: Page size specified in get document list request.
         :type page_size: int
         :param start_date: Start date of the document
@@ -7905,6 +7929,7 @@ class DocumentApi:
             user_id=user_id,
             team_id=team_id,
             transmit_type=transmit_type,
+            date_filter_type=date_filter_type,
             page_size=page_size,
             start_date=start_date,
             status=status,
@@ -7942,6 +7967,7 @@ class DocumentApi:
         user_id: Annotated[Optional[List[StrictStr]], Field(description="UserId of the  Team document.")] = None,
         team_id: Annotated[Optional[List[StrictStr]], Field(description="TeamId  of the  Team document.")] = None,
         transmit_type: Annotated[Optional[StrictStr], Field(description="Transmit type as Sent, Received and Both.")] = None,
+        date_filter_type: Annotated[Optional[StrictStr], Field(description="Date Filter as SentBetween and Expiring.")] = None,
         page_size: Annotated[Optional[StrictInt], Field(description="Page size specified in get document list request.")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Start date of the document")] = None,
         status: Annotated[Optional[List[StrictStr]], Field(description="Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft.")] = None,
@@ -7974,6 +8000,8 @@ class DocumentApi:
         :type team_id: List[str]
         :param transmit_type: Transmit type as Sent, Received and Both.
         :type transmit_type: str
+        :param date_filter_type: Date Filter as SentBetween and Expiring.
+        :type date_filter_type: str
         :param page_size: Page size specified in get document list request.
         :type page_size: int
         :param start_date: Start date of the document
@@ -8017,6 +8045,7 @@ class DocumentApi:
             user_id=user_id,
             team_id=team_id,
             transmit_type=transmit_type,
+            date_filter_type=date_filter_type,
             page_size=page_size,
             start_date=start_date,
             status=status,
@@ -8049,6 +8078,7 @@ class DocumentApi:
         user_id,
         team_id,
         transmit_type,
+        date_filter_type,
         page_size,
         start_date,
         status,
@@ -8093,6 +8123,10 @@ class DocumentApi:
         if transmit_type is not None:
             
             _query_params.append(('TransmitType', transmit_type))
+            
+        if date_filter_type is not None:
+            
+            _query_params.append(('DateFilterType', date_filter_type))
             
         if page_size is not None:
             

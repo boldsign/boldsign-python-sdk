@@ -33,11 +33,12 @@ class CreateSenderIdentityRequest(BaseModel):
     CreateSenderIdentityRequest
     """ # noqa: E501
     email: Annotated[str, Field(min_length=0, strict=True, max_length=250)]
-    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = None
+    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=80)]] = None
     notification_settings: Optional[NotificationSettings] = Field(default=None, alias="notificationSettings")
     brand_id: Optional[StrictStr] = Field(default=None, alias="brandId")
     redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
-    __properties: ClassVar[List[str]] = ["email", "name", "notificationSettings", "brandId", "redirectUrl"]
+    meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
+    __properties: ClassVar[List[str]] = ["email", "name", "notificationSettings", "brandId", "redirectUrl", "metaData"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,7 +111,8 @@ class CreateSenderIdentityRequest(BaseModel):
             "name": obj.get("name"),
             "notificationSettings": NotificationSettings.from_dict(obj["notificationSettings"]) if obj.get("notificationSettings") is not None else None,
             "brandId": obj.get("brandId"),
-            "redirectUrl": obj.get("redirectUrl")
+            "redirectUrl": obj.get("redirectUrl"),
+            "metaData": obj.get("metaData")
         })
         return _obj
 
@@ -132,6 +134,7 @@ class CreateSenderIdentityRequest(BaseModel):
             "notification_settings": "(NotificationSettings,)",
             "brand_id": "(str,)",
             "redirect_url": "(str,)",
+            "meta_data": "(Dict[str, Optional[str]],)",
         }
 
     @classmethod

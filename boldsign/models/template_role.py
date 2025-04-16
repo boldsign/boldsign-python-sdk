@@ -100,8 +100,8 @@ class TemplateRole(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Email', 'SMS', 'EmailAndSMS']):
-            raise ValueError("must be one of enum values ('Email', 'SMS', 'EmailAndSMS')")
+        if value not in set(['Email', 'SMS', 'EmailAndSMS', 'WhatsApp']):
+            raise ValueError("must be one of enum values ('Email', 'SMS', 'EmailAndSMS', 'WhatsApp')")
         return value
 
     model_config = ConfigDict(

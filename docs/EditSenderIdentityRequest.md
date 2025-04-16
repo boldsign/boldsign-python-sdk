@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **notification_settings** | [**NotificationSettings**](NotificationSettings.md) |  | [optional] 
 **redirect_url** | **str** |  | [optional] 
+**meta_data** | **Dict[str, Optional[str]]** |  | [optional] 
 
 ## Example
 

@@ -32,10 +32,11 @@ class EditSenderIdentityRequest(BaseModel):
     """
     EditSenderIdentityRequest
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = None
+    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=80)]] = None
     notification_settings: Optional[NotificationSettings] = Field(default=None, alias="notificationSettings")
     redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
-    __properties: ClassVar[List[str]] = ["name", "notificationSettings", "redirectUrl"]
+    meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
+    __properties: ClassVar[List[str]] = ["name", "notificationSettings", "redirectUrl", "metaData"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,7 +107,8 @@ class EditSenderIdentityRequest(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "notificationSettings": NotificationSettings.from_dict(obj["notificationSettings"]) if obj.get("notificationSettings") is not None else None,
-            "redirectUrl": obj.get("redirectUrl")
+            "redirectUrl": obj.get("redirectUrl"),
+            "metaData": obj.get("metaData")
         })
         return _obj
 
@@ -126,6 +128,7 @@ class EditSenderIdentityRequest(BaseModel):
             "name": "(str,)",
             "notification_settings": "(NotificationSettings,)",
             "redirect_url": "(str,)",
+            "meta_data": "(Dict[str, Optional[str]],)",
         }
 
     @classmethod

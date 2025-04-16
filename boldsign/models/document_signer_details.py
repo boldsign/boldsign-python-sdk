@@ -59,7 +59,8 @@ class DocumentSignerDetails(BaseModel):
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     authentication_retry_count: Optional[StrictInt] = Field(default=None, alias="authenticationRetryCount")
     enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
-    __properties: ClassVar[List[str]] = ["signerName", "signerRole", "signerEmail", "status", "enableAccessCode", "isAuthenticationFailed", "enableEmailOTP", "authenticationType", "isDeliveryFailed", "isViewed", "order", "signerType", "hostEmail", "hostName", "isReassigned", "privateMessage", "allowFieldConfiguration", "formFields", "language", "locale", "phoneNumber", "idVerification", "recipientNotificationSettings", "authenticationRetryCount", "enableQes"]
+    delivery_mode: Optional[StrictStr] = Field(default=None, alias="deliveryMode")
+    __properties: ClassVar[List[str]] = ["signerName", "signerRole", "signerEmail", "status", "enableAccessCode", "isAuthenticationFailed", "enableEmailOTP", "authenticationType", "isDeliveryFailed", "isViewed", "order", "signerType", "hostEmail", "hostName", "isReassigned", "privateMessage", "allowFieldConfiguration", "formFields", "language", "locale", "phoneNumber", "idVerification", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "deliveryMode"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -109,6 +110,16 @@ class DocumentSignerDetails(BaseModel):
 
         if value not in set(['EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default']):
             raise ValueError("must be one of enum values ('EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default')")
+        return value
+
+    @field_validator('delivery_mode')
+    def delivery_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['Email', 'SMS', 'EmailAndSMS', 'WhatsApp']):
+            raise ValueError("must be one of enum values ('Email', 'SMS', 'EmailAndSMS', 'WhatsApp')")
         return value
 
     model_config = ConfigDict(
@@ -202,7 +213,8 @@ class DocumentSignerDetails(BaseModel):
             "idVerification": IdVerification.from_dict(obj["idVerification"]) if obj.get("idVerification") is not None else None,
             "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "authenticationRetryCount": obj.get("authenticationRetryCount"),
-            "enableQes": obj.get("enableQes")
+            "enableQes": obj.get("enableQes"),
+            "deliveryMode": obj.get("deliveryMode")
         })
         return _obj
 
@@ -244,6 +256,7 @@ class DocumentSignerDetails(BaseModel):
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "authentication_retry_count": "(int,)",
             "enable_qes": "(bool,)",
+            "delivery_mode": "(str,)",
         }
 
     @classmethod

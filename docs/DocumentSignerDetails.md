@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 **authentication_retry_count** | **int** |  | [optional] 
 **enable_qes** | **bool** |  | [optional] 
+**delivery_mode** | **str** |  | [optional] 
 
 ## Example
 

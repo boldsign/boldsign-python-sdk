@@ -1005,7 +1005,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_documents**
-> DocumentRecords list_documents(page, sent_by=sent_by, recipients=recipients, transmit_type=transmit_type, page_size=page_size, start_date=start_date, status=status, end_date=end_date, search_key=search_key, labels=labels, next_cursor=next_cursor, brand_ids=brand_ids)
+> DocumentRecords list_documents(page, sent_by=sent_by, recipients=recipients, transmit_type=transmit_type, date_filter_type=date_filter_type, page_size=page_size, start_date=start_date, status=status, end_date=end_date, search_key=search_key, labels=labels, next_cursor=next_cursor, brand_ids=brand_ids)
 
 List user documents.
 
@@ -1032,6 +1032,7 @@ with boldsign.ApiClient(configuration) as api_client:
     sent_by = ['sent_by_example'] # List[str] |  (optional)
     recipients = ['recipients_example'] # List[str] |  (optional)
     transmit_type = 'transmit_type_example' # str |  (optional)
+    date_filter_type = 'date_filter_type_example' # str | Date Filter as SentBetween and ExpiresOn. (optional)
     page_size = 10 # int | Page size specified in get document list request. (optional) (default to 10)
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date of the document (optional)
     status = ['status_example'] # List[str] | Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft. (optional)
@@ -1043,7 +1044,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
     try:
         # List user documents.
-        api_response = api_instance.list_documents(page, sent_by=sent_by, recipients=recipients, transmit_type=transmit_type, page_size=page_size, start_date=start_date, status=status, end_date=end_date, search_key=search_key, labels=labels, next_cursor=next_cursor, brand_ids=brand_ids)
+        api_response = api_instance.list_documents(page, sent_by=sent_by, recipients=recipients, transmit_type=transmit_type, date_filter_type=date_filter_type, page_size=page_size, start_date=start_date, status=status, end_date=end_date, search_key=search_key, labels=labels, next_cursor=next_cursor, brand_ids=brand_ids)
         print("The response of DocumentApi->list_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -1061,6 +1062,7 @@ Name | Type | Description  | Notes
  **sent_by** | [**List[str]**](str.md)|  | [optional] 
  **recipients** | [**List[str]**](str.md)|  | [optional] 
  **transmit_type** | **str**|  | [optional] 
+ **date_filter_type** | **str**| Date Filter as SentBetween and ExpiresOn. | [optional] 
  **page_size** | **int**| Page size specified in get document list request. | [optional] [default to 10]
  **start_date** | **datetime**| Start date of the document | [optional] 
  **status** | [**List[str]**](str.md)| Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft. | [optional] 
@@ -1433,7 +1435,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **team_documents**
-> TeamDocumentRecords team_documents(page, user_id=user_id, team_id=team_id, transmit_type=transmit_type, page_size=page_size, start_date=start_date, status=status, end_date=end_date, search_key=search_key, labels=labels, next_cursor=next_cursor, brand_ids=brand_ids)
+> TeamDocumentRecords team_documents(page, user_id=user_id, team_id=team_id, transmit_type=transmit_type, date_filter_type=date_filter_type, page_size=page_size, start_date=start_date, status=status, end_date=end_date, search_key=search_key, labels=labels, next_cursor=next_cursor, brand_ids=brand_ids)
 
 Get user Team documents.
 
@@ -1460,6 +1462,7 @@ with boldsign.ApiClient(configuration) as api_client:
     user_id = ['user_id_example'] # List[str] | UserId of the  Team document. (optional)
     team_id = ['team_id_example'] # List[str] | TeamId  of the  Team document. (optional)
     transmit_type = 'transmit_type_example' # str | Transmit type as Sent, Received and Both. (optional)
+    date_filter_type = 'date_filter_type_example' # str | Date Filter as SentBetween and Expiring. (optional)
     page_size = 10 # int | Page size specified in get document list request. (optional) (default to 10)
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date of the document (optional)
     status = ['status_example'] # List[str] | Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft. (optional)
@@ -1471,7 +1474,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
     try:
         # Get user Team documents.
-        api_response = api_instance.team_documents(page, user_id=user_id, team_id=team_id, transmit_type=transmit_type, page_size=page_size, start_date=start_date, status=status, end_date=end_date, search_key=search_key, labels=labels, next_cursor=next_cursor, brand_ids=brand_ids)
+        api_response = api_instance.team_documents(page, user_id=user_id, team_id=team_id, transmit_type=transmit_type, date_filter_type=date_filter_type, page_size=page_size, start_date=start_date, status=status, end_date=end_date, search_key=search_key, labels=labels, next_cursor=next_cursor, brand_ids=brand_ids)
         print("The response of DocumentApi->team_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -1489,6 +1492,7 @@ Name | Type | Description  | Notes
  **user_id** | [**List[str]**](str.md)| UserId of the  Team document. | [optional] 
  **team_id** | [**List[str]**](str.md)| TeamId  of the  Team document. | [optional] 
  **transmit_type** | **str**| Transmit type as Sent, Received and Both. | [optional] 
+ **date_filter_type** | **str**| Date Filter as SentBetween and Expiring. | [optional] 
  **page_size** | **int**| Page size specified in get document list request. | [optional] [default to 10]
  **start_date** | **datetime**| Start date of the document | [optional] 
  **status** | [**List[str]**](str.md)| Status of the document such as In-progress, Completed, Decline, Expired, Revoked, Draft. | [optional] 
