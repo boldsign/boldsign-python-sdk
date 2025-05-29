@@ -1,0 +1,24 @@
+import sys
+import os
+
+import boldsign.api_client
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import boldsign
+
+configuration = boldsign.Configuration(
+    api_key = os.getenv('BoldSignAPIKey'),
+    host=os.getenv('BoldSignApiUrl')
+)
+
+with boldsign.ApiClient(configuration) as api_client:
+    identity_verification_api = boldsign.IdentityVerificationApi(api_client)
+    create_embedded_verification_url = boldsign.EmbeddedFileDetails(
+       emailId="sivaramani.sivaraj@syncfusion.com",
+       countryCode="+91",
+       phoneNumber="87654345678",
+       redirectUrl="www.boldsign.com",
+       order=1
+    )
+    document_id = "YOUR_DOCUMENT_ID" #need to give the document id which is failed in all attempts.
+    url_response = identity_verification_api.create_embedded_verification_url(document_id, create_embedded_verification_url)
+    print("Embedded url to approve verification from sender: " ,url_response)

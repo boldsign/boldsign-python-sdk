@@ -75,7 +75,9 @@ class FormField(BaseModel):
     tab_index: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=-1)]] = Field(default=None, alias="tabIndex")
     formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
-    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption"]
+    allow_edit_form_field: Optional[StrictBool] = Field(default=None, alias="allowEditFormField")
+    allow_delete_form_field: Optional[StrictBool] = Field(default=None, alias="allowDeleteFormField")
+    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField"]
 
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
@@ -238,7 +240,9 @@ class FormField(BaseModel):
             "backgroundHexColor": obj.get("backgroundHexColor"),
             "tabIndex": obj.get("tabIndex"),
             "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
-            "resizeOption": obj.get("resizeOption")
+            "resizeOption": obj.get("resizeOption"),
+            "allowEditFormField": obj.get("allowEditFormField"),
+            "allowDeleteFormField": obj.get("allowDeleteFormField")
         })
         return _obj
 
@@ -293,6 +297,8 @@ class FormField(BaseModel):
             "tab_index": "(int,)",
             "formula_field_settings": "(FormulaFieldSettings,)",
             "resize_option": "(str,)",
+            "allow_edit_form_field": "(bool,)",
+            "allow_delete_form_field": "(bool,)",
         }
 
     @classmethod

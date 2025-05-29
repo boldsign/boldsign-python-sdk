@@ -49,7 +49,7 @@ with boldsign.ApiClient(configuration) as api_client:
     create_template_request = boldsign.CreateTemplateRequest(
         enableReassign=True,
         allowNewRoles=True,
-        enablePrintAndAssign=False,
+        enablePrintAndSign=False,
         documentMessage="document message for signers",
         enableSigningOrder=False,
         useTextTags=False,

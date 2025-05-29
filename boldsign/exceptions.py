@@ -157,14 +157,12 @@ class ApiException(OpenApiException):
 
     def __str__(self):
         """Custom error messages for exception"""
-        error_message = "({0})\n"\
-                        "Reason: {1}\n".format(self.status, self.reason)
-        if self.headers:
-            error_message += "HTTP response headers: {0}\n".format(
-                self.headers)
+        error_message = ""
 
-        if self.data or self.body:
-            error_message += "HTTP response body: {0}\n".format(self.data or self.body)
+        if self.status == 401:
+            error_message = "Unauthorized request (401): Invalid authentication."
+        elif self.body:
+            error_message = "HTTP response body: {0}\n".format(self.body)
 
         return error_message
 

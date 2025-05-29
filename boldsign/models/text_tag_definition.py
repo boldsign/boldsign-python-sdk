@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.font import Font
@@ -61,15 +61,40 @@ class TextTagDefinition(BaseModel):
     offset: Optional[TextTagOffset] = None
     label: Optional[StrictStr] = None
     tab_index: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=-1)]] = Field(default=None, alias="tabIndex")
+    data_sync_tag: Optional[StrictStr] = Field(default=None, alias="dataSyncTag")
+    text_align: Optional[StrictStr] = Field(default=None, alias="textAlign")
+    text_direction: Optional[StrictStr] = Field(default=None, alias="textDirection")
+    character_spacing: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="characterSpacing")
+    character_limit: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]] = Field(default=None, alias="characterLimit")
     formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
-    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "formulaFieldSettings", "resizeOption"]
+    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "formulaFieldSettings", "resizeOption"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula']):
             raise ValueError("must be one of enum values ('Signature', 'Initial', 'CheckBox', 'TextBox', 'Label', 'DateSigned', 'RadioButton', 'Image', 'Attachment', 'EditableDate', 'Hyperlink', 'Dropdown', 'Title', 'Company', 'Formula')")
+        return value
+
+    @field_validator('text_align')
+    def text_align_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['Left', 'Center', 'Right']):
+            raise ValueError("must be one of enum values ('Left', 'Center', 'Right')")
+        return value
+
+    @field_validator('text_direction')
+    def text_direction_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['LTR', 'RTL']):
+            raise ValueError("must be one of enum values ('LTR', 'RTL')")
         return value
 
     @field_validator('resize_option')
@@ -172,6 +197,11 @@ class TextTagDefinition(BaseModel):
             "offset": TextTagOffset.from_dict(obj["offset"]) if obj.get("offset") is not None else None,
             "label": obj.get("label"),
             "tabIndex": obj.get("tabIndex"),
+            "dataSyncTag": obj.get("dataSyncTag"),
+            "textAlign": obj.get("textAlign"),
+            "textDirection": obj.get("textDirection"),
+            "characterSpacing": obj.get("characterSpacing"),
+            "characterLimit": obj.get("characterLimit"),
             "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
             "resizeOption": obj.get("resizeOption")
         })
@@ -213,6 +243,11 @@ class TextTagDefinition(BaseModel):
             "offset": "(TextTagOffset,)",
             "label": "(str,)",
             "tab_index": "(int,)",
+            "data_sync_tag": "(str,)",
+            "text_align": "(str,)",
+            "text_direction": "(str,)",
+            "character_spacing": "(float,)",
+            "character_limit": "(int,)",
             "formula_field_settings": "(FormulaFieldSettings,)",
             "resize_option": "(str,)",
         }

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **create_sender_identities**
-> create_sender_identities(create_sender_identity_request)
+> SenderIdentityCreated create_sender_identities(create_sender_identity_request)
 
 Creates sender identity.
 
@@ -25,6 +25,7 @@ Creates sender identity.
 ```python
 import boldsign
 from boldsign.models.create_sender_identity_request import CreateSenderIdentityRequest
+from boldsign.models.sender_identity_created import SenderIdentityCreated
 from boldsign.rest import ApiException
 from pprint import pprint
 
@@ -40,7 +41,9 @@ with boldsign.ApiClient(configuration) as api_client:
 
     try:
         # Creates sender identity.
-        api_instance.create_sender_identities(create_sender_identity_request)
+        api_response = api_instance.create_sender_identities(create_sender_identity_request)
+        print("The response of SenderIdentitiesApi->create_sender_identities:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SenderIdentitiesApi->create_sender_identities: %s\n" % e)
 ```
@@ -56,7 +59,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SenderIdentityCreated**](SenderIdentityCreated.md)
 
 ### Authorization
 

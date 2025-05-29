@@ -43,6 +43,8 @@ Name | Type | Description | Notes
 **tab_index** | **int** |  | [optional] 
 **formula_field_settings** | [**FormulaFieldSettings**](FormulaFieldSettings.md) |  | [optional] 
 **resize_option** | **str** |  | [optional] 
+**allow_edit_form_field** | **bool** |  | [optional] 
+**allow_delete_form_field** | **bool** |  | [optional] 
 
 ## Example
 

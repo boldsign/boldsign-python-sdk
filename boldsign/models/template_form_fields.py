@@ -74,7 +74,9 @@ class TemplateFormFields(BaseModel):
     tab_index: Optional[StrictInt] = Field(default=None, alias="tabIndex")
     formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
-    __properties: ClassVar[List[str]] = ["id", "fieldType", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontHexColor", "isUnderLineFont", "isItalicFont", "isBoldFont", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "dropdownOptions", "bounds", "pageNumber", "conditionalRules", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "hyperlinkText", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption"]
+    allow_edit_form_field: Optional[StrictBool] = Field(default=None, alias="allowEditFormField")
+    allow_delete_form_field: Optional[StrictBool] = Field(default=None, alias="allowDeleteFormField")
+    __properties: ClassVar[List[str]] = ["id", "fieldType", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontHexColor", "isUnderLineFont", "isItalicFont", "isBoldFont", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "dropdownOptions", "bounds", "pageNumber", "conditionalRules", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "hyperlinkText", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField"]
 
     @field_validator('validationtype')
     def validationtype_validate_enum(cls, value):
@@ -220,7 +222,9 @@ class TemplateFormFields(BaseModel):
             "backgroundHexColor": obj.get("backgroundHexColor"),
             "tabIndex": obj.get("tabIndex"),
             "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
-            "resizeOption": obj.get("resizeOption")
+            "resizeOption": obj.get("resizeOption"),
+            "allowEditFormField": obj.get("allowEditFormField"),
+            "allowDeleteFormField": obj.get("allowDeleteFormField")
         })
         return _obj
 
@@ -275,6 +279,8 @@ class TemplateFormFields(BaseModel):
             "tab_index": "(int,)",
             "formula_field_settings": "(FormulaFieldSettings,)",
             "resize_option": "(str,)",
+            "allow_edit_form_field": "(bool,)",
+            "allow_delete_form_field": "(bool,)",
         }
 
     @classmethod

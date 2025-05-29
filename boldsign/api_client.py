@@ -91,7 +91,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'boldsign-python-sdk/1.0.0b9'
+        self.user_agent = 'boldsign-python-sdk/1.0.1'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):
@@ -536,6 +536,21 @@ class ApiClient:
 
         return "&".join(["=".join(map(str, item)) for item in new_params])
 
+    def get_mime_type(self, data: bytes) -> str:
+
+        if data.startswith(b'%PDF-'):
+            return 'application/pdf'
+        elif data.startswith(b'\x89PNG\r\n\x1a\n'):
+            return 'image/png'
+        elif data.startswith(b'\xff\xd8\xff'):
+            return 'image/jpeg'  # Covers JPG and JPEG
+        elif data[0:2] == b'PK' and b'word/' in data:
+            return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'  # DOCX
+        elif data[0:2] == b'PK' and b'xl/' in data:
+            return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'  # XLSX
+        else:
+            return 'application/octet-stream'  # Unknown or binary file
+
     def files_parameters(self, files: Dict[str, Union[str, bytes]]):
         """Builds form parameters.
 
@@ -555,7 +570,7 @@ class ApiClient:
                 raise ValueError("Unsupported file value")
             mimetype = (
                 mimetypes.guess_type(filename)[0]
-                or 'application/octet-stream'
+                or self.get_mime_type(filedata)
             )
             if 'files' in k:
                 k = 'Files'

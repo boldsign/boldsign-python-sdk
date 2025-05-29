@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
@@ -35,7 +35,10 @@ class Font(BaseModel):
     size: Optional[Union[StrictFloat, StrictInt]] = None
     style: Optional[StrictStr] = None
     line_height: Optional[StrictInt] = Field(default=None, alias="lineHeight")
-    __properties: ClassVar[List[str]] = ["name", "color", "size", "style", "lineHeight"]
+    is_bold_font: Optional[StrictBool] = Field(default=None, alias="isBoldFont")
+    is_italic_font: Optional[StrictBool] = Field(default=None, alias="isItalicFont")
+    is_under_line_font: Optional[StrictBool] = Field(default=None, alias="isUnderLineFont")
+    __properties: ClassVar[List[str]] = ["name", "color", "size", "style", "lineHeight", "isBoldFont", "isItalicFont", "isUnderLineFont"]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -128,7 +131,10 @@ class Font(BaseModel):
             "color": obj.get("color"),
             "size": obj.get("size"),
             "style": obj.get("style"),
-            "lineHeight": obj.get("lineHeight")
+            "lineHeight": obj.get("lineHeight"),
+            "isBoldFont": obj.get("isBoldFont"),
+            "isItalicFont": obj.get("isItalicFont"),
+            "isUnderLineFont": obj.get("isUnderLineFont")
         })
         return _obj
 
@@ -150,6 +156,9 @@ class Font(BaseModel):
             "size": "(float,)",
             "style": "(str,)",
             "line_height": "(int,)",
+            "is_bold_font": "(bool,)",
+            "is_italic_font": "(bool,)",
+            "is_under_line_font": "(bool,)",
         }
 
     @classmethod

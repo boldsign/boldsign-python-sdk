@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **size** | **float** |  | [optional] 
 **style** | **str** |  | [optional] 
 **line_height** | **int** |  | [optional] 
+**is_bold_font** | **bool** |  | [optional] 
+**is_italic_font** | **bool** |  | [optional] 
+**is_under_line_font** | **bool** |  | [optional] 
 
 ## Example
 

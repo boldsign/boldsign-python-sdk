@@ -51,7 +51,7 @@ class CreateTemplateRequest(BaseModel):
     allow_new_roles: Optional[StrictBool] = Field(default=True, alias="allowNewRoles")
     allow_new_files: Optional[StrictBool] = Field(default=True, alias="allowNewFiles")
     enable_reassign: Optional[StrictBool] = Field(default=True, alias="enableReassign")
-    enable_print_and_assign: Optional[StrictBool] = Field(default=False, alias="enablePrintAndAssign")
+    enable_print_and_sign: Optional[StrictBool] = Field(default=False, alias="enablePrintAndSign")
     enable_signing_order: Optional[StrictBool] = Field(default=False, alias="enableSigningOrder")
     document_info: Optional[List[DocumentInfo]] = Field(default=None, alias="documentInfo")
     use_text_tags: Optional[StrictBool] = Field(default=False, alias="useTextTags")
@@ -62,7 +62,7 @@ class CreateTemplateRequest(BaseModel):
     template_labels: Optional[List[StrictStr]] = Field(default=None, alias="templateLabels")
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
-    __properties: ClassVar[List[str]] = ["title", "description", "documentTitle", "documentMessage", "files", "fileUrls", "roles", "allowModifyFiles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndAssign", "enableSigningOrder", "documentInfo", "useTextTags", "textTagDefinitions", "autoDetectFields", "onBehalfOf", "labels", "templateLabels", "recipientNotificationSettings", "formGroups"]
+    __properties: ClassVar[List[str]] = ["title", "description", "documentTitle", "documentMessage", "files", "fileUrls", "roles", "allowModifyFiles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "useTextTags", "textTagDefinitions", "autoDetectFields", "onBehalfOf", "labels", "templateLabels", "recipientNotificationSettings", "formGroups"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -145,7 +145,7 @@ class CreateTemplateRequest(BaseModel):
             "allowNewRoles": obj.get("allowNewRoles") if obj.get("allowNewRoles") is not None else True,
             "allowNewFiles": obj.get("allowNewFiles") if obj.get("allowNewFiles") is not None else True,
             "enableReassign": obj.get("enableReassign") if obj.get("enableReassign") is not None else True,
-            "enablePrintAndAssign": obj.get("enablePrintAndAssign") if obj.get("enablePrintAndAssign") is not None else False,
+            "enablePrintAndSign": obj.get("enablePrintAndSign") if obj.get("enablePrintAndSign") is not None else False,
             "enableSigningOrder": obj.get("enableSigningOrder") if obj.get("enableSigningOrder") is not None else False,
             "documentInfo": [DocumentInfo.from_dict(_item) for _item in obj["documentInfo"]] if obj.get("documentInfo") is not None else None,
             "useTextTags": obj.get("useTextTags") if obj.get("useTextTags") is not None else False,
@@ -186,7 +186,7 @@ class CreateTemplateRequest(BaseModel):
             "allow_new_roles": "(bool,)",
             "allow_new_files": "(bool,)",
             "enable_reassign": "(bool,)",
-            "enable_print_and_assign": "(bool,)",
+            "enable_print_and_sign": "(bool,)",
             "enable_signing_order": "(bool,)",
             "document_info": "(List[DocumentInfo],)",
             "use_text_tags": "(bool,)",

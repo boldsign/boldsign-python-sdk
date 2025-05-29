@@ -1,21 +1,18 @@
 import unittest
 import pytest
 import boldsign
-import os
 import time
 from boldsign.rest import ApiException
-
-APIKey = os.getenv('API_KEY')
-url = os.getenv('HOST_URL')
+from config import API_KEY, BASE_URL
 
 @pytest.mark.integration
 class TestPlanApi(unittest.TestCase):
-    
+
     def setUp(self):
-        self.configuration = boldsign.Configuration(api_key=APIKey, host=url)
+        self.configuration = boldsign.Configuration(api_key=API_KEY, host=BASE_URL)
         self.api_client = boldsign.ApiClient(self.configuration)
 
-    @pytest.mark.run(order=109)
+    @pytest.mark.run(order=152)
     def test_api_credits_count_positive(self):
         try:
             self.plan_api = boldsign.PlanApi(self.api_client)
@@ -31,8 +28,7 @@ class TestPlanApi(unittest.TestCase):
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"
         finally:
-            time.sleep(5)
-
+            time.sleep(10)
 
 if __name__ == '__main__':
     unittest.main()

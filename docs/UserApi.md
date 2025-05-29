@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**get_user**](UserApi.md#get_user) | **GET** /v1/users/get | Get summary of the user.
 [**list_users**](UserApi.md#list_users) | **GET** /v1/users/list | List user documents.
 [**resend_invitation**](UserApi.md#resend_invitation) | **POST** /v1/users/resendInvitation | Resend the users invitation.
+[**update_meta_data**](UserApi.md#update_meta_data) | **PUT** /v1/users/updateMetaData | Update new User meta data details.
 [**update_user**](UserApi.md#update_user) | **PUT** /v1/users/update | Update new User role.
 
 
@@ -330,6 +331,71 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_meta_data**
+> update_meta_data(update_user_meta_data=update_user_meta_data)
+
+Update new User meta data details.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.update_user_meta_data import UpdateUserMetaData
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.UserApi(api_client)
+    update_user_meta_data = boldsign.UpdateUserMetaData() # UpdateUserMetaData | update query. (optional)
+
+    try:
+        # Update new User meta data details.
+        api_instance.update_meta_data(update_user_meta_data=update_user_meta_data)
+    except Exception as e:
+        print("Exception when calling UserApi->update_meta_data: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **update_user_meta_data** | [**UpdateUserMetaData**](UpdateUserMetaData.md)| update query. | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;odata.metadata=minimal;odata.streaming=true, application/json;odata.metadata=minimal;odata.streaming=false, application/json;odata.metadata=minimal, application/json;odata.metadata=full;odata.streaming=true, application/json;odata.metadata=full;odata.streaming=false, application/json;odata.metadata=full, application/json;odata.metadata=none;odata.streaming=true, application/json;odata.metadata=none;odata.streaming=false, application/json;odata.metadata=none, application/json;odata.streaming=true, application/json;odata.streaming=false, application/json, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=minimal;IEEE754Compatible=false, application/json;odata.metadata=minimal;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=full;IEEE754Compatible=false, application/json;odata.metadata=full;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=true, application/json;odata.streaming=true;IEEE754Compatible=false, application/json;odata.streaming=true;IEEE754Compatible=true, application/json;odata.streaming=false;IEEE754Compatible=false, application/json;odata.streaming=false;IEEE754Compatible=true, application/json;IEEE754Compatible=false, application/json;IEEE754Compatible=true, application/xml, text/plain, application/json-patch+json, text/json, application/*+json
  - **Accept**: application/json
 
 ### HTTP response details

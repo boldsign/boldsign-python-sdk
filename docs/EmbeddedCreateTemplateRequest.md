@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 **allow_new_roles** | **bool** |  | [optional] [default to True]
 **allow_new_files** | **bool** |  | [optional] [default to True]
 **enable_reassign** | **bool** |  | [optional] [default to True]
-**enable_print_and_assign** | **bool** |  | [optional] [default to False]
+**enable_print_and_sign** | **bool** |  | [optional] [default to False]
 **enable_signing_order** | **bool** |  | [optional] [default to False]
 **document_info** | [**List[DocumentInfo]**](DocumentInfo.md) |  | [optional] 
 **use_text_tags** | **bool** |  | [optional] [default to False]

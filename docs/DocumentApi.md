@@ -16,8 +16,8 @@ Method | HTTP request | Description
 [**download_audit_log**](DocumentApi.md#download_audit_log) | **GET** /v1/document/downloadAuditLog | Download the audit trail document.
 [**download_document**](DocumentApi.md#download_document) | **GET** /v1/document/download | Download the document.
 [**extend_expiry**](DocumentApi.md#extend_expiry) | **PATCH** /v1/document/extendExpiry | Extends the expiration date of the document.
-[**get_embedded_sign_link**](DocumentApi.md#get_embedded_sign_link) | **GET** /v1/document/getEmbeddedSignLink | Get sign link for Embedded Sign.
 [**get_properties**](DocumentApi.md#get_properties) | **GET** /v1/document/properties | Get summary of the document.
+[**get_embedded_sign_link**](DocumentApi.md#get_embedded_sign_link) | **GET** /v1/document/getEmbeddedSignLink | Get sign link for Embedded Sign.
 [**list_documents**](DocumentApi.md#list_documents) | **GET** /v1/document/list | List user documents.
 [**prefill_fields**](DocumentApi.md#prefill_fields) | **PATCH** /v1/document/prefillFields | Updates the value (prefill) of the fields in the document.
 [**remind_document**](DocumentApi.md#remind_document) | **POST** /v1/document/remind | Send reminder to pending signers.
@@ -860,6 +860,73 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_properties**
+> DocumentProperties get_properties(document_id)
+
+Get summary of the document.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.document_properties import DocumentProperties
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.DocumentApi(api_client)
+    document_id = 'document_id_example' # str | Document Id.
+
+    try:
+        # Get summary of the document.
+        api_response = api_instance.get_properties(document_id)
+        print("The response of DocumentApi->get_properties:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentApi->get_properties: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Document Id. | 
+
+### Return type
+
+[**DocumentProperties**](DocumentProperties.md)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_embedded_sign_link**
 > EmbeddedSigningLink get_embedded_sign_link(document_id, signer_email=signer_email, country_code=country_code, phone_number=phone_number, sign_link_valid_till=sign_link_valid_till, redirect_url=redirect_url)
 
@@ -926,73 +993,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json;odata.metadata=minimal;odata.streaming=true, application/json;odata.metadata=minimal;odata.streaming=false, application/json;odata.metadata=minimal, application/json;odata.metadata=full;odata.streaming=true, application/json;odata.metadata=full;odata.streaming=false, application/json;odata.metadata=full, application/json;odata.metadata=none;odata.streaming=true, application/json;odata.metadata=none;odata.streaming=false, application/json;odata.metadata=none, application/json;odata.streaming=true, application/json;odata.streaming=false, application/json, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=minimal;IEEE754Compatible=false, application/json;odata.metadata=minimal;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=full;IEEE754Compatible=false, application/json;odata.metadata=full;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=true, application/json;odata.streaming=true;IEEE754Compatible=false, application/json;odata.streaming=true;IEEE754Compatible=true, application/json;odata.streaming=false;IEEE754Compatible=false, application/json;odata.streaming=false;IEEE754Compatible=true, application/json;IEEE754Compatible=false, application/json;IEEE754Compatible=true, application/xml, text/plain, application/octet-stream, text/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_properties**
-> DocumentProperties get_properties(document_id)
-
-Get summary of the document.
-
-### Example
-
-* Api Key Authentication (X-API-KEY):
-* Api Key Authentication (Bearer):
-
-```python
-import boldsign
-from boldsign.models.document_properties import DocumentProperties
-from boldsign.rest import ApiException
-from pprint import pprint
-
-configuration = boldsign.Configuration(
-    api_key = "***your_api_key***"
-)
-
-# Enter a context with an instance of the API client
-with boldsign.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
-
-    try:
-        # Get summary of the document.
-        api_response = api_instance.get_properties(document_id)
-        print("The response of DocumentApi->get_properties:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DocumentApi->get_properties: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
-
-### Return type
-
-[**DocumentProperties**](DocumentProperties.md)
-
-### Authorization
-
-[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 ### HTTP response details
 

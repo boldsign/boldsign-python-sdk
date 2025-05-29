@@ -22,6 +22,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from boldsign.models.create_sender_identity_request import CreateSenderIdentityRequest
 from boldsign.models.edit_sender_identity_request import EditSenderIdentityRequest
+from boldsign.models.sender_identity_created import SenderIdentityCreated
 from boldsign.models.sender_identity_list import SenderIdentityList
 
 from boldsign.api_client import ApiClient, RequestSerialized
@@ -59,7 +60,7 @@ class SenderIdentitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SenderIdentityCreated:
         """Creates sender identity.
 
 
@@ -96,7 +97,7 @@ class SenderIdentitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': None,
+            '201': "SenderIdentityCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
             '400': "ErrorResult",
@@ -128,7 +129,7 @@ class SenderIdentitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SenderIdentityCreated]:
         """Creates sender identity.
 
 
@@ -165,7 +166,7 @@ class SenderIdentitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': None,
+            '201': "SenderIdentityCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
             '400': "ErrorResult",
@@ -234,7 +235,7 @@ class SenderIdentitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': None,
+            '201': "SenderIdentityCreated",
             '401': "ErrorResult",
             '403': "ErrorResult",
             '400': "ErrorResult",

@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
@@ -32,13 +32,14 @@ class Validation(BaseModel):
     """ # noqa: E501
     type: StrictStr
     regex: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["type", "regex"]
+    regex_message: Optional[StrictStr] = Field(default=None, alias="regexMessage")
+    __properties: ClassVar[List[str]] = ["type", "regex", "regexMessage"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['NumberOnly', 'Email', 'Currency', 'Regex']):
-            raise ValueError("must be one of enum values ('NumberOnly', 'Email', 'Currency', 'Regex')")
+        if value not in set(['NumberOnly', 'Email', 'Currency', 'Regex', 'None']):
+            raise ValueError("must be one of enum values ('NumberOnly', 'Email', 'Currency', 'Regex', 'None')")
         return value
 
     model_config = ConfigDict(
@@ -109,7 +110,8 @@ class Validation(BaseModel):
 
         _obj = cls.model_validate({
             "type": obj.get("type"),
-            "regex": obj.get("regex")
+            "regex": obj.get("regex"),
+            "regexMessage": obj.get("regexMessage")
         })
         return _obj
 
@@ -128,6 +130,7 @@ class Validation(BaseModel):
         return {
             "type": "(str,)",
             "regex": "(str,)",
+            "regex_message": "(str,)",
         }
 
     @classmethod

@@ -25,6 +25,7 @@ from boldsign.models.create_template_request import CreateTemplateRequest
 from boldsign.models.document_created import DocumentCreated
 from boldsign.models.edit_template_request import EditTemplateRequest
 from boldsign.models.embedded_create_template_request import EmbeddedCreateTemplateRequest
+from boldsign.models.embedded_merge_template_form_request import EmbeddedMergeTemplateFormRequest
 from boldsign.models.embedded_send_created import EmbeddedSendCreated
 from boldsign.models.embedded_send_template_form_request import EmbeddedSendTemplateFormRequest
 from boldsign.models.embedded_template_created import EmbeddedTemplateCreated
@@ -1450,6 +1451,288 @@ class TemplateApi:
 
 
     @validate_call
+    def delete_template(
+        self,
+        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Deletes a template.
+
+
+        :param template_id: The template id. (required)
+        :type template_id: str
+        :param on_behalf_of: The on behalfof email address.
+        :type on_behalf_of: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_template_serialize(
+            template_id=template_id,
+            on_behalf_of=on_behalf_of,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "ErrorResult",
+            '403': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_template_with_http_info(
+        self,
+        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Deletes a template.
+
+
+        :param template_id: The template id. (required)
+        :type template_id: str
+        :param on_behalf_of: The on behalfof email address.
+        :type on_behalf_of: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_template_serialize(
+            template_id=template_id,
+            on_behalf_of=on_behalf_of,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "ErrorResult",
+            '403': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_template_without_preload_content(
+        self,
+        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Deletes a template.
+
+
+        :param template_id: The template id. (required)
+        :type template_id: str
+        :param on_behalf_of: The on behalfof email address.
+        :type on_behalf_of: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_template_serialize(
+            template_id=template_id,
+            on_behalf_of=on_behalf_of,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "ErrorResult",
+            '403': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_template_serialize(
+        self,
+        template_id,
+        on_behalf_of,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if template_id is not None:
+            
+            _query_params.append(('templateId', template_id))
+            
+        if on_behalf_of is not None:
+            
+            _query_params.append(('onBehalfOf', on_behalf_of))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'X-API-KEY', 
+            'Bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/v1/template/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def delete_tag(
         self,
         template_tag: Annotated[Optional[TemplateTag], Field(description="Contains TemplateId and LabelNames for Adding Tags.")] = None,
@@ -1835,288 +2118,6 @@ class TemplateApi:
         return self.api_client.param_serialize(
             method='DELETE',
             resource_path='/v1/template/deleteTags',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def delete_template(
-        self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Deletes a template.
-
-
-        :param template_id: The template id. (required)
-        :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
-        :type on_behalf_of: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_template_serialize(
-            template_id=template_id,
-            on_behalf_of=on_behalf_of,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '401': "ErrorResult",
-            '403': "ErrorResult",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_template_with_http_info(
-        self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Deletes a template.
-
-
-        :param template_id: The template id. (required)
-        :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
-        :type on_behalf_of: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_template_serialize(
-            template_id=template_id,
-            on_behalf_of=on_behalf_of,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '401': "ErrorResult",
-            '403': "ErrorResult",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_template_without_preload_content(
-        self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Deletes a template.
-
-
-        :param template_id: The template id. (required)
-        :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
-        :type on_behalf_of: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_template_serialize(
-            template_id=template_id,
-            on_behalf_of=on_behalf_of,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '401': "ErrorResult",
-            '403': "ErrorResult",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_template_serialize(
-        self,
-        template_id,
-        on_behalf_of,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if template_id is not None:
-            
-            _query_params.append(('templateId', template_id))
-            
-        if on_behalf_of is not None:
-            
-            _query_params.append(('onBehalfOf', on_behalf_of))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'X-API-KEY', 
-            'Bearer'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v1/template/delete',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3855,7 +3856,7 @@ class TemplateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DocumentCreated:
         """Send the document by merging multiple templates.
 
 
@@ -3892,7 +3893,7 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '201': "DocumentCreated",
             '422': "ErrorResult",
             '401': "ErrorResult",
         }
@@ -3923,7 +3924,7 @@ class TemplateApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DocumentCreated]:
         """Send the document by merging multiple templates.
 
 
@@ -3960,7 +3961,7 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '201': "DocumentCreated",
             '422': "ErrorResult",
             '401': "ErrorResult",
         }
@@ -4028,7 +4029,7 @@ class TemplateApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '201': "DocumentCreated",
             '422': "ErrorResult",
             '401': "ErrorResult",
         }
@@ -4148,6 +4149,330 @@ class TemplateApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/v1/template/mergeAndSend',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def merge_create_embedded_request_url_template(
+        self,
+        embedded_merge_template_form_request: Annotated[Optional[EmbeddedMergeTemplateFormRequest], Field(description="Embedded merge and send template json request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EmbeddedSendCreated:
+        """Generates a merge request URL using a template that combines document merging and sending processes into your application.
+
+
+        :param embedded_merge_template_form_request: Embedded merge and send template json request.
+        :type embedded_merge_template_form_request: EmbeddedMergeTemplateFormRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._merge_create_embedded_request_url_template_serialize(
+            embedded_merge_template_form_request=embedded_merge_template_form_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedSendCreated",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def merge_create_embedded_request_url_template_with_http_info(
+        self,
+        embedded_merge_template_form_request: Annotated[Optional[EmbeddedMergeTemplateFormRequest], Field(description="Embedded merge and send template json request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EmbeddedSendCreated]:
+        """Generates a merge request URL using a template that combines document merging and sending processes into your application.
+
+
+        :param embedded_merge_template_form_request: Embedded merge and send template json request.
+        :type embedded_merge_template_form_request: EmbeddedMergeTemplateFormRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._merge_create_embedded_request_url_template_serialize(
+            embedded_merge_template_form_request=embedded_merge_template_form_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedSendCreated",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def merge_create_embedded_request_url_template_without_preload_content(
+        self,
+        embedded_merge_template_form_request: Annotated[Optional[EmbeddedMergeTemplateFormRequest], Field(description="Embedded merge and send template json request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Generates a merge request URL using a template that combines document merging and sending processes into your application.
+
+
+        :param embedded_merge_template_form_request: Embedded merge and send template json request.
+        :type embedded_merge_template_form_request: EmbeddedMergeTemplateFormRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._merge_create_embedded_request_url_template_serialize(
+            embedded_merge_template_form_request=embedded_merge_template_form_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedSendCreated",
+            '422': "ErrorResult",
+            '401': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _merge_create_embedded_request_url_template_serialize(
+        self,
+        embedded_merge_template_form_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        has_files = False
+        body_param = embedded_merge_template_form_request
+        excluded_json_fields = set([])
+        # Check if body_param is a list of models
+        if isinstance(body_param, list):
+            for item in body_param:
+                if hasattr(item, 'openapi_types'):
+                    for param_name, param_type in item.openapi_types().items():
+                        param_value = getattr(item, param_name)
+                        if param_value is None:
+                            continue
+
+                        if "io.IOBase" in param_type:
+                            has_files = True
+                            _content_type = "multipart/form-data"
+                            excluded_json_fields.add(param_name)
+
+                            if isinstance(param_value, list):
+                                for index, file_item in enumerate(param_value):
+                                    _files[f'{param_name}[{index}]'] = file_item
+                            else:
+                                _files[param_name] = param_value
+
+                    if has_files is True:
+                        _form_params += item.to_json_form_params(excluded_json_fields)
+        else:
+            # Handle a single object
+            for param_name, param_type in body_param.openapi_types().items():
+                param_value = getattr(body_param, param_name)
+                if param_value is None:
+                    continue
+
+                if "io.IOBase" in param_type:
+                    has_files = True
+                    _content_type = "multipart/form-data"
+                    excluded_json_fields.add(param_name)
+
+                    if isinstance(param_value, list):
+                        for index, item in enumerate(param_value):
+                            _files[f'{param_name}[{index}]'] = item
+                    else:
+                        _files[param_name] = param_value
+
+            if has_files is True:
+                _form_params = body_param.to_json_form_params(excluded_json_fields)
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if embedded_merge_template_form_request is not None and has_files is False:
+            _body_params = embedded_merge_template_form_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'multipart/form-data', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'X-API-KEY', 
+            'Bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/template/mergeCreateEmbeddedRequestUrl',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

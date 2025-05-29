@@ -15,8 +15,8 @@ with boldsign.ApiClient(configuration) as api_client:
             email="luthercooper1@cubeflakes.com",
             name="LutherCooper1",
             phoneNumber= boldsign.PhoneNumber(
-                countryCode="+1",
-                number="2015550123"
+                countryCode="+91",
+                number="6381261236"
             ),
             jobTitle= "Developer",
             companyName="CubeFlakes"
@@ -25,8 +25,8 @@ with boldsign.ApiClient(configuration) as api_client:
             email="hankwhite1@cubeflakes.com",
             name="HankWhite1",
             phoneNumber=boldsign.PhoneNumber(
-                countryCode="+1",
-                number="2015550124"
+                countryCode="+91",
+                number="8807799764"
             ),
             jobTitle= "Manager",
             companyName="CubeFlakes"           

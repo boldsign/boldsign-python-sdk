@@ -8,14 +8,15 @@ Method | HTTP request | Description
 [**create_embedded_request_url_template**](TemplateApi.md#create_embedded_request_url_template) | **POST** /v1/template/createEmbeddedRequestUrl | Generates a send URL using a template which embeds document sending process into your application.
 [**create_embedded_template_url**](TemplateApi.md#create_embedded_template_url) | **POST** /v1/template/createEmbeddedTemplateUrl | Generates a create URL to embeds template create process into your application.
 [**create_template**](TemplateApi.md#create_template) | **POST** /v1/template/create | Creates a new template.
-[**delete_tag**](TemplateApi.md#delete_tag) | **DELETE** /v1/template/deleteTags | Delete the Tags in Templates.
 [**delete_template**](TemplateApi.md#delete_template) | **DELETE** /v1/template/delete | Deletes a template.
+[**delete_tag**](TemplateApi.md#delete_tag) | **DELETE** /v1/template/deleteTags | Delete the Tags in Templates.
 [**download**](TemplateApi.md#download) | **GET** /v1/template/download | Download the template.
 [**edit_template**](TemplateApi.md#edit_template) | **PUT** /v1/template/edit | Edit and updates an existing template.
 [**get_embedded_template_edit_url**](TemplateApi.md#get_embedded_template_edit_url) | **POST** /v1/template/getEmbeddedTemplateEditUrl | Generates a edit URL to embeds template edit process into your application.
 [**get_properties**](TemplateApi.md#get_properties) | **GET** /v1/template/properties | Get summary of the template.
 [**list_templates**](TemplateApi.md#list_templates) | **GET** /v1/template/list | List all the templates.
 [**merge_and_send**](TemplateApi.md#merge_and_send) | **POST** /v1/template/mergeAndSend | Send the document by merging multiple templates.
+[**merge_create_embedded_request_url_template**](TemplateApi.md#merge_create_embedded_request_url_template) | **POST** /v1/template/mergeCreateEmbeddedRequestUrl | Generates a merge request URL using a template that combines document merging and sending processes into your application.
 [**send_using_template**](TemplateApi.md#send_using_template) | **POST** /v1/template/send | Send a document for signature using a Template.
 
 
@@ -291,71 +292,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_tag**
-> delete_tag(template_tag=template_tag)
-
-Delete the Tags in Templates.
-
-### Example
-
-* Api Key Authentication (X-API-KEY):
-* Api Key Authentication (Bearer):
-
-```python
-import boldsign
-from boldsign.models.template_tag import TemplateTag
-from boldsign.rest import ApiException
-from pprint import pprint
-
-configuration = boldsign.Configuration(
-    api_key = "***your_api_key***"
-)
-
-# Enter a context with an instance of the API client
-with boldsign.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = boldsign.TemplateApi(api_client)
-    template_tag = boldsign.TemplateTag() # TemplateTag | Contains TemplateId and LabelNames for Adding Tags. (optional)
-
-    try:
-        # Delete the Tags in Templates.
-        api_instance.delete_tag(template_tag=template_tag)
-    except Exception as e:
-        print("Exception when calling TemplateApi->delete_tag: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **template_tag** | [**TemplateTag**](TemplateTag.md)| Contains TemplateId and LabelNames for Adding Tags. | [optional] 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json;odata.metadata=minimal;odata.streaming=true, application/json;odata.metadata=minimal;odata.streaming=false, application/json;odata.metadata=minimal, application/json;odata.metadata=full;odata.streaming=true, application/json;odata.metadata=full;odata.streaming=false, application/json;odata.metadata=full, application/json;odata.metadata=none;odata.streaming=true, application/json;odata.metadata=none;odata.streaming=false, application/json;odata.metadata=none, application/json;odata.streaming=true, application/json;odata.streaming=false, application/json, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=minimal;IEEE754Compatible=false, application/json;odata.metadata=minimal;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=full;IEEE754Compatible=false, application/json;odata.metadata=full;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=true, application/json;odata.streaming=true;IEEE754Compatible=false, application/json;odata.streaming=true;IEEE754Compatible=true, application/json;odata.streaming=false;IEEE754Compatible=false, application/json;odata.streaming=false;IEEE754Compatible=true, application/json;IEEE754Compatible=false, application/json;IEEE754Compatible=true, application/xml, text/plain, application/json-patch+json, text/json, application/*+json
- - **Accept**: application/json;odata.metadata=minimal;odata.streaming=true, application/json;odata.metadata=minimal;odata.streaming=false, application/json;odata.metadata=minimal, application/json;odata.metadata=full;odata.streaming=true, application/json;odata.metadata=full;odata.streaming=false, application/json;odata.metadata=full, application/json;odata.metadata=none;odata.streaming=true, application/json;odata.metadata=none;odata.streaming=false, application/json;odata.metadata=none, application/json;odata.streaming=true, application/json;odata.streaming=false, application/json, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=minimal;IEEE754Compatible=false, application/json;odata.metadata=minimal;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=full;IEEE754Compatible=false, application/json;odata.metadata=full;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=true, application/json;odata.streaming=true;IEEE754Compatible=false, application/json;odata.streaming=true;IEEE754Compatible=true, application/json;odata.streaming=false;IEEE754Compatible=false, application/json;odata.streaming=false;IEEE754Compatible=true, application/json;IEEE754Compatible=false, application/json;IEEE754Compatible=true, application/xml, text/plain, application/octet-stream, text/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**400** | Bad Request |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **delete_template**
 > delete_template(template_id, on_behalf_of=on_behalf_of)
 
@@ -419,6 +355,71 @@ void (empty response body)
 **204** | No Content |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_tag**
+> delete_tag(template_tag=template_tag)
+
+Delete the Tags in Templates.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.template_tag import TemplateTag
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.TemplateApi(api_client)
+    template_tag = boldsign.TemplateTag() # TemplateTag | Contains TemplateId and LabelNames for Adding Tags. (optional)
+
+    try:
+        # Delete the Tags in Templates.
+        api_instance.delete_tag(template_tag=template_tag)
+    except Exception as e:
+        print("Exception when calling TemplateApi->delete_tag: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_tag** | [**TemplateTag**](TemplateTag.md)| Contains TemplateId and LabelNames for Adding Tags. | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;odata.metadata=minimal;odata.streaming=true, application/json;odata.metadata=minimal;odata.streaming=false, application/json;odata.metadata=minimal, application/json;odata.metadata=full;odata.streaming=true, application/json;odata.metadata=full;odata.streaming=false, application/json;odata.metadata=full, application/json;odata.metadata=none;odata.streaming=true, application/json;odata.metadata=none;odata.streaming=false, application/json;odata.metadata=none, application/json;odata.streaming=true, application/json;odata.streaming=false, application/json, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=minimal;IEEE754Compatible=false, application/json;odata.metadata=minimal;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=full;IEEE754Compatible=false, application/json;odata.metadata=full;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=true, application/json;odata.streaming=true;IEEE754Compatible=false, application/json;odata.streaming=true;IEEE754Compatible=true, application/json;odata.streaming=false;IEEE754Compatible=false, application/json;odata.streaming=false;IEEE754Compatible=true, application/json;IEEE754Compatible=false, application/json;IEEE754Compatible=true, application/xml, text/plain, application/json-patch+json, text/json, application/*+json
+ - **Accept**: application/json;odata.metadata=minimal;odata.streaming=true, application/json;odata.metadata=minimal;odata.streaming=false, application/json;odata.metadata=minimal, application/json;odata.metadata=full;odata.streaming=true, application/json;odata.metadata=full;odata.streaming=false, application/json;odata.metadata=full, application/json;odata.metadata=none;odata.streaming=true, application/json;odata.metadata=none;odata.streaming=false, application/json;odata.metadata=none, application/json;odata.streaming=true, application/json;odata.streaming=false, application/json, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=minimal;IEEE754Compatible=false, application/json;odata.metadata=minimal;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=full;IEEE754Compatible=false, application/json;odata.metadata=full;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=true, application/json;odata.streaming=true;IEEE754Compatible=false, application/json;odata.streaming=true;IEEE754Compatible=true, application/json;odata.streaming=false;IEEE754Compatible=false, application/json;odata.streaming=false;IEEE754Compatible=true, application/json;IEEE754Compatible=false, application/json;IEEE754Compatible=true, application/xml, text/plain, application/octet-stream, text/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -780,7 +781,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **merge_and_send**
-> merge_and_send(merge_and_send_for_sign_form=merge_and_send_for_sign_form)
+> DocumentCreated merge_and_send(merge_and_send_for_sign_form=merge_and_send_for_sign_form)
 
 Send the document by merging multiple templates.
 
@@ -791,6 +792,7 @@ Send the document by merging multiple templates.
 
 ```python
 import boldsign
+from boldsign.models.document_created import DocumentCreated
 from boldsign.models.merge_and_send_for_sign_form import MergeAndSendForSignForm
 from boldsign.rest import ApiException
 from pprint import pprint
@@ -807,7 +809,9 @@ with boldsign.ApiClient(configuration) as api_client:
 
     try:
         # Send the document by merging multiple templates.
-        api_instance.merge_and_send(merge_and_send_for_sign_form=merge_and_send_for_sign_form)
+        api_response = api_instance.merge_and_send(merge_and_send_for_sign_form=merge_and_send_for_sign_form)
+        print("The response of TemplateApi->merge_and_send:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TemplateApi->merge_and_send: %s\n" % e)
 ```
@@ -823,7 +827,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DocumentCreated**](DocumentCreated.md)
 
 ### Authorization
 
@@ -838,7 +842,75 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
+**201** | Created |  -  |
+**422** | Unprocessable Content |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **merge_create_embedded_request_url_template**
+> EmbeddedSendCreated merge_create_embedded_request_url_template(embedded_merge_template_form_request=embedded_merge_template_form_request)
+
+Generates a merge request URL using a template that combines document merging and sending processes into your application.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.embedded_merge_template_form_request import EmbeddedMergeTemplateFormRequest
+from boldsign.models.embedded_send_created import EmbeddedSendCreated
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.TemplateApi(api_client)
+    embedded_merge_template_form_request = boldsign.EmbeddedMergeTemplateFormRequest() # EmbeddedMergeTemplateFormRequest | Embedded merge and send template json request. (optional)
+
+    try:
+        # Generates a merge request URL using a template that combines document merging and sending processes into your application.
+        api_response = api_instance.merge_create_embedded_request_url_template(embedded_merge_template_form_request=embedded_merge_template_form_request)
+        print("The response of TemplateApi->merge_create_embedded_request_url_template:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TemplateApi->merge_create_embedded_request_url_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **embedded_merge_template_form_request** | [**EmbeddedMergeTemplateFormRequest**](EmbeddedMergeTemplateFormRequest.md)| Embedded merge and send template json request. | [optional] 
+
+### Return type
+
+[**EmbeddedSendCreated**](EmbeddedSendCreated.md)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, multipart/form-data, application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
 **422** | Unprocessable Content |  -  |
 **401** | Unauthorized |  -  |
 
