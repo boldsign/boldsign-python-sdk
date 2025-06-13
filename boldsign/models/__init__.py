@@ -20,6 +20,7 @@ from boldsign.models.access_code_details import AccessCodeDetails
 from boldsign.models.address import Address
 from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.audit_trail import AuditTrail
+from boldsign.models.authentication_settings import AuthenticationSettings
 from boldsign.models.base64_file import Base64File
 from boldsign.models.behalf_document import BehalfDocument
 from boldsign.models.behalf_document_records import BehalfDocumentRecords
@@ -111,6 +112,7 @@ from boldsign.models.send_for_sign_from_template_form import SendForSignFromTemp
 from boldsign.models.sender_identity_created import SenderIdentityCreated
 from boldsign.models.sender_identity_list import SenderIdentityList
 from boldsign.models.sender_identity_view_model import SenderIdentityViewModel
+from boldsign.models.signer_authentication_settings import SignerAuthenticationSettings
 from boldsign.models.size import Size
 from boldsign.models.team_created import TeamCreated
 from boldsign.models.team_document_records import TeamDocumentRecords

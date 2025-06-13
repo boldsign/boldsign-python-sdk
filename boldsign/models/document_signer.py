@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from boldsign.models.authentication_settings import AuthenticationSettings
 from boldsign.models.form_field import FormField
 from boldsign.models.identity_verification_settings import IdentityVerificationSettings
 from boldsign.models.phone_number import PhoneNumber
@@ -55,7 +56,8 @@ class DocumentSigner(BaseModel):
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     authentication_retry_count: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = Field(default=None, alias="authenticationRetryCount")
     enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
-    __properties: ClassVar[List[str]] = ["name", "emailAddress", "privateMessage", "authenticationType", "phoneNumber", "deliveryMode", "authenticationCode", "identityVerificationSettings", "signerOrder", "enableEmailOTP", "signerType", "hostEmail", "signerRole", "allowFieldConfiguration", "formFields", "language", "locale", "recipientNotificationSettings", "authenticationRetryCount", "enableQes"]
+    authentication_settings: Optional[AuthenticationSettings] = Field(default=None, alias="authenticationSettings")
+    __properties: ClassVar[List[str]] = ["name", "emailAddress", "privateMessage", "authenticationType", "phoneNumber", "deliveryMode", "authenticationCode", "identityVerificationSettings", "signerOrder", "enableEmailOTP", "signerType", "hostEmail", "signerRole", "allowFieldConfiguration", "formFields", "language", "locale", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "authenticationSettings"]
 
     @field_validator('authentication_type')
     def authentication_type_validate_enum(cls, value):
@@ -193,7 +195,8 @@ class DocumentSigner(BaseModel):
             "locale": obj.get("locale"),
             "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "authenticationRetryCount": obj.get("authenticationRetryCount"),
-            "enableQes": obj.get("enableQes")
+            "enableQes": obj.get("enableQes"),
+            "authenticationSettings": AuthenticationSettings.from_dict(obj["authenticationSettings"]) if obj.get("authenticationSettings") is not None else None
         })
         return _obj
 
@@ -230,6 +233,7 @@ class DocumentSigner(BaseModel):
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "authentication_retry_count": "(int,)",
             "enable_qes": "(bool,)",
+            "authentication_settings": "(AuthenticationSettings,)",
         }
 
     @classmethod

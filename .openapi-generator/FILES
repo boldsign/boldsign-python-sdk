@@ -25,6 +25,7 @@ boldsign/models/access_code_details.py
 boldsign/models/address.py
 boldsign/models/attachment_info.py
 boldsign/models/audit_trail.py
+boldsign/models/authentication_settings.py
 boldsign/models/base64_file.py
 boldsign/models/behalf_document.py
 boldsign/models/behalf_document_records.py
@@ -116,6 +117,7 @@ boldsign/models/send_for_sign_from_template_form.py
 boldsign/models/sender_identity_created.py
 boldsign/models/sender_identity_list.py
 boldsign/models/sender_identity_view_model.py
+boldsign/models/signer_authentication_settings.py
 boldsign/models/size.py
 boldsign/models/team_created.py
 boldsign/models/team_document_records.py
@@ -156,6 +158,7 @@ docs/AccessCodeDetails.md
 docs/Address.md
 docs/AttachmentInfo.md
 docs/AuditTrail.md
+docs/AuthenticationSettings.md
 docs/Base64File.md
 docs/BehalfDocument.md
 docs/BehalfDocumentRecords.md
@@ -254,6 +257,7 @@ docs/SenderIdentitiesApi.md
 docs/SenderIdentityCreated.md
 docs/SenderIdentityList.md
 docs/SenderIdentityViewModel.md
+docs/SignerAuthenticationSettings.md
 docs/Size.md
 docs/TeamCreated.md
 docs/TeamDocumentRecords.md

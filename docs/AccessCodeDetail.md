@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **phone_number** | [**PhoneNumber**](PhoneNumber.md) |  | [optional] 
 **identity_verification_settings** | [**IdentityVerificationSettings**](IdentityVerificationSettings.md) |  | [optional] 
 **authentication_retry_count** | **int** |  | [optional] 
+**authentication_settings** | [**AuthenticationSettings**](AuthenticationSettings.md) |  | [optional] 
 
 ## Example
 

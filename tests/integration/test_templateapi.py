@@ -1986,7 +1986,7 @@ class TestTemplateApi(unittest.TestCase):
             # Call the merge and send endpoint
             response = self.template_api.merge_and_send(merge_and_send_form)
 
-            assert response is None
+            assert response is not None
 
         except ApiException as e:
             print("\nException when calling BoldSign API: %s" % e)

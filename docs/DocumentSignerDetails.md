@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **authentication_retry_count** | **int** |  | [optional] 
 **enable_qes** | **bool** |  | [optional] 
 **delivery_mode** | **str** |  | [optional] 
+**authentication_settings** | [**SignerAuthenticationSettings**](SignerAuthenticationSettings.md) |  | [optional] 
 
 ## Example
 

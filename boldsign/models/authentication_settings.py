@@ -20,36 +20,27 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from boldsign.models.authentication_settings import AuthenticationSettings
-from boldsign.models.identity_verification_settings import IdentityVerificationSettings
-from boldsign.models.phone_number import PhoneNumber
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
 from pydantic import StrictBool
 from typing import Union
 
-class AccessCodeDetail(BaseModel):
+class AuthenticationSettings(BaseModel):
     """
-    AccessCodeDetail
+    AuthenticationSettings
     """ # noqa: E501
-    authentication_type: StrictStr = Field(alias="authenticationType")
-    email_id: Optional[StrictStr] = Field(default=None, alias="emailId")
-    order: Optional[Annotated[int, Field(le=50, strict=True, ge=1)]] = None
-    access_code: Optional[StrictStr] = Field(default=None, alias="accessCode")
-    on_behalf_of: Optional[StrictStr] = Field(default=None, alias="onBehalfOf")
-    phone_number: Optional[PhoneNumber] = Field(default=None, alias="phoneNumber")
-    identity_verification_settings: Optional[IdentityVerificationSettings] = Field(default=None, alias="identityVerificationSettings")
-    authentication_retry_count: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = Field(default=None, alias="authenticationRetryCount")
-    authentication_settings: Optional[AuthenticationSettings] = Field(default=None, alias="authenticationSettings")
-    __properties: ClassVar[List[str]] = ["authenticationType", "emailId", "order", "accessCode", "onBehalfOf", "phoneNumber", "identityVerificationSettings", "authenticationRetryCount", "authenticationSettings"]
+    authentication_frequency: Optional[StrictStr] = Field(default=None, alias="authenticationFrequency")
+    __properties: ClassVar[List[str]] = ["authenticationFrequency"]
 
-    @field_validator('authentication_type')
-    def authentication_type_validate_enum(cls, value):
+    @field_validator('authentication_frequency')
+    def authentication_frequency_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification']):
-            raise ValueError("must be one of enum values ('None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification')")
+        if value is None:
+            return value
+
+        if value not in set(['None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument']):
+            raise ValueError("must be one of enum values ('None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument')")
         return value
 
     model_config = ConfigDict(
@@ -88,7 +79,7 @@ class AccessCodeDetail(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AccessCodeDetail from a JSON string"""
+        """Create an instance of AuthenticationSettings from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self, excluded_fields: Set[str] = None) -> Dict[str, Any]:
@@ -111,7 +102,7 @@ class AccessCodeDetail(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AccessCodeDetail from a dict"""
+        """Create an instance of AuthenticationSettings from a dict"""
         if obj is None:
             return None
 
@@ -119,15 +110,7 @@ class AccessCodeDetail(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "authenticationType": obj.get("authenticationType"),
-            "emailId": obj.get("emailId"),
-            "order": obj.get("order"),
-            "accessCode": obj.get("accessCode"),
-            "onBehalfOf": obj.get("onBehalfOf"),
-            "phoneNumber": PhoneNumber.from_dict(obj["phoneNumber"]) if obj.get("phoneNumber") is not None else None,
-            "identityVerificationSettings": IdentityVerificationSettings.from_dict(obj["identityVerificationSettings"]) if obj.get("identityVerificationSettings") is not None else None,
-            "authenticationRetryCount": obj.get("authenticationRetryCount"),
-            "authenticationSettings": AuthenticationSettings.from_dict(obj["authenticationSettings"]) if obj.get("authenticationSettings") is not None else None
+            "authenticationFrequency": obj.get("authenticationFrequency")
         })
         return _obj
 
@@ -144,15 +127,7 @@ class AccessCodeDetail(BaseModel):
     @classmethod
     def openapi_types(cls) -> Dict[str, str]:
         return {
-            "authentication_type": "(str,)",
-            "email_id": "(str,)",
-            "order": "(int,)",
-            "access_code": "(str,)",
-            "on_behalf_of": "(str,)",
-            "phone_number": "(PhoneNumber,)",
-            "identity_verification_settings": "(IdentityVerificationSettings,)",
-            "authentication_retry_count": "(int,)",
-            "authentication_settings": "(AuthenticationSettings,)",
+            "authentication_frequency": "(str,)",
         }
 
     @classmethod

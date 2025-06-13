@@ -626,7 +626,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
             sender_identitys_response = self.sender_identities_api.create_sender_identities(
                 create_sender_identity_request=sender_identity_request
             )
-            assert sender_identitys_response is None
+            assert sender_identitys_response is not None
         except ApiException as e:
             print("\nException when calling BoldSign API: %s" % e)
             assert False, f"API Exception occurred: {str(e)}"
