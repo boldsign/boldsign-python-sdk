@@ -27,7 +27,7 @@ class TestUsersApi(unittest.TestCase):
         srting_value = self.random_numbers()
         TestUsersApi.team_Name = "sdktestingteam"+srting_value
 
-    @pytest.mark.run(order=177)
+    @pytest.mark.run(order=191)
     def test_create_teams_positive(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -52,7 +52,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(10)
 
-    @pytest.mark.run(order=178)
+    @pytest.mark.run(order=192)
     def test_create_teams_negative_duplicate_name(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -77,7 +77,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=179)
+    @pytest.mark.run(order=193)
     def test_create_team_negative_empty_name(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -101,7 +101,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=180)
+    @pytest.mark.run(order=194)
     def test_get_team_list_positive(self):
         try:
             # Initialize the Teams API client
@@ -166,7 +166,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=181)
+    @pytest.mark.run(order=195)
     def test_get_team_list_negative(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -191,7 +191,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=182)
+    @pytest.mark.run(order=196)
     def test_get_team_list_negative_with_null_values(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -216,7 +216,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=183)
+    @pytest.mark.run(order=197)
     def test_get_team_positive(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -242,7 +242,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=184)
+    @pytest.mark.run(order=198)
     def test_get_team_negative(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -264,7 +264,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=185)
+    @pytest.mark.run(order=199)
     def test_get_team_negative_empty_teamid(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -286,7 +286,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=186)
+    @pytest.mark.run(order=200)
     def test_update_team_negative_duplicate_name(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -312,7 +312,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=187)
+    @pytest.mark.run(order=201)
     def test_update_team_positive(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -339,7 +339,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=188)
+    @pytest.mark.run(order=202)
     def test_update_team_negative_invalid_teamid(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)
@@ -364,7 +364,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=189)
+    @pytest.mark.run(order=203)
     def test_update_team_negative_empty_teamName(self):
         try:
             self.teams_api = boldsign.TeamsApi(self.api_client)

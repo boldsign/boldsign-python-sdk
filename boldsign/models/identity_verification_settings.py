@@ -45,8 +45,8 @@ class IdentityVerificationSettings(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['EveryAccess', 'UntilSignCompleted', 'OncePerDocument']):
-            raise ValueError("must be one of enum values ('EveryAccess', 'UntilSignCompleted', 'OncePerDocument')")
+        if value not in set(['EveryAccess', 'UntilSignCompleted', 'OncePerDocument', 'null']):
+            raise ValueError("must be one of enum values ('EveryAccess', 'UntilSignCompleted', 'OncePerDocument', 'null')")
         return value
 
     @field_validator('name_matcher')
@@ -55,8 +55,8 @@ class IdentityVerificationSettings(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Strict', 'Moderate', 'Lenient']):
-            raise ValueError("must be one of enum values ('Strict', 'Moderate', 'Lenient')")
+        if value not in set(['Strict', 'Moderate', 'Lenient', 'null']):
+            raise ValueError("must be one of enum values ('Strict', 'Moderate', 'Lenient', 'null')")
         return value
 
     model_config = ConfigDict(

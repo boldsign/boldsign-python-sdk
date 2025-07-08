@@ -39,8 +39,8 @@ class AuthenticationSettings(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument']):
-            raise ValueError("must be one of enum values ('None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument')")
+        if value not in set(['None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument', 'null']):
+            raise ValueError("must be one of enum values ('None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument', 'null')")
         return value
 
     model_config = ConfigDict(

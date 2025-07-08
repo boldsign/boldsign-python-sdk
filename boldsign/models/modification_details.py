@@ -18,36 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
 from pydantic import StrictBool
 from typing import Union
 
-class DocumentExpirySettings(BaseModel):
+class ModificationDetails(BaseModel):
     """
-    DocumentExpirySettings
+    ModificationDetails
     """ # noqa: E501
-    expiry_date_type: Optional[StrictStr] = Field(default=None, alias="expiryDateType")
-    expiry_value: Optional[StrictInt] = Field(default=None, alias="expiryValue")
-    enable_default_expiry_alert: Optional[StrictBool] = Field(default=None, alias="enableDefaultExpiryAlert")
-    enable_auto_reminder: Optional[StrictBool] = Field(default=None, alias="enableAutoReminder")
-    reminder_days: Optional[Annotated[int, Field(le=180, strict=True, ge=1)]] = Field(default=None, alias="reminderDays")
-    reminder_count: Optional[StrictInt] = Field(default=None, alias="reminderCount")
-    __properties: ClassVar[List[str]] = ["expiryDateType", "expiryValue", "enableDefaultExpiryAlert", "enableAutoReminder", "reminderDays", "reminderCount"]
-
-    @field_validator('expiry_date_type')
-    def expiry_date_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Days', 'Hours', 'SpecificDateTime', 'null']):
-            raise ValueError("must be one of enum values ('Days', 'Hours', 'SpecificDateTime', 'null')")
-        return value
+    removed_count: Optional[StrictInt] = Field(default=None, alias="removedCount")
+    added_count: Optional[StrictInt] = Field(default=None, alias="addedCount")
+    __properties: ClassVar[List[str]] = ["removedCount", "addedCount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +70,7 @@ class DocumentExpirySettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DocumentExpirySettings from a JSON string"""
+        """Create an instance of ModificationDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self, excluded_fields: Set[str] = None) -> Dict[str, Any]:
@@ -108,7 +93,7 @@ class DocumentExpirySettings(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DocumentExpirySettings from a dict"""
+        """Create an instance of ModificationDetails from a dict"""
         if obj is None:
             return None
 
@@ -116,12 +101,8 @@ class DocumentExpirySettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "expiryDateType": obj.get("expiryDateType"),
-            "expiryValue": obj.get("expiryValue"),
-            "enableDefaultExpiryAlert": obj.get("enableDefaultExpiryAlert"),
-            "enableAutoReminder": obj.get("enableAutoReminder"),
-            "reminderDays": obj.get("reminderDays"),
-            "reminderCount": obj.get("reminderCount")
+            "removedCount": obj.get("removedCount"),
+            "addedCount": obj.get("addedCount")
         })
         return _obj
 
@@ -138,12 +119,8 @@ class DocumentExpirySettings(BaseModel):
     @classmethod
     def openapi_types(cls) -> Dict[str, str]:
         return {
-            "expiry_date_type": "(str,)",
-            "expiry_value": "(int,)",
-            "enable_default_expiry_alert": "(bool,)",
-            "enable_auto_reminder": "(bool,)",
-            "reminder_days": "(int,)",
-            "reminder_count": "(int,)",
+            "removed_count": "(int,)",
+            "added_count": "(int,)",
         }
 
     @classmethod

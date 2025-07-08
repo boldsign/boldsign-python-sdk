@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 # import apis into sdk package
 from boldsign.api.branding_api import BrandingApi
@@ -43,6 +43,7 @@ from boldsign.exceptions import ApiException
 # import models into sdk package
 from boldsign.models.access_code_detail import AccessCodeDetail
 from boldsign.models.access_code_details import AccessCodeDetails
+from boldsign.models.added import Added
 from boldsign.models.address import Address
 from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.audit_trail import AuditTrail
@@ -120,16 +121,19 @@ from boldsign.models.identity_verification_settings import IdentityVerificationS
 from boldsign.models.image_info import ImageInfo
 from boldsign.models.merge_and_send_for_sign_form import MergeAndSendForSignForm
 from boldsign.models.model_date import ModelDate
+from boldsign.models.modification_details import ModificationDetails
 from boldsign.models.notification_settings import NotificationSettings
 from boldsign.models.page_details import PageDetails
 from boldsign.models.phone_number import PhoneNumber
 from boldsign.models.prefill_field import PrefillField
 from boldsign.models.prefill_field_request import PrefillFieldRequest
+from boldsign.models.recipient_change_log import RecipientChangeLog
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.rectangle import Rectangle
 from boldsign.models.reminder_message import ReminderMessage
 from boldsign.models.reminder_settings import ReminderSettings
 from boldsign.models.remove_authentication import RemoveAuthentication
+from boldsign.models.removed import Removed
 from boldsign.models.revoke_document import RevokeDocument
 from boldsign.models.role import Role
 from boldsign.models.roles import Roles

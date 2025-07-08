@@ -112,8 +112,8 @@ class EmbeddedDocumentRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Days', 'Hours', 'SpecificDateTime']):
-            raise ValueError("must be one of enum values ('Days', 'Hours', 'SpecificDateTime')")
+        if value not in set(['Days', 'Hours', 'SpecificDateTime', 'null']):
+            raise ValueError("must be one of enum values ('Days', 'Hours', 'SpecificDateTime', 'null')")
         return value
 
     @field_validator('document_download_option')
@@ -122,8 +122,8 @@ class EmbeddedDocumentRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Combined', 'Individually']):
-            raise ValueError("must be one of enum values ('Combined', 'Individually')")
+        if value not in set(['Combined', 'Individually', 'null']):
+            raise ValueError("must be one of enum values ('Combined', 'Individually', 'null')")
         return value
 
     model_config = ConfigDict(

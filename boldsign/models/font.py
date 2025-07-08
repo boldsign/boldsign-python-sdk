@@ -46,8 +46,8 @@ class Font(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Helvetica', 'Courier', 'TimesRoman', 'NotoSans']):
-            raise ValueError("must be one of enum values ('Helvetica', 'Courier', 'TimesRoman', 'NotoSans')")
+        if value not in set(['Helvetica', 'Courier', 'TimesRoman', 'NotoSans', 'null']):
+            raise ValueError("must be one of enum values ('Helvetica', 'Courier', 'TimesRoman', 'NotoSans', 'null')")
         return value
 
     @field_validator('style')
@@ -56,8 +56,8 @@ class Font(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Regular', 'Bold', 'Italic', 'Underline']):
-            raise ValueError("must be one of enum values ('Regular', 'Bold', 'Italic', 'Underline')")
+        if value not in set(['Regular', 'Bold', 'Italic', 'Underline', 'null']):
+            raise ValueError("must be one of enum values ('Regular', 'Bold', 'Italic', 'Underline', 'null')")
         return value
 
     model_config = ConfigDict(

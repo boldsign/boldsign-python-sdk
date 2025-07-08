@@ -29,7 +29,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         srting_value = self.random_numbers()
         TestSenderIdentitysApi.emailId = "sdktesting"+srting_value+"@syncfusion.com"
 
-    @pytest.mark.run(order=158)
+    @pytest.mark.run(order=165)
     def test_create_brand_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -63,7 +63,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=159)
+    @pytest.mark.run(order=166)
     def test_create_sender_identities_positive(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -88,7 +88,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(10)
 
-    @pytest.mark.run(order=160)
+    @pytest.mark.run(order=167)
     def test_create_sender_identities_negative_missing_name(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -113,7 +113,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=161)
+    @pytest.mark.run(order=168)
     def test_create_sender_identities_negative_with_invalid_email_id(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -139,7 +139,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=162)
+    @pytest.mark.run(order=169)
     def test_create_sender_identities_negative_empty_email(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -164,7 +164,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=163)
+    @pytest.mark.run(order=170)
     def test_update_sender_identities_positive(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -191,7 +191,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=164)
+    @pytest.mark.run(order=171)
     def test_update_sender_identities_empty_name(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -217,7 +217,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=165)
+    @pytest.mark.run(order=172)
     def test_update_sender_identities_negative_invalid_email(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -244,7 +244,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=166)
+    @pytest.mark.run(order=173)
     def test_update_sender_identities_negative_empty_email(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -270,7 +270,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=167)
+    @pytest.mark.run(order=174)
     def test_list_sender_identities_positive(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -295,7 +295,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
             
-    @pytest.mark.run(order=168)
+    @pytest.mark.run(order=175)
     def test_list_sender_identities_negative(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -319,7 +319,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=169)
+    @pytest.mark.run(order=176)
     def test_list_sender_identities_negative_invalid_page_and_page_size(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -342,7 +342,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=170)
+    @pytest.mark.run(order=177)
     def test_resend_invitation_sender_identities_positive(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -364,7 +364,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=171)
+    @pytest.mark.run(order=178)
     def test_resend_invitation_sender_identities_negative(self):
         try:
             
@@ -387,7 +387,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=172)
+    @pytest.mark.run(order=179)
     def test_resend_invitation_sender_identities_negative_empty_emailid(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -408,7 +408,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=173)
+    @pytest.mark.run(order=180)
     def test_resend_invitation_sender_identities_negative_non_existing_senderidentity_email(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -429,7 +429,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=174)
+    @pytest.mark.run(order=181)
     def test_re_request_sender_identities_negative(self):
         try:
             
@@ -452,7 +452,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=175)
+    @pytest.mark.run(order=182)
     def test_delete_sender_identities_positive(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -474,7 +474,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=176)
+    @pytest.mark.run(order=183)
     def test_delete_sender_identities_negative_invalid_email(self):
         try:
             
@@ -497,7 +497,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=177)
+    @pytest.mark.run(order=184)
     def test_delete_sender_identities_negative_empty_email(self):
         try:
             
@@ -519,7 +519,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=178)
+    @pytest.mark.run(order=185)
     def test_delete_sender_identities_negative_non_existance_sender_identity_email(self):
         try:
             
@@ -541,7 +541,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=179)
+    @pytest.mark.run(order=186)
     def test_create_sender_identities_with_existing_brand(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -570,7 +570,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(10)
 
-    @pytest.mark.run(order=180)
+    @pytest.mark.run(order=187)
     def test_delete_sender_identities_(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -591,7 +591,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=181)
+    @pytest.mark.run(order=188)
     def test_delete_brand_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -614,7 +614,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=182)
+    @pytest.mark.run(order=189)
     def test_create_sender_identities_with_dynamic_80_chars_name(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)
@@ -636,7 +636,7 @@ class TestSenderIdentitysApi(unittest.TestCase):
         finally:
             time.sleep(10)
 
-    pytest.mark.run(order=183)
+    pytest.mark.run(order=190)
     def test_create_sender_identities_negative_with_duplicate_email(self):
         try:
             self.sender_identities_api = boldsign.SenderIdentitiesApi(self.api_client)

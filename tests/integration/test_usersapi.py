@@ -28,7 +28,7 @@ class TestUsersApi(unittest.TestCase):
         srting_value = self.random_numbers()
         TestUsersApi.emailId = "prakash.viswanathan+sdk+"+srting_value+"@syncfusion.com"
 
-    @pytest.mark.run(order=190)
+    @pytest.mark.run(order=204)
     def test_create_user_positive(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -53,7 +53,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=191)
+    @pytest.mark.run(order=205)
     def test_create_user_negative_already_existing_email(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -77,7 +77,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=192)
+    @pytest.mark.run(order=206)
     def test_create_user_negative_invalid_email(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -101,7 +101,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=193)
+    @pytest.mark.run(order=207)
     def test_get_user_list_positive(self):
         try:
             print("TestUserID:"+TestUsersApi.emailId)
@@ -134,7 +134,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=194)
+    @pytest.mark.run(order=208)
     def test_get_user_list_negative(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -158,7 +158,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=195)
+    @pytest.mark.run(order=209)
     def test_get_user_list_negative_negative_values(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -183,7 +183,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=196)
+    @pytest.mark.run(order=210)
     def test_get_user_positive(self):
         try:
             print("TestUserID:"+TestUsersApi.user_id)
@@ -208,7 +208,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=197)
+    @pytest.mark.run(order=211)
     def test_get_user_negative_invalid_user_id(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -230,7 +230,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=198)
+    @pytest.mark.run(order=212)
     def test_get_user_negative_empty_user_id(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -252,7 +252,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=199)
+    @pytest.mark.run(order=213)
     def test_update_user_negative(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -277,7 +277,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=200)
+    @pytest.mark.run(order=214)
     def test_resend_invitation_user_positive(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -299,7 +299,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=201)
+    @pytest.mark.run(order=215)
     def test_resend_invitation_user_negative_invalid_userId(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -321,7 +321,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=202)
+    @pytest.mark.run(order=216)
     def test_resend_invitation_user_negative_empty_userId(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -343,7 +343,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=203)
+    @pytest.mark.run(order=217)
     def test_cancel_invitation_positive(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -365,7 +365,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=204)
+    @pytest.mark.run(order=218)
     def test_cancel_invitation_negative_invalid_userId(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)
@@ -387,7 +387,7 @@ class TestUsersApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=205)
+    @pytest.mark.run(order=219)
     def test_cancel_invitation_negative_empty_userId(self):
         try:
             self.user_api = boldsign.UserApi(self.api_client)

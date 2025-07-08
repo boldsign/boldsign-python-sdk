@@ -25,7 +25,7 @@ class TestContactsApi(unittest.TestCase):
         srting_value = self.random_numbers()
         TestContactsApi.emailId = "sdktesting"+srting_value+"@syncfusion.com"
 
-    @pytest.mark.run(order=124)
+    @pytest.mark.run(order=133)
     def test_create_contacts_positive(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -50,7 +50,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=125)
+    @pytest.mark.run(order=134)
     def test_create_contacts_positive_with_all_fields(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -82,7 +82,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=126)
+    @pytest.mark.run(order=135)
     def test_create_contacts_negative_invalid_email(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -109,7 +109,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=127)
+    @pytest.mark.run(order=136)
     def test_list_contact_positive(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -143,7 +143,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=128)
+    @pytest.mark.run(order=137)
     def test_list_contact_negative_invalid_page(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -167,7 +167,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=129)
+    @pytest.mark.run(order=138)
     def test_list_contact_negative_invalid_page_size(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -189,7 +189,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=130)
+    @pytest.mark.run(order=139)
     def test_get_contact_positive(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -215,7 +215,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=131)
+    @pytest.mark.run(order=140)
     def test_get_contact_negative(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -237,7 +237,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=132)
+    @pytest.mark.run(order=141)
     def test_update_contact_positive(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -265,7 +265,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=133)
+    @pytest.mark.run(order=142)
     def test_update_contact_negative(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -293,7 +293,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=134)
+    @pytest.mark.run(order=143)
     def test_update_contact_negative_invalid_email(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -318,7 +318,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=136)
+    @pytest.mark.run(order=144)
     def test_delete_contacts_positive(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)
@@ -340,7 +340,7 @@ class TestContactsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=137)
+    @pytest.mark.run(order=145)
     def test_delete_contacts_negative(self):
         try:
             self.contacts_api = boldsign.ContactsApi(self.api_client)

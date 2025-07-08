@@ -1,6 +1,7 @@
 import unittest
 from boldsign.api import template_api
 from boldsign.models.merge_and_send_for_sign_form import MergeAndSendForSignForm
+from boldsign.models.embedded_merge_template_form_request import EmbeddedMergeTemplateFormRequest
 from boldsign.models.rectangle import Rectangle
 from boldsign.models.role import Role
 import pytest
@@ -50,7 +51,7 @@ class TestTemplateApi(unittest.TestCase):
             image_type = image_path.split('.')[-1]
             return f"data:image/{image_type};base64,{encoded_image}"
 
-    @pytest.mark.run(order=67)
+    @pytest.mark.run(order=68)
     def testTemplateList(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -88,7 +89,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=68)
+    @pytest.mark.run(order=69)
     def testTemplateList_negative(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -126,7 +127,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=69)
+    @pytest.mark.run(order=70)
     def test_create_brand_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -160,7 +161,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=70)
+    @pytest.mark.run(order=71)
     def test_create_template_positive(self):
         try:
             roles = [
@@ -204,7 +205,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=71)
+    @pytest.mark.run(order=72)
     def test_edit_template_positive(self):
         self.template_api = boldsign.TemplateApi(self.api_client)
         print (TestTemplateApi.created_template_id)
@@ -235,7 +236,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=72)
+    @pytest.mark.run(order=73)
     def test_create_template_with_brand_id(self):
         try:
             # Define roles
@@ -282,7 +283,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=73)
+    @pytest.mark.run(order=74)
     def test_create_template_negative_with_missing_document_title(self):
         try:
             roles = [
@@ -326,7 +327,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=74)
+    @pytest.mark.run(order=75)
     def test_create_template_negative_with_empty_roles(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -360,7 +361,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=75)
+    @pytest.mark.run(order=76)
     def test_create_template_with_multiple_files(self):
         try:
             roles = [
@@ -413,7 +414,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=76)
+    @pytest.mark.run(order=77)
     def test_create_template_negative_with_empty_title(self):
         try:
             roles = [
@@ -457,7 +458,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=77)
+    @pytest.mark.run(order=78)
     def test_edit_template_negative_empty_template_id(self):
         self.template_api = boldsign.TemplateApi(self.api_client)
         
@@ -489,7 +490,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=78)
+    @pytest.mark.run(order=79)
     def test_edit_template_negative_invalid_template_id(self):
         self.template_api = boldsign.TemplateApi(self.api_client)
         
@@ -521,7 +522,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=79)
+    @pytest.mark.run(order=80)
     def test_template_properties_integration(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -542,7 +543,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=80)
+    @pytest.mark.run(order=81)
     def test_template_properties_negative_invalid_template_id(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -562,7 +563,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=81)
+    @pytest.mark.run(order=82)
     def test_template_properties_negative_empty_template_id(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -584,7 +585,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=82)
+    @pytest.mark.run(order=83)
     def test_add_tag_to_template(self):
         try:
                 self.template_api = boldsign.TemplateApi(self.api_client)
@@ -611,7 +612,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=83)
+    @pytest.mark.run(order=84)
     def test_add_tag_to_template_negative_invalid_templateId(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -638,7 +639,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=84)
+    @pytest.mark.run(order=85)
     def test_add_tag_to_template_negative_empty_documentLabels_and_templateLabels(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -667,7 +668,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=85)
+    @pytest.mark.run(order=86)
     def test_delete_tag_to_template(self):
         try:
                 self.template_api = boldsign.TemplateApi(self.api_client)
@@ -694,7 +695,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=86)
+    @pytest.mark.run(order=87)
     def test_delete_tag_to_template_negative_empty_documentLabels_and_templateLabels(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -723,7 +724,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=87)
+    @pytest.mark.run(order=88)
     def test_delete_tag_to_template_negative_invalid_templateId(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -750,7 +751,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=88)
+    @pytest.mark.run(order=89)
     def test_create_template_with_form_field(self):
         try:
             roles = [
@@ -807,7 +808,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=89)
+    @pytest.mark.run(order=90)
     def test_create_template_negative_with_form_field_invalid_email(self):
         try:
             roles = [
@@ -863,7 +864,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=90)
+    @pytest.mark.run(order=91)
     def test_create_template_with_image_field(self):
         try:
             roles = [
@@ -925,7 +926,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(10)
 
-    @pytest.mark.run(order=91)
+    @pytest.mark.run(order=92)
     def test_create_template_with_multiple_roles(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -997,7 +998,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=92)
+    @pytest.mark.run(order=93)
     def test_create_template_negative_with_duplicate_role_index(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -1068,7 +1069,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=93)
+    @pytest.mark.run(order=94)
     def testTemplateDownload(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -1100,7 +1101,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=94)
+    @pytest.mark.run(order=95)
     def testTemplateDownload_negative(self):
         try:
             invalid_template_id = "invalid-template-id"
@@ -1124,7 +1125,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=95)
+    @pytest.mark.run(order=96)
     def test_send_using_template_best_case(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -1139,6 +1140,12 @@ class TestTemplateApi(unittest.TestCase):
                         "role_name": "Signer",
                         "signer_name": "John Doe",
                         "signer_email": "john.doe@example.com",
+                        "signerType":"Signer",
+                        "authenticationType":"AccessCode",
+                        "authenticationCode":"123456",
+                        "authenticationSettings":boldsign.AuthenticationSettings(
+                            authenticationFrequency="EveryAccess"
+                        ),
                         "deliveryMode": "Email",
                         "form_fields": [
                         {
@@ -1196,7 +1203,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=96)
+    @pytest.mark.run(order=97)
     def test_send_using_template_with_multiple_cc(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -1279,7 +1286,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=97)
+    @pytest.mark.run(order=98)
     def test_send_using_template_worst_case(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -1330,7 +1337,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=98)
+    @pytest.mark.run(order=99)
     def test_send_document_from_template_with_filePath(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -1409,7 +1416,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=99)
+    @pytest.mark.run(order=100)
     def test_send_using_template_with_email_and_SMS(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -1481,7 +1488,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=100)
+    @pytest.mark.run(order=101)
     def test_send_using_template_with_invalid_email_and_missing_phone(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -1549,7 +1556,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=101)
+    @pytest.mark.run(order=102)
     def test_send_using_template_with_existing_form_fields(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id_from_field}")
@@ -1591,7 +1598,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=102)
+    @pytest.mark.run(order=103)
     def test_send_using_template_with_invalid_formId_existing_form_field_id(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id_from_field}")
@@ -1632,7 +1639,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=103)
+    @pytest.mark.run(order=104)
     def test_send_using_template_with_existing_image_field(self):
         try:
             image_path = "tests/documents/input/logo.png" 
@@ -1677,7 +1684,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=104)
+    @pytest.mark.run(order=105)
     def test_send_using_template_with_invalid_existing_image_field(self):
         try:
             image_path = "tests/documents/input/logo.png"  # Corrected path separator
@@ -1725,7 +1732,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=105)
+    @pytest.mark.run(order=106)
     def test_create_embedded_template(self):
         
         try:
@@ -1770,7 +1777,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=106)
+    @pytest.mark.run(order=107)
     def test_edit_embedded_template_positive(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -1801,7 +1808,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=107)
+    @pytest.mark.run(order=108)
     def test_create_embedded_template_negative_missing_roles(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -1837,7 +1844,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=108)
+    @pytest.mark.run(order=109)
     def test_create_embedded_template_negative_invalid_role(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -1871,7 +1878,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=109)
+    @pytest.mark.run(order=110)
     def test_create_embedded_template_request_link(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)
@@ -1921,7 +1928,100 @@ class TestTemplateApi(unittest.TestCase):
         finally:
                 time.sleep(5)
 
-    @pytest.mark.run(order=110)
+    @pytest.mark.run(order=111)
+    def test_merge_create_embedded_template_request_url(self):
+        try:
+            self.template_api = boldsign.TemplateApi(self.api_client)
+            file_path = "tests/documents/input/doc_1.pdf"
+            if not os.path.exists(file_path):
+                raise FileNotFoundError(f"File not found: {file_path}")
+
+            role1 = Role(
+                signerEmail="sivaramani.sivaraj@syncfusion.com",
+                signerName="sivaramani",
+                signerRole="Manager",
+                signerOrder=1,
+                roleIndex=1,
+                signerType="Signer",
+                authenticationType="AccessCode",
+                authenticationCode="123456",
+                authenticationSettings=boldsign.AuthenticationSettings(
+                    authenticationFrequency="EveryAccess"
+                ),
+            )
+
+            request = EmbeddedMergeTemplateFormRequest(
+                title="Merged Template Embedded Request",
+                roles=[role1],
+                files=[file_path],  # Pass the file path as a list
+                templateIds=[TestTemplateApi.created_template_id,TestTemplateApi.created_template_id1],
+                showToolbar=True,
+                showNavigationButtons=True,
+                showPreviewButton=True,
+                showSaveButton=True,
+                locale="EN",
+                showTooltip=False,
+                sendViewOption="PreparePage"
+            )
+
+            response = self.template_api.merge_create_embedded_request_url_template(request)
+            embedded_url = response.send_url
+
+            print(f"Embedded Merge Template URL: {embedded_url}")
+            self.assertIsNotNone(embedded_url, "Embedded URL should not be None")
+            self.assertIsInstance(embedded_url, str, "Embedded URL should be a string")
+
+        except ApiException as e:
+            print(f"API Exception occurred: {e}")
+            self.fail(f"API Exception: {str(e)}")
+        except Exception as e:
+            print(f"Unexpected Exception occurred: {e}")
+            self.fail(f"Unexpected Exception: {str(e)}")
+        finally:
+            time.sleep(5)
+
+    @pytest.mark.run(order=112)
+    def test_merge_create_embedded_template_request_url_negative(self):
+        try:
+            self.template_api = boldsign.TemplateApi(self.api_client)
+            file_path = "tests/documents/input/doc_1.pdf"
+            assert os.path.exists(file_path), f"File not found: {file_path}"
+
+            role1 = Role(
+                signerEmail="invalid-email-format",
+                signerName="",
+                signerRole="Manager",
+                signerOrder=1,
+                roleIndex=1,
+                signerType="Signer"
+            )
+
+            request = EmbeddedMergeTemplateFormRequest(
+                title="",
+                roles=[role1],
+                files=[file_path],
+                templateIds=["invalid-template-id1", "invalid-template-id2"],
+                showToolbar=True,
+                showNavigationButtons=True,
+                showPreviewButton=True,
+                showSaveButton=True,
+                locale="EN",
+                showTooltip=False,
+                sendViewOption="PreparePage"
+            )
+
+            response = self.template_api.merge_create_embedded_request_url_template(request)
+            assert response is not None
+
+        except ApiException as e:
+            print(f"Expected ApiException occurred: {e}")
+            assert e.status == 400
+        except Exception as e:
+            pytest.fail(f"Unexpected Exception occurred: {str(e)}")
+        finally:
+            time.sleep(5)
+
+    @pytest.mark.run(order=113)
     def test_merge_and_send_using_template_best_case(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -1947,6 +2047,11 @@ class TestTemplateApi(unittest.TestCase):
                 signer_name="John Doe",
                 signer_email="john.doe@example.com",
                 signer_type="Signer",
+                authenticationType="AccessCode",
+                authenticationCode="123456",
+                authenticationSettings=boldsign.AuthenticationSettings(
+                    authenticationFrequency="EveryAccess"
+                ),
                 signer_role="Signer",
                 delivery_mode="Email",
                 form_fields=[form_field]
@@ -1997,7 +2102,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=111)
+    @pytest.mark.run(order=114)
     def test_delete_template_positive(self):
         try:
             print(f"Using Created Template ID: {TestTemplateApi.created_template_id}")
@@ -2013,7 +2118,7 @@ class TestTemplateApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=112)
+    @pytest.mark.run(order=115)
     def test_delete_template_negative(self):
         try:
             self.template_api = boldsign.TemplateApi(self.api_client)

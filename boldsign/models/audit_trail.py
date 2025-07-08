@@ -20,6 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from boldsign.models.modification_details import ModificationDetails
+from boldsign.models.recipient_change_log import RecipientChangeLog
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
@@ -38,7 +40,10 @@ class AuditTrail(BaseModel):
     ipaddress: Optional[StrictStr] = None
     action: Optional[StrictStr] = None
     timestamp: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "email", "toName", "toEmail", "ipaddress", "action", "timestamp"]
+    recipient_change_log: Optional[RecipientChangeLog] = Field(default=None, alias="recipientChangeLog")
+    document_change_log: Optional[ModificationDetails] = Field(default=None, alias="documentChangeLog")
+    field_change_log: Optional[ModificationDetails] = Field(default=None, alias="fieldChangeLog")
+    __properties: ClassVar[List[str]] = ["id", "name", "email", "toName", "toEmail", "ipaddress", "action", "timestamp", "recipientChangeLog", "documentChangeLog", "fieldChangeLog"]
 
     @field_validator('action')
     def action_validate_enum(cls, value):
@@ -124,7 +129,10 @@ class AuditTrail(BaseModel):
             "toEmail": obj.get("toEmail"),
             "ipaddress": obj.get("ipaddress"),
             "action": obj.get("action"),
-            "timestamp": obj.get("timestamp")
+            "timestamp": obj.get("timestamp"),
+            "recipientChangeLog": RecipientChangeLog.from_dict(obj["recipientChangeLog"]) if obj.get("recipientChangeLog") is not None else None,
+            "documentChangeLog": ModificationDetails.from_dict(obj["documentChangeLog"]) if obj.get("documentChangeLog") is not None else None,
+            "fieldChangeLog": ModificationDetails.from_dict(obj["fieldChangeLog"]) if obj.get("fieldChangeLog") is not None else None
         })
         return _obj
 
@@ -149,6 +157,9 @@ class AuditTrail(BaseModel):
             "ipaddress": "(str,)",
             "action": "(str,)",
             "timestamp": "(int,)",
+            "recipient_change_log": "(RecipientChangeLog,)",
+            "document_change_log": "(ModificationDetails,)",
+            "field_change_log": "(ModificationDetails,)",
         }
 
     @classmethod

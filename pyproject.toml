@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "boldsign"
-version = "1.0.2"
+version = "1.0.3"
 description = "BoldSign API"
 authors = ["This client library lets you initiate and track e-signature requests through Syncfusion&#39;s BoldSign API service. <support@boldsign.com>"]
 license = "MIT"

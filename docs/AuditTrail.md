@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **ipaddress** | **str** |  | [optional] 
 **action** | **str** |  | [optional] 
 **timestamp** | **int** |  | [optional] 
+**recipient_change_log** | [**RecipientChangeLog**](RecipientChangeLog.md) |  | [optional] 
+**document_change_log** | [**ModificationDetails**](ModificationDetails.md) |  | [optional] 
+**field_change_log** | [**ModificationDetails**](ModificationDetails.md) |  | [optional] 
 
 ## Example
 

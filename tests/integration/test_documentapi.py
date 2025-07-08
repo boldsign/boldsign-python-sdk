@@ -2,6 +2,7 @@ import unittest
 import pytest
 import boldsign
 import time
+import os
 import base64
 from boldsign import FormField, DocumentSigner, EmbeddedDocumentRequest, EmbeddedSendCreated
 from boldsign.models.document_created import DocumentCreated
@@ -18,6 +19,7 @@ class TestDocumentApi(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.created_document_id = None
+        cls.created_document_id1 = None
         cls.created_document_id_textbox_field = None
         cls.sender_email = None
         cls.created_brand_id = None
@@ -126,15 +128,18 @@ class TestDocumentApi(unittest.TestCase):
                     bounds=boldsign.Rectangle(x=50, y=50, width=100, height=150)
                 )
             ]
-
             document_signer = boldsign.DocumentSigner(
                 name="Test Signer",
                 emailAddress="girisankar.syncfusion@gmail.com",
                 signerOrder=1,
                 signerType="Signer",
+                authenticationType="AccessCode",
+                authenticationCode="123456",
+                authenticationSettings=boldsign.AuthenticationSettings(
+                    authenticationFrequency="EveryAccess"
+                ),
                 formFields=form_fields
             )
-
             reminder_settings = boldsign.ReminderSettings(
                 reminderDays=3,
                 reminderCount=5,
@@ -163,6 +168,7 @@ class TestDocumentApi(unittest.TestCase):
             )
 
             send_document_response = document_api.send_document(send_for_sign)
+            TestDocumentApi.created_document_id1 = send_document_response.document_id
 
             assert send_document_response is not None, "No response received from API"
             assert isinstance(send_document_response, boldsign.DocumentCreated)
@@ -205,6 +211,9 @@ class TestDocumentApi(unittest.TestCase):
                         signerType="Signer",
                         authenticationType="AccessCode",
                         authenticationCode="123456",
+                        authenticationSettings=boldsign.AuthenticationSettings(
+                            authenticationFrequency="OncePerDocument"
+                        ),
                         formFields=[
                             boldsign.FormField(
                                 name="Sign",
@@ -236,6 +245,9 @@ class TestDocumentApi(unittest.TestCase):
                         signerOrder=2,
                         signerType="Reviewer",
                         authenticationType="SMSOTP",
+                        authenticationSettings=boldsign.AuthenticationSettings(
+                            authenticationFrequency="None"
+                        ),
                         phoneNumber=phone_number,
                         privateMessage="This is private message for Reviewer",
                         deliveryMode="EmailAndSMS",
@@ -248,6 +260,9 @@ class TestDocumentApi(unittest.TestCase):
                         signerType="InPersonSigner",
                         hostEmail= TestDocumentApi.sender_email,
                         authenticationType="EmailOTP",
+                        authenticationSettings=boldsign.AuthenticationSettings(
+                            authenticationFrequency="UntilSignCompleted"
+                        ),
                         formFields=[
                             boldsign.FormField(
                                 name="Sign",
@@ -927,7 +942,7 @@ class TestDocumentApi(unittest.TestCase):
             self.document_api = boldsign.DocumentApi(self.api_client)
 
             # Define parameters for download document
-            documentId = TestDocumentApi.created_document_id
+            documentId = TestDocumentApi.created_document_id1
 
             download_documents = self.document_api.download_document(
                 document_id = documentId
@@ -1101,7 +1116,6 @@ class TestDocumentApi(unittest.TestCase):
                 tags = ["Test_Tag1", "Test_Tag2"]
             )
 
-            #Define the add tag request
             add_tag_request = self.document_api.add_tag(
                 document_tags = document_tags
             )
@@ -1268,7 +1282,10 @@ class TestDocumentApi(unittest.TestCase):
             add_authentication = boldsign.AccessCodeDetail(
                 authenticationType="AccessCode",
                 emailId="girisankar.syncfusion+new@gmail.com",
-                accessCode="123456789"
+                accessCode="123456789",
+                authenticationSettings=boldsign.AuthenticationSettings(
+                    authenticationFrequency="EveryAccess"
+                ),
             )
 
             #Define the add authentication request
@@ -1862,7 +1879,11 @@ class TestDocumentApi(unittest.TestCase):
                 email_address="mohammedmushraf.abuthakir+400@syncfusion.com",
                 signer_order=1,
                 signer_type="Signer",
-                authentication_code="1123",
+                authenticationType="AccessCode",
+                authenticationCode="123456",
+                authenticationSettings=boldsign.AuthenticationSettings(
+                    authenticationFrequency="EveryAccess"
+                ),
                 private_message="This is private message for signer",
                 form_fields=[form_field],
                 locale="EN"
@@ -2520,6 +2541,83 @@ class TestDocumentApi(unittest.TestCase):
         except Exception as e:
             print("\nException when calling BoldSign: %s" % e)
             assert False, f"Unexpected exception occurred: {str(e)}"         
+        finally:
+            time.sleep(5)
+
+    @pytest.mark.run(order=67)
+    def test_send_document_with_file_bytes(self):
+        try:
+            self.document_api = boldsign.DocumentApi(self.api_client)
+
+            file_path = "tests/documents/input/doc_1.pdf"
+            self.assertTrue(os.path.exists(file_path), f"File does not exist at: {file_path}")
+
+            with open(file_path, "rb") as f:
+                file_bytes = f.read()
+
+            form_fields = [
+                FormField(
+                    id="Signature",
+                    name="Signature",
+                    fieldType="Signature",
+                    pageNumber=1,
+                    font="Helvetica",
+                    bounds=boldsign.Rectangle(x=50, y=50, width=100, height=150),
+                    isRequired=True
+                ),
+                FormField(
+                    id="Label",
+                    name="Label",
+                    fieldType="Label",
+                    value="Label Field",
+                    font="Helvetica",
+                    pageNumber=1,
+                    bounds=boldsign.Rectangle(x=150, y=250, width=200, height=25),
+                    isRequired=True
+                ),
+            ]
+
+            signer = DocumentSigner(
+                name="David",
+                emailAddress="david@cubeflakes.com",
+                signerOrder=1,
+                signerType="Signer",
+                formFields=form_fields,
+                locale="EN"
+            )
+
+            send_request = SendForSign(
+                document_title="SDK Document Test case",
+                description="Testing document from SDK integration test case",
+                files=[file_bytes],
+                disableExpiryAlert=False,
+                reminderSettings=ReminderSettings(reminderDays=3, reminderCount=5, enableAutoReminder=False),
+                enableReassign=True,
+                message="Please sign this.",
+                signers=[signer],
+                expiryDays=10,
+                enablePrintAndSign=False,
+                AutoDetectFields=False,
+                onBehalfOf="",
+                enableSigningOrder=False,
+                useTextTags=False,
+                title="Document SDK API",
+                hideDocumentId=False,
+                enableEmbeddedSigning=False,
+                expiryDateType="Days",
+                expiryDate=60,
+                disableEmails=False,
+                disableSMS=False,
+            )
+
+            response = self.document_api.send_document(send_request)
+            self.assertIsNotNone(response.document_id, "Document ID should not be None")
+            print(f"Document sent successfully. ID: {response.document_id}")
+
+        except boldsign.ApiException as e:
+            self.fail(f"API exception occurred: {e}")
+        except Exception as ex:
+            self.fail(f"Unexpected exception: {ex}")
         finally:
             time.sleep(5)
 

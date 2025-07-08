@@ -17,7 +17,7 @@ class TestBrandApi(unittest.TestCase):
         self.configuration = boldsign.Configuration(api_key=API_KEY, host=BASE_URL)
         self.api_client = boldsign.ApiClient(self.configuration)
 
-    @pytest.mark.run(order=107)
+    @pytest.mark.run(order=116)
     def test_create_brand_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -51,7 +51,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=108)
+    @pytest.mark.run(order=117)
     def test_create_brand_positive_with_only_required_fields(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -77,7 +77,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=109)
+    @pytest.mark.run(order=118)
     def test_create_brand_negative_empty_name(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -108,7 +108,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=110)
+    @pytest.mark.run(order=119)
     def test_create_brand_negative_invalid_background_color(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -139,7 +139,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=111)
+    @pytest.mark.run(order=120)
     def test_create_brand_negative_invalid_button_color(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -171,7 +171,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=112)
+    @pytest.mark.run(order=121)
     def test_create_brand_negative_invalid_logo_path(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -203,7 +203,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=113)
+    @pytest.mark.run(order=122)
     def test_create_brand_negative_invalid_button_text_color(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -235,7 +235,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=114)
+    @pytest.mark.run(order=123)
     def test_edit_brand_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -261,7 +261,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=115)
+    @pytest.mark.run(order=124)
     def test_edit_brand_negative_invalid_filepath(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -286,7 +286,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=116)
+    @pytest.mark.run(order=125)
     def test_edit_brand_negative(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -310,7 +310,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=117)
+    @pytest.mark.run(order=126)
     def test_brand_list_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -328,7 +328,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=118)
+    @pytest.mark.run(order=127)
     def test_get_brand_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -353,7 +353,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=119)
+    @pytest.mark.run(order=128)
     def test_get_brand_negative(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -375,7 +375,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=120)
+    @pytest.mark.run(order=129)
     def test_reset_default_brand_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -399,7 +399,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=121)
+    @pytest.mark.run(order=130)
     def test_reset_default_brand_negative(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -421,7 +421,7 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=122)
+    @pytest.mark.run(order=131)
     def test_delete_brand_positive(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -445,14 +445,13 @@ class TestBrandApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=123)
+    @pytest.mark.run(order=132)
     def test_delete__brand_negative(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
             
             # Define parameters for delete brand
             brandId = "wrongDocId"
-            
             delete_brand_response = self.branding_api.get_brand(
                 brand_id= brandId
             )

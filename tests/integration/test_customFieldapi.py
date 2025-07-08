@@ -33,7 +33,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         srting_value = self.random_numbers()
         TestCustomFieldsApi.Custom_field_name = "Test Custom Field"+srting_value
         
-    @pytest.mark.run(order=138)
+    @pytest.mark.run(order=146)
     def test_create_brand(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)
@@ -67,7 +67,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=139)
+    @pytest.mark.run(order=147)
     def test_create_custom_field(self):
         try:
             custom_form_fields = boldsign.CustomFormField(
@@ -101,7 +101,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=140)
+    @pytest.mark.run(order=148)
     def test_create_custom_field_negative_empty_field_name(self):
         try:
             custom_form_fields = boldsign.CustomFormField(
@@ -133,7 +133,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=141)
+    @pytest.mark.run(order=149)
     def test_create_custom_field_negative_invalid_brand_id(self):
         try:
             custom_form_fields = boldsign.CustomFormField(
@@ -168,7 +168,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=142)
+    @pytest.mark.run(order=150)
     def test_edit_custom_field(self):
         try:
             custom_form_fields = boldsign.CustomFormField(
@@ -204,7 +204,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=143)
+    @pytest.mark.run(order=151)
     def test_edit_custom_field_negative_invalid_custom_field_id(self):
         try:
             custom_form_fields = boldsign.CustomFormField(
@@ -242,7 +242,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=144)
+    @pytest.mark.run(order=152)
     def test_edit_custom_field_invalid_brand_id(self):
         try:
             custom_form_fields = boldsign.CustomFormField(
@@ -275,7 +275,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=145)
+    @pytest.mark.run(order=153)
     def test_list_custom_fields(self):
         logger.info("Listing custom fields...")
         try:
@@ -294,7 +294,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=146)
+    @pytest.mark.run(order=154)
     def test_list_custom_fields_negative_invalid_brand_id(self):
         logger.info("Listing custom fields with invalid brand ID...")
 
@@ -316,7 +316,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=147)
+    @pytest.mark.run(order=155)
     def test_embed_custom_field_successful(self):
         try:
             current_date = datetime.datetime.now()
@@ -340,7 +340,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=148)
+    @pytest.mark.run(order=156)
     def test_embed_custom_field_invalid_brand_id_negative(self):
         try:
             current_date = datetime.datetime.now()
@@ -363,7 +363,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=149)
+    @pytest.mark.run(order=157)
     def test_delete_custom_field(self):
         logger.info("Deleting the custom field...")
         try:
@@ -383,7 +383,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=150)
+    @pytest.mark.run(order=158)
     def test_delete_custom_field_negative_invalid_custom_field_id(self):
         logger.info("Attempting to delete a custom field with an invalid custom field ID...")
 
@@ -405,7 +405,7 @@ class TestCustomFieldsApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=151)
+    @pytest.mark.run(order=159)
     def test_delete_brand(self):
         try:
             self.branding_api = boldsign.BrandingApi(self.api_client)

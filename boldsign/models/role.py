@@ -88,8 +88,8 @@ class Role(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Signer', 'Reviewer', 'InPersonSigner']):
-            raise ValueError("must be one of enum values ('Signer', 'Reviewer', 'InPersonSigner')")
+        if value not in set(['Signer', 'Reviewer', 'InPersonSigner', 'null']):
+            raise ValueError("must be one of enum values ('Signer', 'Reviewer', 'InPersonSigner', 'null')")
         return value
 
     @field_validator('language')

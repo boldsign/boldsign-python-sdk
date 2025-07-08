@@ -12,7 +12,7 @@ class TestPlanApi(unittest.TestCase):
         self.configuration = boldsign.Configuration(api_key=API_KEY, host=BASE_URL)
         self.api_client = boldsign.ApiClient(self.configuration)
 
-    @pytest.mark.run(order=152)
+    @pytest.mark.run(order=164)
     def test_api_credits_count_positive(self):
         try:
             self.plan_api = boldsign.PlanApi(self.api_client)

@@ -27,7 +27,7 @@ class TestIdentityVerificationApi(unittest.TestCase):
             base64_content = "data:application/pdf;base64," + base64.b64encode(pdf_content).decode('utf-8')
         return base64_content
 
-    @pytest.mark.run(order=1)
+    @pytest.mark.run(order=160)
     def test_send_document(self):
         try:
             document_api = boldsign.DocumentApi(self.api_client)
@@ -101,7 +101,7 @@ class TestIdentityVerificationApi(unittest.TestCase):
         finally:
             time.sleep(60)
 
-    @pytest.mark.run(order=2)
+    @pytest.mark.run(order=161)
     def test_create_embedded_verification_url_negative(self):
         try:
             create_embedded_verification_url = EmbeddedFileDetails(
@@ -123,7 +123,7 @@ class TestIdentityVerificationApi(unittest.TestCase):
         finally:
             time.sleep(5)
 
-    @pytest.mark.run(order=3)
+    @pytest.mark.run(order=162)
     def test_get_identity_verification_report_negative(self):
         try:
             identity_verification_report = boldsign.VerificationDataRequest(
@@ -145,14 +145,14 @@ class TestIdentityVerificationApi(unittest.TestCase):
             time.sleep(5)
 
 
-    @pytest.mark.run(order=4)
+    @pytest.mark.run(order=163)
     def test_get_identity_verification_image_negative(self):
         try:
             identity_verification_image = boldsign.DownloadImageRequest(
                 emailId="girisankar.syncfusion@gmail.com",
                 countryCode="+91",
                 phoneNumber="87654345678",
-                fileId="invalid-field-id",
+                fileId="invalid-file-id",
                 order=1
             )
 
