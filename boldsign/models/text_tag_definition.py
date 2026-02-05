@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from boldsign.models.attachment_info import AttachmentInfo
+from boldsign.models.collaboration_settings import CollaborationSettings
 from boldsign.models.font import Font
 from boldsign.models.formula_field_settings import FormulaFieldSettings
 from boldsign.models.image_info import ImageInfo
@@ -68,7 +69,9 @@ class TextTagDefinition(BaseModel):
     character_limit: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]] = Field(default=None, alias="characterLimit")
     formula_field_settings: Optional[FormulaFieldSettings] = Field(default=None, alias="formulaFieldSettings")
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
-    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "formulaFieldSettings", "resizeOption"]
+    collaboration_settings: Optional[CollaborationSettings] = Field(default=None, alias="collaborationSettings")
+    is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
+    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "formulaFieldSettings", "resizeOption", "collaborationSettings", "isMasked"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -103,8 +106,8 @@ class TextTagDefinition(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont', 'null']):
-            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont', 'null')")
+        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont']):
+            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont')")
         return value
 
     model_config = ConfigDict(
@@ -136,6 +139,14 @@ class TextTagDefinition(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -203,7 +214,9 @@ class TextTagDefinition(BaseModel):
             "characterSpacing": obj.get("characterSpacing"),
             "characterLimit": obj.get("characterLimit"),
             "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
-            "resizeOption": obj.get("resizeOption")
+            "resizeOption": obj.get("resizeOption"),
+            "collaborationSettings": CollaborationSettings.from_dict(obj["collaborationSettings"]) if obj.get("collaborationSettings") is not None else None,
+            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False
         })
         return _obj
 
@@ -250,6 +263,8 @@ class TextTagDefinition(BaseModel):
             "character_limit": "(int,)",
             "formula_field_settings": "(FormulaFieldSettings,)",
             "resize_option": "(str,)",
+            "collaboration_settings": "(CollaborationSettings,)",
+            "is_masked": "(bool,)",
         }
 
     @classmethod

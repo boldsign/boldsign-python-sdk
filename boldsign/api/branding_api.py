@@ -307,6 +307,7 @@ class BrandingApi:
         is_default: Optional[StrictBool] = None,
         can_hide_tag_line: Optional[StrictBool] = None,
         combine_audit_trail: Optional[StrictBool] = None,
+        combine_attachments: Optional[StrictBool] = None,
         exclude_audit_trail_from_email: Optional[StrictBool] = None,
         email_signed_document: Optional[StrictStr] = None,
         document_time_zone: Optional[StrictStr] = None,
@@ -323,6 +324,10 @@ class BrandingApi:
         document_expiry_settings_reminder_count: Optional[StrictInt] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
+        signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_name: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
+        signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -363,6 +368,8 @@ class BrandingApi:
         :type can_hide_tag_line: bool
         :param combine_audit_trail:
         :type combine_audit_trail: bool
+        :param combine_attachments:
+        :type combine_attachments: bool
         :param exclude_audit_trail_from_email:
         :type exclude_audit_trail_from_email: bool
         :param email_signed_document:
@@ -395,6 +402,14 @@ class BrandingApi:
         :type custom_domain_settings_domain_name: str
         :param custom_domain_settings_from_name:
         :type custom_domain_settings_from_name: str
+        :param signature_frame_settings_enable_signature_frame:
+        :type signature_frame_settings_enable_signature_frame: bool
+        :param signature_frame_settings_show_recipient_name:
+        :type signature_frame_settings_show_recipient_name: bool
+        :param signature_frame_settings_show_recipient_email:
+        :type signature_frame_settings_show_recipient_email: bool
+        :param signature_frame_settings_show_time_stamp:
+        :type signature_frame_settings_show_time_stamp: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -430,6 +445,7 @@ class BrandingApi:
             is_default=is_default,
             can_hide_tag_line=can_hide_tag_line,
             combine_audit_trail=combine_audit_trail,
+            combine_attachments=combine_attachments,
             exclude_audit_trail_from_email=exclude_audit_trail_from_email,
             email_signed_document=email_signed_document,
             document_time_zone=document_time_zone,
@@ -446,6 +462,10 @@ class BrandingApi:
             document_expiry_settings_reminder_count=document_expiry_settings_reminder_count,
             custom_domain_settings_domain_name=custom_domain_settings_domain_name,
             custom_domain_settings_from_name=custom_domain_settings_from_name,
+            signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame,
+            signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name,
+            signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
+            signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -484,6 +504,7 @@ class BrandingApi:
         is_default: Optional[StrictBool] = None,
         can_hide_tag_line: Optional[StrictBool] = None,
         combine_audit_trail: Optional[StrictBool] = None,
+        combine_attachments: Optional[StrictBool] = None,
         exclude_audit_trail_from_email: Optional[StrictBool] = None,
         email_signed_document: Optional[StrictStr] = None,
         document_time_zone: Optional[StrictStr] = None,
@@ -500,6 +521,10 @@ class BrandingApi:
         document_expiry_settings_reminder_count: Optional[StrictInt] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
+        signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_name: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
+        signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -540,6 +565,8 @@ class BrandingApi:
         :type can_hide_tag_line: bool
         :param combine_audit_trail:
         :type combine_audit_trail: bool
+        :param combine_attachments:
+        :type combine_attachments: bool
         :param exclude_audit_trail_from_email:
         :type exclude_audit_trail_from_email: bool
         :param email_signed_document:
@@ -572,6 +599,14 @@ class BrandingApi:
         :type custom_domain_settings_domain_name: str
         :param custom_domain_settings_from_name:
         :type custom_domain_settings_from_name: str
+        :param signature_frame_settings_enable_signature_frame:
+        :type signature_frame_settings_enable_signature_frame: bool
+        :param signature_frame_settings_show_recipient_name:
+        :type signature_frame_settings_show_recipient_name: bool
+        :param signature_frame_settings_show_recipient_email:
+        :type signature_frame_settings_show_recipient_email: bool
+        :param signature_frame_settings_show_time_stamp:
+        :type signature_frame_settings_show_time_stamp: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -607,6 +642,7 @@ class BrandingApi:
             is_default=is_default,
             can_hide_tag_line=can_hide_tag_line,
             combine_audit_trail=combine_audit_trail,
+            combine_attachments=combine_attachments,
             exclude_audit_trail_from_email=exclude_audit_trail_from_email,
             email_signed_document=email_signed_document,
             document_time_zone=document_time_zone,
@@ -623,6 +659,10 @@ class BrandingApi:
             document_expiry_settings_reminder_count=document_expiry_settings_reminder_count,
             custom_domain_settings_domain_name=custom_domain_settings_domain_name,
             custom_domain_settings_from_name=custom_domain_settings_from_name,
+            signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame,
+            signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name,
+            signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
+            signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -661,6 +701,7 @@ class BrandingApi:
         is_default: Optional[StrictBool] = None,
         can_hide_tag_line: Optional[StrictBool] = None,
         combine_audit_trail: Optional[StrictBool] = None,
+        combine_attachments: Optional[StrictBool] = None,
         exclude_audit_trail_from_email: Optional[StrictBool] = None,
         email_signed_document: Optional[StrictStr] = None,
         document_time_zone: Optional[StrictStr] = None,
@@ -677,6 +718,10 @@ class BrandingApi:
         document_expiry_settings_reminder_count: Optional[StrictInt] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
+        signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_name: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
+        signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -717,6 +762,8 @@ class BrandingApi:
         :type can_hide_tag_line: bool
         :param combine_audit_trail:
         :type combine_audit_trail: bool
+        :param combine_attachments:
+        :type combine_attachments: bool
         :param exclude_audit_trail_from_email:
         :type exclude_audit_trail_from_email: bool
         :param email_signed_document:
@@ -749,6 +796,14 @@ class BrandingApi:
         :type custom_domain_settings_domain_name: str
         :param custom_domain_settings_from_name:
         :type custom_domain_settings_from_name: str
+        :param signature_frame_settings_enable_signature_frame:
+        :type signature_frame_settings_enable_signature_frame: bool
+        :param signature_frame_settings_show_recipient_name:
+        :type signature_frame_settings_show_recipient_name: bool
+        :param signature_frame_settings_show_recipient_email:
+        :type signature_frame_settings_show_recipient_email: bool
+        :param signature_frame_settings_show_time_stamp:
+        :type signature_frame_settings_show_time_stamp: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -784,6 +839,7 @@ class BrandingApi:
             is_default=is_default,
             can_hide_tag_line=can_hide_tag_line,
             combine_audit_trail=combine_audit_trail,
+            combine_attachments=combine_attachments,
             exclude_audit_trail_from_email=exclude_audit_trail_from_email,
             email_signed_document=email_signed_document,
             document_time_zone=document_time_zone,
@@ -800,6 +856,10 @@ class BrandingApi:
             document_expiry_settings_reminder_count=document_expiry_settings_reminder_count,
             custom_domain_settings_domain_name=custom_domain_settings_domain_name,
             custom_domain_settings_from_name=custom_domain_settings_from_name,
+            signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame,
+            signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name,
+            signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
+            signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -833,6 +893,7 @@ class BrandingApi:
         is_default,
         can_hide_tag_line,
         combine_audit_trail,
+        combine_attachments,
         exclude_audit_trail_from_email,
         email_signed_document,
         document_time_zone,
@@ -849,6 +910,10 @@ class BrandingApi:
         document_expiry_settings_reminder_count,
         custom_domain_settings_domain_name,
         custom_domain_settings_from_name,
+        signature_frame_settings_enable_signature_frame,
+        signature_frame_settings_show_recipient_name,
+        signature_frame_settings_show_recipient_email,
+        signature_frame_settings_show_time_stamp,
         _request_auth,
         _content_type,
         _headers,
@@ -895,6 +960,8 @@ class BrandingApi:
             _form_params.append(('CanHideTagLine', can_hide_tag_line))
         if combine_audit_trail is not None:
             _form_params.append(('CombineAuditTrail', combine_audit_trail))
+        if combine_attachments is not None:
+            _form_params.append(('CombineAttachments', combine_attachments))
         if exclude_audit_trail_from_email is not None:
             _form_params.append(('ExcludeAuditTrailFromEmail', exclude_audit_trail_from_email))
         if email_signed_document is not None:
@@ -927,6 +994,14 @@ class BrandingApi:
             _form_params.append(('CustomDomainSettings.DomainName', custom_domain_settings_domain_name))
         if custom_domain_settings_from_name is not None:
             _form_params.append(('CustomDomainSettings.FromName', custom_domain_settings_from_name))
+        if signature_frame_settings_enable_signature_frame is not None:
+            _form_params.append(('SignatureFrameSettings.EnableSignatureFrame', signature_frame_settings_enable_signature_frame))
+        if signature_frame_settings_show_recipient_name is not None:
+            _form_params.append(('SignatureFrameSettings.ShowRecipientName', signature_frame_settings_show_recipient_name))
+        if signature_frame_settings_show_recipient_email is not None:
+            _form_params.append(('SignatureFrameSettings.ShowRecipientEmail', signature_frame_settings_show_recipient_email))
+        if signature_frame_settings_show_time_stamp is not None:
+            _form_params.append(('SignatureFrameSettings.ShowTimeStamp', signature_frame_settings_show_time_stamp))
         # process the body parameter
 
 
@@ -1335,6 +1410,7 @@ class BrandingApi:
         is_default: Optional[StrictBool] = None,
         can_hide_tag_line: Optional[StrictBool] = None,
         combine_audit_trail: Optional[StrictBool] = None,
+        combine_attachments: Optional[StrictBool] = None,
         exclude_audit_trail_from_email: Optional[StrictBool] = None,
         email_signed_document: Optional[StrictStr] = None,
         document_time_zone: Optional[StrictStr] = None,
@@ -1351,6 +1427,10 @@ class BrandingApi:
         document_expiry_settings_reminder_count: Optional[StrictInt] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
+        signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_name: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
+        signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1393,6 +1473,8 @@ class BrandingApi:
         :type can_hide_tag_line: bool
         :param combine_audit_trail:
         :type combine_audit_trail: bool
+        :param combine_attachments:
+        :type combine_attachments: bool
         :param exclude_audit_trail_from_email:
         :type exclude_audit_trail_from_email: bool
         :param email_signed_document:
@@ -1425,6 +1507,14 @@ class BrandingApi:
         :type custom_domain_settings_domain_name: str
         :param custom_domain_settings_from_name:
         :type custom_domain_settings_from_name: str
+        :param signature_frame_settings_enable_signature_frame:
+        :type signature_frame_settings_enable_signature_frame: bool
+        :param signature_frame_settings_show_recipient_name:
+        :type signature_frame_settings_show_recipient_name: bool
+        :param signature_frame_settings_show_recipient_email:
+        :type signature_frame_settings_show_recipient_email: bool
+        :param signature_frame_settings_show_time_stamp:
+        :type signature_frame_settings_show_time_stamp: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1461,6 +1551,7 @@ class BrandingApi:
             is_default=is_default,
             can_hide_tag_line=can_hide_tag_line,
             combine_audit_trail=combine_audit_trail,
+            combine_attachments=combine_attachments,
             exclude_audit_trail_from_email=exclude_audit_trail_from_email,
             email_signed_document=email_signed_document,
             document_time_zone=document_time_zone,
@@ -1477,6 +1568,10 @@ class BrandingApi:
             document_expiry_settings_reminder_count=document_expiry_settings_reminder_count,
             custom_domain_settings_domain_name=custom_domain_settings_domain_name,
             custom_domain_settings_from_name=custom_domain_settings_from_name,
+            signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame,
+            signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name,
+            signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
+            signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1516,6 +1611,7 @@ class BrandingApi:
         is_default: Optional[StrictBool] = None,
         can_hide_tag_line: Optional[StrictBool] = None,
         combine_audit_trail: Optional[StrictBool] = None,
+        combine_attachments: Optional[StrictBool] = None,
         exclude_audit_trail_from_email: Optional[StrictBool] = None,
         email_signed_document: Optional[StrictStr] = None,
         document_time_zone: Optional[StrictStr] = None,
@@ -1532,6 +1628,10 @@ class BrandingApi:
         document_expiry_settings_reminder_count: Optional[StrictInt] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
+        signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_name: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
+        signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1574,6 +1674,8 @@ class BrandingApi:
         :type can_hide_tag_line: bool
         :param combine_audit_trail:
         :type combine_audit_trail: bool
+        :param combine_attachments:
+        :type combine_attachments: bool
         :param exclude_audit_trail_from_email:
         :type exclude_audit_trail_from_email: bool
         :param email_signed_document:
@@ -1606,6 +1708,14 @@ class BrandingApi:
         :type custom_domain_settings_domain_name: str
         :param custom_domain_settings_from_name:
         :type custom_domain_settings_from_name: str
+        :param signature_frame_settings_enable_signature_frame:
+        :type signature_frame_settings_enable_signature_frame: bool
+        :param signature_frame_settings_show_recipient_name:
+        :type signature_frame_settings_show_recipient_name: bool
+        :param signature_frame_settings_show_recipient_email:
+        :type signature_frame_settings_show_recipient_email: bool
+        :param signature_frame_settings_show_time_stamp:
+        :type signature_frame_settings_show_time_stamp: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1642,6 +1752,7 @@ class BrandingApi:
             is_default=is_default,
             can_hide_tag_line=can_hide_tag_line,
             combine_audit_trail=combine_audit_trail,
+            combine_attachments=combine_attachments,
             exclude_audit_trail_from_email=exclude_audit_trail_from_email,
             email_signed_document=email_signed_document,
             document_time_zone=document_time_zone,
@@ -1658,6 +1769,10 @@ class BrandingApi:
             document_expiry_settings_reminder_count=document_expiry_settings_reminder_count,
             custom_domain_settings_domain_name=custom_domain_settings_domain_name,
             custom_domain_settings_from_name=custom_domain_settings_from_name,
+            signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame,
+            signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name,
+            signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
+            signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1697,6 +1812,7 @@ class BrandingApi:
         is_default: Optional[StrictBool] = None,
         can_hide_tag_line: Optional[StrictBool] = None,
         combine_audit_trail: Optional[StrictBool] = None,
+        combine_attachments: Optional[StrictBool] = None,
         exclude_audit_trail_from_email: Optional[StrictBool] = None,
         email_signed_document: Optional[StrictStr] = None,
         document_time_zone: Optional[StrictStr] = None,
@@ -1713,6 +1829,10 @@ class BrandingApi:
         document_expiry_settings_reminder_count: Optional[StrictInt] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
+        signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_name: Optional[StrictBool] = None,
+        signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
+        signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1755,6 +1875,8 @@ class BrandingApi:
         :type can_hide_tag_line: bool
         :param combine_audit_trail:
         :type combine_audit_trail: bool
+        :param combine_attachments:
+        :type combine_attachments: bool
         :param exclude_audit_trail_from_email:
         :type exclude_audit_trail_from_email: bool
         :param email_signed_document:
@@ -1787,6 +1909,14 @@ class BrandingApi:
         :type custom_domain_settings_domain_name: str
         :param custom_domain_settings_from_name:
         :type custom_domain_settings_from_name: str
+        :param signature_frame_settings_enable_signature_frame:
+        :type signature_frame_settings_enable_signature_frame: bool
+        :param signature_frame_settings_show_recipient_name:
+        :type signature_frame_settings_show_recipient_name: bool
+        :param signature_frame_settings_show_recipient_email:
+        :type signature_frame_settings_show_recipient_email: bool
+        :param signature_frame_settings_show_time_stamp:
+        :type signature_frame_settings_show_time_stamp: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1823,6 +1953,7 @@ class BrandingApi:
             is_default=is_default,
             can_hide_tag_line=can_hide_tag_line,
             combine_audit_trail=combine_audit_trail,
+            combine_attachments=combine_attachments,
             exclude_audit_trail_from_email=exclude_audit_trail_from_email,
             email_signed_document=email_signed_document,
             document_time_zone=document_time_zone,
@@ -1839,6 +1970,10 @@ class BrandingApi:
             document_expiry_settings_reminder_count=document_expiry_settings_reminder_count,
             custom_domain_settings_domain_name=custom_domain_settings_domain_name,
             custom_domain_settings_from_name=custom_domain_settings_from_name,
+            signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame,
+            signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name,
+            signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
+            signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1873,6 +2008,7 @@ class BrandingApi:
         is_default,
         can_hide_tag_line,
         combine_audit_trail,
+        combine_attachments,
         exclude_audit_trail_from_email,
         email_signed_document,
         document_time_zone,
@@ -1889,6 +2025,10 @@ class BrandingApi:
         document_expiry_settings_reminder_count,
         custom_domain_settings_domain_name,
         custom_domain_settings_from_name,
+        signature_frame_settings_enable_signature_frame,
+        signature_frame_settings_show_recipient_name,
+        signature_frame_settings_show_recipient_email,
+        signature_frame_settings_show_time_stamp,
         _request_auth,
         _content_type,
         _headers,
@@ -1939,6 +2079,8 @@ class BrandingApi:
             _form_params.append(('CanHideTagLine', can_hide_tag_line))
         if combine_audit_trail is not None:
             _form_params.append(('CombineAuditTrail', combine_audit_trail))
+        if combine_attachments is not None:
+            _form_params.append(('CombineAttachments', combine_attachments))
         if exclude_audit_trail_from_email is not None:
             _form_params.append(('ExcludeAuditTrailFromEmail', exclude_audit_trail_from_email))
         if email_signed_document is not None:
@@ -1971,6 +2113,14 @@ class BrandingApi:
             _form_params.append(('CustomDomainSettings.DomainName', custom_domain_settings_domain_name))
         if custom_domain_settings_from_name is not None:
             _form_params.append(('CustomDomainSettings.FromName', custom_domain_settings_from_name))
+        if signature_frame_settings_enable_signature_frame is not None:
+            _form_params.append(('SignatureFrameSettings.EnableSignatureFrame', signature_frame_settings_enable_signature_frame))
+        if signature_frame_settings_show_recipient_name is not None:
+            _form_params.append(('SignatureFrameSettings.ShowRecipientName', signature_frame_settings_show_recipient_name))
+        if signature_frame_settings_show_recipient_email is not None:
+            _form_params.append(('SignatureFrameSettings.ShowRecipientEmail', signature_frame_settings_show_recipient_email))
+        if signature_frame_settings_show_time_stamp is not None:
+            _form_params.append(('SignatureFrameSettings.ShowTimeStamp', signature_frame_settings_show_time_stamp))
         # process the body parameter
 
 

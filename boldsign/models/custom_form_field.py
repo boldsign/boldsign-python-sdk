@@ -67,7 +67,8 @@ class CustomFormField(BaseModel):
     restrict_id_prefix_change: Optional[StrictBool] = Field(default=False, alias="restrictIdPrefixChange")
     background_hex_color: Optional[StrictStr] = Field(default=None, alias="backgroundHexColor")
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
-    __properties: ClassVar[List[str]] = ["fieldType", "width", "height", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "idPrefix", "restrictIdPrefixChange", "backgroundHexColor", "resizeOption"]
+    is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
+    __properties: ClassVar[List[str]] = ["fieldType", "width", "height", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "idPrefix", "restrictIdPrefixChange", "backgroundHexColor", "resizeOption", "isMasked"]
 
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
@@ -82,8 +83,8 @@ class CustomFormField(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Helvetica', 'Courier', 'TimesRoman', 'NotoSans']):
-            raise ValueError("must be one of enum values ('Helvetica', 'Courier', 'TimesRoman', 'NotoSans')")
+        if value not in set(['Helvetica', 'Courier', 'TimesRoman', 'NotoSans', 'Carlito']):
+            raise ValueError("must be one of enum values ('Helvetica', 'Courier', 'TimesRoman', 'NotoSans', 'Carlito')")
         return value
 
     @field_validator('validation_type')
@@ -122,8 +123,8 @@ class CustomFormField(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont', 'null']):
-            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont', 'null')")
+        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont']):
+            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont')")
         return value
 
     model_config = ConfigDict(
@@ -155,6 +156,14 @@ class CustomFormField(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -225,7 +234,8 @@ class CustomFormField(BaseModel):
             "idPrefix": obj.get("idPrefix"),
             "restrictIdPrefixChange": obj.get("restrictIdPrefixChange") if obj.get("restrictIdPrefixChange") is not None else False,
             "backgroundHexColor": obj.get("backgroundHexColor"),
-            "resizeOption": obj.get("resizeOption")
+            "resizeOption": obj.get("resizeOption"),
+            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False
         })
         return _obj
 
@@ -275,6 +285,7 @@ class CustomFormField(BaseModel):
             "restrict_id_prefix_change": "(bool,)",
             "background_hex_color": "(str,)",
             "resize_option": "(str,)",
+            "is_masked": "(bool,)",
         }
 
     @classmethod

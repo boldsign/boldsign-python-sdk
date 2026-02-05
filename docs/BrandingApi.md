@@ -76,7 +76,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_brand**
-> BrandCreated create_brand(brand_name, brand_logo, background_color=background_color, button_color=button_color, button_text_color=button_text_color, email_display_name=email_display_name, disclaimer_description=disclaimer_description, disclaimer_title=disclaimer_title, redirect_url=redirect_url, is_default=is_default, can_hide_tag_line=can_hide_tag_line, combine_audit_trail=combine_audit_trail, exclude_audit_trail_from_email=exclude_audit_trail_from_email, email_signed_document=email_signed_document, document_time_zone=document_time_zone, show_built_in_form_fields=show_built_in_form_fields, allow_custom_field_creation=allow_custom_field_creation, show_shared_custom_fields=show_shared_custom_fields, hide_decline=hide_decline, hide_save=hide_save, document_expiry_settings_expiry_date_type=document_expiry_settings_expiry_date_type, document_expiry_settings_expiry_value=document_expiry_settings_expiry_value, document_expiry_settings_enable_default_expiry_alert=document_expiry_settings_enable_default_expiry_alert, document_expiry_settings_enable_auto_reminder=document_expiry_settings_enable_auto_reminder, document_expiry_settings_reminder_days=document_expiry_settings_reminder_days, document_expiry_settings_reminder_count=document_expiry_settings_reminder_count, custom_domain_settings_domain_name=custom_domain_settings_domain_name, custom_domain_settings_from_name=custom_domain_settings_from_name)
+> BrandCreated create_brand(brand_name, brand_logo, background_color=background_color, button_color=button_color, button_text_color=button_text_color, email_display_name=email_display_name, disclaimer_description=disclaimer_description, disclaimer_title=disclaimer_title, redirect_url=redirect_url, is_default=is_default, can_hide_tag_line=can_hide_tag_line, combine_audit_trail=combine_audit_trail, combine_attachments=combine_attachments, exclude_audit_trail_from_email=exclude_audit_trail_from_email, email_signed_document=email_signed_document, document_time_zone=document_time_zone, show_built_in_form_fields=show_built_in_form_fields, allow_custom_field_creation=allow_custom_field_creation, show_shared_custom_fields=show_shared_custom_fields, hide_decline=hide_decline, hide_save=hide_save, document_expiry_settings_expiry_date_type=document_expiry_settings_expiry_date_type, document_expiry_settings_expiry_value=document_expiry_settings_expiry_value, document_expiry_settings_enable_default_expiry_alert=document_expiry_settings_enable_default_expiry_alert, document_expiry_settings_enable_auto_reminder=document_expiry_settings_enable_auto_reminder, document_expiry_settings_reminder_days=document_expiry_settings_reminder_days, document_expiry_settings_reminder_count=document_expiry_settings_reminder_count, custom_domain_settings_domain_name=custom_domain_settings_domain_name, custom_domain_settings_from_name=custom_domain_settings_from_name, signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame, signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name, signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email, signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp)
 
 Create the brand.
 
@@ -111,6 +111,7 @@ with boldsign.ApiClient(configuration) as api_client:
     is_default = False # bool |  (optional) (default to False)
     can_hide_tag_line = False # bool |  (optional) (default to False)
     combine_audit_trail = False # bool |  (optional) (default to False)
+    combine_attachments = False # bool |  (optional) (default to False)
     exclude_audit_trail_from_email = False # bool |  (optional) (default to False)
     email_signed_document = Attachment # str |  (optional) (default to Attachment)
     document_time_zone = 'document_time_zone_example' # str |  (optional)
@@ -127,10 +128,14 @@ with boldsign.ApiClient(configuration) as api_client:
     document_expiry_settings_reminder_count = 56 # int |  (optional)
     custom_domain_settings_domain_name = 'custom_domain_settings_domain_name_example' # str |  (optional)
     custom_domain_settings_from_name = 'custom_domain_settings_from_name_example' # str |  (optional)
+    signature_frame_settings_enable_signature_frame = False # bool |  (optional) (default to False)
+    signature_frame_settings_show_recipient_name = False # bool |  (optional) (default to False)
+    signature_frame_settings_show_recipient_email = False # bool |  (optional) (default to False)
+    signature_frame_settings_show_time_stamp = False # bool |  (optional) (default to False)
 
     try:
         # Create the brand.
-        api_response = api_instance.create_brand(brand_name, brand_logo, background_color=background_color, button_color=button_color, button_text_color=button_text_color, email_display_name=email_display_name, disclaimer_description=disclaimer_description, disclaimer_title=disclaimer_title, redirect_url=redirect_url, is_default=is_default, can_hide_tag_line=can_hide_tag_line, combine_audit_trail=combine_audit_trail, exclude_audit_trail_from_email=exclude_audit_trail_from_email, email_signed_document=email_signed_document, document_time_zone=document_time_zone, show_built_in_form_fields=show_built_in_form_fields, allow_custom_field_creation=allow_custom_field_creation, show_shared_custom_fields=show_shared_custom_fields, hide_decline=hide_decline, hide_save=hide_save, document_expiry_settings_expiry_date_type=document_expiry_settings_expiry_date_type, document_expiry_settings_expiry_value=document_expiry_settings_expiry_value, document_expiry_settings_enable_default_expiry_alert=document_expiry_settings_enable_default_expiry_alert, document_expiry_settings_enable_auto_reminder=document_expiry_settings_enable_auto_reminder, document_expiry_settings_reminder_days=document_expiry_settings_reminder_days, document_expiry_settings_reminder_count=document_expiry_settings_reminder_count, custom_domain_settings_domain_name=custom_domain_settings_domain_name, custom_domain_settings_from_name=custom_domain_settings_from_name)
+        api_response = api_instance.create_brand(brand_name, brand_logo, background_color=background_color, button_color=button_color, button_text_color=button_text_color, email_display_name=email_display_name, disclaimer_description=disclaimer_description, disclaimer_title=disclaimer_title, redirect_url=redirect_url, is_default=is_default, can_hide_tag_line=can_hide_tag_line, combine_audit_trail=combine_audit_trail, combine_attachments=combine_attachments, exclude_audit_trail_from_email=exclude_audit_trail_from_email, email_signed_document=email_signed_document, document_time_zone=document_time_zone, show_built_in_form_fields=show_built_in_form_fields, allow_custom_field_creation=allow_custom_field_creation, show_shared_custom_fields=show_shared_custom_fields, hide_decline=hide_decline, hide_save=hide_save, document_expiry_settings_expiry_date_type=document_expiry_settings_expiry_date_type, document_expiry_settings_expiry_value=document_expiry_settings_expiry_value, document_expiry_settings_enable_default_expiry_alert=document_expiry_settings_enable_default_expiry_alert, document_expiry_settings_enable_auto_reminder=document_expiry_settings_enable_auto_reminder, document_expiry_settings_reminder_days=document_expiry_settings_reminder_days, document_expiry_settings_reminder_count=document_expiry_settings_reminder_count, custom_domain_settings_domain_name=custom_domain_settings_domain_name, custom_domain_settings_from_name=custom_domain_settings_from_name, signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame, signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name, signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email, signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp)
         print("The response of BrandingApi->create_brand:\n")
         pprint(api_response)
     except Exception as e:
@@ -156,6 +161,7 @@ Name | Type | Description  | Notes
  **is_default** | **bool**|  | [optional] [default to False]
  **can_hide_tag_line** | **bool**|  | [optional] [default to False]
  **combine_audit_trail** | **bool**|  | [optional] [default to False]
+ **combine_attachments** | **bool**|  | [optional] [default to False]
  **exclude_audit_trail_from_email** | **bool**|  | [optional] [default to False]
  **email_signed_document** | **str**|  | [optional] [default to Attachment]
  **document_time_zone** | **str**|  | [optional] 
@@ -172,6 +178,10 @@ Name | Type | Description  | Notes
  **document_expiry_settings_reminder_count** | **int**|  | [optional] 
  **custom_domain_settings_domain_name** | **str**|  | [optional] 
  **custom_domain_settings_from_name** | **str**|  | [optional] 
+ **signature_frame_settings_enable_signature_frame** | **bool**|  | [optional] [default to False]
+ **signature_frame_settings_show_recipient_name** | **bool**|  | [optional] [default to False]
+ **signature_frame_settings_show_recipient_email** | **bool**|  | [optional] [default to False]
+ **signature_frame_settings_show_time_stamp** | **bool**|  | [optional] [default to False]
 
 ### Return type
 
@@ -265,7 +275,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **edit_brand**
-> BrandCreated edit_brand(brand_id, brand_name=brand_name, brand_logo=brand_logo, background_color=background_color, button_color=button_color, button_text_color=button_text_color, email_display_name=email_display_name, disclaimer_description=disclaimer_description, disclaimer_title=disclaimer_title, redirect_url=redirect_url, is_default=is_default, can_hide_tag_line=can_hide_tag_line, combine_audit_trail=combine_audit_trail, exclude_audit_trail_from_email=exclude_audit_trail_from_email, email_signed_document=email_signed_document, document_time_zone=document_time_zone, show_built_in_form_fields=show_built_in_form_fields, allow_custom_field_creation=allow_custom_field_creation, show_shared_custom_fields=show_shared_custom_fields, hide_decline=hide_decline, hide_save=hide_save, document_expiry_settings_expiry_date_type=document_expiry_settings_expiry_date_type, document_expiry_settings_expiry_value=document_expiry_settings_expiry_value, document_expiry_settings_enable_default_expiry_alert=document_expiry_settings_enable_default_expiry_alert, document_expiry_settings_enable_auto_reminder=document_expiry_settings_enable_auto_reminder, document_expiry_settings_reminder_days=document_expiry_settings_reminder_days, document_expiry_settings_reminder_count=document_expiry_settings_reminder_count, custom_domain_settings_domain_name=custom_domain_settings_domain_name, custom_domain_settings_from_name=custom_domain_settings_from_name)
+> BrandCreated edit_brand(brand_id, brand_name=brand_name, brand_logo=brand_logo, background_color=background_color, button_color=button_color, button_text_color=button_text_color, email_display_name=email_display_name, disclaimer_description=disclaimer_description, disclaimer_title=disclaimer_title, redirect_url=redirect_url, is_default=is_default, can_hide_tag_line=can_hide_tag_line, combine_audit_trail=combine_audit_trail, combine_attachments=combine_attachments, exclude_audit_trail_from_email=exclude_audit_trail_from_email, email_signed_document=email_signed_document, document_time_zone=document_time_zone, show_built_in_form_fields=show_built_in_form_fields, allow_custom_field_creation=allow_custom_field_creation, show_shared_custom_fields=show_shared_custom_fields, hide_decline=hide_decline, hide_save=hide_save, document_expiry_settings_expiry_date_type=document_expiry_settings_expiry_date_type, document_expiry_settings_expiry_value=document_expiry_settings_expiry_value, document_expiry_settings_enable_default_expiry_alert=document_expiry_settings_enable_default_expiry_alert, document_expiry_settings_enable_auto_reminder=document_expiry_settings_enable_auto_reminder, document_expiry_settings_reminder_days=document_expiry_settings_reminder_days, document_expiry_settings_reminder_count=document_expiry_settings_reminder_count, custom_domain_settings_domain_name=custom_domain_settings_domain_name, custom_domain_settings_from_name=custom_domain_settings_from_name, signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame, signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name, signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email, signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp)
 
 Edit the brand.
 
@@ -301,6 +311,7 @@ with boldsign.ApiClient(configuration) as api_client:
     is_default = False # bool |  (optional) (default to False)
     can_hide_tag_line = False # bool |  (optional) (default to False)
     combine_audit_trail = False # bool |  (optional) (default to False)
+    combine_attachments = False # bool |  (optional) (default to False)
     exclude_audit_trail_from_email = False # bool |  (optional) (default to False)
     email_signed_document = Attachment # str |  (optional) (default to Attachment)
     document_time_zone = 'document_time_zone_example' # str |  (optional)
@@ -317,10 +328,14 @@ with boldsign.ApiClient(configuration) as api_client:
     document_expiry_settings_reminder_count = 56 # int |  (optional)
     custom_domain_settings_domain_name = 'custom_domain_settings_domain_name_example' # str |  (optional)
     custom_domain_settings_from_name = 'custom_domain_settings_from_name_example' # str |  (optional)
+    signature_frame_settings_enable_signature_frame = False # bool |  (optional) (default to False)
+    signature_frame_settings_show_recipient_name = False # bool |  (optional) (default to False)
+    signature_frame_settings_show_recipient_email = False # bool |  (optional) (default to False)
+    signature_frame_settings_show_time_stamp = False # bool |  (optional) (default to False)
 
     try:
         # Edit the brand.
-        api_response = api_instance.edit_brand(brand_id, brand_name=brand_name, brand_logo=brand_logo, background_color=background_color, button_color=button_color, button_text_color=button_text_color, email_display_name=email_display_name, disclaimer_description=disclaimer_description, disclaimer_title=disclaimer_title, redirect_url=redirect_url, is_default=is_default, can_hide_tag_line=can_hide_tag_line, combine_audit_trail=combine_audit_trail, exclude_audit_trail_from_email=exclude_audit_trail_from_email, email_signed_document=email_signed_document, document_time_zone=document_time_zone, show_built_in_form_fields=show_built_in_form_fields, allow_custom_field_creation=allow_custom_field_creation, show_shared_custom_fields=show_shared_custom_fields, hide_decline=hide_decline, hide_save=hide_save, document_expiry_settings_expiry_date_type=document_expiry_settings_expiry_date_type, document_expiry_settings_expiry_value=document_expiry_settings_expiry_value, document_expiry_settings_enable_default_expiry_alert=document_expiry_settings_enable_default_expiry_alert, document_expiry_settings_enable_auto_reminder=document_expiry_settings_enable_auto_reminder, document_expiry_settings_reminder_days=document_expiry_settings_reminder_days, document_expiry_settings_reminder_count=document_expiry_settings_reminder_count, custom_domain_settings_domain_name=custom_domain_settings_domain_name, custom_domain_settings_from_name=custom_domain_settings_from_name)
+        api_response = api_instance.edit_brand(brand_id, brand_name=brand_name, brand_logo=brand_logo, background_color=background_color, button_color=button_color, button_text_color=button_text_color, email_display_name=email_display_name, disclaimer_description=disclaimer_description, disclaimer_title=disclaimer_title, redirect_url=redirect_url, is_default=is_default, can_hide_tag_line=can_hide_tag_line, combine_audit_trail=combine_audit_trail, combine_attachments=combine_attachments, exclude_audit_trail_from_email=exclude_audit_trail_from_email, email_signed_document=email_signed_document, document_time_zone=document_time_zone, show_built_in_form_fields=show_built_in_form_fields, allow_custom_field_creation=allow_custom_field_creation, show_shared_custom_fields=show_shared_custom_fields, hide_decline=hide_decline, hide_save=hide_save, document_expiry_settings_expiry_date_type=document_expiry_settings_expiry_date_type, document_expiry_settings_expiry_value=document_expiry_settings_expiry_value, document_expiry_settings_enable_default_expiry_alert=document_expiry_settings_enable_default_expiry_alert, document_expiry_settings_enable_auto_reminder=document_expiry_settings_enable_auto_reminder, document_expiry_settings_reminder_days=document_expiry_settings_reminder_days, document_expiry_settings_reminder_count=document_expiry_settings_reminder_count, custom_domain_settings_domain_name=custom_domain_settings_domain_name, custom_domain_settings_from_name=custom_domain_settings_from_name, signature_frame_settings_enable_signature_frame=signature_frame_settings_enable_signature_frame, signature_frame_settings_show_recipient_name=signature_frame_settings_show_recipient_name, signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email, signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp)
         print("The response of BrandingApi->edit_brand:\n")
         pprint(api_response)
     except Exception as e:
@@ -347,6 +362,7 @@ Name | Type | Description  | Notes
  **is_default** | **bool**|  | [optional] [default to False]
  **can_hide_tag_line** | **bool**|  | [optional] [default to False]
  **combine_audit_trail** | **bool**|  | [optional] [default to False]
+ **combine_attachments** | **bool**|  | [optional] [default to False]
  **exclude_audit_trail_from_email** | **bool**|  | [optional] [default to False]
  **email_signed_document** | **str**|  | [optional] [default to Attachment]
  **document_time_zone** | **str**|  | [optional] 
@@ -363,6 +379,10 @@ Name | Type | Description  | Notes
  **document_expiry_settings_reminder_count** | **int**|  | [optional] 
  **custom_domain_settings_domain_name** | **str**|  | [optional] 
  **custom_domain_settings_from_name** | **str**|  | [optional] 
+ **signature_frame_settings_enable_signature_frame** | **bool**|  | [optional] [default to False]
+ **signature_frame_settings_show_recipient_name** | **bool**|  | [optional] [default to False]
+ **signature_frame_settings_show_recipient_email** | **bool**|  | [optional] [default to False]
+ **signature_frame_settings_show_time_stamp** | **bool**|  | [optional] [default to False]
 
 ### Return type
 

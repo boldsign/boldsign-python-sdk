@@ -21,7 +21,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from boldsign.models.document_form_fields import DocumentFormFields
-from boldsign.models.id_verification import IdVerification
+from boldsign.models.group_signer import GroupSigner
+from boldsign.models.id_verification_details import IdVerificationDetails
 from boldsign.models.phone_number import PhoneNumber
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.signer_authentication_settings import SignerAuthenticationSettings
@@ -35,6 +36,7 @@ class DocumentSignerDetails(BaseModel):
     """
     DocumentSignerDetails
     """ # noqa: E501
+    id: Optional[StrictStr] = None
     signer_name: Optional[StrictStr] = Field(default=None, alias="signerName")
     signer_role: Optional[StrictStr] = Field(default=None, alias="signerRole")
     signer_email: Optional[StrictStr] = Field(default=None, alias="signerEmail")
@@ -53,16 +55,19 @@ class DocumentSignerDetails(BaseModel):
     private_message: Optional[StrictStr] = Field(default=None, alias="privateMessage")
     allow_field_configuration: Optional[StrictBool] = Field(default=None, alias="allowFieldConfiguration")
     form_fields: Optional[List[DocumentFormFields]] = Field(default=None, alias="formFields")
-    language: Optional[StrictInt] = Field(default=None, description="<p>Description:</p><ul><li><i>0</i> - None</li><li><i>1</i> - English</li><li><i>2</i> - Spanish</li><li><i>3</i> - German</li><li><i>4</i> - French</li><li><i>5</i> - Romanian</li><li><i>6</i> - Norwegian</li><li><i>7</i> - Bulgarian</li><li><i>8</i> - Italian</li><li><i>9</i> - Danish</li><li><i>10</i> - Polish</li><li><i>11</i> - Portuguese</li><li><i>12</i> - Czech</li><li><i>13</i> - Dutch</li><li><i>14</i> - Swedish</li><li><i>15</i> - Russian</li></ul>")
+    language: Optional[StrictInt] = Field(default=None, description="<p>Description:</p><ul><li><i>0</i> - None</li><li><i>1</i> - English</li><li><i>2</i> - Spanish</li><li><i>3</i> - German</li><li><i>4</i> - French</li><li><i>5</i> - Romanian</li><li><i>6</i> - Norwegian</li><li><i>7</i> - Bulgarian</li><li><i>8</i> - Italian</li><li><i>9</i> - Danish</li><li><i>10</i> - Polish</li><li><i>11</i> - Portuguese</li><li><i>12</i> - Czech</li><li><i>13</i> - Dutch</li><li><i>14</i> - Swedish</li><li><i>15</i> - Russian</li><li><i>16</i> - Japanese</li><li><i>17</i> - Thai</li><li><i>18</i> - SimplifiedChinese</li><li><i>19</i> - TraditionalChinese</li><li><i>20</i> - Korean</li></ul>")
     locale: Optional[StrictStr] = None
+    sign_type: Optional[StrictStr] = Field(default='Single', alias="signType")
+    group_id: Optional[StrictStr] = Field(default=None, alias="groupId")
     phone_number: Optional[PhoneNumber] = Field(default=None, alias="phoneNumber")
-    id_verification: Optional[IdVerification] = Field(default=None, alias="idVerification")
+    id_verification: Optional[IdVerificationDetails] = Field(default=None, alias="idVerification")
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     authentication_retry_count: Optional[StrictInt] = Field(default=None, alias="authenticationRetryCount")
     enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
     delivery_mode: Optional[StrictStr] = Field(default=None, alias="deliveryMode")
     authentication_settings: Optional[SignerAuthenticationSettings] = Field(default=None, alias="authenticationSettings")
-    __properties: ClassVar[List[str]] = ["signerName", "signerRole", "signerEmail", "status", "enableAccessCode", "isAuthenticationFailed", "enableEmailOTP", "authenticationType", "isDeliveryFailed", "isViewed", "order", "signerType", "hostEmail", "hostName", "isReassigned", "privateMessage", "allowFieldConfiguration", "formFields", "language", "locale", "phoneNumber", "idVerification", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "deliveryMode", "authenticationSettings"]
+    group_signers: Optional[List[GroupSigner]] = Field(default=None, alias="groupSigners")
+    __properties: ClassVar[List[str]] = ["id", "signerName", "signerRole", "signerEmail", "status", "enableAccessCode", "isAuthenticationFailed", "enableEmailOTP", "authenticationType", "isDeliveryFailed", "isViewed", "order", "signerType", "hostEmail", "hostName", "isReassigned", "privateMessage", "allowFieldConfiguration", "formFields", "language", "locale", "signType", "groupId", "phoneNumber", "idVerification", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "deliveryMode", "authenticationSettings", "groupSigners"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -100,8 +105,8 @@ class DocumentSignerDetails(BaseModel):
         if value is None:
             return value
 
-        if value not in set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]):
-            raise ValueError("must be one of enum values (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)")
+        if value not in set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]):
+            raise ValueError("must be one of enum values (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)")
         return value
 
     @field_validator('locale')
@@ -110,8 +115,18 @@ class DocumentSignerDetails(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default']):
-            raise ValueError("must be one of enum values ('EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default')")
+        if value not in set(['EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default', 'JA', 'TH', 'ZH_CN', 'ZH_TW', 'KO']):
+            raise ValueError("must be one of enum values ('EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default', 'JA', 'TH', 'ZH_CN', 'ZH_TW', 'KO')")
+        return value
+
+    @field_validator('sign_type')
+    def sign_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['Single', 'Group']):
+            raise ValueError("must be one of enum values ('Single', 'Group')")
         return value
 
     @field_validator('delivery_mode')
@@ -153,6 +168,14 @@ class DocumentSignerDetails(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -191,6 +214,7 @@ class DocumentSignerDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "signerName": obj.get("signerName"),
             "signerRole": obj.get("signerRole"),
             "signerEmail": obj.get("signerEmail"),
@@ -211,13 +235,16 @@ class DocumentSignerDetails(BaseModel):
             "formFields": [DocumentFormFields.from_dict(_item) for _item in obj["formFields"]] if obj.get("formFields") is not None else None,
             "language": obj.get("language"),
             "locale": obj.get("locale"),
+            "signType": obj.get("signType") if obj.get("signType") is not None else 'Single',
+            "groupId": obj.get("groupId"),
             "phoneNumber": PhoneNumber.from_dict(obj["phoneNumber"]) if obj.get("phoneNumber") is not None else None,
-            "idVerification": IdVerification.from_dict(obj["idVerification"]) if obj.get("idVerification") is not None else None,
+            "idVerification": IdVerificationDetails.from_dict(obj["idVerification"]) if obj.get("idVerification") is not None else None,
             "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "authenticationRetryCount": obj.get("authenticationRetryCount"),
             "enableQes": obj.get("enableQes"),
             "deliveryMode": obj.get("deliveryMode"),
-            "authenticationSettings": SignerAuthenticationSettings.from_dict(obj["authenticationSettings"]) if obj.get("authenticationSettings") is not None else None
+            "authenticationSettings": SignerAuthenticationSettings.from_dict(obj["authenticationSettings"]) if obj.get("authenticationSettings") is not None else None,
+            "groupSigners": [GroupSigner.from_dict(_item) for _item in obj["groupSigners"]] if obj.get("groupSigners") is not None else None
         })
         return _obj
 
@@ -234,6 +261,7 @@ class DocumentSignerDetails(BaseModel):
     @classmethod
     def openapi_types(cls) -> Dict[str, str]:
         return {
+            "id": "(str,)",
             "signer_name": "(str,)",
             "signer_role": "(str,)",
             "signer_email": "(str,)",
@@ -254,18 +282,22 @@ class DocumentSignerDetails(BaseModel):
             "form_fields": "(List[DocumentFormFields],)",
             "language": "(int,)",
             "locale": "(str,)",
+            "sign_type": "(str,)",
+            "group_id": "(str,)",
             "phone_number": "(PhoneNumber,)",
-            "id_verification": "(IdVerification,)",
+            "id_verification": "(IdVerificationDetails,)",
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "authentication_retry_count": "(int,)",
             "enable_qes": "(bool,)",
             "delivery_mode": "(str,)",
             "authentication_settings": "(SignerAuthenticationSettings,)",
+            "group_signers": "(List[GroupSigner],)",
         }
 
     @classmethod
     def openapi_type_is_array(cls, property_name: str) -> bool:
         return property_name in [
             "form_fields",
+            "group_signers",
         ]
 

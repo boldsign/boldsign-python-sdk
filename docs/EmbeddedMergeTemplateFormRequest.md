@@ -44,13 +44,15 @@ Name | Type | Description | Notes
 **role_removal_indices** | **List[int]** |  | [optional] 
 **document_download_option** | **str** |  | [optional] 
 **meta_data** | **Dict[str, Optional[str]]** |  | [optional] 
-**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 **form_groups** | [**List[FormGroup]**](FormGroup.md) |  | [optional] 
 **remove_form_fields** | **List[str]** |  | [optional] 
+**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 **enable_audit_trail_localization** | **bool** |  | [optional] 
 **download_file_name** | **str** |  | [optional] 
 **scheduled_send_time** | **int** |  | [optional] 
 **allow_scheduled_send** | **bool** |  | [optional] [default to False]
+**allowed_signature_types** | **List[str]** |  | [optional] 
+**group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
 
 ## Example
 

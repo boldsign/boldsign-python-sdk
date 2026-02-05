@@ -45,6 +45,8 @@ Name | Type | Description | Notes
 **resize_option** | **str** |  | [optional] 
 **allow_edit_form_field** | **bool** |  | [optional] 
 **allow_delete_form_field** | **bool** |  | [optional] 
+**collaboration_settings** | [**CollaborationSettings**](CollaborationSettings.md) |  | [optional] 
+**is_masked** | **bool** |  | [optional] [default to False]
 
 ## Example
 

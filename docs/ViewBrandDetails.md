@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **is_default** | **bool** |  | [optional] 
 **can_hide_tag_line** | **bool** |  | [optional] 
 **combine_audit_trail** | **bool** |  | [optional] 
+**combine_attachments** | **bool** |  | [optional] 
 **exclude_audit_trail_from_email** | **bool** |  | [optional] 
 **email_signed_document** | **str** |  | [optional] 
 **document_time_zone** | **str** |  | [optional] 
@@ -29,6 +30,7 @@ Name | Type | Description | Notes
 **document_expiry_settings** | [**DocumentExpirySettings**](DocumentExpirySettings.md) |  | [optional] 
 **custom_domain_settings** | [**CustomDomainSettings**](CustomDomainSettings.md) |  | [optional] 
 **is_domain_verified** | **bool** |  | [optional] 
+**signature_frame_settings** | [**SignatureFrameSettings**](SignatureFrameSettings.md) |  | [optional] 
 
 ## Example
 

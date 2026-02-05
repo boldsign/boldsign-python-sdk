@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from boldsign.models.attachment_info import AttachmentInfo
+from boldsign.models.collaboration_settings import CollaborationSettings
 from boldsign.models.conditional_rule import ConditionalRule
 from boldsign.models.editable_date_field_settings import EditableDateFieldSettings
 from boldsign.models.formula_field_settings import FormulaFieldSettings
@@ -77,7 +78,9 @@ class FormField(BaseModel):
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
     allow_edit_form_field: Optional[StrictBool] = Field(default=None, alias="allowEditFormField")
     allow_delete_form_field: Optional[StrictBool] = Field(default=None, alias="allowDeleteFormField")
-    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField"]
+    collaboration_settings: Optional[CollaborationSettings] = Field(default=None, alias="collaborationSettings")
+    is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
+    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField", "collaborationSettings", "isMasked"]
 
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
@@ -92,8 +95,8 @@ class FormField(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Helvetica', 'Courier', 'TimesRoman', 'NotoSans']):
-            raise ValueError("must be one of enum values ('Helvetica', 'Courier', 'TimesRoman', 'NotoSans')")
+        if value not in set(['Helvetica', 'Courier', 'TimesRoman', 'NotoSans', 'Carlito']):
+            raise ValueError("must be one of enum values ('Helvetica', 'Courier', 'TimesRoman', 'NotoSans', 'Carlito')")
         return value
 
     @field_validator('validation_type')
@@ -132,8 +135,8 @@ class FormField(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont', 'null']):
-            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont', 'null')")
+        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont']):
+            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont')")
         return value
 
     model_config = ConfigDict(
@@ -165,6 +168,14 @@ class FormField(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -242,7 +253,9 @@ class FormField(BaseModel):
             "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
             "resizeOption": obj.get("resizeOption"),
             "allowEditFormField": obj.get("allowEditFormField"),
-            "allowDeleteFormField": obj.get("allowDeleteFormField")
+            "allowDeleteFormField": obj.get("allowDeleteFormField"),
+            "collaborationSettings": CollaborationSettings.from_dict(obj["collaborationSettings"]) if obj.get("collaborationSettings") is not None else None,
+            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False
         })
         return _obj
 
@@ -299,6 +312,8 @@ class FormField(BaseModel):
             "resize_option": "(str,)",
             "allow_edit_form_field": "(bool,)",
             "allow_delete_form_field": "(bool,)",
+            "collaboration_settings": "(CollaborationSettings,)",
+            "is_masked": "(bool,)",
         }
 
     @classmethod

@@ -34,7 +34,8 @@ class EditableDateFieldSettings(BaseModel):
     date_format: Optional[StrictStr] = Field(alias="dateFormat")
     min_date: Optional[datetime] = Field(default=None, alias="minDate")
     max_date: Optional[datetime] = Field(default=None, alias="maxDate")
-    __properties: ClassVar[List[str]] = ["dateFormat", "minDate", "maxDate"]
+    time_format: Optional[StrictStr] = Field(default=None, alias="timeFormat")
+    __properties: ClassVar[List[str]] = ["dateFormat", "minDate", "maxDate", "timeFormat"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -65,6 +66,14 @@ class EditableDateFieldSettings(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -105,7 +114,8 @@ class EditableDateFieldSettings(BaseModel):
         _obj = cls.model_validate({
             "dateFormat": obj.get("dateFormat"),
             "minDate": obj.get("minDate"),
-            "maxDate": obj.get("maxDate")
+            "maxDate": obj.get("maxDate"),
+            "timeFormat": obj.get("timeFormat")
         })
         return _obj
 
@@ -125,6 +135,7 @@ class EditableDateFieldSettings(BaseModel):
             "date_format": "(str,)",
             "min_date": "(datetime,)",
             "max_date": "(datetime,)",
+            "time_format": "(str,)",
         }
 
     @classmethod

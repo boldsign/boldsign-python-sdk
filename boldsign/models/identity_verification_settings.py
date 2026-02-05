@@ -37,7 +37,8 @@ class IdentityVerificationSettings(BaseModel):
     require_matching_selfie: Optional[StrictBool] = Field(default=None, alias="requireMatchingSelfie")
     name_matcher: Optional[StrictStr] = Field(default=None, alias="nameMatcher")
     hold_for_prefill: Optional[StrictBool] = Field(default=None, alias="holdForPrefill")
-    __properties: ClassVar[List[str]] = ["type", "maximumRetryCount", "requireLiveCapture", "requireMatchingSelfie", "nameMatcher", "holdForPrefill"]
+    allowed_document_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedDocumentTypes")
+    __properties: ClassVar[List[str]] = ["type", "maximumRetryCount", "requireLiveCapture", "requireMatchingSelfie", "nameMatcher", "holdForPrefill", "allowedDocumentTypes"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -45,8 +46,8 @@ class IdentityVerificationSettings(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['EveryAccess', 'UntilSignCompleted', 'OncePerDocument', 'null']):
-            raise ValueError("must be one of enum values ('EveryAccess', 'UntilSignCompleted', 'OncePerDocument', 'null')")
+        if value not in set(['EveryAccess', 'UntilSignCompleted', 'OncePerDocument']):
+            raise ValueError("must be one of enum values ('EveryAccess', 'UntilSignCompleted', 'OncePerDocument')")
         return value
 
     @field_validator('name_matcher')
@@ -55,8 +56,19 @@ class IdentityVerificationSettings(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Strict', 'Moderate', 'Lenient', 'null']):
-            raise ValueError("must be one of enum values ('Strict', 'Moderate', 'Lenient', 'null')")
+        if value not in set(['Strict', 'Moderate', 'Lenient']):
+            raise ValueError("must be one of enum values ('Strict', 'Moderate', 'Lenient')")
+        return value
+
+    @field_validator('allowed_document_types')
+    def allowed_document_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['Passport', 'IDCard', 'DriverLicense']):
+                raise ValueError("each list item must be one of ('Passport', 'IDCard', 'DriverLicense')")
         return value
 
     model_config = ConfigDict(
@@ -88,6 +100,14 @@ class IdentityVerificationSettings(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -131,7 +151,8 @@ class IdentityVerificationSettings(BaseModel):
             "requireLiveCapture": obj.get("requireLiveCapture"),
             "requireMatchingSelfie": obj.get("requireMatchingSelfie"),
             "nameMatcher": obj.get("nameMatcher"),
-            "holdForPrefill": obj.get("holdForPrefill")
+            "holdForPrefill": obj.get("holdForPrefill"),
+            "allowedDocumentTypes": obj.get("allowedDocumentTypes")
         })
         return _obj
 
@@ -154,10 +175,12 @@ class IdentityVerificationSettings(BaseModel):
             "require_matching_selfie": "(bool,)",
             "name_matcher": "(str,)",
             "hold_for_prefill": "(bool,)",
+            "allowed_document_types": "(List[str],)",
         }
 
     @classmethod
     def openapi_type_is_array(cls, property_name: str) -> bool:
         return property_name in [
+            "allowed_document_types",
         ]
 

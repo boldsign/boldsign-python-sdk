@@ -91,7 +91,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'boldsign-python-sdk/1.0.3'
+        self.user_agent = 'boldsign-python-sdk/3.0.3'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):
@@ -518,7 +518,7 @@ class ApiClient:
             if k in collection_formats:
                 collection_format = collection_formats[k]
                 if collection_format == 'multi':
-                    new_params.extend((k, str(value)) for value in v)
+                    new_params.extend((k, quote(str(value), safe='')) for value in v)
                 else:
                     if collection_format == 'ssv':
                         delimiter = ' '

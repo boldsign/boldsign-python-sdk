@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.3"
+__version__ = "3.0.3"
 
 # import apis into sdk package
 from boldsign.api.branding_api import BrandingApi
@@ -58,6 +58,8 @@ from boldsign.models.brand_custom_field_details import BrandCustomFieldDetails
 from boldsign.models.branding_message import BrandingMessage
 from boldsign.models.branding_records import BrandingRecords
 from boldsign.models.change_recipient import ChangeRecipient
+from boldsign.models.change_team_request import ChangeTeamRequest
+from boldsign.models.collaboration_settings import CollaborationSettings
 from boldsign.models.conditional_rule import ConditionalRule
 from boldsign.models.contact_created import ContactCreated
 from boldsign.models.contact_details import ContactDetails
@@ -105,6 +107,8 @@ from boldsign.models.embedded_signing_link import EmbeddedSigningLink
 from boldsign.models.embedded_template_created import EmbeddedTemplateCreated
 from boldsign.models.embedded_template_edit_request import EmbeddedTemplateEditRequest
 from boldsign.models.embedded_template_edited import EmbeddedTemplateEdited
+from boldsign.models.embedded_template_preview import EmbeddedTemplatePreview
+from boldsign.models.embedded_template_preview_json_request import EmbeddedTemplatePreviewJsonRequest
 from boldsign.models.error import Error
 from boldsign.models.error_result import ErrorResult
 from boldsign.models.existing_form_field import ExistingFormField
@@ -112,11 +116,14 @@ from boldsign.models.extend_expiry import ExtendExpiry
 from boldsign.models.file_info import FileInfo
 from boldsign.models.font import Font
 from boldsign.models.form_field import FormField
+from boldsign.models.form_field_permission import FormFieldPermission
 from boldsign.models.form_group import FormGroup
 from boldsign.models.formula_field_settings import FormulaFieldSettings
+from boldsign.models.group_signer import GroupSigner
+from boldsign.models.group_signer_settings import GroupSignerSettings
 from boldsign.models.id_document import IdDocument
 from boldsign.models.id_report import IdReport
-from boldsign.models.id_verification import IdVerification
+from boldsign.models.id_verification_details import IdVerificationDetails
 from boldsign.models.identity_verification_settings import IdentityVerificationSettings
 from boldsign.models.image_info import ImageInfo
 from boldsign.models.merge_and_send_for_sign_form import MergeAndSendForSignForm
@@ -142,6 +149,7 @@ from boldsign.models.send_for_sign_from_template_form import SendForSignFromTemp
 from boldsign.models.sender_identity_created import SenderIdentityCreated
 from boldsign.models.sender_identity_list import SenderIdentityList
 from boldsign.models.sender_identity_view_model import SenderIdentityViewModel
+from boldsign.models.signature_frame_settings import SignatureFrameSettings
 from boldsign.models.signer_authentication_settings import SignerAuthenticationSettings
 from boldsign.models.size import Size
 from boldsign.models.team_created import TeamCreated
@@ -155,15 +163,19 @@ from boldsign.models.teams import Teams
 from boldsign.models.template import Template
 from boldsign.models.template_cc import TemplateCC
 from boldsign.models.template_created import TemplateCreated
+from boldsign.models.template_files import TemplateFiles
 from boldsign.models.template_form_fields import TemplateFormFields
+from boldsign.models.template_group_signer import TemplateGroupSigner
 from boldsign.models.template_properties import TemplateProperties
 from boldsign.models.template_records import TemplateRecords
 from boldsign.models.template_role import TemplateRole
 from boldsign.models.template_sender_detail import TemplateSenderDetail
 from boldsign.models.template_sender_details import TemplateSenderDetails
 from boldsign.models.template_shared_template_detail import TemplateSharedTemplateDetail
+from boldsign.models.template_sharing import TemplateSharing
 from boldsign.models.template_signer_details import TemplateSignerDetails
 from boldsign.models.template_tag import TemplateTag
+from boldsign.models.template_team_share import TemplateTeamShare
 from boldsign.models.text_tag_definition import TextTagDefinition
 from boldsign.models.text_tag_offset import TextTagOffset
 from boldsign.models.update_user import UpdateUser

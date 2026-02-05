@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_sender_identities**](SenderIdentitiesApi.md#create_sender_identities) | **POST** /v1/senderIdentities/create | Creates sender identity.
 [**delete_sender_identities**](SenderIdentitiesApi.md#delete_sender_identities) | **DELETE** /v1/senderIdentities/delete | Deletes sender identity.
+[**get_sender_identity_properties**](SenderIdentitiesApi.md#get_sender_identity_properties) | **GET** /v1/senderIdentities/properties | Gets sender identity by ID or email.
 [**list_sender_identities**](SenderIdentitiesApi.md#list_sender_identities) | **GET** /v1/senderIdentities/list | Lists sender identity.
 [**re_request_sender_identities**](SenderIdentitiesApi.md#re_request_sender_identities) | **POST** /v1/senderIdentities/rerequest | Rerequests denied sender identity.
 [**resend_invitation_sender_identities**](SenderIdentitiesApi.md#resend_invitation_sender_identities) | **POST** /v1/senderIdentities/resendInvitation | Resends sender identity invitation.
@@ -140,6 +141,75 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | No Content |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_sender_identity_properties**
+> SenderIdentityViewModel get_sender_identity_properties(id=id, email=email)
+
+Gets sender identity by ID or email.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.sender_identity_view_model import SenderIdentityViewModel
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.SenderIdentitiesApi(api_client)
+    id = 'id_example' # str | The sender identity id. (optional)
+    email = 'email_example' # str | The sender identity email. (optional)
+
+    try:
+        # Gets sender identity by ID or email.
+        api_response = api_instance.get_sender_identity_properties(id=id, email=email)
+        print("The response of SenderIdentitiesApi->get_sender_identity_properties:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SenderIdentitiesApi->get_sender_identity_properties: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The sender identity id. | [optional] 
+ **email** | **str**| The sender identity email. | [optional] 
+
+### Return type
+
+[**SenderIdentityViewModel**](SenderIdentityViewModel.md)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 

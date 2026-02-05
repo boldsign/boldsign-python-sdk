@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **require_matching_selfie** | **bool** |  | [optional] 
 **name_matcher** | **str** |  | [optional] 
 **hold_for_prefill** | **bool** |  | [optional] 
+**allowed_document_types** | **List[str]** |  | [optional] 
 
 ## Example
 

@@ -6,9 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **str** |  | 
-**allowed_file_types** | **str** |  | 
+**accepted_file_types** | **List[str]** |  | 
 **description** | **str** |  | [optional] 
-**accepted_file_types** | **List[str]** |  | [optional] 
+**allowed_file_types** | **str** |  | [optional] 
 
 ## Example
 

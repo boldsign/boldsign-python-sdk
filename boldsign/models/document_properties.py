@@ -29,6 +29,7 @@ from boldsign.models.document_reassign import DocumentReassign
 from boldsign.models.document_sender_detail import DocumentSenderDetail
 from boldsign.models.document_signer_details import DocumentSignerDetails
 from boldsign.models.form_group import FormGroup
+from boldsign.models.group_signer_settings import GroupSignerSettings
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.reminder_settings import ReminderSettings
 from typing import Optional, Set, Tuple
@@ -81,7 +82,11 @@ class DocumentProperties(BaseModel):
     enable_audit_trail_localization: Optional[StrictBool] = Field(default=None, alias="enableAuditTrailLocalization")
     download_file_name: Optional[StrictStr] = Field(default=None, alias="downloadFileName")
     scheduled_send_time: Optional[StrictInt] = Field(default=None, alias="scheduledSendTime")
-    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime"]
+    allowed_signature_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedSignatureTypes")
+    group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
+    in_editing_mode: Optional[StrictBool] = Field(default=None, alias="inEditingMode")
+    display_status: Optional[StrictStr] = Field(default=None, alias="displayStatus")
+    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "inEditingMode", "displayStatus"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -123,6 +128,17 @@ class DocumentProperties(BaseModel):
             raise ValueError("must be one of enum values ('Combined', 'Individually')")
         return value
 
+    @field_validator('allowed_signature_types')
+    def allowed_signature_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['Text', 'Draw', 'Image']):
+                raise ValueError("each list item must be one of ('Text', 'Draw', 'Image')")
+        return value
+
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
@@ -152,6 +168,14 @@ class DocumentProperties(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -229,7 +253,11 @@ class DocumentProperties(BaseModel):
             "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "enableAuditTrailLocalization": obj.get("enableAuditTrailLocalization"),
             "downloadFileName": obj.get("downloadFileName"),
-            "scheduledSendTime": obj.get("scheduledSendTime")
+            "scheduledSendTime": obj.get("scheduledSendTime"),
+            "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
+            "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
+            "inEditingMode": obj.get("inEditingMode"),
+            "displayStatus": obj.get("displayStatus")
         })
         return _obj
 
@@ -286,6 +314,10 @@ class DocumentProperties(BaseModel):
             "enable_audit_trail_localization": "(bool,)",
             "download_file_name": "(str,)",
             "scheduled_send_time": "(int,)",
+            "allowed_signature_types": "(List[str],)",
+            "group_signer_settings": "(GroupSignerSettings,)",
+            "in_editing_mode": "(bool,)",
+            "display_status": "(str,)",
         }
 
     @classmethod
@@ -299,5 +331,6 @@ class DocumentProperties(BaseModel):
             "reassign",
             "document_history",
             "labels",
+            "allowed_signature_types",
         ]
 

@@ -36,13 +36,19 @@ with boldsign.ApiClient(configuration) as api_client:
         signerType="Signer",
         formFields=form_fields
     )
+    form_field_permission = boldsign.FormFieldPermission(
+        can_add=False,
+        can_modify=False,
+        can_modify_default_value=True
+    )
     
     template_id = "YOUR_TEMPLATE_ID"
     
     edit_template_request = boldsign.EditTemplateRequest(   
         title="A new title for template",
         enableSigningOrder=False,
-        roles=role
+        roles=[role],
+        form_field_permission = form_field_permission
     )
     
     edit_template_response = template_api.edit_template(template_id, edit_template_request)

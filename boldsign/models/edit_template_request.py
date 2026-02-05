@@ -18,12 +18,14 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from boldsign.models.document_cc import DocumentCC
 from boldsign.models.document_info import DocumentInfo
+from boldsign.models.form_field_permission import FormFieldPermission
 from boldsign.models.form_group import FormGroup
+from boldsign.models.group_signer_settings import GroupSignerSettings
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.template_role import TemplateRole
 from typing import Optional, Set, Tuple
@@ -55,7 +57,21 @@ class EditTemplateRequest(BaseModel):
     template_labels: Optional[List[StrictStr]] = Field(default=None, alias="templateLabels")
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
-    __properties: ClassVar[List[str]] = ["title", "description", "documentTitle", "documentMessage", "roles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "onBehalfOf", "labels", "templateLabels", "formGroups", "recipientNotificationSettings"]
+    allowed_signature_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedSignatureTypes")
+    form_field_permission: Optional[FormFieldPermission] = Field(default=None, alias="formFieldPermission")
+    group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
+    __properties: ClassVar[List[str]] = ["title", "description", "documentTitle", "documentMessage", "roles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "onBehalfOf", "labels", "templateLabels", "formGroups", "recipientNotificationSettings", "allowedSignatureTypes", "formFieldPermission", "groupSignerSettings"]
+
+    @field_validator('allowed_signature_types')
+    def allowed_signature_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['Text', 'Draw', 'Image']):
+                raise ValueError("each list item must be one of ('Text', 'Draw', 'Image')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +102,14 @@ class EditTemplateRequest(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -142,7 +166,10 @@ class EditTemplateRequest(BaseModel):
             "labels": obj.get("labels"),
             "templateLabels": obj.get("templateLabels"),
             "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None,
-            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
+            "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
+            "formFieldPermission": FormFieldPermission.from_dict(obj["formFieldPermission"]) if obj.get("formFieldPermission") is not None else None,
+            "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None
         })
         return _obj
 
@@ -178,6 +205,9 @@ class EditTemplateRequest(BaseModel):
             "template_labels": "(List[str],)",
             "form_groups": "(List[FormGroup],)",
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
+            "allowed_signature_types": "(List[str],)",
+            "form_field_permission": "(FormFieldPermission,)",
+            "group_signer_settings": "(GroupSignerSettings,)",
         }
 
     @classmethod
@@ -189,5 +219,6 @@ class EditTemplateRequest(BaseModel):
             "labels",
             "template_labels",
             "form_groups",
+            "allowed_signature_types",
         ]
 

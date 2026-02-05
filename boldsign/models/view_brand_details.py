@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_
 from typing import Any, ClassVar, Dict, List, Optional
 from boldsign.models.custom_domain_settings import CustomDomainSettings
 from boldsign.models.document_expiry_settings import DocumentExpirySettings
+from boldsign.models.signature_frame_settings import SignatureFrameSettings
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
@@ -45,6 +46,7 @@ class ViewBrandDetails(BaseModel):
     is_default: Optional[StrictBool] = Field(default=None, alias="isDefault")
     can_hide_tag_line: Optional[StrictBool] = Field(default=None, alias="canHideTagLine")
     combine_audit_trail: Optional[StrictBool] = Field(default=None, alias="combineAuditTrail")
+    combine_attachments: Optional[StrictBool] = Field(default=None, alias="combineAttachments")
     exclude_audit_trail_from_email: Optional[StrictBool] = Field(default=None, alias="excludeAuditTrailFromEmail")
     email_signed_document: Optional[StrictStr] = Field(default=None, alias="emailSignedDocument")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
@@ -56,7 +58,8 @@ class ViewBrandDetails(BaseModel):
     document_expiry_settings: Optional[DocumentExpirySettings] = Field(default=None, alias="documentExpirySettings")
     custom_domain_settings: Optional[CustomDomainSettings] = Field(default=None, alias="customDomainSettings")
     is_domain_verified: Optional[StrictBool] = Field(default=None, alias="isDomainVerified")
-    __properties: ClassVar[List[str]] = ["brandId", "brandLogo", "brandName", "backgroundColor", "buttonColor", "buttonTextColor", "emailDisplayName", "disclaimerTitle", "disclaimerDescription", "redirectUrl", "isDefault", "canHideTagLine", "combineAuditTrail", "excludeAuditTrailFromEmail", "emailSignedDocument", "documentTimeZone", "showBuiltInFormFields", "allowCustomFieldCreation", "showSharedCustomFields", "hideDecline", "hideSave", "documentExpirySettings", "customDomainSettings", "isDomainVerified"]
+    signature_frame_settings: Optional[SignatureFrameSettings] = Field(default=None, alias="signatureFrameSettings")
+    __properties: ClassVar[List[str]] = ["brandId", "brandLogo", "brandName", "backgroundColor", "buttonColor", "buttonTextColor", "emailDisplayName", "disclaimerTitle", "disclaimerDescription", "redirectUrl", "isDefault", "canHideTagLine", "combineAuditTrail", "combineAttachments", "excludeAuditTrailFromEmail", "emailSignedDocument", "documentTimeZone", "showBuiltInFormFields", "allowCustomFieldCreation", "showSharedCustomFields", "hideDecline", "hideSave", "documentExpirySettings", "customDomainSettings", "isDomainVerified", "signatureFrameSettings"]
 
     @field_validator('email_signed_document')
     def email_signed_document_validate_enum(cls, value):
@@ -97,6 +100,14 @@ class ViewBrandDetails(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -148,6 +159,7 @@ class ViewBrandDetails(BaseModel):
             "isDefault": obj.get("isDefault"),
             "canHideTagLine": obj.get("canHideTagLine"),
             "combineAuditTrail": obj.get("combineAuditTrail"),
+            "combineAttachments": obj.get("combineAttachments"),
             "excludeAuditTrailFromEmail": obj.get("excludeAuditTrailFromEmail"),
             "emailSignedDocument": obj.get("emailSignedDocument"),
             "documentTimeZone": obj.get("documentTimeZone"),
@@ -158,7 +170,8 @@ class ViewBrandDetails(BaseModel):
             "hideSave": obj.get("hideSave"),
             "documentExpirySettings": DocumentExpirySettings.from_dict(obj["documentExpirySettings"]) if obj.get("documentExpirySettings") is not None else None,
             "customDomainSettings": CustomDomainSettings.from_dict(obj["customDomainSettings"]) if obj.get("customDomainSettings") is not None else None,
-            "isDomainVerified": obj.get("isDomainVerified")
+            "isDomainVerified": obj.get("isDomainVerified"),
+            "signatureFrameSettings": SignatureFrameSettings.from_dict(obj["signatureFrameSettings"]) if obj.get("signatureFrameSettings") is not None else None
         })
         return _obj
 
@@ -188,6 +201,7 @@ class ViewBrandDetails(BaseModel):
             "is_default": "(bool,)",
             "can_hide_tag_line": "(bool,)",
             "combine_audit_trail": "(bool,)",
+            "combine_attachments": "(bool,)",
             "exclude_audit_trail_from_email": "(bool,)",
             "email_signed_document": "(str,)",
             "document_time_zone": "(str,)",
@@ -199,6 +213,7 @@ class ViewBrandDetails(BaseModel):
             "document_expiry_settings": "(DocumentExpirySettings,)",
             "custom_domain_settings": "(CustomDomainSettings,)",
             "is_domain_verified": "(bool,)",
+            "signature_frame_settings": "(SignatureFrameSettings,)",
         }
 
     @classmethod

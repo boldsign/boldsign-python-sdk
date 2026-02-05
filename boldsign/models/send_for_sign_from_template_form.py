@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from boldsign.models.document_cc import DocumentCC
 from boldsign.models.document_info import DocumentInfo
 from boldsign.models.form_group import FormGroup
+from boldsign.models.group_signer_settings import GroupSignerSettings
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.reminder_settings import ReminderSettings
 from boldsign.models.role import Role
@@ -63,14 +64,16 @@ class SendForSignFromTemplateForm(BaseModel):
     role_removal_indices: Optional[List[StrictInt]] = Field(default=None, alias="roleRemovalIndices")
     document_download_option: Optional[StrictStr] = Field(default=None, alias="documentDownloadOption")
     meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
-    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
     remove_form_fields: Optional[List[StrictStr]] = Field(default=None, alias="removeFormFields")
+    recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     enable_audit_trail_localization: Optional[StrictBool] = Field(default=None, alias="enableAuditTrailLocalization")
     download_file_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=250)]] = Field(default=None, alias="downloadFileName")
     scheduled_send_time: Optional[StrictInt] = Field(default=None, alias="scheduledSendTime")
     allow_scheduled_send: Optional[StrictBool] = Field(default=False, alias="allowScheduledSend")
-    __properties: ClassVar[List[str]] = ["files", "fileUrls", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "recipientNotificationSettings", "formGroups", "removeFormFields", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend"]
+    allowed_signature_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedSignatureTypes")
+    group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
+    __properties: ClassVar[List[str]] = ["files", "fileUrls", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings"]
 
     @field_validator('expiry_date_type')
     def expiry_date_type_validate_enum(cls, value):
@@ -78,8 +81,8 @@ class SendForSignFromTemplateForm(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Days', 'Hours', 'SpecificDateTime', 'null']):
-            raise ValueError("must be one of enum values ('Days', 'Hours', 'SpecificDateTime', 'null')")
+        if value not in set(['Days', 'Hours', 'SpecificDateTime']):
+            raise ValueError("must be one of enum values ('Days', 'Hours', 'SpecificDateTime')")
         return value
 
     @field_validator('document_download_option')
@@ -88,8 +91,19 @@ class SendForSignFromTemplateForm(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Combined', 'Individually', 'null']):
-            raise ValueError("must be one of enum values ('Combined', 'Individually', 'null')")
+        if value not in set(['Combined', 'Individually']):
+            raise ValueError("must be one of enum values ('Combined', 'Individually')")
+        return value
+
+    @field_validator('allowed_signature_types')
+    def allowed_signature_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['Text', 'Draw', 'Image']):
+                raise ValueError("each list item must be one of ('Text', 'Draw', 'Image')")
         return value
 
     model_config = ConfigDict(
@@ -121,6 +135,14 @@ class SendForSignFromTemplateForm(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -185,13 +207,15 @@ class SendForSignFromTemplateForm(BaseModel):
             "roleRemovalIndices": obj.get("roleRemovalIndices"),
             "documentDownloadOption": obj.get("documentDownloadOption"),
             "metaData": obj.get("metaData"),
-            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None,
             "removeFormFields": obj.get("removeFormFields"),
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "enableAuditTrailLocalization": obj.get("enableAuditTrailLocalization"),
             "downloadFileName": obj.get("downloadFileName"),
             "scheduledSendTime": obj.get("scheduledSendTime"),
-            "allowScheduledSend": obj.get("allowScheduledSend") if obj.get("allowScheduledSend") is not None else False
+            "allowScheduledSend": obj.get("allowScheduledSend") if obj.get("allowScheduledSend") is not None else False,
+            "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
+            "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None
         })
         return _obj
 
@@ -234,13 +258,15 @@ class SendForSignFromTemplateForm(BaseModel):
             "role_removal_indices": "(List[int],)",
             "document_download_option": "(str,)",
             "meta_data": "(Dict[str, Optional[str]],)",
-            "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "form_groups": "(List[FormGroup],)",
             "remove_form_fields": "(List[str],)",
+            "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "enable_audit_trail_localization": "(bool,)",
             "download_file_name": "(str,)",
             "scheduled_send_time": "(int,)",
             "allow_scheduled_send": "(bool,)",
+            "allowed_signature_types": "(List[str],)",
+            "group_signer_settings": "(GroupSignerSettings,)",
         }
 
     @classmethod
@@ -255,5 +281,6 @@ class SendForSignFromTemplateForm(BaseModel):
             "role_removal_indices",
             "form_groups",
             "remove_form_fields",
+            "allowed_signature_types",
         ]
 

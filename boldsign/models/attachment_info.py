@@ -31,10 +31,10 @@ class AttachmentInfo(BaseModel):
     AttachmentInfo
     """ # noqa: E501
     title: Optional[StrictStr]
-    allowed_file_types: Optional[StrictStr] = Field(alias="allowedFileTypes")
+    accepted_file_types: Optional[List[StrictStr]] = Field(alias="acceptedFileTypes")
     description: Optional[StrictStr] = None
-    accepted_file_types: Optional[List[StrictStr]] = Field(default=None, alias="acceptedFileTypes")
-    __properties: ClassVar[List[str]] = ["title", "allowedFileTypes", "description", "acceptedFileTypes"]
+    allowed_file_types: Optional[StrictStr] = Field(default=None, alias="allowedFileTypes")
+    __properties: ClassVar[List[str]] = ["title", "acceptedFileTypes", "description", "allowedFileTypes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -65,6 +65,14 @@ class AttachmentInfo(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -104,9 +112,9 @@ class AttachmentInfo(BaseModel):
 
         _obj = cls.model_validate({
             "title": obj.get("title"),
-            "allowedFileTypes": obj.get("allowedFileTypes"),
+            "acceptedFileTypes": obj.get("acceptedFileTypes"),
             "description": obj.get("description"),
-            "acceptedFileTypes": obj.get("acceptedFileTypes")
+            "allowedFileTypes": obj.get("allowedFileTypes")
         })
         return _obj
 
@@ -124,9 +132,9 @@ class AttachmentInfo(BaseModel):
     def openapi_types(cls) -> Dict[str, str]:
         return {
             "title": "(str,)",
-            "allowed_file_types": "(str,)",
-            "description": "(str,)",
             "accepted_file_types": "(List[str],)",
+            "description": "(str,)",
+            "allowed_file_types": "(str,)",
         }
 
     @classmethod

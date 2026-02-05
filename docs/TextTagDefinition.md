@@ -35,6 +35,8 @@ Name | Type | Description | Notes
 **character_limit** | **int** |  | [optional] 
 **formula_field_settings** | [**FormulaFieldSettings**](FormulaFieldSettings.md) |  | [optional] 
 **resize_option** | **str** |  | [optional] 
+**collaboration_settings** | [**CollaborationSettings**](CollaborationSettings.md) |  | [optional] 
+**is_masked** | **bool** |  | [optional] [default to False]
 
 ## Example
 

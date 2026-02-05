@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from boldsign.models.phone_number import PhoneNumber
+from boldsign.models.template_group_signer import TemplateGroupSigner
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
@@ -48,7 +49,9 @@ class TemplateSignerDetails(BaseModel):
     host_name: Optional[StrictStr] = Field(default=None, alias="hostName")
     host_user_id: Optional[StrictStr] = Field(default=None, alias="hostUserId")
     sign_type: Optional[StrictStr] = Field(default=None, alias="signType")
-    __properties: ClassVar[List[str]] = ["signerName", "signerRole", "signerEmail", "phoneNumber", "status", "enableAccessCode", "enableEmailOTP", "imposeAuthentication", "deliveryMode", "allowFieldConfiguration", "userId", "order", "signerType", "hostEmail", "hostName", "hostUserId", "signType"]
+    group_id: Optional[StrictStr] = Field(default=None, alias="groupId")
+    group_signers: Optional[List[TemplateGroupSigner]] = Field(default=None, alias="groupSigners")
+    __properties: ClassVar[List[str]] = ["signerName", "signerRole", "signerEmail", "phoneNumber", "status", "enableAccessCode", "enableEmailOTP", "imposeAuthentication", "deliveryMode", "allowFieldConfiguration", "userId", "order", "signerType", "hostEmail", "hostName", "hostUserId", "signType", "groupId", "groupSigners"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -129,6 +132,14 @@ class TemplateSignerDetails(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -183,7 +194,9 @@ class TemplateSignerDetails(BaseModel):
             "hostEmail": obj.get("hostEmail"),
             "hostName": obj.get("hostName"),
             "hostUserId": obj.get("hostUserId"),
-            "signType": obj.get("signType")
+            "signType": obj.get("signType"),
+            "groupId": obj.get("groupId"),
+            "groupSigners": [TemplateGroupSigner.from_dict(_item) for _item in obj["groupSigners"]] if obj.get("groupSigners") is not None else None
         })
         return _obj
 
@@ -217,10 +230,13 @@ class TemplateSignerDetails(BaseModel):
             "host_name": "(str,)",
             "host_user_id": "(str,)",
             "sign_type": "(str,)",
+            "group_id": "(str,)",
+            "group_signers": "(List[TemplateGroupSigner],)",
         }
 
     @classmethod
     def openapi_type_is_array(cls, property_name: str) -> bool:
         return property_name in [
+            "group_signers",
         ]
 

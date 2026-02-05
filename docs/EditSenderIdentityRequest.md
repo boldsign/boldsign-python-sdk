@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **notification_settings** | [**NotificationSettings**](NotificationSettings.md) |  | [optional] 
 **redirect_url** | **str** |  | [optional] 
 **meta_data** | **Dict[str, Optional[str]]** |  | [optional] 
+**locale** | **str** |  | [optional] 
 
 ## Example
 
