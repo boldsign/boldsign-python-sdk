@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from boldsign.models.attachment_info import AttachmentInfo
+from boldsign.models.collaboration_settings import CollaborationSettings
 from boldsign.models.conditional_rule import ConditionalRule
 from boldsign.models.editable_date_field_settings import EditableDateFieldSettings
 from boldsign.models.file_info import FileInfo
@@ -38,6 +39,7 @@ class DocumentFormFields(BaseModel):
     DocumentFormFields
     """ # noqa: E501
     id: Optional[StrictStr] = None
+    form_field_id: Optional[StrictStr] = Field(default=None, alias="formFieldId")
     type: Optional[StrictStr] = None
     value: Optional[StrictStr] = None
     font: Optional[StrictStr] = None
@@ -76,7 +78,10 @@ class DocumentFormFields(BaseModel):
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
     allow_edit_form_field: Optional[StrictBool] = Field(default=None, alias="allowEditFormField")
     allow_delete_form_field: Optional[StrictBool] = Field(default=None, alias="allowDeleteFormField")
-    __properties: ClassVar[List[str]] = ["id", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontColor", "isUnderline", "isItalic", "isBold", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "fileInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "bounds", "pageNumber", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField"]
+    collaboration_settings: Optional[CollaborationSettings] = Field(default=None, alias="collaborationSettings")
+    hidden: Optional[StrictBool] = None
+    is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
+    __properties: ClassVar[List[str]] = ["id", "formFieldId", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontColor", "isUnderline", "isItalic", "isBold", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "fileInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "bounds", "pageNumber", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField", "collaborationSettings", "hidden", "isMasked"]
 
     @field_validator('validationtype')
     def validationtype_validate_enum(cls, value):
@@ -114,8 +119,8 @@ class DocumentFormFields(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont', 'null']):
-            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont', 'null')")
+        if value not in set(['GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont']):
+            raise ValueError("must be one of enum values ('GrowVertically', 'GrowHorizontally', 'GrowBoth', 'Fixed', 'AutoResizeFont')")
         return value
 
     model_config = ConfigDict(
@@ -147,6 +152,14 @@ class DocumentFormFields(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -186,6 +199,7 @@ class DocumentFormFields(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "formFieldId": obj.get("formFieldId"),
             "type": obj.get("type"),
             "value": obj.get("value"),
             "font": obj.get("font"),
@@ -223,7 +237,10 @@ class DocumentFormFields(BaseModel):
             "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
             "resizeOption": obj.get("resizeOption"),
             "allowEditFormField": obj.get("allowEditFormField"),
-            "allowDeleteFormField": obj.get("allowDeleteFormField")
+            "allowDeleteFormField": obj.get("allowDeleteFormField"),
+            "collaborationSettings": CollaborationSettings.from_dict(obj["collaborationSettings"]) if obj.get("collaborationSettings") is not None else None,
+            "hidden": obj.get("hidden"),
+            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False
         })
         return _obj
 
@@ -241,6 +258,7 @@ class DocumentFormFields(BaseModel):
     def openapi_types(cls) -> Dict[str, str]:
         return {
             "id": "(str,)",
+            "form_field_id": "(str,)",
             "type": "(str,)",
             "value": "(str,)",
             "font": "(str,)",
@@ -279,6 +297,9 @@ class DocumentFormFields(BaseModel):
             "resize_option": "(str,)",
             "allow_edit_form_field": "(bool,)",
             "allow_delete_form_field": "(bool,)",
+            "collaboration_settings": "(CollaborationSettings,)",
+            "hidden": "(bool,)",
+            "is_masked": "(bool,)",
         }
 
     @classmethod

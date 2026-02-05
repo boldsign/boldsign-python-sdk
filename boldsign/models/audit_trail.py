@@ -35,15 +35,19 @@ class AuditTrail(BaseModel):
     id: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
     email: Optional[StrictStr] = None
+    from_name: Optional[StrictStr] = Field(default=None, alias="fromName")
+    from_email: Optional[StrictStr] = Field(default=None, alias="fromEmail")
+    from_phone_number: Optional[StrictStr] = Field(default=None, alias="fromPhoneNumber")
     to_name: Optional[StrictStr] = Field(default=None, alias="toName")
     to_email: Optional[StrictStr] = Field(default=None, alias="toEmail")
+    to_phone_number: Optional[StrictStr] = Field(default=None, alias="toPhoneNumber")
     ipaddress: Optional[StrictStr] = None
     action: Optional[StrictStr] = None
     timestamp: Optional[StrictInt] = None
     recipient_change_log: Optional[RecipientChangeLog] = Field(default=None, alias="recipientChangeLog")
     document_change_log: Optional[ModificationDetails] = Field(default=None, alias="documentChangeLog")
     field_change_log: Optional[ModificationDetails] = Field(default=None, alias="fieldChangeLog")
-    __properties: ClassVar[List[str]] = ["id", "name", "email", "toName", "toEmail", "ipaddress", "action", "timestamp", "recipientChangeLog", "documentChangeLog", "fieldChangeLog"]
+    __properties: ClassVar[List[str]] = ["id", "name", "email", "fromName", "fromEmail", "fromPhoneNumber", "toName", "toEmail", "toPhoneNumber", "ipaddress", "action", "timestamp", "recipientChangeLog", "documentChangeLog", "fieldChangeLog"]
 
     @field_validator('action')
     def action_validate_enum(cls, value):
@@ -51,8 +55,8 @@ class AuditTrail(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Sent', 'Viewed', 'Signed', 'Completed', 'Downloaded', 'Reassigned', 'Declined', 'Recalled', 'Created', 'AuthenticationFailed', 'Reminder', 'AccessCodeChanged', 'AccessCodeViewed', 'DownloadedForPrintSign', 'FormCreated', 'EmailOTP', 'AuthenticationRemoved', 'DownloadedAuditTrail', 'Cloned', 'ClonedWithFieldValues', 'Deleted', 'MovedToTrash', 'Restored', 'AutoReminder', 'Resend', 'Reviewed', 'InitiatePrintSign', 'CancelPrintSign', 'CompletePrintSign', 'GeneratedEmbeddedSignLink', 'EmbeddedSigned', 'EmbeddedReviewed', 'ExpiryDateExtended', 'Attachment', 'EditRecipient', 'AuthenticationAdded', 'AutoReminderON', 'AutoReminderOFF', 'SMSOTP', 'PhoneNumberChanged', 'UnlockedSMSOTP', 'SMSAuthenticationAdded', 'SMSAuthenticationRemoved', 'SMSOTPVerified', 'SMSAuthenticationFailed', 'UnlockEmailOTP', 'EmailAuthenticationAdded', 'EmailAuthenticationRemoved', 'EmailOtpVerify', 'EmailAuthenticationFailed', 'SMSOTPResend', 'EmailOTPResend', 'ResumeDocumentSigning', 'EmailOTPAuthenticationAdded', 'EmailOTPAuthenticationRemoved', 'EmailOTPAuthenticationFailed', 'EmailOTPVerified', 'IdentityVerificationInitiated', 'IdentityVerificationRemoved', 'IdentityVerificationCompleted', 'IdentityVerificationFailed', 'DownloadedVerificationData', 'ManualIdentityVerificationCompleted', 'IdentityVerificationReset', 'CreateEmbeddedVerificationLink', 'SensitiveDataDownloaded', 'IdVerificationRemoved', 'IdVerificationAdded', 'ManualIdentityVerificationInitiated', 'GeneratedSigningLink', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'QESVerificationInitiated', 'QESVerified', 'QESRejected', 'QESExpired', 'QESWithdrawn']):
-            raise ValueError("must be one of enum values ('Sent', 'Viewed', 'Signed', 'Completed', 'Downloaded', 'Reassigned', 'Declined', 'Recalled', 'Created', 'AuthenticationFailed', 'Reminder', 'AccessCodeChanged', 'AccessCodeViewed', 'DownloadedForPrintSign', 'FormCreated', 'EmailOTP', 'AuthenticationRemoved', 'DownloadedAuditTrail', 'Cloned', 'ClonedWithFieldValues', 'Deleted', 'MovedToTrash', 'Restored', 'AutoReminder', 'Resend', 'Reviewed', 'InitiatePrintSign', 'CancelPrintSign', 'CompletePrintSign', 'GeneratedEmbeddedSignLink', 'EmbeddedSigned', 'EmbeddedReviewed', 'ExpiryDateExtended', 'Attachment', 'EditRecipient', 'AuthenticationAdded', 'AutoReminderON', 'AutoReminderOFF', 'SMSOTP', 'PhoneNumberChanged', 'UnlockedSMSOTP', 'SMSAuthenticationAdded', 'SMSAuthenticationRemoved', 'SMSOTPVerified', 'SMSAuthenticationFailed', 'UnlockEmailOTP', 'EmailAuthenticationAdded', 'EmailAuthenticationRemoved', 'EmailOtpVerify', 'EmailAuthenticationFailed', 'SMSOTPResend', 'EmailOTPResend', 'ResumeDocumentSigning', 'EmailOTPAuthenticationAdded', 'EmailOTPAuthenticationRemoved', 'EmailOTPAuthenticationFailed', 'EmailOTPVerified', 'IdentityVerificationInitiated', 'IdentityVerificationRemoved', 'IdentityVerificationCompleted', 'IdentityVerificationFailed', 'DownloadedVerificationData', 'ManualIdentityVerificationCompleted', 'IdentityVerificationReset', 'CreateEmbeddedVerificationLink', 'SensitiveDataDownloaded', 'IdVerificationRemoved', 'IdVerificationAdded', 'ManualIdentityVerificationInitiated', 'GeneratedSigningLink', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'QESVerificationInitiated', 'QESVerified', 'QESRejected', 'QESExpired', 'QESWithdrawn')")
+        if value not in set(['Sent', 'Viewed', 'Signed', 'Completed', 'Downloaded', 'Reassigned', 'Declined', 'Recalled', 'Created', 'AuthenticationFailed', 'Reminder', 'AccessCodeChanged', 'AccessCodeViewed', 'DownloadedForPrintSign', 'FormCreated', 'EmailOTP', 'AuthenticationRemoved', 'DownloadedAuditTrail', 'Cloned', 'ClonedWithFieldValues', 'Deleted', 'MovedToTrash', 'Restored', 'AutoReminder', 'Resend', 'Reviewed', 'InitiatePrintSign', 'CancelPrintSign', 'CompletePrintSign', 'GeneratedEmbeddedSignLink', 'EmbeddedSigned', 'EmbeddedReviewed', 'ExpiryDateExtended', 'Attachment', 'EditRecipient', 'AuthenticationAdded', 'AutoReminderON', 'AutoReminderOFF', 'SMSOTP', 'PhoneNumberChanged', 'UnlockedSMSOTP', 'SMSAuthenticationAdded', 'SMSAuthenticationRemoved', 'SMSOTPVerified', 'SMSAuthenticationFailed', 'UnlockEmailOTP', 'EmailAuthenticationAdded', 'EmailAuthenticationRemoved', 'EmailOtpVerify', 'EmailAuthenticationFailed', 'SMSOTPResend', 'EmailOTPResend', 'ResumeDocumentSigning', 'EmailOTPAuthenticationAdded', 'EmailOTPAuthenticationRemoved', 'EmailOTPAuthenticationFailed', 'EmailOTPVerified', 'IdentityVerificationInitiated', 'IdentityVerificationRemoved', 'IdentityVerificationCompleted', 'IdentityVerificationFailed', 'DownloadedVerificationData', 'ManualIdentityVerificationCompleted', 'IdentityVerificationReset', 'CreateEmbeddedVerificationLink', 'SensitiveDataDownloaded', 'IdVerificationRemoved', 'IdVerificationAdded', 'ManualIdentityVerificationInitiated', 'GeneratedSigningLink', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'QESVerificationInitiated', 'QESVerified', 'QESRejected', 'QESExpired', 'QESWithdrawn', 'ResentForApproval', 'DocumentFieldMarkup']):
+            raise ValueError("must be one of enum values ('Sent', 'Viewed', 'Signed', 'Completed', 'Downloaded', 'Reassigned', 'Declined', 'Recalled', 'Created', 'AuthenticationFailed', 'Reminder', 'AccessCodeChanged', 'AccessCodeViewed', 'DownloadedForPrintSign', 'FormCreated', 'EmailOTP', 'AuthenticationRemoved', 'DownloadedAuditTrail', 'Cloned', 'ClonedWithFieldValues', 'Deleted', 'MovedToTrash', 'Restored', 'AutoReminder', 'Resend', 'Reviewed', 'InitiatePrintSign', 'CancelPrintSign', 'CompletePrintSign', 'GeneratedEmbeddedSignLink', 'EmbeddedSigned', 'EmbeddedReviewed', 'ExpiryDateExtended', 'Attachment', 'EditRecipient', 'AuthenticationAdded', 'AutoReminderON', 'AutoReminderOFF', 'SMSOTP', 'PhoneNumberChanged', 'UnlockedSMSOTP', 'SMSAuthenticationAdded', 'SMSAuthenticationRemoved', 'SMSOTPVerified', 'SMSAuthenticationFailed', 'UnlockEmailOTP', 'EmailAuthenticationAdded', 'EmailAuthenticationRemoved', 'EmailOtpVerify', 'EmailAuthenticationFailed', 'SMSOTPResend', 'EmailOTPResend', 'ResumeDocumentSigning', 'EmailOTPAuthenticationAdded', 'EmailOTPAuthenticationRemoved', 'EmailOTPAuthenticationFailed', 'EmailOTPVerified', 'IdentityVerificationInitiated', 'IdentityVerificationRemoved', 'IdentityVerificationCompleted', 'IdentityVerificationFailed', 'DownloadedVerificationData', 'ManualIdentityVerificationCompleted', 'IdentityVerificationReset', 'CreateEmbeddedVerificationLink', 'SensitiveDataDownloaded', 'IdVerificationRemoved', 'IdVerificationAdded', 'ManualIdentityVerificationInitiated', 'GeneratedSigningLink', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'QESVerificationInitiated', 'QESVerified', 'QESRejected', 'QESExpired', 'QESWithdrawn', 'ResentForApproval', 'DocumentFieldMarkup')")
         return value
 
     model_config = ConfigDict(
@@ -84,6 +88,14 @@ class AuditTrail(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -125,8 +137,12 @@ class AuditTrail(BaseModel):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "email": obj.get("email"),
+            "fromName": obj.get("fromName"),
+            "fromEmail": obj.get("fromEmail"),
+            "fromPhoneNumber": obj.get("fromPhoneNumber"),
             "toName": obj.get("toName"),
             "toEmail": obj.get("toEmail"),
+            "toPhoneNumber": obj.get("toPhoneNumber"),
             "ipaddress": obj.get("ipaddress"),
             "action": obj.get("action"),
             "timestamp": obj.get("timestamp"),
@@ -152,8 +168,12 @@ class AuditTrail(BaseModel):
             "id": "(str,)",
             "name": "(str,)",
             "email": "(str,)",
+            "from_name": "(str,)",
+            "from_email": "(str,)",
+            "from_phone_number": "(str,)",
             "to_name": "(str,)",
             "to_email": "(str,)",
+            "to_phone_number": "(str,)",
             "ipaddress": "(str,)",
             "action": "(str,)",
             "timestamp": "(int,)",

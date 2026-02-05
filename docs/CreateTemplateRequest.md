@@ -28,8 +28,11 @@ Name | Type | Description | Notes
 **on_behalf_of** | **str** |  | [optional] 
 **labels** | **List[str]** |  | [optional] 
 **template_labels** | **List[str]** |  | [optional] 
-**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 **form_groups** | [**List[FormGroup]**](FormGroup.md) |  | [optional] 
+**recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
+**allowed_signature_types** | **List[str]** |  | [optional] 
+**form_field_permission** | [**FormFieldPermission**](FormFieldPermission.md) |  | [optional] 
+**group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
 
 ## Example
 

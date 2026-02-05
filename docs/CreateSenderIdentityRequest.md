@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **brand_id** | **str** |  | [optional] 
 **redirect_url** | **str** |  | [optional] 
 **meta_data** | **Dict[str, Optional[str]]** |  | [optional] 
+**locale** | **str** |  | [optional] 
 
 ## Example
 

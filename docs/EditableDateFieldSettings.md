@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **date_format** | **str** |  | 
 **min_date** | **datetime** |  | [optional] 
 **max_date** | **datetime** |  | [optional] 
+**time_format** | **str** |  | [optional] 
 
 ## Example
 

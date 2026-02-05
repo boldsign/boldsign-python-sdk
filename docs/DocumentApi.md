@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**download_attachment**](DocumentApi.md#download_attachment) | **GET** /v1/document/downloadAttachment | Download the Attachment.
 [**download_audit_log**](DocumentApi.md#download_audit_log) | **GET** /v1/document/downloadAuditLog | Download the audit trail document.
 [**download_document**](DocumentApi.md#download_document) | **GET** /v1/document/download | Download the document.
+[**draft_send**](DocumentApi.md#draft_send) | **POST** /v1/document/draftSend | Sends a draft-status document out for signature.
 [**extend_expiry**](DocumentApi.md#extend_expiry) | **PATCH** /v1/document/extendExpiry | Extends the expiration date of the document.
 [**get_properties**](DocumentApi.md#get_properties) | **GET** /v1/document/properties | Get summary of the document.
 [**get_embedded_sign_link**](DocumentApi.md#get_embedded_sign_link) | **GET** /v1/document/getEmbeddedSignLink | Get sign link for Embedded Sign.
@@ -788,6 +789,70 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **draft_send**
+> draft_send(document_id)
+
+Sends a draft-status document out for signature.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.DocumentApi(api_client)
+    document_id = 'document_id_example' # str | The ID of the document to be sent.
+
+    try:
+        # Sends a draft-status document out for signature.
+        api_instance.draft_send(document_id)
+    except Exception as e:
+        print("Exception when calling DocumentApi->draft_send: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| The ID of the document to be sent. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 

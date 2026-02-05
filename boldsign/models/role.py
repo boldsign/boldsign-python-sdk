@@ -54,13 +54,15 @@ class Role(BaseModel):
     form_fields: Optional[List[FormField]] = Field(default=None, alias="formFields")
     existing_form_fields: Optional[List[ExistingFormField]] = Field(default=None, alias="existingFormFields")
     identity_verification_settings: Optional[IdentityVerificationSettings] = Field(default=None, alias="identityVerificationSettings")
-    language: Optional[StrictInt] = Field(default=None, description="<p>Description:</p><ul><li><i>0</i> - None</li><li><i>1</i> - English</li><li><i>2</i> - Spanish</li><li><i>3</i> - German</li><li><i>4</i> - French</li><li><i>5</i> - Romanian</li><li><i>6</i> - Norwegian</li><li><i>7</i> - Bulgarian</li><li><i>8</i> - Italian</li><li><i>9</i> - Danish</li><li><i>10</i> - Polish</li><li><i>11</i> - Portuguese</li><li><i>12</i> - Czech</li><li><i>13</i> - Dutch</li><li><i>14</i> - Swedish</li><li><i>15</i> - Russian</li></ul>")
+    language: Optional[StrictInt] = Field(default=None, description="<p>Description:</p><ul><li><i>0</i> - None</li><li><i>1</i> - English</li><li><i>2</i> - Spanish</li><li><i>3</i> - German</li><li><i>4</i> - French</li><li><i>5</i> - Romanian</li><li><i>6</i> - Norwegian</li><li><i>7</i> - Bulgarian</li><li><i>8</i> - Italian</li><li><i>9</i> - Danish</li><li><i>10</i> - Polish</li><li><i>11</i> - Portuguese</li><li><i>12</i> - Czech</li><li><i>13</i> - Dutch</li><li><i>14</i> - Swedish</li><li><i>15</i> - Russian</li><li><i>16</i> - Japanese</li><li><i>17</i> - Thai</li><li><i>18</i> - SimplifiedChinese</li><li><i>19</i> - TraditionalChinese</li><li><i>20</i> - Korean</li></ul>")
     locale: Optional[StrictStr] = None
+    sign_type: Optional[StrictStr] = Field(default=None, alias="signType")
+    group_id: Optional[StrictStr] = Field(default=None, alias="groupId")
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     authentication_retry_count: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = Field(default=None, alias="authenticationRetryCount")
     enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
     authentication_settings: Optional[AuthenticationSettings] = Field(default=None, alias="authenticationSettings")
-    __properties: ClassVar[List[str]] = ["roleIndex", "signerName", "signerOrder", "signerEmail", "hostEmail", "privateMessage", "authenticationCode", "enableEmailOTP", "authenticationType", "phoneNumber", "deliveryMode", "signerType", "signerRole", "allowFieldConfiguration", "formFields", "existingFormFields", "identityVerificationSettings", "language", "locale", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "authenticationSettings"]
+    __properties: ClassVar[List[str]] = ["roleIndex", "signerName", "signerOrder", "signerEmail", "hostEmail", "privateMessage", "authenticationCode", "enableEmailOTP", "authenticationType", "phoneNumber", "deliveryMode", "signerType", "signerRole", "allowFieldConfiguration", "formFields", "existingFormFields", "identityVerificationSettings", "language", "locale", "signType", "groupId", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "authenticationSettings"]
 
     @field_validator('authentication_type')
     def authentication_type_validate_enum(cls, value):
@@ -88,8 +90,8 @@ class Role(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Signer', 'Reviewer', 'InPersonSigner', 'null']):
-            raise ValueError("must be one of enum values ('Signer', 'Reviewer', 'InPersonSigner', 'null')")
+        if value not in set(['Signer', 'Reviewer', 'InPersonSigner']):
+            raise ValueError("must be one of enum values ('Signer', 'Reviewer', 'InPersonSigner')")
         return value
 
     @field_validator('language')
@@ -98,8 +100,8 @@ class Role(BaseModel):
         if value is None:
             return value
 
-        if value not in set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]):
-            raise ValueError("must be one of enum values (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)")
+        if value not in set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]):
+            raise ValueError("must be one of enum values (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)")
         return value
 
     @field_validator('locale')
@@ -108,8 +110,18 @@ class Role(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default']):
-            raise ValueError("must be one of enum values ('EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default')")
+        if value not in set(['EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default', 'JA', 'TH', 'ZH_CN', 'ZH_TW', 'KO']):
+            raise ValueError("must be one of enum values ('EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default', 'JA', 'TH', 'ZH_CN', 'ZH_TW', 'KO')")
+        return value
+
+    @field_validator('sign_type')
+    def sign_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['Single', 'Group']):
+            raise ValueError("must be one of enum values ('Single', 'Group')")
         return value
 
     model_config = ConfigDict(
@@ -141,6 +153,14 @@ class Role(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -198,6 +218,8 @@ class Role(BaseModel):
             "identityVerificationSettings": IdentityVerificationSettings.from_dict(obj["identityVerificationSettings"]) if obj.get("identityVerificationSettings") is not None else None,
             "language": obj.get("language"),
             "locale": obj.get("locale"),
+            "signType": obj.get("signType"),
+            "groupId": obj.get("groupId"),
             "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "authenticationRetryCount": obj.get("authenticationRetryCount"),
             "enableQes": obj.get("enableQes"),
@@ -237,6 +259,8 @@ class Role(BaseModel):
             "identity_verification_settings": "(IdentityVerificationSettings,)",
             "language": "(int,)",
             "locale": "(str,)",
+            "sign_type": "(str,)",
+            "group_id": "(str,)",
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "authentication_retry_count": "(int,)",
             "enable_qes": "(bool,)",

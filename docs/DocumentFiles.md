@@ -5,9 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **str** |  | [optional] 
 **document_name** | **str** |  | [optional] 
 **order** | **int** |  | [optional] 
 **page_count** | **int** |  | [optional] 
+**template_name** | **str** |  | [optional] 
+**template_id** | **str** |  | [optional] 
 
 ## Example
 

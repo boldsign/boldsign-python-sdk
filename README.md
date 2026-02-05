@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *DocumentApi* | [**download_attachment**](docs/DocumentApi.md#download_attachment) | **GET** /v1/document/downloadAttachment | Download the Attachment.
 *DocumentApi* | [**download_audit_log**](docs/DocumentApi.md#download_audit_log) | **GET** /v1/document/downloadAuditLog | Download the audit trail document.
 *DocumentApi* | [**download_document**](docs/DocumentApi.md#download_document) | **GET** /v1/document/download | Download the document.
+*DocumentApi* | [**draft_send**](docs/DocumentApi.md#draft_send) | **POST** /v1/document/draftSend | Sends a draft-status document out for signature.
 *DocumentApi* | [**extend_expiry**](docs/DocumentApi.md#extend_expiry) | **PATCH** /v1/document/extendExpiry | Extends the expiration date of the document.
 *DocumentApi* | [**get_properties**](docs/DocumentApi.md#get_properties) | **GET** /v1/document/properties | Get summary of the document.
 *DocumentApi* | [**get_embedded_sign_link**](docs/DocumentApi.md#get_embedded_sign_link) | **GET** /v1/document/getEmbeddedSignLink | Get sign link for Embedded Sign.
@@ -125,6 +126,7 @@ Class | Method | HTTP request | Description
 *PlanApi* | [**api_credits_count**](docs/PlanApi.md#api_credits_count) | **GET** /v1/plan/apiCreditsCount | Gets the Api credits details.
 *SenderIdentitiesApi* | [**create_sender_identities**](docs/SenderIdentitiesApi.md#create_sender_identities) | **POST** /v1/senderIdentities/create | Creates sender identity.
 *SenderIdentitiesApi* | [**delete_sender_identities**](docs/SenderIdentitiesApi.md#delete_sender_identities) | **DELETE** /v1/senderIdentities/delete | Deletes sender identity.
+*SenderIdentitiesApi* | [**get_sender_identity_properties**](docs/SenderIdentitiesApi.md#get_sender_identity_properties) | **GET** /v1/senderIdentities/properties | Gets sender identity by ID or email.
 *SenderIdentitiesApi* | [**list_sender_identities**](docs/SenderIdentitiesApi.md#list_sender_identities) | **GET** /v1/senderIdentities/list | Lists sender identity.
 *SenderIdentitiesApi* | [**re_request_sender_identities**](docs/SenderIdentitiesApi.md#re_request_sender_identities) | **POST** /v1/senderIdentities/rerequest | Rerequests denied sender identity.
 *SenderIdentitiesApi* | [**resend_invitation_sender_identities**](docs/SenderIdentitiesApi.md#resend_invitation_sender_identities) | **POST** /v1/senderIdentities/resendInvitation | Resends sender identity invitation.
@@ -134,6 +136,7 @@ Class | Method | HTTP request | Description
 *TeamsApi* | [**list_teams**](docs/TeamsApi.md#list_teams) | **GET** /v1/teams/list | List Teams.
 *TeamsApi* | [**update_team**](docs/TeamsApi.md#update_team) | **PUT** /v1/teams/update | Update Team.
 *TemplateApi* | [**add_tag**](docs/TemplateApi.md#add_tag) | **PATCH** /v1/template/addTags | Add the Tags in Templates.
+*TemplateApi* | [**create_embedded_preview_url**](docs/TemplateApi.md#create_embedded_preview_url) | **POST** /v1/template/createEmbeddedPreviewUrl | Generates a preview URL for a template to view it.
 *TemplateApi* | [**create_embedded_request_url_template**](docs/TemplateApi.md#create_embedded_request_url_template) | **POST** /v1/template/createEmbeddedRequestUrl | Generates a send URL using a template which embeds document sending process into your application.
 *TemplateApi* | [**create_embedded_template_url**](docs/TemplateApi.md#create_embedded_template_url) | **POST** /v1/template/createEmbeddedTemplateUrl | Generates a create URL to embeds template create process into your application.
 *TemplateApi* | [**create_template**](docs/TemplateApi.md#create_template) | **POST** /v1/template/create | Creates a new template.
@@ -148,6 +151,7 @@ Class | Method | HTTP request | Description
 *TemplateApi* | [**merge_create_embedded_request_url_template**](docs/TemplateApi.md#merge_create_embedded_request_url_template) | **POST** /v1/template/mergeCreateEmbeddedRequestUrl | Generates a merge request URL using a template that combines document merging and sending processes into your application.
 *TemplateApi* | [**send_using_template**](docs/TemplateApi.md#send_using_template) | **POST** /v1/template/send | Send a document for signature using a Template.
 *UserApi* | [**cancel_invitation**](docs/UserApi.md#cancel_invitation) | **POST** /v1/users/cancelInvitation | Cancel the users invitation.
+*UserApi* | [**change_team**](docs/UserApi.md#change_team) | **PUT** /v1/users/changeTeam | Change users to other team.
 *UserApi* | [**create_user**](docs/UserApi.md#create_user) | **POST** /v1/users/create | Create the user.
 *UserApi* | [**get_user**](docs/UserApi.md#get_user) | **GET** /v1/users/get | Get summary of the user.
 *UserApi* | [**list_users**](docs/UserApi.md#list_users) | **GET** /v1/users/list | List user documents.
@@ -175,6 +179,8 @@ Class | Method | HTTP request | Description
  - [BrandingMessage](docs/BrandingMessage.md)
  - [BrandingRecords](docs/BrandingRecords.md)
  - [ChangeRecipient](docs/ChangeRecipient.md)
+ - [ChangeTeamRequest](docs/ChangeTeamRequest.md)
+ - [CollaborationSettings](docs/CollaborationSettings.md)
  - [ConditionalRule](docs/ConditionalRule.md)
  - [ContactCreated](docs/ContactCreated.md)
  - [ContactDetails](docs/ContactDetails.md)
@@ -222,6 +228,8 @@ Class | Method | HTTP request | Description
  - [EmbeddedTemplateCreated](docs/EmbeddedTemplateCreated.md)
  - [EmbeddedTemplateEditRequest](docs/EmbeddedTemplateEditRequest.md)
  - [EmbeddedTemplateEdited](docs/EmbeddedTemplateEdited.md)
+ - [EmbeddedTemplatePreview](docs/EmbeddedTemplatePreview.md)
+ - [EmbeddedTemplatePreviewJsonRequest](docs/EmbeddedTemplatePreviewJsonRequest.md)
  - [Error](docs/Error.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [ExistingFormField](docs/ExistingFormField.md)
@@ -229,11 +237,14 @@ Class | Method | HTTP request | Description
  - [FileInfo](docs/FileInfo.md)
  - [Font](docs/Font.md)
  - [FormField](docs/FormField.md)
+ - [FormFieldPermission](docs/FormFieldPermission.md)
  - [FormGroup](docs/FormGroup.md)
  - [FormulaFieldSettings](docs/FormulaFieldSettings.md)
+ - [GroupSigner](docs/GroupSigner.md)
+ - [GroupSignerSettings](docs/GroupSignerSettings.md)
  - [IdDocument](docs/IdDocument.md)
  - [IdReport](docs/IdReport.md)
- - [IdVerification](docs/IdVerification.md)
+ - [IdVerificationDetails](docs/IdVerificationDetails.md)
  - [IdentityVerificationSettings](docs/IdentityVerificationSettings.md)
  - [ImageInfo](docs/ImageInfo.md)
  - [MergeAndSendForSignForm](docs/MergeAndSendForSignForm.md)
@@ -259,6 +270,7 @@ Class | Method | HTTP request | Description
  - [SenderIdentityCreated](docs/SenderIdentityCreated.md)
  - [SenderIdentityList](docs/SenderIdentityList.md)
  - [SenderIdentityViewModel](docs/SenderIdentityViewModel.md)
+ - [SignatureFrameSettings](docs/SignatureFrameSettings.md)
  - [SignerAuthenticationSettings](docs/SignerAuthenticationSettings.md)
  - [Size](docs/Size.md)
  - [TeamCreated](docs/TeamCreated.md)
@@ -272,15 +284,19 @@ Class | Method | HTTP request | Description
  - [Template](docs/Template.md)
  - [TemplateCC](docs/TemplateCC.md)
  - [TemplateCreated](docs/TemplateCreated.md)
+ - [TemplateFiles](docs/TemplateFiles.md)
  - [TemplateFormFields](docs/TemplateFormFields.md)
+ - [TemplateGroupSigner](docs/TemplateGroupSigner.md)
  - [TemplateProperties](docs/TemplateProperties.md)
  - [TemplateRecords](docs/TemplateRecords.md)
  - [TemplateRole](docs/TemplateRole.md)
  - [TemplateSenderDetail](docs/TemplateSenderDetail.md)
  - [TemplateSenderDetails](docs/TemplateSenderDetails.md)
  - [TemplateSharedTemplateDetail](docs/TemplateSharedTemplateDetail.md)
+ - [TemplateSharing](docs/TemplateSharing.md)
  - [TemplateSignerDetails](docs/TemplateSignerDetails.md)
  - [TemplateTag](docs/TemplateTag.md)
+ - [TemplateTeamShare](docs/TemplateTeamShare.md)
  - [TextTagDefinition](docs/TextTagDefinition.md)
  - [TextTagOffset](docs/TextTagOffset.md)
  - [UpdateUser](docs/UpdateUser.md)

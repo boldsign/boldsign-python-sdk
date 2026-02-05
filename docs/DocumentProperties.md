@@ -45,6 +45,10 @@ Name | Type | Description | Notes
 **enable_audit_trail_localization** | **bool** |  | [optional] 
 **download_file_name** | **str** |  | [optional] 
 **scheduled_send_time** | **int** |  | [optional] 
+**allowed_signature_types** | **List[str]** |  | [optional] 
+**group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
+**in_editing_mode** | **bool** |  | [optional] 
+**display_status** | **str** |  | [optional] 
 
 ## Example
 

@@ -5,6 +5,7 @@ All URIs are relative to *https://api.boldsign.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_tag**](TemplateApi.md#add_tag) | **PATCH** /v1/template/addTags | Add the Tags in Templates.
+[**create_embedded_preview_url**](TemplateApi.md#create_embedded_preview_url) | **POST** /v1/template/createEmbeddedPreviewUrl | Generates a preview URL for a template to view it.
 [**create_embedded_request_url_template**](TemplateApi.md#create_embedded_request_url_template) | **POST** /v1/template/createEmbeddedRequestUrl | Generates a send URL using a template which embeds document sending process into your application.
 [**create_embedded_template_url**](TemplateApi.md#create_embedded_template_url) | **POST** /v1/template/createEmbeddedTemplateUrl | Generates a create URL to embeds template create process into your application.
 [**create_template**](TemplateApi.md#create_template) | **POST** /v1/template/create | Creates a new template.
@@ -81,6 +82,75 @@ void (empty response body)
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_embedded_preview_url**
+> EmbeddedTemplatePreview create_embedded_preview_url(template_id, embedded_template_preview_json_request=embedded_template_preview_json_request)
+
+Generates a preview URL for a template to view it.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.embedded_template_preview import EmbeddedTemplatePreview
+from boldsign.models.embedded_template_preview_json_request import EmbeddedTemplatePreviewJsonRequest
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.TemplateApi(api_client)
+    template_id = 'template_id_example' # str | The template id.
+    embedded_template_preview_json_request = boldsign.EmbeddedTemplatePreviewJsonRequest() # EmbeddedTemplatePreviewJsonRequest | The embedded template preview request body. (optional)
+
+    try:
+        # Generates a preview URL for a template to view it.
+        api_response = api_instance.create_embedded_preview_url(template_id, embedded_template_preview_json_request=embedded_template_preview_json_request)
+        print("The response of TemplateApi->create_embedded_preview_url:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TemplateApi->create_embedded_preview_url: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **str**| The template id. | 
+ **embedded_template_preview_json_request** | [**EmbeddedTemplatePreviewJsonRequest**](EmbeddedTemplatePreviewJsonRequest.md)| The embedded template preview request body. | [optional] 
+
+### Return type
+
+[**EmbeddedTemplatePreview**](EmbeddedTemplatePreview.md)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, multipart/form-data, application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -424,7 +494,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **download**
-> io.IOBase download(template_id, on_behalf_of=on_behalf_of)
+> io.IOBase download(template_id, on_behalf_of=on_behalf_of, include_form_field_values=include_form_field_values)
 
 Download the template.
 
@@ -448,10 +518,11 @@ with boldsign.ApiClient(configuration) as api_client:
     api_instance = boldsign.TemplateApi(api_client)
     template_id = 'template_id_example' # str | Template Id.
     on_behalf_of = 'on_behalf_of_example' # str | The on behalfof email address. (optional)
+    include_form_field_values = False # bool | Include form field data. (optional) (default to False)
 
     try:
         # Download the template.
-        api_response = api_instance.download(template_id, on_behalf_of=on_behalf_of)
+        api_response = api_instance.download(template_id, on_behalf_of=on_behalf_of, include_form_field_values=include_form_field_values)
         print("The response of TemplateApi->download:\n")
         pprint(api_response)
     except Exception as e:
@@ -467,6 +538,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **str**| Template Id. | 
  **on_behalf_of** | **str**| The on behalfof email address. | [optional] 
+ **include_form_field_values** | **bool**| Include form field data. | [optional] [default to False]
 
 ### Return type
 
@@ -697,7 +769,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_templates**
-> TemplateRecords list_templates(page, template_type=template_type, page_size=page_size, search_key=search_key, on_behalf_of=on_behalf_of, created_by=created_by, template_labels=template_labels, start_date=start_date, end_date=end_date, brand_ids=brand_ids)
+> TemplateRecords list_templates(page, template_type=template_type, page_size=page_size, search_key=search_key, on_behalf_of=on_behalf_of, created_by=created_by, template_labels=template_labels, start_date=start_date, end_date=end_date, brand_ids=brand_ids, shared_with_team_id=shared_with_team_id)
 
 List all the templates.
 
@@ -730,10 +802,11 @@ with boldsign.ApiClient(configuration) as api_client:
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date of the template (optional)
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date of the template (optional)
     brand_ids = ['brand_ids_example'] # List[str] | BrandId(s) of the template. (optional)
+    shared_with_team_id = ['shared_with_team_id_example'] # List[str] | The templates can be listed by the shared teams. (optional)
 
     try:
         # List all the templates.
-        api_response = api_instance.list_templates(page, template_type=template_type, page_size=page_size, search_key=search_key, on_behalf_of=on_behalf_of, created_by=created_by, template_labels=template_labels, start_date=start_date, end_date=end_date, brand_ids=brand_ids)
+        api_response = api_instance.list_templates(page, template_type=template_type, page_size=page_size, search_key=search_key, on_behalf_of=on_behalf_of, created_by=created_by, template_labels=template_labels, start_date=start_date, end_date=end_date, brand_ids=brand_ids, shared_with_team_id=shared_with_team_id)
         print("The response of TemplateApi->list_templates:\n")
         pprint(api_response)
     except Exception as e:
@@ -757,6 +830,7 @@ Name | Type | Description  | Notes
  **start_date** | **datetime**| Start date of the template | [optional] 
  **end_date** | **datetime**| End date of the template | [optional] 
  **brand_ids** | [**List[str]**](str.md)| BrandId(s) of the template. | [optional] 
+ **shared_with_team_id** | [**List[str]**](str.md)| The templates can be listed by the shared teams. | [optional] 
 
 ### Return type
 

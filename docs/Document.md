@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **cursor** | **int** |  | [optional] 
 **brand_id** | **str** |  | [optional] 
 **scheduled_send_time** | **int** |  | [optional] 
+**in_editing_mode** | **bool** |  | [optional] 
+**display_status** | **str** |  | [optional] 
 
 ## Example
 

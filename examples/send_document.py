@@ -56,7 +56,7 @@ with boldsign.ApiClient(configuration) as api_client:
     send_for_sign = boldsign.SendForSign(
         document_title = "SDK Document Test case",
         description="Testing document from SDK integration test case",
-        files=["tests/documents/input/nda-document.pdf"],
+        files=["YOUR_FILE_PATH"],
         disableExpiryAlert=False,
         reminderSettings=boldsign.ReminderSettings(
             reminderDays=3,
@@ -79,6 +79,10 @@ with boldsign.ApiClient(configuration) as api_client:
         expiryDate=60,
         disableEmails=False,
         disableSMS=False,
+        metaData = {
+            'DocumentType': 'new',
+            'DocumentCategory': 'Software'
+        }
     )
 
     send_document_response = document_api.send_document(send_for_sign)

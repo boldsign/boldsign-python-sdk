@@ -5,6 +5,7 @@ All URIs are relative to *https://api.boldsign.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cancel_invitation**](UserApi.md#cancel_invitation) | **POST** /v1/users/cancelInvitation | Cancel the users invitation.
+[**change_team**](UserApi.md#change_team) | **PUT** /v1/users/changeTeam | Change users to other team.
 [**create_user**](UserApi.md#create_user) | **POST** /v1/users/create | Create the user.
 [**get_user**](UserApi.md#get_user) | **GET** /v1/users/get | Get summary of the user.
 [**list_users**](UserApi.md#list_users) | **GET** /v1/users/list | List user documents.
@@ -65,6 +66,73 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **change_team**
+> change_team(user_id, change_team_request=change_team_request)
+
+Change users to other team.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.change_team_request import ChangeTeamRequest
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.UserApi(api_client)
+    user_id = 'user_id_example' # str | user Id.
+    change_team_request = boldsign.ChangeTeamRequest() # ChangeTeamRequest | Change team request. (optional)
+
+    try:
+        # Change users to other team.
+        api_instance.change_team(user_id, change_team_request=change_team_request)
+    except Exception as e:
+        print("Exception when calling UserApi->change_team: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| user Id. | 
+ **change_team_request** | [**ChangeTeamRequest**](ChangeTeamRequest.md)| Change team request. | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;odata.metadata=minimal;odata.streaming=true, application/json;odata.metadata=minimal;odata.streaming=false, application/json;odata.metadata=minimal, application/json;odata.metadata=full;odata.streaming=true, application/json;odata.metadata=full;odata.streaming=false, application/json;odata.metadata=full, application/json;odata.metadata=none;odata.streaming=true, application/json;odata.metadata=none;odata.streaming=false, application/json;odata.metadata=none, application/json;odata.streaming=true, application/json;odata.streaming=false, application/json, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=minimal;IEEE754Compatible=false, application/json;odata.metadata=minimal;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=full;IEEE754Compatible=false, application/json;odata.metadata=full;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=true, application/json;odata.streaming=true;IEEE754Compatible=false, application/json;odata.streaming=true;IEEE754Compatible=true, application/json;odata.streaming=false;IEEE754Compatible=false, application/json;odata.streaming=false;IEEE754Compatible=true, application/json;IEEE754Compatible=false, application/json;IEEE754Compatible=true, application/xml, text/plain, application/json-patch+json, text/json, application/*+json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -210,7 +278,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_users**
-> UserRecords list_users(page, page_size=page_size, search=search)
+> UserRecords list_users(page, page_size=page_size, search=search, user_id=user_id)
 
 List user documents.
 
@@ -236,10 +304,11 @@ with boldsign.ApiClient(configuration) as api_client:
     page = 1 # int | Page index specified in get user list request. (default to 1)
     page_size = 10 # int | Page size specified in get user list request. (optional) (default to 10)
     search = 'search_example' # str | Users can be listed by the search  based on the user ID (optional)
+    user_id = ['user_id_example'] # List[str] | Users can be listed by the search based on the user IDs (optional)
 
     try:
         # List user documents.
-        api_response = api_instance.list_users(page, page_size=page_size, search=search)
+        api_response = api_instance.list_users(page, page_size=page_size, search=search, user_id=user_id)
         print("The response of UserApi->list_users:\n")
         pprint(api_response)
     except Exception as e:
@@ -256,6 +325,7 @@ Name | Type | Description  | Notes
  **page** | **int**| Page index specified in get user list request. | [default to 1]
  **page_size** | **int**| Page size specified in get user list request. | [optional] [default to 10]
  **search** | **str**| Users can be listed by the search  based on the user ID | [optional] 
+ **user_id** | [**List[str]**](str.md)| Users can be listed by the search based on the user IDs | [optional] 
 
 ### Return type
 

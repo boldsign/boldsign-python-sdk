@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **restrict_id_prefix_change** | **bool** |  | [optional] [default to False]
 **background_hex_color** | **str** |  | [optional] 
 **resize_option** | **str** |  | [optional] 
+**is_masked** | **bool** |  | [optional] [default to False]
 
 ## Example
 

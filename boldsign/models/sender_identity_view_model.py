@@ -31,6 +31,7 @@ class SenderIdentityViewModel(BaseModel):
     """
     SenderIdentityViewModel
     """ # noqa: E501
+    id: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
     email: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
@@ -40,7 +41,8 @@ class SenderIdentityViewModel(BaseModel):
     brand_id: Optional[StrictStr] = Field(default=None, alias="brandId")
     redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
     meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
-    __properties: ClassVar[List[str]] = ["name", "email", "status", "createdBy", "approvedDate", "notificationSettings", "brandId", "redirectUrl", "metaData"]
+    locale: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "email", "status", "createdBy", "approvedDate", "notificationSettings", "brandId", "redirectUrl", "metaData", "locale"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +73,14 @@ class SenderIdentityViewModel(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -109,6 +119,7 @@ class SenderIdentityViewModel(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "name": obj.get("name"),
             "email": obj.get("email"),
             "status": obj.get("status"),
@@ -117,7 +128,8 @@ class SenderIdentityViewModel(BaseModel):
             "notificationSettings": NotificationSettings.from_dict(obj["notificationSettings"]) if obj.get("notificationSettings") is not None else None,
             "brandId": obj.get("brandId"),
             "redirectUrl": obj.get("redirectUrl"),
-            "metaData": obj.get("metaData")
+            "metaData": obj.get("metaData"),
+            "locale": obj.get("locale")
         })
         return _obj
 
@@ -134,6 +146,7 @@ class SenderIdentityViewModel(BaseModel):
     @classmethod
     def openapi_types(cls) -> Dict[str, str]:
         return {
+            "id": "(str,)",
             "name": "(str,)",
             "email": "(str,)",
             "status": "(str,)",
@@ -143,6 +156,7 @@ class SenderIdentityViewModel(BaseModel):
             "brand_id": "(str,)",
             "redirect_url": "(str,)",
             "meta_data": "(Dict[str, Optional[str]],)",
+            "locale": "(str,)",
         }
 
     @classmethod

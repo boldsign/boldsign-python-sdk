@@ -38,7 +38,8 @@ class IdVerification(BaseModel):
     require_matching_selfie: Optional[StrictBool] = Field(default=None, alias="requireMatchingSelfie")
     hold_for_prefill: Optional[StrictBool] = Field(default=None, alias="holdForPrefill")
     prefill_completed: Optional[StrictBool] = Field(default=None, alias="prefillCompleted")
-    __properties: ClassVar[List[str]] = ["type", "maximumRetryCount", "status", "nameMatcher", "requireLiveCapture", "requireMatchingSelfie", "holdForPrefill", "prefillCompleted"]
+    allowed_document_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedDocumentTypes")
+    __properties: ClassVar[List[str]] = ["type", "maximumRetryCount", "status", "nameMatcher", "requireLiveCapture", "requireMatchingSelfie", "holdForPrefill", "prefillCompleted", "allowedDocumentTypes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +70,14 @@ class IdVerification(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -114,7 +123,8 @@ class IdVerification(BaseModel):
             "requireLiveCapture": obj.get("requireLiveCapture"),
             "requireMatchingSelfie": obj.get("requireMatchingSelfie"),
             "holdForPrefill": obj.get("holdForPrefill"),
-            "prefillCompleted": obj.get("prefillCompleted")
+            "prefillCompleted": obj.get("prefillCompleted"),
+            "allowedDocumentTypes": obj.get("allowedDocumentTypes")
         })
         return _obj
 
@@ -139,10 +149,12 @@ class IdVerification(BaseModel):
             "require_matching_selfie": "(bool,)",
             "hold_for_prefill": "(bool,)",
             "prefill_completed": "(bool,)",
+            "allowed_document_types": "(List[str],)",
         }
 
     @classmethod
     def openapi_type_is_array(cls, property_name: str) -> bool:
         return property_name in [
+            "allowed_document_types",
         ]
 

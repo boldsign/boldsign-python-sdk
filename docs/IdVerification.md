@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **require_matching_selfie** | **bool** |  | [optional] 
 **hold_for_prefill** | **bool** |  | [optional] 
 **prefill_completed** | **bool** |  | [optional] 
+**allowed_document_types** | **List[str]** |  | [optional] 
 
 ## Example
 

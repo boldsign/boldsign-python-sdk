@@ -12,6 +12,6 @@ with boldsign.ApiClient(configuration) as api_client:
 
     template_api = boldsign.TemplateApi(api_client)
     
-    template_id = "c7de007a-3a19-4f5d-bd37-994d2186a2b3"
+    template_id = "YOUR_TEMPLATE_ID"
     
-    download_response =template_api.download(template_id)
+    download_response =template_api.download(template_id,include_form_field_values=True)

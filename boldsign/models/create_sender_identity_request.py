@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from boldsign.models.notification_settings import NotificationSettings
@@ -38,7 +38,18 @@ class CreateSenderIdentityRequest(BaseModel):
     brand_id: Optional[StrictStr] = Field(default=None, alias="brandId")
     redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
     meta_data: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, alias="metaData")
-    __properties: ClassVar[List[str]] = ["email", "name", "notificationSettings", "brandId", "redirectUrl", "metaData"]
+    locale: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["email", "name", "notificationSettings", "brandId", "redirectUrl", "metaData", "locale"]
+
+    @field_validator('locale')
+    def locale_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default', 'JA', 'TH', 'ZH_CN', 'ZH_TW', 'KO']):
+            raise ValueError("must be one of enum values ('EN', 'NO', 'FR', 'DE', 'ES', 'BG', 'CS', 'DA', 'IT', 'NL', 'PL', 'PT', 'RO', 'RU', 'SV', 'Default', 'JA', 'TH', 'ZH_CN', 'ZH_TW', 'KO')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +80,14 @@ class CreateSenderIdentityRequest(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -112,7 +131,8 @@ class CreateSenderIdentityRequest(BaseModel):
             "notificationSettings": NotificationSettings.from_dict(obj["notificationSettings"]) if obj.get("notificationSettings") is not None else None,
             "brandId": obj.get("brandId"),
             "redirectUrl": obj.get("redirectUrl"),
-            "metaData": obj.get("metaData")
+            "metaData": obj.get("metaData"),
+            "locale": obj.get("locale")
         })
         return _obj
 
@@ -135,6 +155,7 @@ class CreateSenderIdentityRequest(BaseModel):
             "brand_id": "(str,)",
             "redirect_url": "(str,)",
             "meta_data": "(Dict[str, Optional[str]],)",
+            "locale": "(str,)",
         }
 
     @classmethod

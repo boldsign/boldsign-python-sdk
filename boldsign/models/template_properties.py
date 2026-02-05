@@ -21,14 +21,17 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from boldsign.models.behalf_of import BehalfOf
-from boldsign.models.document_files import DocumentFiles
 from boldsign.models.document_info import DocumentInfo
+from boldsign.models.form_field_permission import FormFieldPermission
 from boldsign.models.form_group import FormGroup
+from boldsign.models.group_signer_settings import GroupSignerSettings
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.roles import Roles
+from boldsign.models.template_files import TemplateFiles
 from boldsign.models.template_form_fields import TemplateFormFields
 from boldsign.models.template_sender_detail import TemplateSenderDetail
 from boldsign.models.template_shared_template_detail import TemplateSharedTemplateDetail
+from boldsign.models.template_sharing import TemplateSharing
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
@@ -44,7 +47,7 @@ class TemplateProperties(BaseModel):
     description: Optional[StrictStr] = None
     document_title: Optional[StrictStr] = Field(default=None, alias="documentTitle")
     document_message: Optional[StrictStr] = Field(default=None, alias="documentMessage")
-    files: Optional[List[DocumentFiles]] = None
+    files: Optional[List[TemplateFiles]] = None
     roles: Optional[List[Roles]] = None
     form_groups: Optional[List[FormGroup]] = Field(default=None, alias="formGroups")
     common_fields: Optional[List[TemplateFormFields]] = Field(default=None, alias="commonFields")
@@ -66,7 +69,11 @@ class TemplateProperties(BaseModel):
     behalf_of: Optional[BehalfOf] = Field(default=None, alias="behalfOf")
     document_download_option: Optional[StrictStr] = Field(default=None, alias="documentDownloadOption")
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
-    __properties: ClassVar[List[str]] = ["templateId", "title", "description", "documentTitle", "documentMessage", "files", "roles", "formGroups", "commonFields", "cCDetails", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "EnablePrintAndSign", "enableSigningOrder", "createdDate", "createdBy", "sharedTemplateDetail", "documentInfo", "labels", "templateLabels", "behalfOf", "documentDownloadOption", "recipientNotificationSettings"]
+    form_field_permission: Optional[FormFieldPermission] = Field(default=None, alias="formFieldPermission")
+    allowed_signature_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedSignatureTypes")
+    group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
+    sharing: Optional[TemplateSharing] = None
+    __properties: ClassVar[List[str]] = ["templateId", "title", "description", "documentTitle", "documentMessage", "files", "roles", "formGroups", "commonFields", "cCDetails", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "EnablePrintAndSign", "enableSigningOrder", "createdDate", "createdBy", "sharedTemplateDetail", "documentInfo", "labels", "templateLabels", "behalfOf", "documentDownloadOption", "recipientNotificationSettings", "formFieldPermission", "allowedSignatureTypes", "groupSignerSettings", "sharing"]
 
     @field_validator('document_download_option')
     def document_download_option_validate_enum(cls, value):
@@ -76,6 +83,17 @@ class TemplateProperties(BaseModel):
 
         if value not in set(['Combined', 'Individually']):
             raise ValueError("must be one of enum values ('Combined', 'Individually')")
+        return value
+
+    @field_validator('allowed_signature_types')
+    def allowed_signature_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['Text', 'Draw', 'Image']):
+                raise ValueError("each list item must be one of ('Text', 'Draw', 'Image')")
         return value
 
     model_config = ConfigDict(
@@ -107,6 +125,14 @@ class TemplateProperties(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
@@ -150,7 +176,7 @@ class TemplateProperties(BaseModel):
             "description": obj.get("description"),
             "documentTitle": obj.get("documentTitle"),
             "documentMessage": obj.get("documentMessage"),
-            "files": [DocumentFiles.from_dict(_item) for _item in obj["files"]] if obj.get("files") is not None else None,
+            "files": [TemplateFiles.from_dict(_item) for _item in obj["files"]] if obj.get("files") is not None else None,
             "roles": [Roles.from_dict(_item) for _item in obj["roles"]] if obj.get("roles") is not None else None,
             "formGroups": [FormGroup.from_dict(_item) for _item in obj["formGroups"]] if obj.get("formGroups") is not None else None,
             "commonFields": [TemplateFormFields.from_dict(_item) for _item in obj["commonFields"]] if obj.get("commonFields") is not None else None,
@@ -171,7 +197,11 @@ class TemplateProperties(BaseModel):
             "templateLabels": obj.get("templateLabels"),
             "behalfOf": BehalfOf.from_dict(obj["behalfOf"]) if obj.get("behalfOf") is not None else None,
             "documentDownloadOption": obj.get("documentDownloadOption"),
-            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None
+            "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
+            "formFieldPermission": FormFieldPermission.from_dict(obj["formFieldPermission"]) if obj.get("formFieldPermission") is not None else None,
+            "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
+            "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
+            "sharing": TemplateSharing.from_dict(obj["sharing"]) if obj.get("sharing") is not None else None
         })
         return _obj
 
@@ -193,7 +223,7 @@ class TemplateProperties(BaseModel):
             "description": "(str,)",
             "document_title": "(str,)",
             "document_message": "(str,)",
-            "files": "(List[DocumentFiles],)",
+            "files": "(List[TemplateFiles],)",
             "roles": "(List[Roles],)",
             "form_groups": "(List[FormGroup],)",
             "common_fields": "(List[TemplateFormFields],)",
@@ -215,6 +245,10 @@ class TemplateProperties(BaseModel):
             "behalf_of": "(BehalfOf,)",
             "document_download_option": "(str,)",
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
+            "form_field_permission": "(FormFieldPermission,)",
+            "allowed_signature_types": "(List[str],)",
+            "group_signer_settings": "(GroupSignerSettings,)",
+            "sharing": "(TemplateSharing,)",
         }
 
     @classmethod
@@ -229,5 +263,6 @@ class TemplateProperties(BaseModel):
             "document_info",
             "labels",
             "template_labels",
+            "allowed_signature_types",
         ]
 

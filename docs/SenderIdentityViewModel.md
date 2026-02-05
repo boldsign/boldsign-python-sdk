@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **str** |  | [optional] 
 **name** | **str** |  | [optional] 
 **email** | **str** |  | [optional] 
 **status** | **str** |  | [optional] 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **brand_id** | **str** |  | [optional] 
 **redirect_url** | **str** |  | [optional] 
 **meta_data** | **Dict[str, Optional[str]]** |  | [optional] 
+**locale** | **str** |  | [optional] 
 
 ## Example
 

@@ -22,6 +22,8 @@ Name | Type | Description | Notes
 **host_name** | **str** |  | [optional] 
 **host_user_id** | **str** |  | [optional] 
 **sign_type** | **str** |  | [optional] 
+**group_id** | **str** |  | [optional] 
+**group_signers** | [**List[TemplateGroupSigner]**](TemplateGroupSigner.md) |  | [optional] 
 
 ## Example
 

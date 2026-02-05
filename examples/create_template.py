@@ -45,6 +45,13 @@ with boldsign.ApiClient(configuration) as api_client:
             allowRoleDelete=True
         )
     ]
+    # can only edit or delete the existing form field
+    form_field_permission = boldsign.FormFieldPermission(
+        can_add=False,
+        can_modify=True,
+        can_modify_default_value=False
+    )
+
     
     create_template_request = boldsign.CreateTemplateRequest(
         enableReassign=True,
@@ -59,7 +66,8 @@ with boldsign.ApiClient(configuration) as api_client:
         documentTitle= "title of the document",
         allowNewFiles=True,
         roles=role,
-        files=["D:/Github/22.10.2024/Examples/open-api-sdk/python/sdk/tests/documents/input/nda-document.pdf"]
+        form_field_permission = form_field_permission,
+        files=["tests/documents/input/nda-document.pdf"]
     )
 
     create_template_response = template_api.create_template(create_template_request=create_template_request)

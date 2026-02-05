@@ -39,8 +39,8 @@ class AuthenticationSettings(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument', 'null']):
-            raise ValueError("must be one of enum values ('None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument', 'null')")
+        if value not in set(['None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument']):
+            raise ValueError("must be one of enum values ('None', 'EveryAccess', 'UntilSignCompleted', 'OncePerDocument')")
         return value
 
     model_config = ConfigDict(
@@ -72,6 +72,14 @@ class AuthenticationSettings(BaseModel):
                         data.append((f'{key}[{index}]', item))
                     else:
                         data.append((key, json.dumps(value[index], ensure_ascii=False)))
+            elif isinstance(value, dict):
+                for dict_key, dict_value in value.items():
+                    if dict_value is not None:
+                        if isinstance(dict_value, list):
+                            for idx, item in enumerate(dict_value):
+                                data.append((f'{key}[{dict_key}][{idx}]', item))
+                        else:
+                            data.append((f'{key}[{dict_key}]', str(dict_value)))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 

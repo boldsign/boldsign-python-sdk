@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **description** | **str** |  | [optional] 
 **document_title** | **str** |  | [optional] 
 **document_message** | **str** |  | [optional] 
-**files** | [**List[DocumentFiles]**](DocumentFiles.md) |  | [optional] 
+**files** | [**List[TemplateFiles]**](TemplateFiles.md) |  | [optional] 
 **roles** | [**List[Roles]**](Roles.md) |  | [optional] 
 **form_groups** | [**List[FormGroup]**](FormGroup.md) |  | [optional] 
 **common_fields** | [**List[TemplateFormFields]**](TemplateFormFields.md) |  | [optional] 
@@ -32,6 +32,10 @@ Name | Type | Description | Notes
 **behalf_of** | [**BehalfOf**](BehalfOf.md) |  | [optional] 
 **document_download_option** | **str** |  | [optional] 
 **recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
+**form_field_permission** | [**FormFieldPermission**](FormFieldPermission.md) |  | [optional] 
+**allowed_signature_types** | **List[str]** |  | [optional] 
+**group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
+**sharing** | [**TemplateSharing**](TemplateSharing.md) |  | [optional] 
 
 ## Example
 
