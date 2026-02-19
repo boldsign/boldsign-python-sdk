@@ -110,6 +110,7 @@ Class | Method | HTTP request | Description
 *DocumentApi* | [**download_audit_log**](docs/DocumentApi.md#download_audit_log) | **GET** /v1/document/downloadAuditLog | Download the audit trail document.
 *DocumentApi* | [**download_document**](docs/DocumentApi.md#download_document) | **GET** /v1/document/download | Download the document.
 *DocumentApi* | [**draft_send**](docs/DocumentApi.md#draft_send) | **POST** /v1/document/draftSend | Sends a draft-status document out for signature.
+*DocumentApi* | [**edit_document**](docs/DocumentApi.md#edit_document) | **PUT** /v1/document/edit | Edit and updates an existing document.
 *DocumentApi* | [**extend_expiry**](docs/DocumentApi.md#extend_expiry) | **PATCH** /v1/document/extendExpiry | Extends the expiration date of the document.
 *DocumentApi* | [**get_properties**](docs/DocumentApi.md#get_properties) | **GET** /v1/document/properties | Get summary of the document.
 *DocumentApi* | [**get_embedded_sign_link**](docs/DocumentApi.md#get_embedded_sign_link) | **GET** /v1/document/getEmbeddedSignLink | Get sign link for Embedded Sign.
@@ -201,6 +202,7 @@ Class | Method | HTTP request | Description
  - [DocumentCC](docs/DocumentCC.md)
  - [DocumentCcDetails](docs/DocumentCcDetails.md)
  - [DocumentCreated](docs/DocumentCreated.md)
+ - [DocumentEdited](docs/DocumentEdited.md)
  - [DocumentExpirySettings](docs/DocumentExpirySettings.md)
  - [DocumentFiles](docs/DocumentFiles.md)
  - [DocumentFormFields](docs/DocumentFormFields.md)
@@ -213,6 +215,10 @@ Class | Method | HTTP request | Description
  - [DocumentSignerDetails](docs/DocumentSignerDetails.md)
  - [DocumentTags](docs/DocumentTags.md)
  - [DownloadImageRequest](docs/DownloadImageRequest.md)
+ - [EditDocumentFile](docs/EditDocumentFile.md)
+ - [EditDocumentRequest](docs/EditDocumentRequest.md)
+ - [EditDocumentSigner](docs/EditDocumentSigner.md)
+ - [EditFormField](docs/EditFormField.md)
  - [EditSenderIdentityRequest](docs/EditSenderIdentityRequest.md)
  - [EditTemplateRequest](docs/EditTemplateRequest.md)
  - [EditableDateFieldSettings](docs/EditableDateFieldSettings.md)

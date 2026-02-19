@@ -59,6 +59,7 @@ boldsign/models/document.py
 boldsign/models/document_cc.py
 boldsign/models/document_cc_details.py
 boldsign/models/document_created.py
+boldsign/models/document_edited.py
 boldsign/models/document_expiry_settings.py
 boldsign/models/document_files.py
 boldsign/models/document_form_fields.py
@@ -71,6 +72,10 @@ boldsign/models/document_signer.py
 boldsign/models/document_signer_details.py
 boldsign/models/document_tags.py
 boldsign/models/download_image_request.py
+boldsign/models/edit_document_file.py
+boldsign/models/edit_document_request.py
+boldsign/models/edit_document_signer.py
+boldsign/models/edit_form_field.py
 boldsign/models/edit_sender_identity_request.py
 boldsign/models/edit_template_request.py
 boldsign/models/editable_date_field_settings.py
@@ -212,6 +217,7 @@ docs/DocumentApi.md
 docs/DocumentCC.md
 docs/DocumentCcDetails.md
 docs/DocumentCreated.md
+docs/DocumentEdited.md
 docs/DocumentExpirySettings.md
 docs/DocumentFiles.md
 docs/DocumentFormFields.md
@@ -224,6 +230,10 @@ docs/DocumentSigner.md
 docs/DocumentSignerDetails.md
 docs/DocumentTags.md
 docs/DownloadImageRequest.md
+docs/EditDocumentFile.md
+docs/EditDocumentRequest.md
+docs/EditDocumentSigner.md
+docs/EditFormField.md
 docs/EditSenderIdentityRequest.md
 docs/EditTemplateRequest.md
 docs/EditableDateFieldSettings.md

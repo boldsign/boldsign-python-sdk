@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**download_audit_log**](DocumentApi.md#download_audit_log) | **GET** /v1/document/downloadAuditLog | Download the audit trail document.
 [**download_document**](DocumentApi.md#download_document) | **GET** /v1/document/download | Download the document.
 [**draft_send**](DocumentApi.md#draft_send) | **POST** /v1/document/draftSend | Sends a draft-status document out for signature.
+[**edit_document**](DocumentApi.md#edit_document) | **PUT** /v1/document/edit | Edit and updates an existing document.
 [**extend_expiry**](DocumentApi.md#extend_expiry) | **PATCH** /v1/document/extendExpiry | Extends the expiration date of the document.
 [**get_properties**](DocumentApi.md#get_properties) | **GET** /v1/document/properties | Get summary of the document.
 [**get_embedded_sign_link**](DocumentApi.md#get_embedded_sign_link) | **GET** /v1/document/getEmbeddedSignLink | Get sign link for Embedded Sign.
@@ -855,6 +856,78 @@ void (empty response body)
 **201** | Created |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **edit_document**
+> DocumentEdited edit_document(document_id, edit_document_request=edit_document_request)
+
+Edit and updates an existing document.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.document_edited import DocumentEdited
+from boldsign.models.edit_document_request import EditDocumentRequest
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.DocumentApi(api_client)
+    document_id = 'document_id_example' # str | Document Id.
+    edit_document_request = boldsign.EditDocumentRequest() # EditDocumentRequest | Edit document JSON request. (optional)
+
+    try:
+        # Edit and updates an existing document.
+        api_response = api_instance.edit_document(document_id, edit_document_request=edit_document_request)
+        print("The response of DocumentApi->edit_document:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentApi->edit_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Document Id. | 
+ **edit_document_request** | [**EditDocumentRequest**](EditDocumentRequest.md)| Edit document JSON request. | [optional] 
+
+### Return type
+
+[**DocumentEdited**](DocumentEdited.md)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, multipart/form-data, application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**400** | Bad Request |  -  |
+**422** | Unprocessable Content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
