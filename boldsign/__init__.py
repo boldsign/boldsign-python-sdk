@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.0.3"
+__version__ = "3.1.0"
 
 # import apis into sdk package
 from boldsign.api.branding_api import BrandingApi
@@ -80,6 +80,7 @@ from boldsign.models.document import Document
 from boldsign.models.document_cc import DocumentCC
 from boldsign.models.document_cc_details import DocumentCcDetails
 from boldsign.models.document_created import DocumentCreated
+from boldsign.models.document_edited import DocumentEdited
 from boldsign.models.document_expiry_settings import DocumentExpirySettings
 from boldsign.models.document_files import DocumentFiles
 from boldsign.models.document_form_fields import DocumentFormFields
@@ -92,6 +93,10 @@ from boldsign.models.document_signer import DocumentSigner
 from boldsign.models.document_signer_details import DocumentSignerDetails
 from boldsign.models.document_tags import DocumentTags
 from boldsign.models.download_image_request import DownloadImageRequest
+from boldsign.models.edit_document_file import EditDocumentFile
+from boldsign.models.edit_document_request import EditDocumentRequest
+from boldsign.models.edit_document_signer import EditDocumentSigner
+from boldsign.models.edit_form_field import EditFormField
 from boldsign.models.edit_sender_identity_request import EditSenderIdentityRequest
 from boldsign.models.edit_template_request import EditTemplateRequest
 from boldsign.models.editable_date_field_settings import EditableDateFieldSettings
