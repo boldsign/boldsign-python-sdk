@@ -24,7 +24,7 @@ from pathlib import Path
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "boldsign"
-VERSION = "3.1.0"
+VERSION = "3.1.1"
 
 # Check if a version was passed via command-line arguments
 if "--version" in sys.argv:

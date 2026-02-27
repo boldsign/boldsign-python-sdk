@@ -41,10 +41,12 @@ from boldsign.models.contact_page_details import ContactPageDetails
 from boldsign.models.contacts_details import ContactsDetails
 from boldsign.models.contacts_list import ContactsList
 from boldsign.models.create_contact_response import CreateContactResponse
+from boldsign.models.create_group_contact_response import CreateGroupContactResponse
 from boldsign.models.create_sender_identity_request import CreateSenderIdentityRequest
 from boldsign.models.create_team_request import CreateTeamRequest
 from boldsign.models.create_template_request import CreateTemplateRequest
 from boldsign.models.create_user import CreateUser
+from boldsign.models.creators import Creators
 from boldsign.models.custom_domain_settings import CustomDomainSettings
 from boldsign.models.custom_field_collection import CustomFieldCollection
 from boldsign.models.custom_field_message import CustomFieldMessage
@@ -76,6 +78,8 @@ from boldsign.models.edit_template_request import EditTemplateRequest
 from boldsign.models.editable_date_field_settings import EditableDateFieldSettings
 from boldsign.models.embedded_create_template_request import EmbeddedCreateTemplateRequest
 from boldsign.models.embedded_custom_field_created import EmbeddedCustomFieldCreated
+from boldsign.models.embedded_document_edit_json_request import EmbeddedDocumentEditJsonRequest
+from boldsign.models.embedded_document_edited import EmbeddedDocumentEdited
 from boldsign.models.embedded_document_request import EmbeddedDocumentRequest
 from boldsign.models.embedded_file_details import EmbeddedFileDetails
 from boldsign.models.embedded_file_link import EmbeddedFileLink
@@ -98,8 +102,13 @@ from boldsign.models.form_field import FormField
 from boldsign.models.form_field_permission import FormFieldPermission
 from boldsign.models.form_group import FormGroup
 from boldsign.models.formula_field_settings import FormulaFieldSettings
+from boldsign.models.get_group_contact_details import GetGroupContactDetails
+from boldsign.models.group_contact import GroupContact
+from boldsign.models.group_contact_details import GroupContactDetails
+from boldsign.models.group_contacts_list import GroupContactsList
 from boldsign.models.group_signer import GroupSigner
 from boldsign.models.group_signer_settings import GroupSignerSettings
+from boldsign.models.group_user import GroupUser
 from boldsign.models.id_document import IdDocument
 from boldsign.models.id_report import IdReport
 from boldsign.models.id_verification_details import IdVerificationDetails
@@ -157,6 +166,7 @@ from boldsign.models.template_tag import TemplateTag
 from boldsign.models.template_team_share import TemplateTeamShare
 from boldsign.models.text_tag_definition import TextTagDefinition
 from boldsign.models.text_tag_offset import TextTagOffset
+from boldsign.models.update_group_contact import UpdateGroupContact
 from boldsign.models.update_user import UpdateUser
 from boldsign.models.update_user_meta_data import UpdateUserMetaData
 from boldsign.models.user_page_details import UserPageDetails

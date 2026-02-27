@@ -103,6 +103,7 @@ Class | Method | HTTP request | Description
 *DocumentApi* | [**behalf_documents**](docs/DocumentApi.md#behalf_documents) | **GET** /v1/document/behalfList | Gets the behalf documents.
 *DocumentApi* | [**change_access_code**](docs/DocumentApi.md#change_access_code) | **PATCH** /v1/document/changeAccessCode | Changes the access code for the given document signer.
 *DocumentApi* | [**change_recipient**](docs/DocumentApi.md#change_recipient) | **PATCH** /v1/document/changeRecipient | Change recipient details of a document.
+*DocumentApi* | [**create_embedded_edit_url**](docs/DocumentApi.md#create_embedded_edit_url) | **POST** /v1/document/createEmbeddedEditUrl | Generates an embedded edit URL that allows the document editing process to be integrated into your application.
 *DocumentApi* | [**create_embedded_request_url_document**](docs/DocumentApi.md#create_embedded_request_url_document) | **POST** /v1/document/createEmbeddedRequestUrl | Generates a send URL which embeds document sending process into your application.
 *DocumentApi* | [**delete_document**](docs/DocumentApi.md#delete_document) | **DELETE** /v1/document/delete | Delete the document.
 *DocumentApi* | [**delete_tag**](docs/DocumentApi.md#delete_tag) | **DELETE** /v1/document/deleteTags | Delete the Tags in Documents.
@@ -121,6 +122,11 @@ Class | Method | HTTP request | Description
 *DocumentApi* | [**revoke_document**](docs/DocumentApi.md#revoke_document) | **POST** /v1/document/revoke | Revoke the document.
 *DocumentApi* | [**send_document**](docs/DocumentApi.md#send_document) | **POST** /v1/document/send | Sends the document for sign.
 *DocumentApi* | [**team_documents**](docs/DocumentApi.md#team_documents) | **GET** /v1/document/teamlist | Get user Team documents.
+*GroupContactsApi* | [**create_group_contact**](docs/GroupContactsApi.md#create_group_contact) | **POST** /v1/contactGroups/create | Create a new Group Contact.
+*GroupContactsApi* | [**delete_group_contact**](docs/GroupContactsApi.md#delete_group_contact) | **DELETE** /v1/contactGroups/delete | Deletes a Group Contact.
+*GroupContactsApi* | [**get_group_contact**](docs/GroupContactsApi.md#get_group_contact) | **GET** /v1/contactGroups/get | Get Summary of the Group Contact.
+*GroupContactsApi* | [**group_contact_list**](docs/GroupContactsApi.md#group_contact_list) | **GET** /v1/contactGroups/list | List Group Contacts.
+*GroupContactsApi* | [**update_group_contact**](docs/GroupContactsApi.md#update_group_contact) | **PUT** /v1/contactGroups/update | Update the Group Contact.
 *IdentityVerificationApi* | [**create_embedded_verification_url**](docs/IdentityVerificationApi.md#create_embedded_verification_url) | **POST** /v1/identityVerification/createEmbeddedVerificationUrl | Generate a URL that embeds manual ID verification for the specified document signer into your application.
 *IdentityVerificationApi* | [**image**](docs/IdentityVerificationApi.md#image) | **POST** /v1/identityVerification/image | Retrieve the uploaded ID verification document or selfie image for the specified document signer using the file ID.
 *IdentityVerificationApi* | [**report**](docs/IdentityVerificationApi.md#report) | **POST** /v1/identityVerification/report | Retrieve the ID verification report for the specified document signer.
@@ -189,10 +195,12 @@ Class | Method | HTTP request | Description
  - [ContactsDetails](docs/ContactsDetails.md)
  - [ContactsList](docs/ContactsList.md)
  - [CreateContactResponse](docs/CreateContactResponse.md)
+ - [CreateGroupContactResponse](docs/CreateGroupContactResponse.md)
  - [CreateSenderIdentityRequest](docs/CreateSenderIdentityRequest.md)
  - [CreateTeamRequest](docs/CreateTeamRequest.md)
  - [CreateTemplateRequest](docs/CreateTemplateRequest.md)
  - [CreateUser](docs/CreateUser.md)
+ - [Creators](docs/Creators.md)
  - [CustomDomainSettings](docs/CustomDomainSettings.md)
  - [CustomFieldCollection](docs/CustomFieldCollection.md)
  - [CustomFieldMessage](docs/CustomFieldMessage.md)
@@ -224,6 +232,8 @@ Class | Method | HTTP request | Description
  - [EditableDateFieldSettings](docs/EditableDateFieldSettings.md)
  - [EmbeddedCreateTemplateRequest](docs/EmbeddedCreateTemplateRequest.md)
  - [EmbeddedCustomFieldCreated](docs/EmbeddedCustomFieldCreated.md)
+ - [EmbeddedDocumentEditJsonRequest](docs/EmbeddedDocumentEditJsonRequest.md)
+ - [EmbeddedDocumentEdited](docs/EmbeddedDocumentEdited.md)
  - [EmbeddedDocumentRequest](docs/EmbeddedDocumentRequest.md)
  - [EmbeddedFileDetails](docs/EmbeddedFileDetails.md)
  - [EmbeddedFileLink](docs/EmbeddedFileLink.md)
@@ -246,8 +256,13 @@ Class | Method | HTTP request | Description
  - [FormFieldPermission](docs/FormFieldPermission.md)
  - [FormGroup](docs/FormGroup.md)
  - [FormulaFieldSettings](docs/FormulaFieldSettings.md)
+ - [GetGroupContactDetails](docs/GetGroupContactDetails.md)
+ - [GroupContact](docs/GroupContact.md)
+ - [GroupContactDetails](docs/GroupContactDetails.md)
+ - [GroupContactsList](docs/GroupContactsList.md)
  - [GroupSigner](docs/GroupSigner.md)
  - [GroupSignerSettings](docs/GroupSignerSettings.md)
+ - [GroupUser](docs/GroupUser.md)
  - [IdDocument](docs/IdDocument.md)
  - [IdReport](docs/IdReport.md)
  - [IdVerificationDetails](docs/IdVerificationDetails.md)
@@ -305,6 +320,7 @@ Class | Method | HTTP request | Description
  - [TemplateTeamShare](docs/TemplateTeamShare.md)
  - [TextTagDefinition](docs/TextTagDefinition.md)
  - [TextTagOffset](docs/TextTagOffset.md)
+ - [UpdateGroupContact](docs/UpdateGroupContact.md)
  - [UpdateUser](docs/UpdateUser.md)
  - [UpdateUserMetaData](docs/UpdateUserMetaData.md)
  - [UserPageDetails](docs/UserPageDetails.md)
