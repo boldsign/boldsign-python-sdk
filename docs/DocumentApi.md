@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**behalf_documents**](DocumentApi.md#behalf_documents) | **GET** /v1/document/behalfList | Gets the behalf documents.
 [**change_access_code**](DocumentApi.md#change_access_code) | **PATCH** /v1/document/changeAccessCode | Changes the access code for the given document signer.
 [**change_recipient**](DocumentApi.md#change_recipient) | **PATCH** /v1/document/changeRecipient | Change recipient details of a document.
+[**create_embedded_edit_url**](DocumentApi.md#create_embedded_edit_url) | **POST** /v1/document/createEmbeddedEditUrl | Generates an embedded edit URL that allows the document editing process to be integrated into your application.
 [**create_embedded_request_url_document**](DocumentApi.md#create_embedded_request_url_document) | **POST** /v1/document/createEmbeddedRequestUrl | Generates a send URL which embeds document sending process into your application.
 [**delete_document**](DocumentApi.md#delete_document) | **DELETE** /v1/document/delete | Delete the document.
 [**delete_tag**](DocumentApi.md#delete_tag) | **DELETE** /v1/document/deleteTags | Delete the Tags in Documents.
@@ -385,6 +386,78 @@ void (empty response body)
 **204** | No Content |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_embedded_edit_url**
+> EmbeddedDocumentEdited create_embedded_edit_url(document_id, embedded_document_edit_json_request=embedded_document_edit_json_request)
+
+Generates an embedded edit URL that allows the document editing process to be integrated into your application.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.embedded_document_edit_json_request import EmbeddedDocumentEditJsonRequest
+from boldsign.models.embedded_document_edited import EmbeddedDocumentEdited
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.DocumentApi(api_client)
+    document_id = 'document_id_example' # str | The document id.
+    embedded_document_edit_json_request = boldsign.EmbeddedDocumentEditJsonRequest() # EmbeddedDocumentEditJsonRequest | The embedded edit document request body. (optional)
+
+    try:
+        # Generates an embedded edit URL that allows the document editing process to be integrated into your application.
+        api_response = api_instance.create_embedded_edit_url(document_id, embedded_document_edit_json_request=embedded_document_edit_json_request)
+        print("The response of DocumentApi->create_embedded_edit_url:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentApi->create_embedded_edit_url: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| The document id. | 
+ **embedded_document_edit_json_request** | [**EmbeddedDocumentEditJsonRequest**](EmbeddedDocumentEditJsonRequest.md)| The embedded edit document request body. | [optional] 
+
+### Return type
+
+[**EmbeddedDocumentEdited**](EmbeddedDocumentEdited.md)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, multipart/form-data, application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**422** | Unprocessable Content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

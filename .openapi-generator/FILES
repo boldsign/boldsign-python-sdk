@@ -9,6 +9,7 @@ boldsign/api/branding_api.py
 boldsign/api/contacts_api.py
 boldsign/api/custom_field_api.py
 boldsign/api/document_api.py
+boldsign/api/group_contacts_api.py
 boldsign/api/identity_verification_api.py
 boldsign/api/plan_api.py
 boldsign/api/sender_identities_api.py
@@ -46,10 +47,12 @@ boldsign/models/contact_page_details.py
 boldsign/models/contacts_details.py
 boldsign/models/contacts_list.py
 boldsign/models/create_contact_response.py
+boldsign/models/create_group_contact_response.py
 boldsign/models/create_sender_identity_request.py
 boldsign/models/create_team_request.py
 boldsign/models/create_template_request.py
 boldsign/models/create_user.py
+boldsign/models/creators.py
 boldsign/models/custom_domain_settings.py
 boldsign/models/custom_field_collection.py
 boldsign/models/custom_field_message.py
@@ -81,6 +84,8 @@ boldsign/models/edit_template_request.py
 boldsign/models/editable_date_field_settings.py
 boldsign/models/embedded_create_template_request.py
 boldsign/models/embedded_custom_field_created.py
+boldsign/models/embedded_document_edit_json_request.py
+boldsign/models/embedded_document_edited.py
 boldsign/models/embedded_document_request.py
 boldsign/models/embedded_file_details.py
 boldsign/models/embedded_file_link.py
@@ -103,8 +108,13 @@ boldsign/models/form_field.py
 boldsign/models/form_field_permission.py
 boldsign/models/form_group.py
 boldsign/models/formula_field_settings.py
+boldsign/models/get_group_contact_details.py
+boldsign/models/group_contact.py
+boldsign/models/group_contact_details.py
+boldsign/models/group_contacts_list.py
 boldsign/models/group_signer.py
 boldsign/models/group_signer_settings.py
+boldsign/models/group_user.py
 boldsign/models/id_document.py
 boldsign/models/id_report.py
 boldsign/models/id_verification_details.py
@@ -162,6 +172,7 @@ boldsign/models/template_tag.py
 boldsign/models/template_team_share.py
 boldsign/models/text_tag_definition.py
 boldsign/models/text_tag_offset.py
+boldsign/models/update_group_contact.py
 boldsign/models/update_user.py
 boldsign/models/update_user_meta_data.py
 boldsign/models/user_page_details.py
@@ -202,10 +213,12 @@ docs/ContactsApi.md
 docs/ContactsDetails.md
 docs/ContactsList.md
 docs/CreateContactResponse.md
+docs/CreateGroupContactResponse.md
 docs/CreateSenderIdentityRequest.md
 docs/CreateTeamRequest.md
 docs/CreateTemplateRequest.md
 docs/CreateUser.md
+docs/Creators.md
 docs/CustomDomainSettings.md
 docs/CustomFieldApi.md
 docs/CustomFieldCollection.md
@@ -239,6 +252,8 @@ docs/EditTemplateRequest.md
 docs/EditableDateFieldSettings.md
 docs/EmbeddedCreateTemplateRequest.md
 docs/EmbeddedCustomFieldCreated.md
+docs/EmbeddedDocumentEditJsonRequest.md
+docs/EmbeddedDocumentEdited.md
 docs/EmbeddedDocumentRequest.md
 docs/EmbeddedFileDetails.md
 docs/EmbeddedFileLink.md
@@ -261,8 +276,14 @@ docs/FormField.md
 docs/FormFieldPermission.md
 docs/FormGroup.md
 docs/FormulaFieldSettings.md
+docs/GetGroupContactDetails.md
+docs/GroupContact.md
+docs/GroupContactDetails.md
+docs/GroupContactsApi.md
+docs/GroupContactsList.md
 docs/GroupSigner.md
 docs/GroupSignerSettings.md
+docs/GroupUser.md
 docs/IdDocument.md
 docs/IdReport.md
 docs/IdVerificationDetails.md
@@ -325,6 +346,7 @@ docs/TemplateTag.md
 docs/TemplateTeamShare.md
 docs/TextTagDefinition.md
 docs/TextTagOffset.md
+docs/UpdateGroupContact.md
 docs/UpdateUser.md
 docs/UpdateUserMetaData.md
 docs/UserApi.md
