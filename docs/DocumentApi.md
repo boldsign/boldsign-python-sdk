@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**add_authentication**](DocumentApi.md#add_authentication) | **PATCH** /v1/document/addAuthentication | The add authentication to recipient.
 [**add_tag**](DocumentApi.md#add_tag) | **PATCH** /v1/document/addTags | Add the Tags in Documents.
 [**behalf_documents**](DocumentApi.md#behalf_documents) | **GET** /v1/document/behalfList | Gets the behalf documents.
+[**cancel_editing**](DocumentApi.md#cancel_editing) | **POST** /v1/document/cancelEditing | Cancels editing for a document that is currently in edit-mode.
 [**change_access_code**](DocumentApi.md#change_access_code) | **PATCH** /v1/document/changeAccessCode | Changes the access code for the given document signer.
 [**change_recipient**](DocumentApi.md#change_recipient) | **PATCH** /v1/document/changeRecipient | Change recipient details of a document.
 [**create_embedded_edit_url**](DocumentApi.md#create_embedded_edit_url) | **POST** /v1/document/createEmbeddedEditUrl | Generates an embedded edit URL that allows the document editing process to be integrated into your application.
@@ -248,6 +249,72 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **cancel_editing**
+> cancel_editing(document_id, on_behalf_of=on_behalf_of)
+
+Cancels editing for a document that is currently in edit-mode.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.DocumentApi(api_client)
+    document_id = 'document_id_example' # str | The document id.
+    on_behalf_of = 'on_behalf_of_example' # str | The onbehalfof email id. (optional)
+
+    try:
+        # Cancels editing for a document that is currently in edit-mode.
+        api_instance.cancel_editing(document_id, on_behalf_of=on_behalf_of)
+    except Exception as e:
+        print("Exception when calling DocumentApi->cancel_editing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| The document id. | 
+ **on_behalf_of** | **str**| The onbehalfof email id. | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

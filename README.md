@@ -101,6 +101,7 @@ Class | Method | HTTP request | Description
 *DocumentApi* | [**add_authentication**](docs/DocumentApi.md#add_authentication) | **PATCH** /v1/document/addAuthentication | The add authentication to recipient.
 *DocumentApi* | [**add_tag**](docs/DocumentApi.md#add_tag) | **PATCH** /v1/document/addTags | Add the Tags in Documents.
 *DocumentApi* | [**behalf_documents**](docs/DocumentApi.md#behalf_documents) | **GET** /v1/document/behalfList | Gets the behalf documents.
+*DocumentApi* | [**cancel_editing**](docs/DocumentApi.md#cancel_editing) | **POST** /v1/document/cancelEditing | Cancels editing for a document that is currently in edit-mode.
 *DocumentApi* | [**change_access_code**](docs/DocumentApi.md#change_access_code) | **PATCH** /v1/document/changeAccessCode | Changes the access code for the given document signer.
 *DocumentApi* | [**change_recipient**](docs/DocumentApi.md#change_recipient) | **PATCH** /v1/document/changeRecipient | Change recipient details of a document.
 *DocumentApi* | [**create_embedded_edit_url**](docs/DocumentApi.md#create_embedded_edit_url) | **POST** /v1/document/createEmbeddedEditUrl | Generates an embedded edit URL that allows the document editing process to be integrated into your application.
