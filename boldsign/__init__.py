@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.1.1"
+__version__ = "3.1.2"
 
 # import apis into sdk package
 from boldsign.api.branding_api import BrandingApi
