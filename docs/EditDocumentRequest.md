@@ -35,6 +35,7 @@ Name | Type | Description | Notes
 **scheduled_send_time** | **int** |  | [optional] 
 **allowed_signature_types** | **List[str]** |  | [optional] 
 **group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
+**enable_allow_sign_everywhere** | **bool** |  | [optional] 
 
 ## Example
 

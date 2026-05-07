@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **allow_message_editing** | **bool** |  | [optional] 
 **allow_new_roles** | **bool** |  | [optional] 
 **allow_new_files** | **bool** |  | [optional] 
+**allow_modify_files** | **bool** |  | [optional] 
 **enable_reassign** | **bool** |  | [optional] 
 **enable_print_and_sign** | **bool** |  | [optional] 
 **enable_signing_order** | **bool** |  | [optional] 
@@ -27,6 +28,7 @@ Name | Type | Description | Notes
 **allowed_signature_types** | **List[str]** |  | [optional] 
 **form_field_permission** | [**FormFieldPermission**](FormFieldPermission.md) |  | [optional] 
 **group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
+**enable_allow_sign_everywhere** | **bool** |  | [optional] 
 
 ## Example
 
