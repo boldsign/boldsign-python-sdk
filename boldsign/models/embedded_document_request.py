@@ -87,7 +87,8 @@ class EmbeddedDocumentRequest(BaseModel):
     allow_scheduled_send: Optional[StrictBool] = Field(default=False, alias="allowScheduledSend")
     allowed_signature_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedSignatureTypes")
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
-    __properties: ClassVar[List[str]] = ["redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "showTooltip", "embeddedSendLinkValidTill", "files", "title", "message", "signers", "cc", "enableSigningOrder", "expiryDays", "expiryDateType", "expiryValue", "reminderSettings", "enableEmbeddedSigning", "disableEmails", "disableSMS", "brandId", "hideDocumentId", "labels", "fileUrls", "sendLinkValidTill", "useTextTags", "textTagDefinitions", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "documentInfo", "onBehalfOf", "AutoDetectFields", "documentDownloadOption", "isSandbox", "metaData", "formGroups", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings"]
+    enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
+    __properties: ClassVar[List[str]] = ["redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "showTooltip", "embeddedSendLinkValidTill", "files", "title", "message", "signers", "cc", "enableSigningOrder", "expiryDays", "expiryDateType", "expiryValue", "reminderSettings", "enableEmbeddedSigning", "disableEmails", "disableSMS", "brandId", "hideDocumentId", "labels", "fileUrls", "sendLinkValidTill", "useTextTags", "textTagDefinitions", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "documentInfo", "onBehalfOf", "AutoDetectFields", "documentDownloadOption", "isSandbox", "metaData", "formGroups", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere"]
 
     @field_validator('send_view_option')
     def send_view_option_validate_enum(cls, value):
@@ -261,7 +262,8 @@ class EmbeddedDocumentRequest(BaseModel):
             "scheduledSendTime": obj.get("scheduledSendTime"),
             "allowScheduledSend": obj.get("allowScheduledSend") if obj.get("allowScheduledSend") is not None else False,
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
-            "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None
+            "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
+            "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere")
         })
         return _obj
 
@@ -325,6 +327,7 @@ class EmbeddedDocumentRequest(BaseModel):
             "allow_scheduled_send": "(bool,)",
             "allowed_signature_types": "(List[str],)",
             "group_signer_settings": "(GroupSignerSettings,)",
+            "enable_allow_sign_everywhere": "(bool,)",
         }
 
     @classmethod

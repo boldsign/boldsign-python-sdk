@@ -47,6 +47,7 @@ Name | Type | Description | Notes
 **allow_delete_form_field** | **bool** |  | [optional] 
 **collaboration_settings** | [**CollaborationSettings**](CollaborationSettings.md) |  | [optional] 
 **is_masked** | **bool** |  | [optional] [default to False]
+**is_default_value_required** | **bool** |  | [optional] 
 
 ## Example
 

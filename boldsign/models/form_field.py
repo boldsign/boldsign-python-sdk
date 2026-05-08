@@ -80,7 +80,8 @@ class FormField(BaseModel):
     allow_delete_form_field: Optional[StrictBool] = Field(default=None, alias="allowDeleteFormField")
     collaboration_settings: Optional[CollaborationSettings] = Field(default=None, alias="collaborationSettings")
     is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
-    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField", "collaborationSettings", "isMasked"]
+    is_default_value_required: Optional[StrictBool] = Field(default=None, alias="isDefaultValueRequired")
+    __properties: ClassVar[List[str]] = ["fieldType", "pageNumber", "bounds", "id", "name", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "groupName", "label", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "conditionalRules", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField", "collaborationSettings", "isMasked", "isDefaultValueRequired"]
 
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
@@ -255,7 +256,8 @@ class FormField(BaseModel):
             "allowEditFormField": obj.get("allowEditFormField"),
             "allowDeleteFormField": obj.get("allowDeleteFormField"),
             "collaborationSettings": CollaborationSettings.from_dict(obj["collaborationSettings"]) if obj.get("collaborationSettings") is not None else None,
-            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False
+            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False,
+            "isDefaultValueRequired": obj.get("isDefaultValueRequired")
         })
         return _obj
 
@@ -314,6 +316,7 @@ class FormField(BaseModel):
             "allow_delete_form_field": "(bool,)",
             "collaboration_settings": "(CollaborationSettings,)",
             "is_masked": "(bool,)",
+            "is_default_value_required": "(bool,)",
         }
 
     @classmethod

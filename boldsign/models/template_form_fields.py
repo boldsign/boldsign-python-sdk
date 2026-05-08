@@ -79,7 +79,8 @@ class TemplateFormFields(BaseModel):
     allow_delete_form_field: Optional[StrictBool] = Field(default=None, alias="allowDeleteFormField")
     collaboration_settings: Optional[CollaborationSettings] = Field(default=None, alias="collaborationSettings")
     is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
-    __properties: ClassVar[List[str]] = ["id", "fieldType", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontHexColor", "isUnderLineFont", "isItalicFont", "isBoldFont", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "dropdownOptions", "bounds", "pageNumber", "conditionalRules", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "hyperlinkText", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField", "collaborationSettings", "isMasked"]
+    is_default_value_required: Optional[StrictBool] = Field(default=None, alias="isDefaultValueRequired")
+    __properties: ClassVar[List[str]] = ["id", "fieldType", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontHexColor", "isUnderLineFont", "isItalicFont", "isBoldFont", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "dropdownOptions", "bounds", "pageNumber", "conditionalRules", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "hyperlinkText", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField", "collaborationSettings", "isMasked", "isDefaultValueRequired"]
 
     @field_validator('validationtype')
     def validationtype_validate_enum(cls, value):
@@ -237,7 +238,8 @@ class TemplateFormFields(BaseModel):
             "allowEditFormField": obj.get("allowEditFormField"),
             "allowDeleteFormField": obj.get("allowDeleteFormField"),
             "collaborationSettings": CollaborationSettings.from_dict(obj["collaborationSettings"]) if obj.get("collaborationSettings") is not None else None,
-            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False
+            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False,
+            "isDefaultValueRequired": obj.get("isDefaultValueRequired")
         })
         return _obj
 
@@ -296,6 +298,7 @@ class TemplateFormFields(BaseModel):
             "allow_delete_form_field": "(bool,)",
             "collaboration_settings": "(CollaborationSettings,)",
             "is_masked": "(bool,)",
+            "is_default_value_required": "(bool,)",
         }
 
     @classmethod

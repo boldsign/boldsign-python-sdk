@@ -44,6 +44,7 @@ Name | Type | Description | Notes
 **allowed_signature_types** | **List[str]** |  | [optional] 
 **form_field_permission** | [**FormFieldPermission**](FormFieldPermission.md) |  | [optional] 
 **group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
+**enable_allow_sign_everywhere** | **bool** |  | [optional] 
 
 ## Example
 

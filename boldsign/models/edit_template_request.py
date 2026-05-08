@@ -48,6 +48,7 @@ class EditTemplateRequest(BaseModel):
     allow_message_editing: Optional[StrictBool] = Field(default=None, alias="allowMessageEditing")
     allow_new_roles: Optional[StrictBool] = Field(default=None, alias="allowNewRoles")
     allow_new_files: Optional[StrictBool] = Field(default=None, alias="allowNewFiles")
+    allow_modify_files: Optional[StrictBool] = Field(default=None, alias="allowModifyFiles")
     enable_reassign: Optional[StrictBool] = Field(default=None, alias="enableReassign")
     enable_print_and_sign: Optional[StrictBool] = Field(default=None, alias="enablePrintAndSign")
     enable_signing_order: Optional[StrictBool] = Field(default=None, alias="enableSigningOrder")
@@ -60,7 +61,8 @@ class EditTemplateRequest(BaseModel):
     allowed_signature_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedSignatureTypes")
     form_field_permission: Optional[FormFieldPermission] = Field(default=None, alias="formFieldPermission")
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
-    __properties: ClassVar[List[str]] = ["title", "description", "documentTitle", "documentMessage", "roles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "onBehalfOf", "labels", "templateLabels", "formGroups", "recipientNotificationSettings", "allowedSignatureTypes", "formFieldPermission", "groupSignerSettings"]
+    enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
+    __properties: ClassVar[List[str]] = ["title", "description", "documentTitle", "documentMessage", "roles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "onBehalfOf", "labels", "templateLabels", "formGroups", "recipientNotificationSettings", "allowedSignatureTypes", "formFieldPermission", "groupSignerSettings", "enableAllowSignEverywhere"]
 
     @field_validator('allowed_signature_types')
     def allowed_signature_types_validate_enum(cls, value):
@@ -158,6 +160,7 @@ class EditTemplateRequest(BaseModel):
             "allowMessageEditing": obj.get("allowMessageEditing"),
             "allowNewRoles": obj.get("allowNewRoles"),
             "allowNewFiles": obj.get("allowNewFiles"),
+            "allowModifyFiles": obj.get("allowModifyFiles"),
             "enableReassign": obj.get("enableReassign"),
             "enablePrintAndSign": obj.get("enablePrintAndSign"),
             "enableSigningOrder": obj.get("enableSigningOrder"),
@@ -169,7 +172,8 @@ class EditTemplateRequest(BaseModel):
             "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
             "formFieldPermission": FormFieldPermission.from_dict(obj["formFieldPermission"]) if obj.get("formFieldPermission") is not None else None,
-            "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None
+            "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
+            "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere")
         })
         return _obj
 
@@ -196,6 +200,7 @@ class EditTemplateRequest(BaseModel):
             "allow_message_editing": "(bool,)",
             "allow_new_roles": "(bool,)",
             "allow_new_files": "(bool,)",
+            "allow_modify_files": "(bool,)",
             "enable_reassign": "(bool,)",
             "enable_print_and_sign": "(bool,)",
             "enable_signing_order": "(bool,)",
@@ -208,6 +213,7 @@ class EditTemplateRequest(BaseModel):
             "allowed_signature_types": "(List[str],)",
             "form_field_permission": "(FormFieldPermission,)",
             "group_signer_settings": "(GroupSignerSettings,)",
+            "enable_allow_sign_everywhere": "(bool,)",
         }
 
     @classmethod
