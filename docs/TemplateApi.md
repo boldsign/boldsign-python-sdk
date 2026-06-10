@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**merge_and_send**](TemplateApi.md#merge_and_send) | **POST** /v1/template/mergeAndSend | Send the document by merging multiple templates.
 [**merge_create_embedded_request_url_template**](TemplateApi.md#merge_create_embedded_request_url_template) | **POST** /v1/template/mergeCreateEmbeddedRequestUrl | Generates a merge request URL using a template that combines document merging and sending processes into your application.
 [**send_using_template**](TemplateApi.md#send_using_template) | **POST** /v1/template/send | Send a document for signature using a Template.
+[**share_template**](TemplateApi.md#share_template) | **PATCH** /v1/template/share | Share a template with teams and manage permissions.
 
 
 # **add_tag**
@@ -1057,6 +1058,75 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **401** | Unauthorized |  -  |
 **422** | Unprocessable Content |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **share_template**
+> share_template(template_id, template_share_request)
+
+Share a template with teams and manage permissions.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.template_share_request import TemplateShareRequest
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.TemplateApi(api_client)
+    template_id = 'template_id_example' # str | Template Id.
+    template_share_request = boldsign.TemplateShareRequest() # TemplateShareRequest | Permissions request.
+
+    try:
+        # Share a template with teams and manage permissions.
+        api_instance.share_template(template_id, template_share_request)
+    except Exception as e:
+        print("Exception when calling TemplateApi->share_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **str**| Template Id. | 
+ **template_share_request** | [**TemplateShareRequest**](TemplateShareRequest.md)| Permissions request. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;odata.metadata=minimal;odata.streaming=true, application/json;odata.metadata=minimal;odata.streaming=false, application/json;odata.metadata=minimal, application/json;odata.metadata=full;odata.streaming=true, application/json;odata.metadata=full;odata.streaming=false, application/json;odata.metadata=full, application/json;odata.metadata=none;odata.streaming=true, application/json;odata.metadata=none;odata.streaming=false, application/json;odata.metadata=none, application/json;odata.streaming=true, application/json;odata.streaming=false, application/json, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=minimal;IEEE754Compatible=false, application/json;odata.metadata=minimal;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=full;IEEE754Compatible=false, application/json;odata.metadata=full;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false, application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true, application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=false, application/json;odata.metadata=none;IEEE754Compatible=true, application/json;odata.streaming=true;IEEE754Compatible=false, application/json;odata.streaming=true;IEEE754Compatible=true, application/json;odata.streaming=false;IEEE754Compatible=false, application/json;odata.streaming=false;IEEE754Compatible=true, application/json;IEEE754Compatible=false, application/json;IEEE754Compatible=true, application/xml, text/plain, application/json-patch+json, text/json, application/*+json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal Server Error |  -  |
+**401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

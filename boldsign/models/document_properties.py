@@ -86,7 +86,10 @@ class DocumentProperties(BaseModel):
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
     in_editing_mode: Optional[StrictBool] = Field(default=None, alias="inEditingMode")
     display_status: Optional[StrictStr] = Field(default=None, alias="displayStatus")
-    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "inEditingMode", "displayStatus"]
+    enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
+    is_combined_audit: Optional[StrictBool] = Field(default=None, alias="isCombinedAudit")
+    is_combined_attachment: Optional[StrictBool] = Field(default=None, alias="isCombinedAttachment")
+    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "inEditingMode", "displayStatus", "enableAllowSignEverywhere", "isCombinedAudit", "isCombinedAttachment"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -257,7 +260,10 @@ class DocumentProperties(BaseModel):
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
             "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
             "inEditingMode": obj.get("inEditingMode"),
-            "displayStatus": obj.get("displayStatus")
+            "displayStatus": obj.get("displayStatus"),
+            "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
+            "isCombinedAudit": obj.get("isCombinedAudit"),
+            "isCombinedAttachment": obj.get("isCombinedAttachment")
         })
         return _obj
 
@@ -318,6 +324,9 @@ class DocumentProperties(BaseModel):
             "group_signer_settings": "(GroupSignerSettings,)",
             "in_editing_mode": "(bool,)",
             "display_status": "(str,)",
+            "enable_allow_sign_everywhere": "(bool,)",
+            "is_combined_audit": "(bool,)",
+            "is_combined_attachment": "(bool,)",
         }
 
     @classmethod

@@ -73,7 +73,8 @@ class TemplateProperties(BaseModel):
     allowed_signature_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedSignatureTypes")
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
     sharing: Optional[TemplateSharing] = None
-    __properties: ClassVar[List[str]] = ["templateId", "title", "description", "documentTitle", "documentMessage", "files", "roles", "formGroups", "commonFields", "cCDetails", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "EnablePrintAndSign", "enableSigningOrder", "createdDate", "createdBy", "sharedTemplateDetail", "documentInfo", "labels", "templateLabels", "behalfOf", "documentDownloadOption", "recipientNotificationSettings", "formFieldPermission", "allowedSignatureTypes", "groupSignerSettings", "sharing"]
+    enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
+    __properties: ClassVar[List[str]] = ["templateId", "title", "description", "documentTitle", "documentMessage", "files", "roles", "formGroups", "commonFields", "cCDetails", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "EnablePrintAndSign", "enableSigningOrder", "createdDate", "createdBy", "sharedTemplateDetail", "documentInfo", "labels", "templateLabels", "behalfOf", "documentDownloadOption", "recipientNotificationSettings", "formFieldPermission", "allowedSignatureTypes", "groupSignerSettings", "sharing", "enableAllowSignEverywhere"]
 
     @field_validator('document_download_option')
     def document_download_option_validate_enum(cls, value):
@@ -201,7 +202,8 @@ class TemplateProperties(BaseModel):
             "formFieldPermission": FormFieldPermission.from_dict(obj["formFieldPermission"]) if obj.get("formFieldPermission") is not None else None,
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
             "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
-            "sharing": TemplateSharing.from_dict(obj["sharing"]) if obj.get("sharing") is not None else None
+            "sharing": TemplateSharing.from_dict(obj["sharing"]) if obj.get("sharing") is not None else None,
+            "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere")
         })
         return _obj
 
@@ -249,6 +251,7 @@ class TemplateProperties(BaseModel):
             "allowed_signature_types": "(List[str],)",
             "group_signer_settings": "(GroupSignerSettings,)",
             "sharing": "(TemplateSharing,)",
+            "enable_allow_sign_everywhere": "(bool,)",
         }
 
     @classmethod
