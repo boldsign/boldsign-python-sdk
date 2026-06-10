@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from boldsign.models.attachment_info import AttachmentInfo
 from boldsign.models.collaboration_settings import CollaborationSettings
+from boldsign.models.conditional_rule import ConditionalRule
 from boldsign.models.font import Font
 from boldsign.models.formula_field_settings import FormulaFieldSettings
 from boldsign.models.image_info import ImageInfo
@@ -71,7 +72,8 @@ class TextTagDefinition(BaseModel):
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
     collaboration_settings: Optional[CollaborationSettings] = Field(default=None, alias="collaborationSettings")
     is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
-    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "formulaFieldSettings", "resizeOption", "collaborationSettings", "isMasked"]
+    conditional_rules: Optional[List[ConditionalRule]] = Field(default=None, alias="conditionalRules")
+    __properties: ClassVar[List[str]] = ["definitionId", "type", "signerIndex", "isRequired", "placeholder", "fieldId", "font", "validation", "size", "dateFormat", "timeFormat", "radioGroupName", "groupName", "value", "dropdownOptions", "imageInfo", "hyperlinkText", "attachmentInfo", "backgroundHexColor", "isReadOnly", "offset", "label", "tabIndex", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "formulaFieldSettings", "resizeOption", "collaborationSettings", "isMasked", "conditionalRules"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -216,7 +218,8 @@ class TextTagDefinition(BaseModel):
             "formulaFieldSettings": FormulaFieldSettings.from_dict(obj["formulaFieldSettings"]) if obj.get("formulaFieldSettings") is not None else None,
             "resizeOption": obj.get("resizeOption"),
             "collaborationSettings": CollaborationSettings.from_dict(obj["collaborationSettings"]) if obj.get("collaborationSettings") is not None else None,
-            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False
+            "isMasked": obj.get("isMasked") if obj.get("isMasked") is not None else False,
+            "conditionalRules": [ConditionalRule.from_dict(_item) for _item in obj["conditionalRules"]] if obj.get("conditionalRules") is not None else None
         })
         return _obj
 
@@ -265,11 +268,13 @@ class TextTagDefinition(BaseModel):
             "resize_option": "(str,)",
             "collaboration_settings": "(CollaborationSettings,)",
             "is_masked": "(bool,)",
+            "conditional_rules": "(List[ConditionalRule],)",
         }
 
     @classmethod
     def openapi_type_is_array(cls, property_name: str) -> bool:
         return property_name in [
             "dropdown_options",
+            "conditional_rules",
         ]
 

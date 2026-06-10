@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.1.4"
+__version__ = "3.2.0"
 
 # import apis into sdk package
 from boldsign.api.branding_api import BrandingApi
@@ -120,6 +120,7 @@ from boldsign.models.embedded_template_edited import EmbeddedTemplateEdited
 from boldsign.models.embedded_template_preview import EmbeddedTemplatePreview
 from boldsign.models.embedded_template_preview_json_request import EmbeddedTemplatePreviewJsonRequest
 from boldsign.models.error import Error
+from boldsign.models.error_response import ErrorResponse
 from boldsign.models.error_result import ErrorResult
 from boldsign.models.existing_form_field import ExistingFormField
 from boldsign.models.extend_expiry import ExtendExpiry
@@ -186,11 +187,14 @@ from boldsign.models.template_records import TemplateRecords
 from boldsign.models.template_role import TemplateRole
 from boldsign.models.template_sender_detail import TemplateSenderDetail
 from boldsign.models.template_sender_details import TemplateSenderDetails
+from boldsign.models.template_share_error_response import TemplateShareErrorResponse
+from boldsign.models.template_share_request import TemplateShareRequest
 from boldsign.models.template_shared_template_detail import TemplateSharedTemplateDetail
 from boldsign.models.template_sharing import TemplateSharing
 from boldsign.models.template_signer_details import TemplateSignerDetails
 from boldsign.models.template_tag import TemplateTag
 from boldsign.models.template_team_share import TemplateTeamShare
+from boldsign.models.template_team_share_request import TemplateTeamShareRequest
 from boldsign.models.text_tag_definition import TextTagDefinition
 from boldsign.models.text_tag_offset import TextTagOffset
 from boldsign.models.update_group_contact import UpdateGroupContact

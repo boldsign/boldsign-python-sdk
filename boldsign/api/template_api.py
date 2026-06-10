@@ -38,6 +38,7 @@ from boldsign.models.send_for_sign_from_template_form import SendForSignFromTemp
 from boldsign.models.template_created import TemplateCreated
 from boldsign.models.template_properties import TemplateProperties
 from boldsign.models.template_records import TemplateRecords
+from boldsign.models.template_share_request import TemplateShareRequest
 from boldsign.models.template_tag import TemplateTag
 
 from boldsign.api_client import ApiClient, RequestSerialized
@@ -5189,6 +5190,391 @@ class TemplateApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/v1/template/send',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def share_template(
+        self,
+        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_share_request: Annotated[TemplateShareRequest, Field(description="Permissions request.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Share a template with teams and manage permissions.
+
+
+        :param template_id: Template Id. (required)
+        :type template_id: str
+        :param template_share_request: Permissions request. (required)
+        :type template_share_request: TemplateShareRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._share_template_serialize(
+            template_id=template_id,
+            template_share_request=template_share_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': "TemplateShareErrorResponse",
+            '403': "TemplateShareErrorResponse",
+            '500': "ErrorResponse",
+            '401': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def share_template_with_http_info(
+        self,
+        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_share_request: Annotated[TemplateShareRequest, Field(description="Permissions request.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Share a template with teams and manage permissions.
+
+
+        :param template_id: Template Id. (required)
+        :type template_id: str
+        :param template_share_request: Permissions request. (required)
+        :type template_share_request: TemplateShareRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._share_template_serialize(
+            template_id=template_id,
+            template_share_request=template_share_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': "TemplateShareErrorResponse",
+            '403': "TemplateShareErrorResponse",
+            '500': "ErrorResponse",
+            '401': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def share_template_without_preload_content(
+        self,
+        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_share_request: Annotated[TemplateShareRequest, Field(description="Permissions request.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Share a template with teams and manage permissions.
+
+
+        :param template_id: Template Id. (required)
+        :type template_id: str
+        :param template_share_request: Permissions request. (required)
+        :type template_share_request: TemplateShareRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._share_template_serialize(
+            template_id=template_id,
+            template_share_request=template_share_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': "TemplateShareErrorResponse",
+            '403': "TemplateShareErrorResponse",
+            '500': "ErrorResponse",
+            '401': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _share_template_serialize(
+        self,
+        template_id,
+        template_share_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        has_files = False
+        body_param = template_share_request
+        excluded_json_fields = set([])
+        # Check if body_param is a list of models
+        if isinstance(body_param, list):
+            for item in body_param:
+                if hasattr(item, 'openapi_types'):
+                    for param_name, param_type in item.openapi_types().items():
+                        param_value = getattr(item, param_name)
+                        if param_value is None:
+                            continue
+
+                        if "io.IOBase" in param_type:
+                            has_files = True
+                            _content_type = "multipart/form-data"
+                            excluded_json_fields.add(param_name)
+
+                            if isinstance(param_value, list):
+                                for index, file_item in enumerate(param_value):
+                                    _files[f'{param_name}[{index}]'] = file_item
+                            else:
+                                _files[param_name] = param_value
+
+                    if has_files is True:
+                        _form_params += item.to_json_form_params(excluded_json_fields)
+        else:
+            # Handle a single object
+            for param_name, param_type in body_param.openapi_types().items():
+                param_value = getattr(body_param, param_name)
+                if param_value is None:
+                    continue
+
+                if "io.IOBase" in param_type:
+                    has_files = True
+                    _content_type = "multipart/form-data"
+                    excluded_json_fields.add(param_name)
+
+                    if isinstance(param_value, list):
+                        for index, item in enumerate(param_value):
+                            _files[f'{param_name}[{index}]'] = item
+                    else:
+                        _files[param_name] = param_value
+
+            if has_files is True:
+                _form_params = body_param.to_json_form_params(excluded_json_fields)
+
+        # process the path parameters
+        # process the query parameters
+        if template_id is not None:
+            
+            _query_params.append(('templateId', template_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if template_share_request is not None and has_files is False:
+            _body_params = template_share_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json;odata.metadata=minimal;odata.streaming=true', 
+                        'application/json;odata.metadata=minimal;odata.streaming=false', 
+                        'application/json;odata.metadata=minimal', 
+                        'application/json;odata.metadata=full;odata.streaming=true', 
+                        'application/json;odata.metadata=full;odata.streaming=false', 
+                        'application/json;odata.metadata=full', 
+                        'application/json;odata.metadata=none;odata.streaming=true', 
+                        'application/json;odata.metadata=none;odata.streaming=false', 
+                        'application/json;odata.metadata=none', 
+                        'application/json;odata.streaming=true', 
+                        'application/json;odata.streaming=false', 
+                        'application/json', 
+                        'application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true', 
+                        'application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true', 
+                        'application/json;odata.metadata=minimal;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=minimal;IEEE754Compatible=true', 
+                        'application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true', 
+                        'application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true', 
+                        'application/json;odata.metadata=full;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=full;IEEE754Compatible=true', 
+                        'application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true', 
+                        'application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true', 
+                        'application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=none;IEEE754Compatible=false', 
+                        'application/json;odata.metadata=none;IEEE754Compatible=true', 
+                        'application/json;odata.streaming=true;IEEE754Compatible=false', 
+                        'application/json;odata.streaming=true;IEEE754Compatible=true', 
+                        'application/json;odata.streaming=false;IEEE754Compatible=false', 
+                        'application/json;odata.streaming=false;IEEE754Compatible=true', 
+                        'application/json;IEEE754Compatible=false', 
+                        'application/json;IEEE754Compatible=true', 
+                        'application/xml', 
+                        'text/plain', 
+                        'application/json-patch+json', 
+                        'text/json', 
+                        'application/*+json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'X-API-KEY', 
+            'Bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/v1/template/share',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

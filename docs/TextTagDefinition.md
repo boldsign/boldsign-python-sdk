@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **resize_option** | **str** |  | [optional] 
 **collaboration_settings** | [**CollaborationSettings**](CollaborationSettings.md) |  | [optional] 
 **is_masked** | **bool** |  | [optional] [default to False]
+**conditional_rules** | [**List[ConditionalRule]**](ConditionalRule.md) |  | [optional] 
 
 ## Example
 

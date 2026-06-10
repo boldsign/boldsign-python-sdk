@@ -158,6 +158,7 @@ Class | Method | HTTP request | Description
 *TemplateApi* | [**merge_and_send**](docs/TemplateApi.md#merge_and_send) | **POST** /v1/template/mergeAndSend | Send the document by merging multiple templates.
 *TemplateApi* | [**merge_create_embedded_request_url_template**](docs/TemplateApi.md#merge_create_embedded_request_url_template) | **POST** /v1/template/mergeCreateEmbeddedRequestUrl | Generates a merge request URL using a template that combines document merging and sending processes into your application.
 *TemplateApi* | [**send_using_template**](docs/TemplateApi.md#send_using_template) | **POST** /v1/template/send | Send a document for signature using a Template.
+*TemplateApi* | [**share_template**](docs/TemplateApi.md#share_template) | **PATCH** /v1/template/share | Share a template with teams and manage permissions.
 *UserApi* | [**cancel_invitation**](docs/UserApi.md#cancel_invitation) | **POST** /v1/users/cancelInvitation | Cancel the users invitation.
 *UserApi* | [**change_team**](docs/UserApi.md#change_team) | **PUT** /v1/users/changeTeam | Change users to other team.
 *UserApi* | [**create_user**](docs/UserApi.md#create_user) | **POST** /v1/users/create | Create the user.
@@ -248,6 +249,7 @@ Class | Method | HTTP request | Description
  - [EmbeddedTemplatePreview](docs/EmbeddedTemplatePreview.md)
  - [EmbeddedTemplatePreviewJsonRequest](docs/EmbeddedTemplatePreviewJsonRequest.md)
  - [Error](docs/Error.md)
+ - [ErrorResponse](docs/ErrorResponse.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [ExistingFormField](docs/ExistingFormField.md)
  - [ExtendExpiry](docs/ExtendExpiry.md)
@@ -314,11 +316,14 @@ Class | Method | HTTP request | Description
  - [TemplateRole](docs/TemplateRole.md)
  - [TemplateSenderDetail](docs/TemplateSenderDetail.md)
  - [TemplateSenderDetails](docs/TemplateSenderDetails.md)
+ - [TemplateShareErrorResponse](docs/TemplateShareErrorResponse.md)
+ - [TemplateShareRequest](docs/TemplateShareRequest.md)
  - [TemplateSharedTemplateDetail](docs/TemplateSharedTemplateDetail.md)
  - [TemplateSharing](docs/TemplateSharing.md)
  - [TemplateSignerDetails](docs/TemplateSignerDetails.md)
  - [TemplateTag](docs/TemplateTag.md)
  - [TemplateTeamShare](docs/TemplateTeamShare.md)
+ - [TemplateTeamShareRequest](docs/TemplateTeamShareRequest.md)
  - [TextTagDefinition](docs/TextTagDefinition.md)
  - [TextTagOffset](docs/TextTagOffset.md)
  - [UpdateGroupContact](docs/UpdateGroupContact.md)

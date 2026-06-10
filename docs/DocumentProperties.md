@@ -49,6 +49,9 @@ Name | Type | Description | Notes
 **group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
 **in_editing_mode** | **bool** |  | [optional] 
 **display_status** | **str** |  | [optional] 
+**enable_allow_sign_everywhere** | **bool** |  | [optional] 
+**is_combined_audit** | **bool** |  | [optional] 
+**is_combined_attachment** | **bool** |  | [optional] 
 
 ## Example
 
