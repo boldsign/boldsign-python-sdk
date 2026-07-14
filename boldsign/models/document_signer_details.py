@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from boldsign.models.document_form_fields import DocumentFormFields
 from boldsign.models.group_signer import GroupSigner
 from boldsign.models.id_verification_details import IdVerificationDetails
+from boldsign.models.kba_details import KbaDetails
 from boldsign.models.phone_number import PhoneNumber
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.signer_authentication_settings import SignerAuthenticationSettings
@@ -61,13 +62,14 @@ class DocumentSignerDetails(BaseModel):
     group_id: Optional[StrictStr] = Field(default=None, alias="groupId")
     phone_number: Optional[PhoneNumber] = Field(default=None, alias="phoneNumber")
     id_verification: Optional[IdVerificationDetails] = Field(default=None, alias="idVerification")
+    kba: Optional[KbaDetails] = None
     recipient_notification_settings: Optional[RecipientNotificationSettings] = Field(default=None, alias="recipientNotificationSettings")
     authentication_retry_count: Optional[StrictInt] = Field(default=None, alias="authenticationRetryCount")
     enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
     delivery_mode: Optional[StrictStr] = Field(default=None, alias="deliveryMode")
     authentication_settings: Optional[SignerAuthenticationSettings] = Field(default=None, alias="authenticationSettings")
     group_signers: Optional[List[GroupSigner]] = Field(default=None, alias="groupSigners")
-    __properties: ClassVar[List[str]] = ["id", "signerName", "signerRole", "signerEmail", "status", "enableAccessCode", "isAuthenticationFailed", "enableEmailOTP", "authenticationType", "isDeliveryFailed", "isViewed", "order", "signerType", "hostEmail", "hostName", "isReassigned", "privateMessage", "allowFieldConfiguration", "formFields", "language", "locale", "signType", "groupId", "phoneNumber", "idVerification", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "deliveryMode", "authenticationSettings", "groupSigners"]
+    __properties: ClassVar[List[str]] = ["id", "signerName", "signerRole", "signerEmail", "status", "enableAccessCode", "isAuthenticationFailed", "enableEmailOTP", "authenticationType", "isDeliveryFailed", "isViewed", "order", "signerType", "hostEmail", "hostName", "isReassigned", "privateMessage", "allowFieldConfiguration", "formFields", "language", "locale", "signType", "groupId", "phoneNumber", "idVerification", "kba", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "deliveryMode", "authenticationSettings", "groupSigners"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -85,8 +87,8 @@ class DocumentSignerDetails(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification']):
-            raise ValueError("must be one of enum values ('None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification')")
+        if value not in set(['None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification', 'KBA']):
+            raise ValueError("must be one of enum values ('None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification', 'KBA')")
         return value
 
     @field_validator('signer_type')
@@ -239,6 +241,7 @@ class DocumentSignerDetails(BaseModel):
             "groupId": obj.get("groupId"),
             "phoneNumber": PhoneNumber.from_dict(obj["phoneNumber"]) if obj.get("phoneNumber") is not None else None,
             "idVerification": IdVerificationDetails.from_dict(obj["idVerification"]) if obj.get("idVerification") is not None else None,
+            "kba": KbaDetails.from_dict(obj["kba"]) if obj.get("kba") is not None else None,
             "recipientNotificationSettings": RecipientNotificationSettings.from_dict(obj["recipientNotificationSettings"]) if obj.get("recipientNotificationSettings") is not None else None,
             "authenticationRetryCount": obj.get("authenticationRetryCount"),
             "enableQes": obj.get("enableQes"),
@@ -286,6 +289,7 @@ class DocumentSignerDetails(BaseModel):
             "group_id": "(str,)",
             "phone_number": "(PhoneNumber,)",
             "id_verification": "(IdVerificationDetails,)",
+            "kba": "(KbaDetails,)",
             "recipient_notification_settings": "(RecipientNotificationSettings,)",
             "authentication_retry_count": "(int,)",
             "enable_qes": "(bool,)",

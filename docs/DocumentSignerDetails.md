@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **group_id** | **str** |  | [optional] 
 **phone_number** | [**PhoneNumber**](PhoneNumber.md) |  | [optional] 
 **id_verification** | [**IdVerificationDetails**](IdVerificationDetails.md) |  | [optional] 
+**kba** | [**KbaDetails**](KbaDetails.md) |  | [optional] 
 **recipient_notification_settings** | [**RecipientNotificationSettings**](RecipientNotificationSettings.md) |  | [optional] 
 **authentication_retry_count** | **int** |  | [optional] 
 **enable_qes** | **bool** |  | [optional] 

@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**add_tag**](TemplateApi.md#add_tag) | **PATCH** /v1/template/addTags | Add the Tags in Templates.
 [**create_embedded_preview_url**](TemplateApi.md#create_embedded_preview_url) | **POST** /v1/template/createEmbeddedPreviewUrl | Generates a preview URL for a template to view it.
 [**create_embedded_request_url_template**](TemplateApi.md#create_embedded_request_url_template) | **POST** /v1/template/createEmbeddedRequestUrl | Generates a send URL using a template which embeds document sending process into your application.
+[**create_embedded_template_clone_url**](TemplateApi.md#create_embedded_template_clone_url) | **POST** /v1/template/createEmbeddedCloneUrl | Generates a URL to embeds Clone template process into your application.
 [**create_embedded_template_url**](TemplateApi.md#create_embedded_template_url) | **POST** /v1/template/createEmbeddedTemplateUrl | Generates a create URL to embeds template create process into your application.
 [**create_template**](TemplateApi.md#create_template) | **POST** /v1/template/create | Creates a new template.
 [**delete_template**](TemplateApi.md#delete_template) | **DELETE** /v1/template/delete | Deletes a template.
@@ -112,7 +113,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | The template id.
+    template_id = 'template_id_example' # str | 
     embedded_template_preview_json_request = boldsign.EmbeddedTemplatePreviewJsonRequest() # EmbeddedTemplatePreviewJsonRequest | The embedded template preview request body. (optional)
 
     try:
@@ -131,7 +132,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| The template id. | 
+ **template_id** | **str**|  | 
  **embedded_template_preview_json_request** | [**EmbeddedTemplatePreviewJsonRequest**](EmbeddedTemplatePreviewJsonRequest.md)| The embedded template preview request body. | [optional] 
 
 ### Return type
@@ -181,7 +182,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | The template id.
+    template_id = 'template_id_example' # str | 
     embedded_send_template_form_request = boldsign.EmbeddedSendTemplateFormRequest() # EmbeddedSendTemplateFormRequest | Embedded send template json request. (optional)
 
     try:
@@ -200,7 +201,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| The template id. | 
+ **template_id** | **str**|  | 
  **embedded_send_template_form_request** | [**EmbeddedSendTemplateFormRequest**](EmbeddedSendTemplateFormRequest.md)| Embedded send template json request. | [optional] 
 
 ### Return type
@@ -223,6 +224,76 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **422** | Unprocessable Content |  -  |
 **401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_embedded_template_clone_url**
+> EmbeddedClonedTemplate create_embedded_template_clone_url(template_id, embedded_clone_template_json_request=embedded_clone_template_json_request)
+
+Generates a URL to embeds Clone template process into your application.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.embedded_clone_template_json_request import EmbeddedCloneTemplateJsonRequest
+from boldsign.models.embedded_cloned_template import EmbeddedClonedTemplate
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.TemplateApi(api_client)
+    template_id = 'template_id_example' # str | 
+    embedded_clone_template_json_request = boldsign.EmbeddedCloneTemplateJsonRequest() # EmbeddedCloneTemplateJsonRequest | The embedded clone template request body. (optional)
+
+    try:
+        # Generates a URL to embeds Clone template process into your application.
+        api_response = api_instance.create_embedded_template_clone_url(template_id, embedded_clone_template_json_request=embedded_clone_template_json_request)
+        print("The response of TemplateApi->create_embedded_template_clone_url:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TemplateApi->create_embedded_template_clone_url: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **str**|  | 
+ **embedded_clone_template_json_request** | [**EmbeddedCloneTemplateJsonRequest**](EmbeddedCloneTemplateJsonRequest.md)| The embedded clone template request body. | [optional] 
+
+### Return type
+
+[**EmbeddedClonedTemplate**](EmbeddedClonedTemplate.md)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, multipart/form-data, application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -386,8 +457,8 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | The template id.
-    on_behalf_of = 'on_behalf_of_example' # str | The on behalfof email address. (optional)
+    template_id = 'template_id_example' # str | 
+    on_behalf_of = 'on_behalf_of_example' # str |  (optional)
 
     try:
         # Deletes a template.
@@ -403,8 +474,8 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| The template id. | 
- **on_behalf_of** | **str**| The on behalfof email address. | [optional] 
+ **template_id** | **str**|  | 
+ **on_behalf_of** | **str**|  | [optional] 
 
 ### Return type
 
@@ -517,9 +588,9 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | Template Id.
-    on_behalf_of = 'on_behalf_of_example' # str | The on behalfof email address. (optional)
-    include_form_field_values = False # bool | Include form field data. (optional) (default to False)
+    template_id = 'template_id_example' # str | 
+    on_behalf_of = 'on_behalf_of_example' # str |  (optional)
+    include_form_field_values = False # bool |  (optional) (default to False)
 
     try:
         # Download the template.
@@ -537,9 +608,9 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| Template Id. | 
- **on_behalf_of** | **str**| The on behalfof email address. | [optional] 
- **include_form_field_values** | **bool**| Include form field data. | [optional] [default to False]
+ **template_id** | **str**|  | 
+ **on_behalf_of** | **str**|  | [optional] 
+ **include_form_field_values** | **bool**|  | [optional] [default to False]
 
 ### Return type
 
@@ -588,7 +659,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | The template id.
+    template_id = 'template_id_example' # str | 
     edit_template_request = boldsign.EditTemplateRequest() # EditTemplateRequest | The edit template request body.
 
     try:
@@ -605,7 +676,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| The template id. | 
+ **template_id** | **str**|  | 
  **edit_template_request** | [**EditTemplateRequest**](EditTemplateRequest.md)| The edit template request body. | 
 
 ### Return type
@@ -657,7 +728,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | The template id.
+    template_id = 'template_id_example' # str | 
     embedded_template_edit_request = boldsign.EmbeddedTemplateEditRequest() # EmbeddedTemplateEditRequest | The embedded edit template request body. (optional)
 
     try:
@@ -676,7 +747,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| The template id. | 
+ **template_id** | **str**|  | 
  **embedded_template_edit_request** | [**EmbeddedTemplateEditRequest**](EmbeddedTemplateEditRequest.md)| The embedded edit template request body. | [optional] 
 
 ### Return type
@@ -726,7 +797,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | Template Id.
+    template_id = 'template_id_example' # str | 
 
     try:
         # Get summary of the template.
@@ -744,7 +815,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| Template Id. | 
+ **template_id** | **str**|  | 
 
 ### Return type
 
@@ -1016,7 +1087,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | The template id.
+    template_id = 'template_id_example' # str | 
     send_for_sign_from_template_form = boldsign.SendForSignFromTemplateForm() # SendForSignFromTemplateForm | The send template details as JSON. (optional)
 
     try:
@@ -1035,7 +1106,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| The template id. | 
+ **template_id** | **str**|  | 
  **send_for_sign_from_template_form** | [**SendForSignFromTemplateForm**](SendForSignFromTemplateForm.md)| The send template details as JSON. | [optional] 
 
 ### Return type
@@ -1085,7 +1156,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TemplateApi(api_client)
-    template_id = 'template_id_example' # str | Template Id.
+    template_id = 'template_id_example' # str | 
     template_share_request = boldsign.TemplateShareRequest() # TemplateShareRequest | Permissions request.
 
     try:
@@ -1102,7 +1173,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**| Template Id. | 
+ **template_id** | **str**|  | 
  **template_share_request** | [**TemplateShareRequest**](TemplateShareRequest.md)| Permissions request. | 
 
 ### Return type

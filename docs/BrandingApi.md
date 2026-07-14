@@ -118,14 +118,14 @@ with boldsign.ApiClient(configuration) as api_client:
     show_built_in_form_fields = True # bool |  (optional) (default to True)
     allow_custom_field_creation = False # bool |  (optional) (default to False)
     show_shared_custom_fields = False # bool |  (optional) (default to False)
-    hide_decline = True # bool |  (optional)
-    hide_save = True # bool |  (optional)
-    document_expiry_settings_expiry_date_type = 'document_expiry_settings_expiry_date_type_example' # str |  (optional)
-    document_expiry_settings_expiry_value = 56 # int |  (optional)
-    document_expiry_settings_enable_default_expiry_alert = True # bool |  (optional)
-    document_expiry_settings_enable_auto_reminder = True # bool |  (optional)
-    document_expiry_settings_reminder_days = 56 # int |  (optional)
-    document_expiry_settings_reminder_count = 56 # int |  (optional)
+    hide_decline = True # bool | This option prevents signers to decline the document during the signing process. (optional)
+    hide_save = True # bool | This option prevents signers to save their changes during the signing process and continue signing later. (optional)
+    document_expiry_settings_expiry_date_type = 'document_expiry_settings_expiry_date_type_example' # str | This property represents the type for the expiry date (optional)
+    document_expiry_settings_expiry_value = 56 # int | This property is used to set the expiry value based on the expiry type (optional)
+    document_expiry_settings_enable_default_expiry_alert = True # bool | This property will send the expiry alert email before the day of expiry for the pending signers. (optional)
+    document_expiry_settings_enable_auto_reminder = True # bool | When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders. (optional)
+    document_expiry_settings_reminder_days = 56 # int | Remind in terms of days. (optional)
+    document_expiry_settings_reminder_count = 56 # int | Number of reminder count. (optional)
     custom_domain_settings_domain_name = 'custom_domain_settings_domain_name_example' # str |  (optional)
     custom_domain_settings_from_name = 'custom_domain_settings_from_name_example' # str |  (optional)
     signature_frame_settings_enable_signature_frame = False # bool |  (optional) (default to False)
@@ -168,14 +168,14 @@ Name | Type | Description  | Notes
  **show_built_in_form_fields** | **bool**|  | [optional] [default to True]
  **allow_custom_field_creation** | **bool**|  | [optional] [default to False]
  **show_shared_custom_fields** | **bool**|  | [optional] [default to False]
- **hide_decline** | **bool**|  | [optional] 
- **hide_save** | **bool**|  | [optional] 
- **document_expiry_settings_expiry_date_type** | **str**|  | [optional] 
- **document_expiry_settings_expiry_value** | **int**|  | [optional] 
- **document_expiry_settings_enable_default_expiry_alert** | **bool**|  | [optional] 
- **document_expiry_settings_enable_auto_reminder** | **bool**|  | [optional] 
- **document_expiry_settings_reminder_days** | **int**|  | [optional] 
- **document_expiry_settings_reminder_count** | **int**|  | [optional] 
+ **hide_decline** | **bool**| This option prevents signers to decline the document during the signing process. | [optional] 
+ **hide_save** | **bool**| This option prevents signers to save their changes during the signing process and continue signing later. | [optional] 
+ **document_expiry_settings_expiry_date_type** | **str**| This property represents the type for the expiry date | [optional] 
+ **document_expiry_settings_expiry_value** | **int**| This property is used to set the expiry value based on the expiry type | [optional] 
+ **document_expiry_settings_enable_default_expiry_alert** | **bool**| This property will send the expiry alert email before the day of expiry for the pending signers. | [optional] 
+ **document_expiry_settings_enable_auto_reminder** | **bool**| When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders. | [optional] 
+ **document_expiry_settings_reminder_days** | **int**| Remind in terms of days. | [optional] 
+ **document_expiry_settings_reminder_count** | **int**| Number of reminder count. | [optional] 
  **custom_domain_settings_domain_name** | **str**|  | [optional] 
  **custom_domain_settings_from_name** | **str**|  | [optional] 
  **signature_frame_settings_enable_signature_frame** | **bool**|  | [optional] [default to False]
@@ -231,7 +231,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.BrandingApi(api_client)
-    brand_id = 'brand_id_example' # str | brand Id.
+    brand_id = 'brand_id_example' # str | 
 
     try:
         # Delete the brand.
@@ -249,7 +249,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **brand_id** | **str**| brand Id. | 
+ **brand_id** | **str**|  | 
 
 ### Return type
 
@@ -298,7 +298,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.BrandingApi(api_client)
-    brand_id = 'brand_id_example' # str | The brand id.
+    brand_id = 'brand_id_example' # str | 
     brand_name = 'brand_name_example' # str |  (optional)
     brand_logo = None # io.IOBase |  (optional)
     background_color = 'background_color_example' # str |  (optional)
@@ -318,14 +318,14 @@ with boldsign.ApiClient(configuration) as api_client:
     show_built_in_form_fields = True # bool |  (optional) (default to True)
     allow_custom_field_creation = False # bool |  (optional) (default to False)
     show_shared_custom_fields = False # bool |  (optional) (default to False)
-    hide_decline = True # bool |  (optional)
-    hide_save = True # bool |  (optional)
-    document_expiry_settings_expiry_date_type = 'document_expiry_settings_expiry_date_type_example' # str |  (optional)
-    document_expiry_settings_expiry_value = 56 # int |  (optional)
-    document_expiry_settings_enable_default_expiry_alert = True # bool |  (optional)
-    document_expiry_settings_enable_auto_reminder = True # bool |  (optional)
-    document_expiry_settings_reminder_days = 56 # int |  (optional)
-    document_expiry_settings_reminder_count = 56 # int |  (optional)
+    hide_decline = True # bool | This option prevents signers to decline the document during the signing process. (optional)
+    hide_save = True # bool | This option prevents signers to save their changes during the signing process and continue signing later. (optional)
+    document_expiry_settings_expiry_date_type = 'document_expiry_settings_expiry_date_type_example' # str | This property represents the type for the expiry date (optional)
+    document_expiry_settings_expiry_value = 56 # int | This property is used to set the expiry value based on the expiry type (optional)
+    document_expiry_settings_enable_default_expiry_alert = True # bool | This property will send the expiry alert email before the day of expiry for the pending signers. (optional)
+    document_expiry_settings_enable_auto_reminder = True # bool | When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders. (optional)
+    document_expiry_settings_reminder_days = 56 # int | Remind in terms of days. (optional)
+    document_expiry_settings_reminder_count = 56 # int | Number of reminder count. (optional)
     custom_domain_settings_domain_name = 'custom_domain_settings_domain_name_example' # str |  (optional)
     custom_domain_settings_from_name = 'custom_domain_settings_from_name_example' # str |  (optional)
     signature_frame_settings_enable_signature_frame = False # bool |  (optional) (default to False)
@@ -349,7 +349,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **brand_id** | **str**| The brand id. | 
+ **brand_id** | **str**|  | 
  **brand_name** | **str**|  | [optional] 
  **brand_logo** | **io.IOBase**|  | [optional] 
  **background_color** | **str**|  | [optional] 
@@ -369,14 +369,14 @@ Name | Type | Description  | Notes
  **show_built_in_form_fields** | **bool**|  | [optional] [default to True]
  **allow_custom_field_creation** | **bool**|  | [optional] [default to False]
  **show_shared_custom_fields** | **bool**|  | [optional] [default to False]
- **hide_decline** | **bool**|  | [optional] 
- **hide_save** | **bool**|  | [optional] 
- **document_expiry_settings_expiry_date_type** | **str**|  | [optional] 
- **document_expiry_settings_expiry_value** | **int**|  | [optional] 
- **document_expiry_settings_enable_default_expiry_alert** | **bool**|  | [optional] 
- **document_expiry_settings_enable_auto_reminder** | **bool**|  | [optional] 
- **document_expiry_settings_reminder_days** | **int**|  | [optional] 
- **document_expiry_settings_reminder_count** | **int**|  | [optional] 
+ **hide_decline** | **bool**| This option prevents signers to decline the document during the signing process. | [optional] 
+ **hide_save** | **bool**| This option prevents signers to save their changes during the signing process and continue signing later. | [optional] 
+ **document_expiry_settings_expiry_date_type** | **str**| This property represents the type for the expiry date | [optional] 
+ **document_expiry_settings_expiry_value** | **int**| This property is used to set the expiry value based on the expiry type | [optional] 
+ **document_expiry_settings_enable_default_expiry_alert** | **bool**| This property will send the expiry alert email before the day of expiry for the pending signers. | [optional] 
+ **document_expiry_settings_enable_auto_reminder** | **bool**| When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders. | [optional] 
+ **document_expiry_settings_reminder_days** | **int**| Remind in terms of days. | [optional] 
+ **document_expiry_settings_reminder_count** | **int**| Number of reminder count. | [optional] 
  **custom_domain_settings_domain_name** | **str**|  | [optional] 
  **custom_domain_settings_from_name** | **str**|  | [optional] 
  **signature_frame_settings_enable_signature_frame** | **bool**|  | [optional] [default to False]
@@ -432,7 +432,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.BrandingApi(api_client)
-    brand_id = 'brand_id_example' # str | The brand id.
+    brand_id = 'brand_id_example' # str | 
 
     try:
         # Get the specific brand details.
@@ -450,7 +450,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **brand_id** | **str**| The brand id. | 
+ **brand_id** | **str**|  | 
 
 ### Return type
 
@@ -500,7 +500,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.BrandingApi(api_client)
-    brand_id = 'brand_id_example' # str | brand Id.
+    brand_id = 'brand_id_example' # str | 
 
     try:
         # Reset default brand.
@@ -518,7 +518,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **brand_id** | **str**| brand Id. | 
+ **brand_id** | **str**|  | 
 
 ### Return type
 

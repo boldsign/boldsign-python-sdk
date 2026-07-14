@@ -726,7 +726,7 @@ class ContactsApi:
     @validate_call
     def delete_contacts(
         self,
-        id: Annotated[StrictStr, Field(description="The contact id.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -743,7 +743,7 @@ class ContactsApi:
         """Deletes a contact.
 
 
-        :param id: The contact id. (required)
+        :param id: (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -794,7 +794,7 @@ class ContactsApi:
     @validate_call
     def delete_contacts_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The contact id.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -811,7 +811,7 @@ class ContactsApi:
         """Deletes a contact.
 
 
-        :param id: The contact id. (required)
+        :param id: (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -862,7 +862,7 @@ class ContactsApi:
     @validate_call
     def delete_contacts_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The contact id.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -879,7 +879,7 @@ class ContactsApi:
         """Deletes a contact.
 
 
-        :param id: The contact id. (required)
+        :param id: (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -991,7 +991,7 @@ class ContactsApi:
     @validate_call
     def get_contact(
         self,
-        id: Annotated[StrictStr, Field(description="Contact Id.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1008,7 +1008,7 @@ class ContactsApi:
         """Get summary of the contact.
 
 
-        :param id: Contact Id. (required)
+        :param id: (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1059,7 +1059,7 @@ class ContactsApi:
     @validate_call
     def get_contact_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="Contact Id.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1076,7 +1076,7 @@ class ContactsApi:
         """Get summary of the contact.
 
 
-        :param id: Contact Id. (required)
+        :param id: (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1127,7 +1127,7 @@ class ContactsApi:
     @validate_call
     def get_contact_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="Contact Id.")],
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1144,7 +1144,7 @@ class ContactsApi:
         """Get summary of the contact.
 
 
-        :param id: Contact Id. (required)
+        :param id: (required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1256,7 +1256,7 @@ class ContactsApi:
     @validate_call
     def update_contact(
         self,
-        id: Annotated[Optional[StrictStr], Field(description="The contactId.")] = None,
+        id: Optional[StrictStr] = None,
         contact_details: Annotated[Optional[ContactDetails], Field(description="The contact details.")] = None,
         _request_timeout: Union[
             None,
@@ -1274,7 +1274,7 @@ class ContactsApi:
         """Update the contact.
 
 
-        :param id: The contactId.
+        :param id:
         :type id: str
         :param contact_details: The contact details.
         :type contact_details: ContactDetails
@@ -1328,7 +1328,7 @@ class ContactsApi:
     @validate_call
     def update_contact_with_http_info(
         self,
-        id: Annotated[Optional[StrictStr], Field(description="The contactId.")] = None,
+        id: Optional[StrictStr] = None,
         contact_details: Annotated[Optional[ContactDetails], Field(description="The contact details.")] = None,
         _request_timeout: Union[
             None,
@@ -1346,7 +1346,7 @@ class ContactsApi:
         """Update the contact.
 
 
-        :param id: The contactId.
+        :param id:
         :type id: str
         :param contact_details: The contact details.
         :type contact_details: ContactDetails
@@ -1400,7 +1400,7 @@ class ContactsApi:
     @validate_call
     def update_contact_without_preload_content(
         self,
-        id: Annotated[Optional[StrictStr], Field(description="The contactId.")] = None,
+        id: Optional[StrictStr] = None,
         contact_details: Annotated[Optional[ContactDetails], Field(description="The contact details.")] = None,
         _request_timeout: Union[
             None,
@@ -1418,7 +1418,7 @@ class ContactsApi:
         """Update the contact.
 
 
-        :param id: The contactId.
+        :param id:
         :type id: str
         :param contact_details: The contact details.
         :type contact_details: ContactDetails

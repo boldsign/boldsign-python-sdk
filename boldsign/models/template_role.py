@@ -102,8 +102,8 @@ class TemplateRole(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification']):
-            raise ValueError("must be one of enum values ('None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification')")
+        if value not in set(['None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification', 'KBA']):
+            raise ValueError("must be one of enum values ('None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification', 'KBA')")
         return value
 
     @field_validator('delivery_mode')

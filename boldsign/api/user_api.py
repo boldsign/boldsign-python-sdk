@@ -314,7 +314,7 @@ class UserApi:
     @validate_call
     def change_team(
         self,
-        user_id: Annotated[StrictStr, Field(description="user Id.")],
+        user_id: StrictStr,
         change_team_request: Annotated[Optional[ChangeTeamRequest], Field(description="Change team request.")] = None,
         _request_timeout: Union[
             None,
@@ -332,7 +332,7 @@ class UserApi:
         """Change users to other team.
 
 
-        :param user_id: user Id. (required)
+        :param user_id: (required)
         :type user_id: str
         :param change_team_request: Change team request.
         :type change_team_request: ChangeTeamRequest
@@ -386,7 +386,7 @@ class UserApi:
     @validate_call
     def change_team_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="user Id.")],
+        user_id: StrictStr,
         change_team_request: Annotated[Optional[ChangeTeamRequest], Field(description="Change team request.")] = None,
         _request_timeout: Union[
             None,
@@ -404,7 +404,7 @@ class UserApi:
         """Change users to other team.
 
 
-        :param user_id: user Id. (required)
+        :param user_id: (required)
         :type user_id: str
         :param change_team_request: Change team request.
         :type change_team_request: ChangeTeamRequest
@@ -458,7 +458,7 @@ class UserApi:
     @validate_call
     def change_team_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="user Id.")],
+        user_id: StrictStr,
         change_team_request: Annotated[Optional[ChangeTeamRequest], Field(description="Change team request.")] = None,
         _request_timeout: Union[
             None,
@@ -476,7 +476,7 @@ class UserApi:
         """Change users to other team.
 
 
-        :param user_id: user Id. (required)
+        :param user_id: (required)
         :type user_id: str
         :param change_team_request: Change team request.
         :type change_team_request: ChangeTeamRequest
@@ -1056,7 +1056,7 @@ class UserApi:
     @validate_call
     def get_user(
         self,
-        user_id: Annotated[StrictStr, Field(description="User Id.")],
+        user_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1073,7 +1073,7 @@ class UserApi:
         """Get summary of the user.
 
 
-        :param user_id: User Id. (required)
+        :param user_id: (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1124,7 +1124,7 @@ class UserApi:
     @validate_call
     def get_user_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="User Id.")],
+        user_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1141,7 +1141,7 @@ class UserApi:
         """Get summary of the user.
 
 
-        :param user_id: User Id. (required)
+        :param user_id: (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1192,7 +1192,7 @@ class UserApi:
     @validate_call
     def get_user_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="User Id.")],
+        user_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1209,7 +1209,7 @@ class UserApi:
         """Get summary of the user.
 
 
-        :param user_id: User Id. (required)
+        :param user_id: (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

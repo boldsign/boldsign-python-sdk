@@ -22,7 +22,9 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from boldsign.models.attachment_info import AttachmentInfo
+from boldsign.models.checkbox_validation_settings import CheckboxValidationSettings
 from boldsign.models.editable_date_field_settings import EditableDateFieldSettings
+from boldsign.models.group_option import GroupOption
 from boldsign.models.image_info import ImageInfo
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
@@ -42,6 +44,8 @@ class CustomFormField(BaseModel):
     value: Optional[StrictStr] = None
     font_size: Optional[Union[Annotated[float, Field(strict=True, ge=0)], Annotated[int, Field(strict=True, ge=0)]]] = Field(default=13, alias="fontSize")
     font: Optional[StrictStr] = None
+    group_options: Optional[List[GroupOption]] = Field(default=None, alias="groupOptions")
+    checkbox_validation_settings: Optional[CheckboxValidationSettings] = Field(default=None, alias="checkboxValidationSettings")
     font_hex_color: Optional[StrictStr] = Field(default=None, alias="fontHexColor")
     is_bold_font: Optional[StrictBool] = Field(default=None, alias="isBoldFont")
     is_italic_font: Optional[StrictBool] = Field(default=None, alias="isItalicFont")
@@ -68,7 +72,7 @@ class CustomFormField(BaseModel):
     background_hex_color: Optional[StrictStr] = Field(default=None, alias="backgroundHexColor")
     resize_option: Optional[StrictStr] = Field(default=None, alias="resizeOption")
     is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
-    __properties: ClassVar[List[str]] = ["fieldType", "width", "height", "isRequired", "isReadOnly", "value", "fontSize", "font", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "idPrefix", "restrictIdPrefixChange", "backgroundHexColor", "resizeOption", "isMasked"]
+    __properties: ClassVar[List[str]] = ["fieldType", "width", "height", "isRequired", "isReadOnly", "value", "fontSize", "font", "groupOptions", "checkboxValidationSettings", "fontHexColor", "isBoldFont", "isItalicFont", "isUnderLineFont", "lineHeight", "characterLimit", "placeHolder", "validationType", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "hyperlinkText", "dataSyncTag", "dropdownOptions", "textAlign", "textDirection", "characterSpacing", "idPrefix", "restrictIdPrefixChange", "backgroundHexColor", "resizeOption", "isMasked"]
 
     @field_validator('field_type')
     def field_type_validate_enum(cls, value):
@@ -210,6 +214,8 @@ class CustomFormField(BaseModel):
             "value": obj.get("value"),
             "fontSize": obj.get("fontSize") if obj.get("fontSize") is not None else 13,
             "font": obj.get("font"),
+            "groupOptions": [GroupOption.from_dict(_item) for _item in obj["groupOptions"]] if obj.get("groupOptions") is not None else None,
+            "checkboxValidationSettings": CheckboxValidationSettings.from_dict(obj["checkboxValidationSettings"]) if obj.get("checkboxValidationSettings") is not None else None,
             "fontHexColor": obj.get("fontHexColor"),
             "isBoldFont": obj.get("isBoldFont"),
             "isItalicFont": obj.get("isItalicFont"),
@@ -260,6 +266,8 @@ class CustomFormField(BaseModel):
             "value": "(str,)",
             "font_size": "(float,)",
             "font": "(str,)",
+            "group_options": "(List[GroupOption],)",
+            "checkbox_validation_settings": "(CheckboxValidationSettings,)",
             "font_hex_color": "(str,)",
             "is_bold_font": "(bool,)",
             "is_italic_font": "(bool,)",
@@ -291,6 +299,7 @@ class CustomFormField(BaseModel):
     @classmethod
     def openapi_type_is_array(cls, property_name: str) -> bool:
         return property_name in [
+            "group_options",
             "dropdown_options",
         ]
 

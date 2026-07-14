@@ -102,7 +102,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.GroupContactsApi(api_client)
-    group_id = 'group_id_example' # str | The group contact id.
+    group_id = 'group_id_example' # str | 
 
     try:
         # Deletes a Group Contact.
@@ -118,7 +118,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_id** | **str**| The group contact id. | 
+ **group_id** | **str**|  | 
 
 ### Return type
 
@@ -167,7 +167,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.GroupContactsApi(api_client)
-    group_id = 'group_id_example' # str | Group Contact Id.
+    group_id = 'group_id_example' # str | 
 
     try:
         # Get Summary of the Group Contact.
@@ -185,7 +185,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_id** | **str**| Group Contact Id. | 
+ **group_id** | **str**|  | 
 
 ### Return type
 
@@ -308,7 +308,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.GroupContactsApi(api_client)
-    group_id = 'group_id_example' # str | The group contact ID.
+    group_id = 'group_id_example' # str | 
     update_group_contact = boldsign.UpdateGroupContact() # UpdateGroupContact | The group contact details.
 
     try:
@@ -325,7 +325,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_id** | **str**| The group contact ID. | 
+ **group_id** | **str**|  | 
  **update_group_contact** | [**UpdateGroupContact**](UpdateGroupContact.md)| The group contact details. | 
 
 ### Return type

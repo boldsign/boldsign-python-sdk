@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**cancel_editing**](DocumentApi.md#cancel_editing) | **POST** /v1/document/cancelEditing | Cancels editing for a document that is currently in edit-mode.
 [**change_access_code**](DocumentApi.md#change_access_code) | **PATCH** /v1/document/changeAccessCode | Changes the access code for the given document signer.
 [**change_recipient**](DocumentApi.md#change_recipient) | **PATCH** /v1/document/changeRecipient | Change recipient details of a document.
+[**create_embedded_document_clone_url**](DocumentApi.md#create_embedded_document_clone_url) | **POST** /v1/document/createEmbeddedCloneUrl | Generates a URL to embeds Clone document process into your application.
 [**create_embedded_edit_url**](DocumentApi.md#create_embedded_edit_url) | **POST** /v1/document/createEmbeddedEditUrl | Generates an embedded edit URL that allows the document editing process to be integrated into your application.
 [**create_embedded_request_url_document**](DocumentApi.md#create_embedded_request_url_document) | **POST** /v1/document/createEmbeddedRequestUrl | Generates a send URL which embeds document sending process into your application.
 [**delete_document**](DocumentApi.md#delete_document) | **DELETE** /v1/document/delete | Delete the document.
@@ -55,7 +56,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | The DocumentId.
+    document_id = 'document_id_example' # str | 
     access_code_detail = boldsign.AccessCodeDetail() # AccessCodeDetail | Access code details. (optional)
 
     try:
@@ -72,7 +73,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The DocumentId. | 
+ **document_id** | **str**|  | 
  **access_code_detail** | [**AccessCodeDetail**](AccessCodeDetail.md)| Access code details. | [optional] 
 
 ### Return type
@@ -275,8 +276,8 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | The document id.
-    on_behalf_of = 'on_behalf_of_example' # str | The onbehalfof email id. (optional)
+    document_id = 'document_id_example' # str | 
+    on_behalf_of = 'on_behalf_of_example' # str |  (optional)
 
     try:
         # Cancels editing for a document that is currently in edit-mode.
@@ -292,8 +293,8 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The document id. | 
- **on_behalf_of** | **str**| The onbehalfof email id. | [optional] 
+ **document_id** | **str**|  | 
+ **on_behalf_of** | **str**|  | [optional] 
 
 ### Return type
 
@@ -413,7 +414,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | The documentID details.
+    document_id = 'document_id_example' # str | 
     change_recipient = boldsign.ChangeRecipient() # ChangeRecipient | The new recipient details.
 
     try:
@@ -430,7 +431,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The documentID details. | 
+ **document_id** | **str**|  | 
  **change_recipient** | [**ChangeRecipient**](ChangeRecipient.md)| The new recipient details. | 
 
 ### Return type
@@ -453,6 +454,76 @@ void (empty response body)
 **204** | No Content |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_embedded_document_clone_url**
+> EmbeddedClonedDocument create_embedded_document_clone_url(document_id, embedded_clone_document_json_request=embedded_clone_document_json_request)
+
+Generates a URL to embeds Clone document process into your application.
+
+### Example
+
+* Api Key Authentication (X-API-KEY):
+* Api Key Authentication (Bearer):
+
+```python
+import boldsign
+from boldsign.models.embedded_clone_document_json_request import EmbeddedCloneDocumentJsonRequest
+from boldsign.models.embedded_cloned_document import EmbeddedClonedDocument
+from boldsign.rest import ApiException
+from pprint import pprint
+
+configuration = boldsign.Configuration(
+    api_key = "***your_api_key***"
+)
+
+# Enter a context with an instance of the API client
+with boldsign.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = boldsign.DocumentApi(api_client)
+    document_id = 'document_id_example' # str | 
+    embedded_clone_document_json_request = boldsign.EmbeddedCloneDocumentJsonRequest() # EmbeddedCloneDocumentJsonRequest | The embedded clone document request body. (optional)
+
+    try:
+        # Generates a URL to embeds Clone document process into your application.
+        api_response = api_instance.create_embedded_document_clone_url(document_id, embedded_clone_document_json_request=embedded_clone_document_json_request)
+        print("The response of DocumentApi->create_embedded_document_clone_url:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentApi->create_embedded_document_clone_url: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**|  | 
+ **embedded_clone_document_json_request** | [**EmbeddedCloneDocumentJsonRequest**](EmbeddedCloneDocumentJsonRequest.md)| The embedded clone document request body. | [optional] 
+
+### Return type
+
+[**EmbeddedClonedDocument**](EmbeddedClonedDocument.md)
+
+### Authorization
+
+[X-API-KEY](../README.md#X-API-KEY), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, multipart/form-data, application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -481,7 +552,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | The document id.
+    document_id = 'document_id_example' # str | 
     embedded_document_edit_json_request = boldsign.EmbeddedDocumentEditJsonRequest() # EmbeddedDocumentEditJsonRequest | The embedded edit document request body. (optional)
 
     try:
@@ -500,7 +571,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The document id. | 
+ **document_id** | **str**|  | 
  **embedded_document_edit_json_request** | [**EmbeddedDocumentEditJsonRequest**](EmbeddedDocumentEditJsonRequest.md)| The embedded edit document request body. | [optional] 
 
 ### Return type
@@ -621,8 +692,8 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
-    delete_permanently = False # bool | Delete Permanently. (optional) (default to False)
+    document_id = 'document_id_example' # str | 
+    delete_permanently = False # bool |  (optional) (default to False)
 
     try:
         # Delete the document.
@@ -638,8 +709,8 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
- **delete_permanently** | **bool**| Delete Permanently. | [optional] [default to False]
+ **document_id** | **str**|  | 
+ **delete_permanently** | **bool**|  | [optional] [default to False]
 
 ### Return type
 
@@ -752,9 +823,9 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
-    attachment_id = 'attachment_id_example' # str | Attachment Id(Get attachment ID from Properties API).
-    on_behalf_of = 'on_behalf_of_example' # str | The on behalfof email address. (optional)
+    document_id = 'document_id_example' # str | 
+    attachment_id = 'attachment_id_example' # str | 
+    on_behalf_of = 'on_behalf_of_example' # str |  (optional)
 
     try:
         # Download the Attachment.
@@ -772,9 +843,9 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
- **attachment_id** | **str**| Attachment Id(Get attachment ID from Properties API). | 
- **on_behalf_of** | **str**| The on behalfof email address. | [optional] 
+ **document_id** | **str**|  | 
+ **attachment_id** | **str**|  | 
+ **on_behalf_of** | **str**|  | [optional] 
 
 ### Return type
 
@@ -822,8 +893,8 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
-    on_behalf_of = 'on_behalf_of_example' # str | The on behalfof email address. (optional)
+    document_id = 'document_id_example' # str | 
+    on_behalf_of = 'on_behalf_of_example' # str |  (optional)
 
     try:
         # Download the audit trail document.
@@ -841,8 +912,8 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
- **on_behalf_of** | **str**| The on behalfof email address. | [optional] 
+ **document_id** | **str**|  | 
+ **on_behalf_of** | **str**|  | [optional] 
 
 ### Return type
 
@@ -890,8 +961,8 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
-    on_behalf_of = 'on_behalf_of_example' # str | The on behalfof email address. (optional)
+    document_id = 'document_id_example' # str | 
+    on_behalf_of = 'on_behalf_of_example' # str |  (optional)
 
     try:
         # Download the document.
@@ -909,8 +980,8 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
- **on_behalf_of** | **str**| The on behalfof email address. | [optional] 
+ **document_id** | **str**|  | 
+ **on_behalf_of** | **str**|  | [optional] 
 
 ### Return type
 
@@ -958,7 +1029,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | The ID of the document to be sent.
+    document_id = 'document_id_example' # str | 
 
     try:
         # Sends a draft-status document out for signature.
@@ -974,7 +1045,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The ID of the document to be sent. | 
+ **document_id** | **str**|  | 
 
 ### Return type
 
@@ -1024,7 +1095,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
+    document_id = 'document_id_example' # str | 
     edit_document_request = boldsign.EditDocumentRequest() # EditDocumentRequest | Edit document JSON request. (optional)
 
     try:
@@ -1043,7 +1114,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
+ **document_id** | **str**|  | 
  **edit_document_request** | [**EditDocumentRequest**](EditDocumentRequest.md)| Edit document JSON request. | [optional] 
 
 ### Return type
@@ -1095,7 +1166,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
+    document_id = 'document_id_example' # str | 
     extend_expiry = boldsign.ExtendExpiry() # ExtendExpiry | The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type. (optional)
 
     try:
@@ -1112,7 +1183,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
+ **document_id** | **str**|  | 
  **extend_expiry** | [**ExtendExpiry**](ExtendExpiry.md)| The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type. | [optional] 
 
 ### Return type
@@ -1162,7 +1233,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
+    document_id = 'document_id_example' # str | 
 
     try:
         # Get summary of the document.
@@ -1180,7 +1251,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
+ **document_id** | **str**|  | 
 
 ### Return type
 
@@ -1396,7 +1467,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | The DocumentId.
+    document_id = 'document_id_example' # str | 
     prefill_field_request = boldsign.PrefillFieldRequest() # PrefillFieldRequest | The prefill field request.
 
     try:
@@ -1413,7 +1484,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The DocumentId. | 
+ **document_id** | **str**|  | 
  **prefill_field_request** | [**PrefillFieldRequest**](PrefillFieldRequest.md)| The prefill field request. | 
 
 ### Return type
@@ -1463,8 +1534,8 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
-    receiver_emails = ['receiver_emails_example'] # List[str] | Signer emails. (optional)
+    document_id = 'document_id_example' # str | 
+    receiver_emails = ['receiver_emails_example'] # List[str] |  (optional)
     reminder_message = boldsign.ReminderMessage() # ReminderMessage | Reminder Message for signers. (optional)
 
     try:
@@ -1481,8 +1552,8 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
- **receiver_emails** | [**List[str]**](str.md)| Signer emails. | [optional] 
+ **document_id** | **str**|  | 
+ **receiver_emails** | [**List[str]**](str.md)|  | [optional] 
  **reminder_message** | [**ReminderMessage**](ReminderMessage.md)| Reminder Message for signers. | [optional] 
 
 ### Return type
@@ -1599,7 +1670,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.DocumentApi(api_client)
-    document_id = 'document_id_example' # str | Document Id.
+    document_id = 'document_id_example' # str | 
     revoke_document = boldsign.RevokeDocument() # RevokeDocument | RevokeDetails.
 
     try:
@@ -1616,7 +1687,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| Document Id. | 
+ **document_id** | **str**|  | 
  **revoke_document** | [**RevokeDocument**](RevokeDocument.md)| RevokeDetails. | 
 
 ### Return type

@@ -175,7 +175,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.ContactsApi(api_client)
-    id = 'id_example' # str | The contact id.
+    id = 'id_example' # str | 
 
     try:
         # Deletes a contact.
@@ -191,7 +191,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| The contact id. | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -240,7 +240,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.ContactsApi(api_client)
-    id = 'id_example' # str | Contact Id.
+    id = 'id_example' # str | 
 
     try:
         # Get summary of the contact.
@@ -258,7 +258,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Contact Id. | 
+ **id** | **str**|  | 
 
 ### Return type
 
@@ -307,7 +307,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.ContactsApi(api_client)
-    id = 'id_example' # str | The contactId. (optional)
+    id = 'id_example' # str |  (optional)
     contact_details = boldsign.ContactDetails() # ContactDetails | The contact details. (optional)
 
     try:
@@ -324,7 +324,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| The contactId. | [optional] 
+ **id** | **str**|  | [optional] 
  **contact_details** | [**ContactDetails**](ContactDetails.md)| The contact details. | [optional] 
 
 ### Return type

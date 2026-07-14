@@ -34,7 +34,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.IdentityVerificationApi(api_client)
-    document_id = 'document_id_example' # str | The document id.
+    document_id = 'document_id_example' # str | 
     embedded_file_details = boldsign.EmbeddedFileDetails() # EmbeddedFileDetails | The embedded verification link request. (optional)
 
     try:
@@ -53,7 +53,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The document id. | 
+ **document_id** | **str**|  | 
  **embedded_file_details** | [**EmbeddedFileDetails**](EmbeddedFileDetails.md)| The embedded verification link request. | [optional] 
 
 ### Return type
@@ -103,7 +103,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.IdentityVerificationApi(api_client)
-    document_id = 'document_id_example' # str | The document id.
+    document_id = 'document_id_example' # str | 
     download_image_request = boldsign.DownloadImageRequest() # DownloadImageRequest | The download image request.
 
     try:
@@ -122,7 +122,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The document id. | 
+ **document_id** | **str**|  | 
  **download_image_request** | [**DownloadImageRequest**](DownloadImageRequest.md)| The download image request. | 
 
 ### Return type
@@ -174,7 +174,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.IdentityVerificationApi(api_client)
-    document_id = 'document_id_example' # str | The document id.
+    document_id = 'document_id_example' # str | 
     verification_data_request = boldsign.VerificationDataRequest() # VerificationDataRequest | The download image request.
 
     try:
@@ -193,7 +193,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **document_id** | **str**| The document id. | 
+ **document_id** | **str**|  | 
  **verification_data_request** | [**VerificationDataRequest**](VerificationDataRequest.md)| The download image request. | 
 
 ### Return type

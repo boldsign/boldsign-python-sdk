@@ -102,7 +102,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.UserApi(api_client)
-    user_id = 'user_id_example' # str | user Id.
+    user_id = 'user_id_example' # str | 
     change_team_request = boldsign.ChangeTeamRequest() # ChangeTeamRequest | Change team request. (optional)
 
     try:
@@ -119,7 +119,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| user Id. | 
+ **user_id** | **str**|  | 
  **change_team_request** | [**ChangeTeamRequest**](ChangeTeamRequest.md)| Change team request. | [optional] 
 
 ### Return type
@@ -234,7 +234,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.UserApi(api_client)
-    user_id = 'user_id_example' # str | User Id.
+    user_id = 'user_id_example' # str | 
 
     try:
         # Get summary of the user.
@@ -252,7 +252,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| User Id. | 
+ **user_id** | **str**|  | 
 
 ### Return type
 

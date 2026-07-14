@@ -102,7 +102,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.TeamsApi(api_client)
-    team_id = 'team_id_example' # str | Team Id.
+    team_id = 'team_id_example' # str | 
 
     try:
         # Get Team details.
@@ -120,7 +120,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **team_id** | **str**| Team Id. | 
+ **team_id** | **str**|  | 
 
 ### Return type
 

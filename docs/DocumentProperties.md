@@ -52,6 +52,7 @@ Name | Type | Description | Notes
 **enable_allow_sign_everywhere** | **bool** |  | [optional] 
 **is_combined_audit** | **bool** |  | [optional] 
 **is_combined_attachment** | **bool** |  | [optional] 
+**document_time_zone** | **str** |  | [optional] 
 
 ## Example
 

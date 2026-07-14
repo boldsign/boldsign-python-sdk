@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **value** | **str** |  | [optional] 
 **font_size** | **float** |  | [optional] [default to 13]
 **font** | **str** |  | [optional] 
+**group_options** | [**List[GroupOption]**](GroupOption.md) |  | [optional] 
+**checkbox_validation_settings** | [**CheckboxValidationSettings**](CheckboxValidationSettings.md) |  | [optional] 
 **font_hex_color** | **str** |  | [optional] 
 **is_bold_font** | **bool** |  | [optional] 
 **is_italic_font** | **bool** |  | [optional] 

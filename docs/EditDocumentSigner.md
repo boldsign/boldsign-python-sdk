@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **delivery_mode** | **str** |  | [optional] 
 **authentication_code** | **str** |  | [optional] 
 **identity_verification_settings** | [**IdentityVerificationSettings**](IdentityVerificationSettings.md) |  | [optional] 
+**kba_settings** | [**KbaSettings**](KbaSettings.md) |  | [optional] 
 **signer_order** | **int** |  | [optional] 
 **enable_email_otp** | **bool** |  | [optional] 
 **signer_type** | **str** |  | [optional] 

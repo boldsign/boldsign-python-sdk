@@ -410,7 +410,7 @@ class GroupContactsApi:
     @validate_call
     def delete_group_contact(
         self,
-        group_id: Annotated[StrictStr, Field(description="The group contact id.")],
+        group_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -427,7 +427,7 @@ class GroupContactsApi:
         """Deletes a Group Contact.
 
 
-        :param group_id: The group contact id. (required)
+        :param group_id: (required)
         :type group_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -478,7 +478,7 @@ class GroupContactsApi:
     @validate_call
     def delete_group_contact_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The group contact id.")],
+        group_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -495,7 +495,7 @@ class GroupContactsApi:
         """Deletes a Group Contact.
 
 
-        :param group_id: The group contact id. (required)
+        :param group_id: (required)
         :type group_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -546,7 +546,7 @@ class GroupContactsApi:
     @validate_call
     def delete_group_contact_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The group contact id.")],
+        group_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -563,7 +563,7 @@ class GroupContactsApi:
         """Deletes a Group Contact.
 
 
-        :param group_id: The group contact id. (required)
+        :param group_id: (required)
         :type group_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -675,7 +675,7 @@ class GroupContactsApi:
     @validate_call
     def get_group_contact(
         self,
-        group_id: Annotated[StrictStr, Field(description="Group Contact Id.")],
+        group_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -692,7 +692,7 @@ class GroupContactsApi:
         """Get Summary of the Group Contact.
 
 
-        :param group_id: Group Contact Id. (required)
+        :param group_id: (required)
         :type group_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -743,7 +743,7 @@ class GroupContactsApi:
     @validate_call
     def get_group_contact_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="Group Contact Id.")],
+        group_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -760,7 +760,7 @@ class GroupContactsApi:
         """Get Summary of the Group Contact.
 
 
-        :param group_id: Group Contact Id. (required)
+        :param group_id: (required)
         :type group_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -811,7 +811,7 @@ class GroupContactsApi:
     @validate_call
     def get_group_contact_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="Group Contact Id.")],
+        group_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -828,7 +828,7 @@ class GroupContactsApi:
         """Get Summary of the Group Contact.
 
 
-        :param group_id: Group Contact Id. (required)
+        :param group_id: (required)
         :type group_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1271,7 +1271,7 @@ class GroupContactsApi:
     @validate_call
     def update_group_contact(
         self,
-        group_id: Annotated[StrictStr, Field(description="The group contact ID.")],
+        group_id: StrictStr,
         update_group_contact: Annotated[UpdateGroupContact, Field(description="The group contact details.")],
         _request_timeout: Union[
             None,
@@ -1289,7 +1289,7 @@ class GroupContactsApi:
         """Update the Group Contact.
 
 
-        :param group_id: The group contact ID. (required)
+        :param group_id: (required)
         :type group_id: str
         :param update_group_contact: The group contact details. (required)
         :type update_group_contact: UpdateGroupContact
@@ -1343,7 +1343,7 @@ class GroupContactsApi:
     @validate_call
     def update_group_contact_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The group contact ID.")],
+        group_id: StrictStr,
         update_group_contact: Annotated[UpdateGroupContact, Field(description="The group contact details.")],
         _request_timeout: Union[
             None,
@@ -1361,7 +1361,7 @@ class GroupContactsApi:
         """Update the Group Contact.
 
 
-        :param group_id: The group contact ID. (required)
+        :param group_id: (required)
         :type group_id: str
         :param update_group_contact: The group contact details. (required)
         :type update_group_contact: UpdateGroupContact
@@ -1415,7 +1415,7 @@ class GroupContactsApi:
     @validate_call
     def update_group_contact_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The group contact ID.")],
+        group_id: StrictStr,
         update_group_contact: Annotated[UpdateGroupContact, Field(description="The group contact details.")],
         _request_timeout: Union[
             None,
@@ -1433,7 +1433,7 @@ class GroupContactsApi:
         """Update the Group Contact.
 
 
-        :param group_id: The group contact ID. (required)
+        :param group_id: (required)
         :type group_id: str
         :param update_group_contact: The group contact details. (required)
         :type update_group_contact: UpdateGroupContact

@@ -453,7 +453,7 @@ class CustomFieldApi:
     @validate_call
     def custom_fields_list(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -470,7 +470,7 @@ class CustomFieldApi:
         """List the custom fields respective to the brand id.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -521,7 +521,7 @@ class CustomFieldApi:
     @validate_call
     def custom_fields_list_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -538,7 +538,7 @@ class CustomFieldApi:
         """List the custom fields respective to the brand id.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -589,7 +589,7 @@ class CustomFieldApi:
     @validate_call
     def custom_fields_list_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -606,7 +606,7 @@ class CustomFieldApi:
         """List the custom fields respective to the brand id.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -718,7 +718,7 @@ class CustomFieldApi:
     @validate_call
     def delete_custom_field(
         self,
-        custom_field_id: Annotated[StrictStr, Field(description="The custom field id.")],
+        custom_field_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -735,7 +735,7 @@ class CustomFieldApi:
         """Delete the custom field.
 
 
-        :param custom_field_id: The custom field id. (required)
+        :param custom_field_id: (required)
         :type custom_field_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -787,7 +787,7 @@ class CustomFieldApi:
     @validate_call
     def delete_custom_field_with_http_info(
         self,
-        custom_field_id: Annotated[StrictStr, Field(description="The custom field id.")],
+        custom_field_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -804,7 +804,7 @@ class CustomFieldApi:
         """Delete the custom field.
 
 
-        :param custom_field_id: The custom field id. (required)
+        :param custom_field_id: (required)
         :type custom_field_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -856,7 +856,7 @@ class CustomFieldApi:
     @validate_call
     def delete_custom_field_without_preload_content(
         self,
-        custom_field_id: Annotated[StrictStr, Field(description="The custom field id.")],
+        custom_field_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -873,7 +873,7 @@ class CustomFieldApi:
         """Delete the custom field.
 
 
-        :param custom_field_id: The custom field id. (required)
+        :param custom_field_id: (required)
         :type custom_field_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1025,7 +1025,7 @@ class CustomFieldApi:
     @validate_call
     def edit_custom_field(
         self,
-        custom_field_id: Annotated[StrictStr, Field(description="The custom field id.")],
+        custom_field_id: StrictStr,
         brand_custom_field_details: Annotated[BrandCustomFieldDetails, Field(description="The custom field details.")],
         _request_timeout: Union[
             None,
@@ -1043,7 +1043,7 @@ class CustomFieldApi:
         """Edit the custom field.
 
 
-        :param custom_field_id: The custom field id. (required)
+        :param custom_field_id: (required)
         :type custom_field_id: str
         :param brand_custom_field_details: The custom field details. (required)
         :type brand_custom_field_details: BrandCustomFieldDetails
@@ -1098,7 +1098,7 @@ class CustomFieldApi:
     @validate_call
     def edit_custom_field_with_http_info(
         self,
-        custom_field_id: Annotated[StrictStr, Field(description="The custom field id.")],
+        custom_field_id: StrictStr,
         brand_custom_field_details: Annotated[BrandCustomFieldDetails, Field(description="The custom field details.")],
         _request_timeout: Union[
             None,
@@ -1116,7 +1116,7 @@ class CustomFieldApi:
         """Edit the custom field.
 
 
-        :param custom_field_id: The custom field id. (required)
+        :param custom_field_id: (required)
         :type custom_field_id: str
         :param brand_custom_field_details: The custom field details. (required)
         :type brand_custom_field_details: BrandCustomFieldDetails
@@ -1171,7 +1171,7 @@ class CustomFieldApi:
     @validate_call
     def edit_custom_field_without_preload_content(
         self,
-        custom_field_id: Annotated[StrictStr, Field(description="The custom field id.")],
+        custom_field_id: StrictStr,
         brand_custom_field_details: Annotated[BrandCustomFieldDetails, Field(description="The custom field details.")],
         _request_timeout: Union[
             None,
@@ -1189,7 +1189,7 @@ class CustomFieldApi:
         """Edit the custom field.
 
 
-        :param custom_field_id: The custom field id. (required)
+        :param custom_field_id: (required)
         :type custom_field_id: str
         :param brand_custom_field_details: The custom field details. (required)
         :type brand_custom_field_details: BrandCustomFieldDetails
