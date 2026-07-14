@@ -31,6 +31,8 @@ from boldsign.models.document_properties import DocumentProperties
 from boldsign.models.document_records import DocumentRecords
 from boldsign.models.document_tags import DocumentTags
 from boldsign.models.edit_document_request import EditDocumentRequest
+from boldsign.models.embedded_clone_document_json_request import EmbeddedCloneDocumentJsonRequest
+from boldsign.models.embedded_cloned_document import EmbeddedClonedDocument
 from boldsign.models.embedded_document_edit_json_request import EmbeddedDocumentEditJsonRequest
 from boldsign.models.embedded_document_edited import EmbeddedDocumentEdited
 from boldsign.models.embedded_document_request import EmbeddedDocumentRequest
@@ -66,7 +68,7 @@ class DocumentApi:
     @validate_call
     def add_authentication(
         self,
-        document_id: Annotated[StrictStr, Field(description="The DocumentId.")],
+        document_id: StrictStr,
         access_code_detail: Annotated[Optional[AccessCodeDetail], Field(description="Access code details.")] = None,
         _request_timeout: Union[
             None,
@@ -84,7 +86,7 @@ class DocumentApi:
         """The add authentication to recipient.
 
 
-        :param document_id: The DocumentId. (required)
+        :param document_id: (required)
         :type document_id: str
         :param access_code_detail: Access code details.
         :type access_code_detail: AccessCodeDetail
@@ -138,7 +140,7 @@ class DocumentApi:
     @validate_call
     def add_authentication_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The DocumentId.")],
+        document_id: StrictStr,
         access_code_detail: Annotated[Optional[AccessCodeDetail], Field(description="Access code details.")] = None,
         _request_timeout: Union[
             None,
@@ -156,7 +158,7 @@ class DocumentApi:
         """The add authentication to recipient.
 
 
-        :param document_id: The DocumentId. (required)
+        :param document_id: (required)
         :type document_id: str
         :param access_code_detail: Access code details.
         :type access_code_detail: AccessCodeDetail
@@ -210,7 +212,7 @@ class DocumentApi:
     @validate_call
     def add_authentication_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The DocumentId.")],
+        document_id: StrictStr,
         access_code_detail: Annotated[Optional[AccessCodeDetail], Field(description="Access code details.")] = None,
         _request_timeout: Union[
             None,
@@ -228,7 +230,7 @@ class DocumentApi:
         """The add authentication to recipient.
 
 
-        :param document_id: The DocumentId. (required)
+        :param document_id: (required)
         :type document_id: str
         :param access_code_detail: Access code details.
         :type access_code_detail: AccessCodeDetail
@@ -1321,8 +1323,8 @@ class DocumentApi:
     @validate_call
     def cancel_editing(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The onbehalfof email id.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1339,9 +1341,9 @@ class DocumentApi:
         """Cancels editing for a document that is currently in edit-mode.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The onbehalfof email id.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1393,8 +1395,8 @@ class DocumentApi:
     @validate_call
     def cancel_editing_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The onbehalfof email id.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1411,9 +1413,9 @@ class DocumentApi:
         """Cancels editing for a document that is currently in edit-mode.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The onbehalfof email id.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1465,8 +1467,8 @@ class DocumentApi:
     @validate_call
     def cancel_editing_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The onbehalfof email id.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1483,9 +1485,9 @@ class DocumentApi:
         """Cancels editing for a document that is currently in edit-mode.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The onbehalfof email id.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2055,7 +2057,7 @@ class DocumentApi:
     @validate_call
     def change_recipient(
         self,
-        document_id: Annotated[StrictStr, Field(description="The documentID details.")],
+        document_id: StrictStr,
         change_recipient: Annotated[ChangeRecipient, Field(description="The new recipient details.")],
         _request_timeout: Union[
             None,
@@ -2073,7 +2075,7 @@ class DocumentApi:
         """Change recipient details of a document.
 
 
-        :param document_id: The documentID details. (required)
+        :param document_id: (required)
         :type document_id: str
         :param change_recipient: The new recipient details. (required)
         :type change_recipient: ChangeRecipient
@@ -2127,7 +2129,7 @@ class DocumentApi:
     @validate_call
     def change_recipient_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The documentID details.")],
+        document_id: StrictStr,
         change_recipient: Annotated[ChangeRecipient, Field(description="The new recipient details.")],
         _request_timeout: Union[
             None,
@@ -2145,7 +2147,7 @@ class DocumentApi:
         """Change recipient details of a document.
 
 
-        :param document_id: The documentID details. (required)
+        :param document_id: (required)
         :type document_id: str
         :param change_recipient: The new recipient details. (required)
         :type change_recipient: ChangeRecipient
@@ -2199,7 +2201,7 @@ class DocumentApi:
     @validate_call
     def change_recipient_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The documentID details.")],
+        document_id: StrictStr,
         change_recipient: Annotated[ChangeRecipient, Field(description="The new recipient details.")],
         _request_timeout: Union[
             None,
@@ -2217,7 +2219,7 @@ class DocumentApi:
         """Change recipient details of a document.
 
 
-        :param document_id: The documentID details. (required)
+        :param document_id: (required)
         :type document_id: str
         :param change_recipient: The new recipient details. (required)
         :type change_recipient: ChangeRecipient
@@ -2471,9 +2473,350 @@ class DocumentApi:
 
 
     @validate_call
+    def create_embedded_document_clone_url(
+        self,
+        document_id: StrictStr,
+        embedded_clone_document_json_request: Annotated[Optional[EmbeddedCloneDocumentJsonRequest], Field(description="The embedded clone document request body.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EmbeddedClonedDocument:
+        """Generates a URL to embeds Clone document process into your application.
+
+
+        :param document_id: (required)
+        :type document_id: str
+        :param embedded_clone_document_json_request: The embedded clone document request body.
+        :type embedded_clone_document_json_request: EmbeddedCloneDocumentJsonRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_embedded_document_clone_url_serialize(
+            document_id=document_id,
+            embedded_clone_document_json_request=embedded_clone_document_json_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedClonedDocument",
+            '401': "ErrorResult",
+            '400': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def create_embedded_document_clone_url_with_http_info(
+        self,
+        document_id: StrictStr,
+        embedded_clone_document_json_request: Annotated[Optional[EmbeddedCloneDocumentJsonRequest], Field(description="The embedded clone document request body.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EmbeddedClonedDocument]:
+        """Generates a URL to embeds Clone document process into your application.
+
+
+        :param document_id: (required)
+        :type document_id: str
+        :param embedded_clone_document_json_request: The embedded clone document request body.
+        :type embedded_clone_document_json_request: EmbeddedCloneDocumentJsonRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_embedded_document_clone_url_serialize(
+            document_id=document_id,
+            embedded_clone_document_json_request=embedded_clone_document_json_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedClonedDocument",
+            '401': "ErrorResult",
+            '400': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def create_embedded_document_clone_url_without_preload_content(
+        self,
+        document_id: StrictStr,
+        embedded_clone_document_json_request: Annotated[Optional[EmbeddedCloneDocumentJsonRequest], Field(description="The embedded clone document request body.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Generates a URL to embeds Clone document process into your application.
+
+
+        :param document_id: (required)
+        :type document_id: str
+        :param embedded_clone_document_json_request: The embedded clone document request body.
+        :type embedded_clone_document_json_request: EmbeddedCloneDocumentJsonRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_embedded_document_clone_url_serialize(
+            document_id=document_id,
+            embedded_clone_document_json_request=embedded_clone_document_json_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedClonedDocument",
+            '401': "ErrorResult",
+            '400': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_embedded_document_clone_url_serialize(
+        self,
+        document_id,
+        embedded_clone_document_json_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        has_files = False
+        body_param = embedded_clone_document_json_request
+        excluded_json_fields = set([])
+        # Check if body_param is a list of models
+        if isinstance(body_param, list):
+            for item in body_param:
+                if hasattr(item, 'openapi_types'):
+                    for param_name, param_type in item.openapi_types().items():
+                        param_value = getattr(item, param_name)
+                        if param_value is None:
+                            continue
+
+                        if "io.IOBase" in param_type:
+                            has_files = True
+                            _content_type = "multipart/form-data"
+                            excluded_json_fields.add(param_name)
+
+                            if isinstance(param_value, list):
+                                for index, file_item in enumerate(param_value):
+                                    _files[f'{param_name}[{index}]'] = file_item
+                            else:
+                                _files[param_name] = param_value
+
+                    if has_files is True:
+                        _form_params += item.to_json_form_params(excluded_json_fields)
+        else:
+            # Handle a single object
+            for param_name, param_type in body_param.openapi_types().items():
+                param_value = getattr(body_param, param_name)
+                if param_value is None:
+                    continue
+
+                if "io.IOBase" in param_type:
+                    has_files = True
+                    _content_type = "multipart/form-data"
+                    excluded_json_fields.add(param_name)
+
+                    if isinstance(param_value, list):
+                        for index, item in enumerate(param_value):
+                            _files[f'{param_name}[{index}]'] = item
+                    else:
+                        _files[param_name] = param_value
+
+            if has_files is True:
+                _form_params = body_param.to_json_form_params(excluded_json_fields)
+
+        # process the path parameters
+        # process the query parameters
+        if document_id is not None:
+            
+            _query_params.append(('documentId', document_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if embedded_clone_document_json_request is not None and has_files is False:
+            _body_params = embedded_clone_document_json_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'multipart/form-data', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'X-API-KEY', 
+            'Bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/document/createEmbeddedCloneUrl',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def create_embedded_edit_url(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         embedded_document_edit_json_request: Annotated[Optional[EmbeddedDocumentEditJsonRequest], Field(description="The embedded edit document request body.")] = None,
         _request_timeout: Union[
             None,
@@ -2491,7 +2834,7 @@ class DocumentApi:
         """Generates an embedded edit URL that allows the document editing process to be integrated into your application.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param embedded_document_edit_json_request: The embedded edit document request body.
         :type embedded_document_edit_json_request: EmbeddedDocumentEditJsonRequest
@@ -2547,7 +2890,7 @@ class DocumentApi:
     @validate_call
     def create_embedded_edit_url_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         embedded_document_edit_json_request: Annotated[Optional[EmbeddedDocumentEditJsonRequest], Field(description="The embedded edit document request body.")] = None,
         _request_timeout: Union[
             None,
@@ -2565,7 +2908,7 @@ class DocumentApi:
         """Generates an embedded edit URL that allows the document editing process to be integrated into your application.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param embedded_document_edit_json_request: The embedded edit document request body.
         :type embedded_document_edit_json_request: EmbeddedDocumentEditJsonRequest
@@ -2621,7 +2964,7 @@ class DocumentApi:
     @validate_call
     def create_embedded_edit_url_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         embedded_document_edit_json_request: Annotated[Optional[EmbeddedDocumentEditJsonRequest], Field(description="The embedded edit document request body.")] = None,
         _request_timeout: Union[
             None,
@@ -2639,7 +2982,7 @@ class DocumentApi:
         """Generates an embedded edit URL that allows the document editing process to be integrated into your application.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param embedded_document_edit_json_request: The embedded edit document request body.
         :type embedded_document_edit_json_request: EmbeddedDocumentEditJsonRequest
@@ -3150,8 +3493,8 @@ class DocumentApi:
     @validate_call
     def delete_document(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        delete_permanently: Annotated[Optional[StrictBool], Field(description="Delete Permanently.")] = None,
+        document_id: StrictStr,
+        delete_permanently: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3168,9 +3511,9 @@ class DocumentApi:
         """Delete the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param delete_permanently: Delete Permanently.
+        :param delete_permanently:
         :type delete_permanently: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3222,8 +3565,8 @@ class DocumentApi:
     @validate_call
     def delete_document_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        delete_permanently: Annotated[Optional[StrictBool], Field(description="Delete Permanently.")] = None,
+        document_id: StrictStr,
+        delete_permanently: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3240,9 +3583,9 @@ class DocumentApi:
         """Delete the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param delete_permanently: Delete Permanently.
+        :param delete_permanently:
         :type delete_permanently: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3294,8 +3637,8 @@ class DocumentApi:
     @validate_call
     def delete_document_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        delete_permanently: Annotated[Optional[StrictBool], Field(description="Delete Permanently.")] = None,
+        document_id: StrictStr,
+        delete_permanently: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3312,9 +3655,9 @@ class DocumentApi:
         """Delete the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param delete_permanently: Delete Permanently.
+        :param delete_permanently:
         :type delete_permanently: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3872,9 +4215,9 @@ class DocumentApi:
     @validate_call
     def download_attachment(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        attachment_id: Annotated[StrictStr, Field(description="Attachment Id(Get attachment ID from Properties API).")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        attachment_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3891,11 +4234,11 @@ class DocumentApi:
         """Download the Attachment.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param attachment_id: Attachment Id(Get attachment ID from Properties API). (required)
+        :param attachment_id: (required)
         :type attachment_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3948,9 +4291,9 @@ class DocumentApi:
     @validate_call
     def download_attachment_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        attachment_id: Annotated[StrictStr, Field(description="Attachment Id(Get attachment ID from Properties API).")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        attachment_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3967,11 +4310,11 @@ class DocumentApi:
         """Download the Attachment.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param attachment_id: Attachment Id(Get attachment ID from Properties API). (required)
+        :param attachment_id: (required)
         :type attachment_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4024,9 +4367,9 @@ class DocumentApi:
     @validate_call
     def download_attachment_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        attachment_id: Annotated[StrictStr, Field(description="Attachment Id(Get attachment ID from Properties API).")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        attachment_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4043,11 +4386,11 @@ class DocumentApi:
         """Download the Attachment.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param attachment_id: Attachment Id(Get attachment ID from Properties API). (required)
+        :param attachment_id: (required)
         :type attachment_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4210,8 +4553,8 @@ class DocumentApi:
     @validate_call
     def download_audit_log(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4228,9 +4571,9 @@ class DocumentApi:
         """Download the audit trail document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4282,8 +4625,8 @@ class DocumentApi:
     @validate_call
     def download_audit_log_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4300,9 +4643,9 @@ class DocumentApi:
         """Download the audit trail document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4354,8 +4697,8 @@ class DocumentApi:
     @validate_call
     def download_audit_log_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4372,9 +4715,9 @@ class DocumentApi:
         """Download the audit trail document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4531,8 +4874,8 @@ class DocumentApi:
     @validate_call
     def download_document(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4549,9 +4892,9 @@ class DocumentApi:
         """Download the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4603,8 +4946,8 @@ class DocumentApi:
     @validate_call
     def download_document_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4621,9 +4964,9 @@ class DocumentApi:
         """Download the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4675,8 +5018,8 @@ class DocumentApi:
     @validate_call
     def download_document_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        document_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4693,9 +5036,9 @@ class DocumentApi:
         """Download the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4852,7 +5195,7 @@ class DocumentApi:
     @validate_call
     def draft_send(
         self,
-        document_id: Annotated[StrictStr, Field(description="The ID of the document to be sent.")],
+        document_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4869,7 +5212,7 @@ class DocumentApi:
         """Sends a draft-status document out for signature.
 
 
-        :param document_id: The ID of the document to be sent. (required)
+        :param document_id: (required)
         :type document_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4920,7 +5263,7 @@ class DocumentApi:
     @validate_call
     def draft_send_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The ID of the document to be sent.")],
+        document_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4937,7 +5280,7 @@ class DocumentApi:
         """Sends a draft-status document out for signature.
 
 
-        :param document_id: The ID of the document to be sent. (required)
+        :param document_id: (required)
         :type document_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4988,7 +5331,7 @@ class DocumentApi:
     @validate_call
     def draft_send_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The ID of the document to be sent.")],
+        document_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5005,7 +5348,7 @@ class DocumentApi:
         """Sends a draft-status document out for signature.
 
 
-        :param document_id: The ID of the document to be sent. (required)
+        :param document_id: (required)
         :type document_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5117,7 +5460,7 @@ class DocumentApi:
     @validate_call
     def edit_document(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         edit_document_request: Annotated[Optional[EditDocumentRequest], Field(description="Edit document JSON request.")] = None,
         _request_timeout: Union[
             None,
@@ -5135,7 +5478,7 @@ class DocumentApi:
         """Edit and updates an existing document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param edit_document_request: Edit document JSON request.
         :type edit_document_request: EditDocumentRequest
@@ -5191,7 +5534,7 @@ class DocumentApi:
     @validate_call
     def edit_document_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         edit_document_request: Annotated[Optional[EditDocumentRequest], Field(description="Edit document JSON request.")] = None,
         _request_timeout: Union[
             None,
@@ -5209,7 +5552,7 @@ class DocumentApi:
         """Edit and updates an existing document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param edit_document_request: Edit document JSON request.
         :type edit_document_request: EditDocumentRequest
@@ -5265,7 +5608,7 @@ class DocumentApi:
     @validate_call
     def edit_document_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         edit_document_request: Annotated[Optional[EditDocumentRequest], Field(description="Edit document JSON request.")] = None,
         _request_timeout: Union[
             None,
@@ -5283,7 +5626,7 @@ class DocumentApi:
         """Edit and updates an existing document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param edit_document_request: Edit document JSON request.
         :type edit_document_request: EditDocumentRequest
@@ -5464,7 +5807,7 @@ class DocumentApi:
     @validate_call
     def extend_expiry(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         extend_expiry: Annotated[Optional[ExtendExpiry], Field(description="The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.")] = None,
         _request_timeout: Union[
             None,
@@ -5482,7 +5825,7 @@ class DocumentApi:
         """Extends the expiration date of the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param extend_expiry: The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.
         :type extend_expiry: ExtendExpiry
@@ -5536,7 +5879,7 @@ class DocumentApi:
     @validate_call
     def extend_expiry_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         extend_expiry: Annotated[Optional[ExtendExpiry], Field(description="The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.")] = None,
         _request_timeout: Union[
             None,
@@ -5554,7 +5897,7 @@ class DocumentApi:
         """Extends the expiration date of the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param extend_expiry: The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.
         :type extend_expiry: ExtendExpiry
@@ -5608,7 +5951,7 @@ class DocumentApi:
     @validate_call
     def extend_expiry_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         extend_expiry: Annotated[Optional[ExtendExpiry], Field(description="The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.")] = None,
         _request_timeout: Union[
             None,
@@ -5626,7 +5969,7 @@ class DocumentApi:
         """Extends the expiration date of the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param extend_expiry: The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.
         :type extend_expiry: ExtendExpiry
@@ -5882,7 +6225,7 @@ class DocumentApi:
     @validate_call
     def get_properties(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5899,7 +6242,7 @@ class DocumentApi:
         """Get summary of the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5950,7 +6293,7 @@ class DocumentApi:
     @validate_call
     def get_properties_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5967,7 +6310,7 @@ class DocumentApi:
         """Get summary of the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6018,7 +6361,7 @@ class DocumentApi:
     @validate_call
     def get_properties_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6035,7 +6378,7 @@ class DocumentApi:
         """Get summary of the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7034,7 +7377,7 @@ class DocumentApi:
     @validate_call
     def prefill_fields(
         self,
-        document_id: Annotated[StrictStr, Field(description="The DocumentId.")],
+        document_id: StrictStr,
         prefill_field_request: Annotated[PrefillFieldRequest, Field(description="The prefill field request.")],
         _request_timeout: Union[
             None,
@@ -7052,7 +7395,7 @@ class DocumentApi:
         """Updates the value (prefill) of the fields in the document.
 
 
-        :param document_id: The DocumentId. (required)
+        :param document_id: (required)
         :type document_id: str
         :param prefill_field_request: The prefill field request. (required)
         :type prefill_field_request: PrefillFieldRequest
@@ -7106,7 +7449,7 @@ class DocumentApi:
     @validate_call
     def prefill_fields_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The DocumentId.")],
+        document_id: StrictStr,
         prefill_field_request: Annotated[PrefillFieldRequest, Field(description="The prefill field request.")],
         _request_timeout: Union[
             None,
@@ -7124,7 +7467,7 @@ class DocumentApi:
         """Updates the value (prefill) of the fields in the document.
 
 
-        :param document_id: The DocumentId. (required)
+        :param document_id: (required)
         :type document_id: str
         :param prefill_field_request: The prefill field request. (required)
         :type prefill_field_request: PrefillFieldRequest
@@ -7178,7 +7521,7 @@ class DocumentApi:
     @validate_call
     def prefill_fields_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The DocumentId.")],
+        document_id: StrictStr,
         prefill_field_request: Annotated[PrefillFieldRequest, Field(description="The prefill field request.")],
         _request_timeout: Union[
             None,
@@ -7196,7 +7539,7 @@ class DocumentApi:
         """Updates the value (prefill) of the fields in the document.
 
 
-        :param document_id: The DocumentId. (required)
+        :param document_id: (required)
         :type document_id: str
         :param prefill_field_request: The prefill field request. (required)
         :type prefill_field_request: PrefillFieldRequest
@@ -7413,8 +7756,8 @@ class DocumentApi:
     @validate_call
     def remind_document(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        receiver_emails: Annotated[Optional[List[StrictStr]], Field(description="Signer emails.")] = None,
+        document_id: StrictStr,
+        receiver_emails: Optional[List[StrictStr]] = None,
         reminder_message: Annotated[Optional[ReminderMessage], Field(description="Reminder Message for signers.")] = None,
         _request_timeout: Union[
             None,
@@ -7432,9 +7775,9 @@ class DocumentApi:
         """Send reminder to pending signers.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param receiver_emails: Signer emails.
+        :param receiver_emails:
         :type receiver_emails: List[str]
         :param reminder_message: Reminder Message for signers.
         :type reminder_message: ReminderMessage
@@ -7489,8 +7832,8 @@ class DocumentApi:
     @validate_call
     def remind_document_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        receiver_emails: Annotated[Optional[List[StrictStr]], Field(description="Signer emails.")] = None,
+        document_id: StrictStr,
+        receiver_emails: Optional[List[StrictStr]] = None,
         reminder_message: Annotated[Optional[ReminderMessage], Field(description="Reminder Message for signers.")] = None,
         _request_timeout: Union[
             None,
@@ -7508,9 +7851,9 @@ class DocumentApi:
         """Send reminder to pending signers.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param receiver_emails: Signer emails.
+        :param receiver_emails:
         :type receiver_emails: List[str]
         :param reminder_message: Reminder Message for signers.
         :type reminder_message: ReminderMessage
@@ -7565,8 +7908,8 @@ class DocumentApi:
     @validate_call
     def remind_document_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
-        receiver_emails: Annotated[Optional[List[StrictStr]], Field(description="Signer emails.")] = None,
+        document_id: StrictStr,
+        receiver_emails: Optional[List[StrictStr]] = None,
         reminder_message: Annotated[Optional[ReminderMessage], Field(description="Reminder Message for signers.")] = None,
         _request_timeout: Union[
             None,
@@ -7584,9 +7927,9 @@ class DocumentApi:
         """Send reminder to pending signers.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
-        :param receiver_emails: Signer emails.
+        :param receiver_emails:
         :type receiver_emails: List[str]
         :param reminder_message: Reminder Message for signers.
         :type reminder_message: ReminderMessage
@@ -8267,7 +8610,7 @@ class DocumentApi:
     @validate_call
     def revoke_document(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         revoke_document: Annotated[RevokeDocument, Field(description="RevokeDetails.")],
         _request_timeout: Union[
             None,
@@ -8285,7 +8628,7 @@ class DocumentApi:
         """Revoke the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param revoke_document: RevokeDetails. (required)
         :type revoke_document: RevokeDocument
@@ -8339,7 +8682,7 @@ class DocumentApi:
     @validate_call
     def revoke_document_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         revoke_document: Annotated[RevokeDocument, Field(description="RevokeDetails.")],
         _request_timeout: Union[
             None,
@@ -8357,7 +8700,7 @@ class DocumentApi:
         """Revoke the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param revoke_document: RevokeDetails. (required)
         :type revoke_document: RevokeDocument
@@ -8411,7 +8754,7 @@ class DocumentApi:
     @validate_call
     def revoke_document_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="Document Id.")],
+        document_id: StrictStr,
         revoke_document: Annotated[RevokeDocument, Field(description="RevokeDetails.")],
         _request_timeout: Union[
             None,
@@ -8429,7 +8772,7 @@ class DocumentApi:
         """Revoke the document.
 
 
-        :param document_id: Document Id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param revoke_document: RevokeDetails. (required)
         :type revoke_document: RevokeDocument

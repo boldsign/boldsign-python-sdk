@@ -413,7 +413,7 @@ class SenderIdentitiesApi:
     @validate_call
     def delete_sender_identities(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -430,7 +430,7 @@ class SenderIdentitiesApi:
         """Deletes sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -481,7 +481,7 @@ class SenderIdentitiesApi:
     @validate_call
     def delete_sender_identities_with_http_info(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -498,7 +498,7 @@ class SenderIdentitiesApi:
         """Deletes sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -549,7 +549,7 @@ class SenderIdentitiesApi:
     @validate_call
     def delete_sender_identities_without_preload_content(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -566,7 +566,7 @@ class SenderIdentitiesApi:
         """Deletes sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -678,8 +678,8 @@ class SenderIdentitiesApi:
     @validate_call
     def get_sender_identity_properties(
         self,
-        id: Annotated[Optional[StrictStr], Field(description="The sender identity id.")] = None,
-        email: Annotated[Optional[StrictStr], Field(description="The sender identity email.")] = None,
+        id: Optional[StrictStr] = None,
+        email: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -696,9 +696,9 @@ class SenderIdentitiesApi:
         """Gets sender identity by ID or email.
 
 
-        :param id: The sender identity id.
+        :param id:
         :type id: str
-        :param email: The sender identity email.
+        :param email:
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -750,8 +750,8 @@ class SenderIdentitiesApi:
     @validate_call
     def get_sender_identity_properties_with_http_info(
         self,
-        id: Annotated[Optional[StrictStr], Field(description="The sender identity id.")] = None,
-        email: Annotated[Optional[StrictStr], Field(description="The sender identity email.")] = None,
+        id: Optional[StrictStr] = None,
+        email: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -768,9 +768,9 @@ class SenderIdentitiesApi:
         """Gets sender identity by ID or email.
 
 
-        :param id: The sender identity id.
+        :param id:
         :type id: str
-        :param email: The sender identity email.
+        :param email:
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -822,8 +822,8 @@ class SenderIdentitiesApi:
     @validate_call
     def get_sender_identity_properties_without_preload_content(
         self,
-        id: Annotated[Optional[StrictStr], Field(description="The sender identity id.")] = None,
-        email: Annotated[Optional[StrictStr], Field(description="The sender identity email.")] = None,
+        id: Optional[StrictStr] = None,
+        email: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -840,9 +840,9 @@ class SenderIdentitiesApi:
         """Gets sender identity by ID or email.
 
 
-        :param id: The sender identity id.
+        :param id:
         :type id: str
-        :param email: The sender identity email.
+        :param email:
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1277,7 +1277,7 @@ class SenderIdentitiesApi:
     @validate_call
     def re_request_sender_identities(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1294,7 +1294,7 @@ class SenderIdentitiesApi:
         """Rerequests denied sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1345,7 +1345,7 @@ class SenderIdentitiesApi:
     @validate_call
     def re_request_sender_identities_with_http_info(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1362,7 +1362,7 @@ class SenderIdentitiesApi:
         """Rerequests denied sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1413,7 +1413,7 @@ class SenderIdentitiesApi:
     @validate_call
     def re_request_sender_identities_without_preload_content(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1430,7 +1430,7 @@ class SenderIdentitiesApi:
         """Rerequests denied sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1542,7 +1542,7 @@ class SenderIdentitiesApi:
     @validate_call
     def resend_invitation_sender_identities(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1559,7 +1559,7 @@ class SenderIdentitiesApi:
         """Resends sender identity invitation.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1610,7 +1610,7 @@ class SenderIdentitiesApi:
     @validate_call
     def resend_invitation_sender_identities_with_http_info(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1627,7 +1627,7 @@ class SenderIdentitiesApi:
         """Resends sender identity invitation.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1678,7 +1678,7 @@ class SenderIdentitiesApi:
     @validate_call
     def resend_invitation_sender_identities_without_preload_content(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1695,7 +1695,7 @@ class SenderIdentitiesApi:
         """Resends sender identity invitation.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1807,7 +1807,7 @@ class SenderIdentitiesApi:
     @validate_call
     def update_sender_identities(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         edit_sender_identity_request: Annotated[EditSenderIdentityRequest, Field(description="The create sender identity request.")],
         _request_timeout: Union[
             None,
@@ -1825,7 +1825,7 @@ class SenderIdentitiesApi:
         """Updates sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param edit_sender_identity_request: The create sender identity request. (required)
         :type edit_sender_identity_request: EditSenderIdentityRequest
@@ -1879,7 +1879,7 @@ class SenderIdentitiesApi:
     @validate_call
     def update_sender_identities_with_http_info(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         edit_sender_identity_request: Annotated[EditSenderIdentityRequest, Field(description="The create sender identity request.")],
         _request_timeout: Union[
             None,
@@ -1897,7 +1897,7 @@ class SenderIdentitiesApi:
         """Updates sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param edit_sender_identity_request: The create sender identity request. (required)
         :type edit_sender_identity_request: EditSenderIdentityRequest
@@ -1951,7 +1951,7 @@ class SenderIdentitiesApi:
     @validate_call
     def update_sender_identities_without_preload_content(
         self,
-        email: Annotated[StrictStr, Field(description="The email address.")],
+        email: StrictStr,
         edit_sender_identity_request: Annotated[EditSenderIdentityRequest, Field(description="The create sender identity request.")],
         _request_timeout: Union[
             None,
@@ -1969,7 +1969,7 @@ class SenderIdentitiesApi:
         """Updates sender identity.
 
 
-        :param email: The email address. (required)
+        :param email: (required)
         :type email: str
         :param edit_sender_identity_request: The create sender identity request. (required)
         :type edit_sender_identity_request: EditSenderIdentityRequest

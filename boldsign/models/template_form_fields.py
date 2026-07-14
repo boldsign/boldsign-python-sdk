@@ -38,6 +38,7 @@ class TemplateFormFields(BaseModel):
     TemplateFormFields
     """ # noqa: E501
     id: Optional[StrictStr] = None
+    form_field_id: Optional[StrictStr] = Field(default=None, alias="formFieldId")
     field_type: Optional[StrictStr] = Field(default=None, alias="fieldType")
     type: Optional[StrictStr] = None
     value: Optional[StrictStr] = None
@@ -80,7 +81,7 @@ class TemplateFormFields(BaseModel):
     collaboration_settings: Optional[CollaborationSettings] = Field(default=None, alias="collaborationSettings")
     is_masked: Optional[StrictBool] = Field(default=False, alias="isMasked")
     is_default_value_required: Optional[StrictBool] = Field(default=None, alias="isDefaultValueRequired")
-    __properties: ClassVar[List[str]] = ["id", "fieldType", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontHexColor", "isUnderLineFont", "isItalicFont", "isBoldFont", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "dropdownOptions", "bounds", "pageNumber", "conditionalRules", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "hyperlinkText", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField", "collaborationSettings", "isMasked", "isDefaultValueRequired"]
+    __properties: ClassVar[List[str]] = ["id", "formFieldId", "fieldType", "type", "value", "font", "isRequired", "isReadOnly", "lineHeight", "fontSize", "fontHexColor", "isUnderLineFont", "isItalicFont", "isBoldFont", "groupName", "label", "placeholder", "validationtype", "validationCustomRegex", "validationCustomRegexMessage", "dateFormat", "timeFormat", "imageInfo", "attachmentInfo", "editableDateFieldSettings", "dropdownOptions", "bounds", "pageNumber", "conditionalRules", "dataSyncTag", "textAlign", "textDirection", "characterSpacing", "characterLimit", "hyperlinkText", "backgroundHexColor", "tabIndex", "formulaFieldSettings", "resizeOption", "allowEditFormField", "allowDeleteFormField", "collaborationSettings", "isMasked", "isDefaultValueRequired"]
 
     @field_validator('validationtype')
     def validationtype_validate_enum(cls, value):
@@ -198,6 +199,7 @@ class TemplateFormFields(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "formFieldId": obj.get("formFieldId"),
             "fieldType": obj.get("fieldType"),
             "type": obj.get("type"),
             "value": obj.get("value"),
@@ -257,6 +259,7 @@ class TemplateFormFields(BaseModel):
     def openapi_types(cls) -> Dict[str, str]:
         return {
             "id": "(str,)",
+            "form_field_id": "(str,)",
             "field_type": "(str,)",
             "type": "(str,)",
             "value": "(str,)",

@@ -105,7 +105,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.SenderIdentitiesApi(api_client)
-    email = 'email_example' # str | The email address.
+    email = 'email_example' # str | 
 
     try:
         # Deletes sender identity.
@@ -121,7 +121,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **email** | **str**| The email address. | 
+ **email** | **str**|  | 
 
 ### Return type
 
@@ -170,8 +170,8 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.SenderIdentitiesApi(api_client)
-    id = 'id_example' # str | The sender identity id. (optional)
-    email = 'email_example' # str | The sender identity email. (optional)
+    id = 'id_example' # str |  (optional)
+    email = 'email_example' # str |  (optional)
 
     try:
         # Gets sender identity by ID or email.
@@ -189,8 +189,8 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| The sender identity id. | [optional] 
- **email** | **str**| The sender identity email. | [optional] 
+ **id** | **str**|  | [optional] 
+ **email** | **str**|  | [optional] 
 
 ### Return type
 
@@ -311,7 +311,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.SenderIdentitiesApi(api_client)
-    email = 'email_example' # str | The email address.
+    email = 'email_example' # str | 
 
     try:
         # Rerequests denied sender identity.
@@ -327,7 +327,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **email** | **str**| The email address. | 
+ **email** | **str**|  | 
 
 ### Return type
 
@@ -375,7 +375,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.SenderIdentitiesApi(api_client)
-    email = 'email_example' # str | The email address.
+    email = 'email_example' # str | 
 
     try:
         # Resends sender identity invitation.
@@ -391,7 +391,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **email** | **str**| The email address. | 
+ **email** | **str**|  | 
 
 ### Return type
 
@@ -440,7 +440,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.SenderIdentitiesApi(api_client)
-    email = 'email_example' # str | The email address.
+    email = 'email_example' # str | 
     edit_sender_identity_request = boldsign.EditSenderIdentityRequest() # EditSenderIdentityRequest | The create sender identity request.
 
     try:
@@ -457,7 +457,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **email** | **str**| The email address. | 
+ **email** | **str**|  | 
  **edit_sender_identity_request** | [**EditSenderIdentityRequest**](EditSenderIdentityRequest.md)| The create sender identity request. | 
 
 ### Return type

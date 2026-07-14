@@ -48,7 +48,7 @@ class IdentityVerificationApi:
     @validate_call
     def create_embedded_verification_url(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         embedded_file_details: Annotated[Optional[EmbeddedFileDetails], Field(description="The embedded verification link request.")] = None,
         _request_timeout: Union[
             None,
@@ -66,7 +66,7 @@ class IdentityVerificationApi:
         """Generate a URL that embeds manual ID verification for the specified document signer into your application.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param embedded_file_details: The embedded verification link request.
         :type embedded_file_details: EmbeddedFileDetails
@@ -120,7 +120,7 @@ class IdentityVerificationApi:
     @validate_call
     def create_embedded_verification_url_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         embedded_file_details: Annotated[Optional[EmbeddedFileDetails], Field(description="The embedded verification link request.")] = None,
         _request_timeout: Union[
             None,
@@ -138,7 +138,7 @@ class IdentityVerificationApi:
         """Generate a URL that embeds manual ID verification for the specified document signer into your application.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param embedded_file_details: The embedded verification link request.
         :type embedded_file_details: EmbeddedFileDetails
@@ -192,7 +192,7 @@ class IdentityVerificationApi:
     @validate_call
     def create_embedded_verification_url_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         embedded_file_details: Annotated[Optional[EmbeddedFileDetails], Field(description="The embedded verification link request.")] = None,
         _request_timeout: Union[
             None,
@@ -210,7 +210,7 @@ class IdentityVerificationApi:
         """Generate a URL that embeds manual ID verification for the specified document signer into your application.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param embedded_file_details: The embedded verification link request.
         :type embedded_file_details: EmbeddedFileDetails
@@ -427,7 +427,7 @@ class IdentityVerificationApi:
     @validate_call
     def image(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         download_image_request: Annotated[DownloadImageRequest, Field(description="The download image request.")],
         _request_timeout: Union[
             None,
@@ -445,7 +445,7 @@ class IdentityVerificationApi:
         """Retrieve the uploaded ID verification document or selfie image for the specified document signer using the file ID.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param download_image_request: The download image request. (required)
         :type download_image_request: DownloadImageRequest
@@ -500,7 +500,7 @@ class IdentityVerificationApi:
     @validate_call
     def image_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         download_image_request: Annotated[DownloadImageRequest, Field(description="The download image request.")],
         _request_timeout: Union[
             None,
@@ -518,7 +518,7 @@ class IdentityVerificationApi:
         """Retrieve the uploaded ID verification document or selfie image for the specified document signer using the file ID.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param download_image_request: The download image request. (required)
         :type download_image_request: DownloadImageRequest
@@ -573,7 +573,7 @@ class IdentityVerificationApi:
     @validate_call
     def image_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         download_image_request: Annotated[DownloadImageRequest, Field(description="The download image request.")],
         _request_timeout: Union[
             None,
@@ -591,7 +591,7 @@ class IdentityVerificationApi:
         """Retrieve the uploaded ID verification document or selfie image for the specified document signer using the file ID.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param download_image_request: The download image request. (required)
         :type download_image_request: DownloadImageRequest
@@ -848,7 +848,7 @@ class IdentityVerificationApi:
     @validate_call
     def report(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         verification_data_request: Annotated[VerificationDataRequest, Field(description="The download image request.")],
         _request_timeout: Union[
             None,
@@ -866,7 +866,7 @@ class IdentityVerificationApi:
         """Retrieve the ID verification report for the specified document signer.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param verification_data_request: The download image request. (required)
         :type verification_data_request: VerificationDataRequest
@@ -921,7 +921,7 @@ class IdentityVerificationApi:
     @validate_call
     def report_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         verification_data_request: Annotated[VerificationDataRequest, Field(description="The download image request.")],
         _request_timeout: Union[
             None,
@@ -939,7 +939,7 @@ class IdentityVerificationApi:
         """Retrieve the ID verification report for the specified document signer.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param verification_data_request: The download image request. (required)
         :type verification_data_request: VerificationDataRequest
@@ -994,7 +994,7 @@ class IdentityVerificationApi:
     @validate_call
     def report_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The document id.")],
+        document_id: StrictStr,
         verification_data_request: Annotated[VerificationDataRequest, Field(description="The download image request.")],
         _request_timeout: Union[
             None,
@@ -1012,7 +1012,7 @@ class IdentityVerificationApi:
         """Retrieve the ID verification report for the specified document signer.
 
 
-        :param document_id: The document id. (required)
+        :param document_id: (required)
         :type document_id: str
         :param verification_data_request: The download image request. (required)
         :type verification_data_request: VerificationDataRequest

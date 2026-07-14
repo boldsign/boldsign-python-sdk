@@ -89,7 +89,8 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
     allowed_signature_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedSignatureTypes")
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
     enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
-    __properties: ClassVar[List[str]] = ["files", "fileUrls", "redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "sendLinkValidTill", "showTooltip", "templateIds", "useTextTags", "textTagDefinitions", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere"]
+    document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
+    __properties: ClassVar[List[str]] = ["files", "fileUrls", "redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "sendLinkValidTill", "showTooltip", "templateIds", "useTextTags", "textTagDefinitions", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone"]
 
     @field_validator('send_view_option')
     def send_view_option_validate_enum(cls, value):
@@ -265,7 +266,8 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
             "allowScheduledSend": obj.get("allowScheduledSend") if obj.get("allowScheduledSend") is not None else False,
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
             "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
-            "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere")
+            "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
+            "documentTimeZone": obj.get("documentTimeZone")
         })
         return _obj
 
@@ -331,6 +333,7 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
             "allowed_signature_types": "(List[str],)",
             "group_signer_settings": "(GroupSignerSettings,)",
             "enable_allow_sign_everywhere": "(bool,)",
+            "document_time_zone": "(str,)",
         }
 
     @classmethod

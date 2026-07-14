@@ -410,7 +410,7 @@ class TeamsApi:
     @validate_call
     def get_team(
         self,
-        team_id: Annotated[StrictStr, Field(description="Team Id.")],
+        team_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -427,7 +427,7 @@ class TeamsApi:
         """Get Team details.
 
 
-        :param team_id: Team Id. (required)
+        :param team_id: (required)
         :type team_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -478,7 +478,7 @@ class TeamsApi:
     @validate_call
     def get_team_with_http_info(
         self,
-        team_id: Annotated[StrictStr, Field(description="Team Id.")],
+        team_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -495,7 +495,7 @@ class TeamsApi:
         """Get Team details.
 
 
-        :param team_id: Team Id. (required)
+        :param team_id: (required)
         :type team_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -546,7 +546,7 @@ class TeamsApi:
     @validate_call
     def get_team_without_preload_content(
         self,
-        team_id: Annotated[StrictStr, Field(description="Team Id.")],
+        team_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -563,7 +563,7 @@ class TeamsApi:
         """Get Team details.
 
 
-        :param team_id: Team Id. (required)
+        :param team_id: (required)
         :type team_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

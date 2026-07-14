@@ -24,6 +24,8 @@ from typing_extensions import Annotated
 from boldsign.models.create_template_request import CreateTemplateRequest
 from boldsign.models.document_created import DocumentCreated
 from boldsign.models.edit_template_request import EditTemplateRequest
+from boldsign.models.embedded_clone_template_json_request import EmbeddedCloneTemplateJsonRequest
+from boldsign.models.embedded_cloned_template import EmbeddedClonedTemplate
 from boldsign.models.embedded_create_template_request import EmbeddedCreateTemplateRequest
 from boldsign.models.embedded_merge_template_form_request import EmbeddedMergeTemplateFormRequest
 from boldsign.models.embedded_send_created import EmbeddedSendCreated
@@ -464,7 +466,7 @@ class TemplateApi:
     @validate_call
     def create_embedded_preview_url(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_template_preview_json_request: Annotated[Optional[EmbeddedTemplatePreviewJsonRequest], Field(description="The embedded template preview request body.")] = None,
         _request_timeout: Union[
             None,
@@ -482,7 +484,7 @@ class TemplateApi:
         """Generates a preview URL for a template to view it.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_template_preview_json_request: The embedded template preview request body.
         :type embedded_template_preview_json_request: EmbeddedTemplatePreviewJsonRequest
@@ -535,7 +537,7 @@ class TemplateApi:
     @validate_call
     def create_embedded_preview_url_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_template_preview_json_request: Annotated[Optional[EmbeddedTemplatePreviewJsonRequest], Field(description="The embedded template preview request body.")] = None,
         _request_timeout: Union[
             None,
@@ -553,7 +555,7 @@ class TemplateApi:
         """Generates a preview URL for a template to view it.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_template_preview_json_request: The embedded template preview request body.
         :type embedded_template_preview_json_request: EmbeddedTemplatePreviewJsonRequest
@@ -606,7 +608,7 @@ class TemplateApi:
     @validate_call
     def create_embedded_preview_url_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_template_preview_json_request: Annotated[Optional[EmbeddedTemplatePreviewJsonRequest], Field(description="The embedded template preview request body.")] = None,
         _request_timeout: Union[
             None,
@@ -624,7 +626,7 @@ class TemplateApi:
         """Generates a preview URL for a template to view it.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_template_preview_json_request: The embedded template preview request body.
         :type embedded_template_preview_json_request: EmbeddedTemplatePreviewJsonRequest
@@ -802,7 +804,7 @@ class TemplateApi:
     @validate_call
     def create_embedded_request_url_template(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_send_template_form_request: Annotated[Optional[EmbeddedSendTemplateFormRequest], Field(description="Embedded send template json request.")] = None,
         _request_timeout: Union[
             None,
@@ -820,7 +822,7 @@ class TemplateApi:
         """Generates a send URL using a template which embeds document sending process into your application.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_send_template_form_request: Embedded send template json request.
         :type embedded_send_template_form_request: EmbeddedSendTemplateFormRequest
@@ -874,7 +876,7 @@ class TemplateApi:
     @validate_call
     def create_embedded_request_url_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_send_template_form_request: Annotated[Optional[EmbeddedSendTemplateFormRequest], Field(description="Embedded send template json request.")] = None,
         _request_timeout: Union[
             None,
@@ -892,7 +894,7 @@ class TemplateApi:
         """Generates a send URL using a template which embeds document sending process into your application.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_send_template_form_request: Embedded send template json request.
         :type embedded_send_template_form_request: EmbeddedSendTemplateFormRequest
@@ -946,7 +948,7 @@ class TemplateApi:
     @validate_call
     def create_embedded_request_url_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_send_template_form_request: Annotated[Optional[EmbeddedSendTemplateFormRequest], Field(description="Embedded send template json request.")] = None,
         _request_timeout: Union[
             None,
@@ -964,7 +966,7 @@ class TemplateApi:
         """Generates a send URL using a template which embeds document sending process into your application.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_send_template_form_request: Embedded send template json request.
         :type embedded_send_template_form_request: EmbeddedSendTemplateFormRequest
@@ -1125,6 +1127,347 @@ class TemplateApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/v1/template/createEmbeddedRequestUrl',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def create_embedded_template_clone_url(
+        self,
+        template_id: StrictStr,
+        embedded_clone_template_json_request: Annotated[Optional[EmbeddedCloneTemplateJsonRequest], Field(description="The embedded clone template request body.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EmbeddedClonedTemplate:
+        """Generates a URL to embeds Clone template process into your application.
+
+
+        :param template_id: (required)
+        :type template_id: str
+        :param embedded_clone_template_json_request: The embedded clone template request body.
+        :type embedded_clone_template_json_request: EmbeddedCloneTemplateJsonRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_embedded_template_clone_url_serialize(
+            template_id=template_id,
+            embedded_clone_template_json_request=embedded_clone_template_json_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedClonedTemplate",
+            '401': "ErrorResult",
+            '400': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def create_embedded_template_clone_url_with_http_info(
+        self,
+        template_id: StrictStr,
+        embedded_clone_template_json_request: Annotated[Optional[EmbeddedCloneTemplateJsonRequest], Field(description="The embedded clone template request body.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EmbeddedClonedTemplate]:
+        """Generates a URL to embeds Clone template process into your application.
+
+
+        :param template_id: (required)
+        :type template_id: str
+        :param embedded_clone_template_json_request: The embedded clone template request body.
+        :type embedded_clone_template_json_request: EmbeddedCloneTemplateJsonRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_embedded_template_clone_url_serialize(
+            template_id=template_id,
+            embedded_clone_template_json_request=embedded_clone_template_json_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedClonedTemplate",
+            '401': "ErrorResult",
+            '400': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def create_embedded_template_clone_url_without_preload_content(
+        self,
+        template_id: StrictStr,
+        embedded_clone_template_json_request: Annotated[Optional[EmbeddedCloneTemplateJsonRequest], Field(description="The embedded clone template request body.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Generates a URL to embeds Clone template process into your application.
+
+
+        :param template_id: (required)
+        :type template_id: str
+        :param embedded_clone_template_json_request: The embedded clone template request body.
+        :type embedded_clone_template_json_request: EmbeddedCloneTemplateJsonRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_embedded_template_clone_url_serialize(
+            template_id=template_id,
+            embedded_clone_template_json_request=embedded_clone_template_json_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EmbeddedClonedTemplate",
+            '401': "ErrorResult",
+            '400': "ErrorResult",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_embedded_template_clone_url_serialize(
+        self,
+        template_id,
+        embedded_clone_template_json_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        has_files = False
+        body_param = embedded_clone_template_json_request
+        excluded_json_fields = set([])
+        # Check if body_param is a list of models
+        if isinstance(body_param, list):
+            for item in body_param:
+                if hasattr(item, 'openapi_types'):
+                    for param_name, param_type in item.openapi_types().items():
+                        param_value = getattr(item, param_name)
+                        if param_value is None:
+                            continue
+
+                        if "io.IOBase" in param_type:
+                            has_files = True
+                            _content_type = "multipart/form-data"
+                            excluded_json_fields.add(param_name)
+
+                            if isinstance(param_value, list):
+                                for index, file_item in enumerate(param_value):
+                                    _files[f'{param_name}[{index}]'] = file_item
+                            else:
+                                _files[param_name] = param_value
+
+                    if has_files is True:
+                        _form_params += item.to_json_form_params(excluded_json_fields)
+        else:
+            # Handle a single object
+            for param_name, param_type in body_param.openapi_types().items():
+                param_value = getattr(body_param, param_name)
+                if param_value is None:
+                    continue
+
+                if "io.IOBase" in param_type:
+                    has_files = True
+                    _content_type = "multipart/form-data"
+                    excluded_json_fields.add(param_name)
+
+                    if isinstance(param_value, list):
+                        for index, item in enumerate(param_value):
+                            _files[f'{param_name}[{index}]'] = item
+                    else:
+                        _files[param_name] = param_value
+
+            if has_files is True:
+                _form_params = body_param.to_json_form_params(excluded_json_fields)
+
+        # process the path parameters
+        # process the query parameters
+        if template_id is not None:
+            
+            _query_params.append(('templateId', template_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if embedded_clone_template_json_request is not None and has_files is False:
+            _body_params = embedded_clone_template_json_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'multipart/form-data', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'X-API-KEY', 
+            'Bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/template/createEmbeddedCloneUrl',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1794,8 +2137,8 @@ class TemplateApi:
     @validate_call
     def delete_template(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        template_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1812,9 +2155,9 @@ class TemplateApi:
         """Deletes a template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1866,8 +2209,8 @@ class TemplateApi:
     @validate_call
     def delete_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        template_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1884,9 +2227,9 @@ class TemplateApi:
         """Deletes a template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1938,8 +2281,8 @@ class TemplateApi:
     @validate_call
     def delete_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
+        template_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1956,9 +2299,9 @@ class TemplateApi:
         """Deletes a template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2477,9 +2820,9 @@ class TemplateApi:
     @validate_call
     def download(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
-        include_form_field_values: Annotated[Optional[StrictBool], Field(description="Include form field data.")] = None,
+        template_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
+        include_form_field_values: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2496,11 +2839,11 @@ class TemplateApi:
         """Download the template.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
-        :param include_form_field_values: Include form field data.
+        :param include_form_field_values:
         :type include_form_field_values: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2553,9 +2896,9 @@ class TemplateApi:
     @validate_call
     def download_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
-        include_form_field_values: Annotated[Optional[StrictBool], Field(description="Include form field data.")] = None,
+        template_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
+        include_form_field_values: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2572,11 +2915,11 @@ class TemplateApi:
         """Download the template.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
-        :param include_form_field_values: Include form field data.
+        :param include_form_field_values:
         :type include_form_field_values: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2629,9 +2972,9 @@ class TemplateApi:
     @validate_call
     def download_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
-        on_behalf_of: Annotated[Optional[StrictStr], Field(description="The on behalfof email address.")] = None,
-        include_form_field_values: Annotated[Optional[StrictBool], Field(description="Include form field data.")] = None,
+        template_id: StrictStr,
+        on_behalf_of: Optional[StrictStr] = None,
+        include_form_field_values: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2648,11 +2991,11 @@ class TemplateApi:
         """Download the template.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
-        :param on_behalf_of: The on behalfof email address.
+        :param on_behalf_of:
         :type on_behalf_of: str
-        :param include_form_field_values: Include form field data.
+        :param include_form_field_values:
         :type include_form_field_values: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2776,7 +3119,7 @@ class TemplateApi:
     @validate_call
     def edit_template(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         edit_template_request: Annotated[EditTemplateRequest, Field(description="The edit template request body.")],
         _request_timeout: Union[
             None,
@@ -2794,7 +3137,7 @@ class TemplateApi:
         """Edit and updates an existing template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param edit_template_request: The edit template request body. (required)
         :type edit_template_request: EditTemplateRequest
@@ -2849,7 +3192,7 @@ class TemplateApi:
     @validate_call
     def edit_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         edit_template_request: Annotated[EditTemplateRequest, Field(description="The edit template request body.")],
         _request_timeout: Union[
             None,
@@ -2867,7 +3210,7 @@ class TemplateApi:
         """Edit and updates an existing template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param edit_template_request: The edit template request body. (required)
         :type edit_template_request: EditTemplateRequest
@@ -2922,7 +3265,7 @@ class TemplateApi:
     @validate_call
     def edit_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         edit_template_request: Annotated[EditTemplateRequest, Field(description="The edit template request body.")],
         _request_timeout: Union[
             None,
@@ -2940,7 +3283,7 @@ class TemplateApi:
         """Edit and updates an existing template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param edit_template_request: The edit template request body. (required)
         :type edit_template_request: EditTemplateRequest
@@ -3158,7 +3501,7 @@ class TemplateApi:
     @validate_call
     def get_embedded_template_edit_url(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_template_edit_request: Annotated[Optional[EmbeddedTemplateEditRequest], Field(description="The embedded edit template request body.")] = None,
         _request_timeout: Union[
             None,
@@ -3176,7 +3519,7 @@ class TemplateApi:
         """Generates a edit URL to embeds template edit process into your application.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_template_edit_request: The embedded edit template request body.
         :type embedded_template_edit_request: EmbeddedTemplateEditRequest
@@ -3230,7 +3573,7 @@ class TemplateApi:
     @validate_call
     def get_embedded_template_edit_url_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_template_edit_request: Annotated[Optional[EmbeddedTemplateEditRequest], Field(description="The embedded edit template request body.")] = None,
         _request_timeout: Union[
             None,
@@ -3248,7 +3591,7 @@ class TemplateApi:
         """Generates a edit URL to embeds template edit process into your application.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_template_edit_request: The embedded edit template request body.
         :type embedded_template_edit_request: EmbeddedTemplateEditRequest
@@ -3302,7 +3645,7 @@ class TemplateApi:
     @validate_call
     def get_embedded_template_edit_url_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         embedded_template_edit_request: Annotated[Optional[EmbeddedTemplateEditRequest], Field(description="The embedded edit template request body.")] = None,
         _request_timeout: Union[
             None,
@@ -3320,7 +3663,7 @@ class TemplateApi:
         """Generates a edit URL to embeds template edit process into your application.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param embedded_template_edit_request: The embedded edit template request body.
         :type embedded_template_edit_request: EmbeddedTemplateEditRequest
@@ -3499,7 +3842,7 @@ class TemplateApi:
     @validate_call
     def get_properties(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3516,7 +3859,7 @@ class TemplateApi:
         """Get summary of the template.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3567,7 +3910,7 @@ class TemplateApi:
     @validate_call
     def get_properties_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3584,7 +3927,7 @@ class TemplateApi:
         """Get summary of the template.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3635,7 +3978,7 @@ class TemplateApi:
     @validate_call
     def get_properties_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3652,7 +3995,7 @@ class TemplateApi:
         """Get summary of the template.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4867,7 +5210,7 @@ class TemplateApi:
     @validate_call
     def send_using_template(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         send_for_sign_from_template_form: Annotated[Optional[SendForSignFromTemplateForm], Field(description="The send template details as JSON.")] = None,
         _request_timeout: Union[
             None,
@@ -4885,7 +5228,7 @@ class TemplateApi:
         """Send a document for signature using a Template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param send_for_sign_from_template_form: The send template details as JSON.
         :type send_for_sign_from_template_form: SendForSignFromTemplateForm
@@ -4939,7 +5282,7 @@ class TemplateApi:
     @validate_call
     def send_using_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         send_for_sign_from_template_form: Annotated[Optional[SendForSignFromTemplateForm], Field(description="The send template details as JSON.")] = None,
         _request_timeout: Union[
             None,
@@ -4957,7 +5300,7 @@ class TemplateApi:
         """Send a document for signature using a Template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param send_for_sign_from_template_form: The send template details as JSON.
         :type send_for_sign_from_template_form: SendForSignFromTemplateForm
@@ -5011,7 +5354,7 @@ class TemplateApi:
     @validate_call
     def send_using_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="The template id.")],
+        template_id: StrictStr,
         send_for_sign_from_template_form: Annotated[Optional[SendForSignFromTemplateForm], Field(description="The send template details as JSON.")] = None,
         _request_timeout: Union[
             None,
@@ -5029,7 +5372,7 @@ class TemplateApi:
         """Send a document for signature using a Template.
 
 
-        :param template_id: The template id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param send_for_sign_from_template_form: The send template details as JSON.
         :type send_for_sign_from_template_form: SendForSignFromTemplateForm
@@ -5208,7 +5551,7 @@ class TemplateApi:
     @validate_call
     def share_template(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_id: StrictStr,
         template_share_request: Annotated[TemplateShareRequest, Field(description="Permissions request.")],
         _request_timeout: Union[
             None,
@@ -5226,7 +5569,7 @@ class TemplateApi:
         """Share a template with teams and manage permissions.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param template_share_request: Permissions request. (required)
         :type template_share_request: TemplateShareRequest
@@ -5282,7 +5625,7 @@ class TemplateApi:
     @validate_call
     def share_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_id: StrictStr,
         template_share_request: Annotated[TemplateShareRequest, Field(description="Permissions request.")],
         _request_timeout: Union[
             None,
@@ -5300,7 +5643,7 @@ class TemplateApi:
         """Share a template with teams and manage permissions.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param template_share_request: Permissions request. (required)
         :type template_share_request: TemplateShareRequest
@@ -5356,7 +5699,7 @@ class TemplateApi:
     @validate_call
     def share_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(description="Template Id.")],
+        template_id: StrictStr,
         template_share_request: Annotated[TemplateShareRequest, Field(description="Permissions request.")],
         _request_timeout: Union[
             None,
@@ -5374,7 +5717,7 @@ class TemplateApi:
         """Share a template with teams and manage permissions.
 
 
-        :param template_id: Template Id. (required)
+        :param template_id: (required)
         :type template_id: str
         :param template_share_request: Permissions request. (required)
         :type template_share_request: TemplateShareRequest

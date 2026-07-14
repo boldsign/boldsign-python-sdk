@@ -314,14 +314,14 @@ class BrandingApi:
         show_built_in_form_fields: Optional[StrictBool] = None,
         allow_custom_field_creation: Optional[StrictBool] = None,
         show_shared_custom_fields: Optional[StrictBool] = None,
-        hide_decline: Optional[StrictBool] = None,
-        hide_save: Optional[StrictBool] = None,
-        document_expiry_settings_expiry_date_type: Optional[StrictStr] = None,
-        document_expiry_settings_expiry_value: Optional[StrictInt] = None,
-        document_expiry_settings_enable_default_expiry_alert: Optional[StrictBool] = None,
-        document_expiry_settings_enable_auto_reminder: Optional[StrictBool] = None,
-        document_expiry_settings_reminder_days: Optional[Annotated[int, Field(le=180, strict=True, ge=1)]] = None,
-        document_expiry_settings_reminder_count: Optional[StrictInt] = None,
+        hide_decline: Annotated[Optional[StrictBool], Field(description="This option prevents signers to decline the document during the signing process.")] = None,
+        hide_save: Annotated[Optional[StrictBool], Field(description="This option prevents signers to save their changes during the signing process and continue signing later.")] = None,
+        document_expiry_settings_expiry_date_type: Annotated[Optional[StrictStr], Field(description="This property represents the type for the expiry date")] = None,
+        document_expiry_settings_expiry_value: Annotated[Optional[StrictInt], Field(description="This property is used to set the expiry value based on the expiry type")] = None,
+        document_expiry_settings_enable_default_expiry_alert: Annotated[Optional[StrictBool], Field(description="This property will send the expiry alert email before the day of expiry for the pending signers.")] = None,
+        document_expiry_settings_enable_auto_reminder: Annotated[Optional[StrictBool], Field(description="When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.")] = None,
+        document_expiry_settings_reminder_days: Annotated[Optional[Annotated[int, Field(le=180, strict=True, ge=1)]], Field(description="Remind in terms of days.")] = None,
+        document_expiry_settings_reminder_count: Annotated[Optional[StrictInt], Field(description="Number of reminder count.")] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
         signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
@@ -382,21 +382,21 @@ class BrandingApi:
         :type allow_custom_field_creation: bool
         :param show_shared_custom_fields:
         :type show_shared_custom_fields: bool
-        :param hide_decline:
+        :param hide_decline: This option prevents signers to decline the document during the signing process.
         :type hide_decline: bool
-        :param hide_save:
+        :param hide_save: This option prevents signers to save their changes during the signing process and continue signing later.
         :type hide_save: bool
-        :param document_expiry_settings_expiry_date_type:
+        :param document_expiry_settings_expiry_date_type: This property represents the type for the expiry date
         :type document_expiry_settings_expiry_date_type: str
-        :param document_expiry_settings_expiry_value:
+        :param document_expiry_settings_expiry_value: This property is used to set the expiry value based on the expiry type
         :type document_expiry_settings_expiry_value: int
-        :param document_expiry_settings_enable_default_expiry_alert:
+        :param document_expiry_settings_enable_default_expiry_alert: This property will send the expiry alert email before the day of expiry for the pending signers.
         :type document_expiry_settings_enable_default_expiry_alert: bool
-        :param document_expiry_settings_enable_auto_reminder:
+        :param document_expiry_settings_enable_auto_reminder: When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.
         :type document_expiry_settings_enable_auto_reminder: bool
-        :param document_expiry_settings_reminder_days:
+        :param document_expiry_settings_reminder_days: Remind in terms of days.
         :type document_expiry_settings_reminder_days: int
-        :param document_expiry_settings_reminder_count:
+        :param document_expiry_settings_reminder_count: Number of reminder count.
         :type document_expiry_settings_reminder_count: int
         :param custom_domain_settings_domain_name:
         :type custom_domain_settings_domain_name: str
@@ -511,14 +511,14 @@ class BrandingApi:
         show_built_in_form_fields: Optional[StrictBool] = None,
         allow_custom_field_creation: Optional[StrictBool] = None,
         show_shared_custom_fields: Optional[StrictBool] = None,
-        hide_decline: Optional[StrictBool] = None,
-        hide_save: Optional[StrictBool] = None,
-        document_expiry_settings_expiry_date_type: Optional[StrictStr] = None,
-        document_expiry_settings_expiry_value: Optional[StrictInt] = None,
-        document_expiry_settings_enable_default_expiry_alert: Optional[StrictBool] = None,
-        document_expiry_settings_enable_auto_reminder: Optional[StrictBool] = None,
-        document_expiry_settings_reminder_days: Optional[Annotated[int, Field(le=180, strict=True, ge=1)]] = None,
-        document_expiry_settings_reminder_count: Optional[StrictInt] = None,
+        hide_decline: Annotated[Optional[StrictBool], Field(description="This option prevents signers to decline the document during the signing process.")] = None,
+        hide_save: Annotated[Optional[StrictBool], Field(description="This option prevents signers to save their changes during the signing process and continue signing later.")] = None,
+        document_expiry_settings_expiry_date_type: Annotated[Optional[StrictStr], Field(description="This property represents the type for the expiry date")] = None,
+        document_expiry_settings_expiry_value: Annotated[Optional[StrictInt], Field(description="This property is used to set the expiry value based on the expiry type")] = None,
+        document_expiry_settings_enable_default_expiry_alert: Annotated[Optional[StrictBool], Field(description="This property will send the expiry alert email before the day of expiry for the pending signers.")] = None,
+        document_expiry_settings_enable_auto_reminder: Annotated[Optional[StrictBool], Field(description="When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.")] = None,
+        document_expiry_settings_reminder_days: Annotated[Optional[Annotated[int, Field(le=180, strict=True, ge=1)]], Field(description="Remind in terms of days.")] = None,
+        document_expiry_settings_reminder_count: Annotated[Optional[StrictInt], Field(description="Number of reminder count.")] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
         signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
@@ -579,21 +579,21 @@ class BrandingApi:
         :type allow_custom_field_creation: bool
         :param show_shared_custom_fields:
         :type show_shared_custom_fields: bool
-        :param hide_decline:
+        :param hide_decline: This option prevents signers to decline the document during the signing process.
         :type hide_decline: bool
-        :param hide_save:
+        :param hide_save: This option prevents signers to save their changes during the signing process and continue signing later.
         :type hide_save: bool
-        :param document_expiry_settings_expiry_date_type:
+        :param document_expiry_settings_expiry_date_type: This property represents the type for the expiry date
         :type document_expiry_settings_expiry_date_type: str
-        :param document_expiry_settings_expiry_value:
+        :param document_expiry_settings_expiry_value: This property is used to set the expiry value based on the expiry type
         :type document_expiry_settings_expiry_value: int
-        :param document_expiry_settings_enable_default_expiry_alert:
+        :param document_expiry_settings_enable_default_expiry_alert: This property will send the expiry alert email before the day of expiry for the pending signers.
         :type document_expiry_settings_enable_default_expiry_alert: bool
-        :param document_expiry_settings_enable_auto_reminder:
+        :param document_expiry_settings_enable_auto_reminder: When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.
         :type document_expiry_settings_enable_auto_reminder: bool
-        :param document_expiry_settings_reminder_days:
+        :param document_expiry_settings_reminder_days: Remind in terms of days.
         :type document_expiry_settings_reminder_days: int
-        :param document_expiry_settings_reminder_count:
+        :param document_expiry_settings_reminder_count: Number of reminder count.
         :type document_expiry_settings_reminder_count: int
         :param custom_domain_settings_domain_name:
         :type custom_domain_settings_domain_name: str
@@ -708,14 +708,14 @@ class BrandingApi:
         show_built_in_form_fields: Optional[StrictBool] = None,
         allow_custom_field_creation: Optional[StrictBool] = None,
         show_shared_custom_fields: Optional[StrictBool] = None,
-        hide_decline: Optional[StrictBool] = None,
-        hide_save: Optional[StrictBool] = None,
-        document_expiry_settings_expiry_date_type: Optional[StrictStr] = None,
-        document_expiry_settings_expiry_value: Optional[StrictInt] = None,
-        document_expiry_settings_enable_default_expiry_alert: Optional[StrictBool] = None,
-        document_expiry_settings_enable_auto_reminder: Optional[StrictBool] = None,
-        document_expiry_settings_reminder_days: Optional[Annotated[int, Field(le=180, strict=True, ge=1)]] = None,
-        document_expiry_settings_reminder_count: Optional[StrictInt] = None,
+        hide_decline: Annotated[Optional[StrictBool], Field(description="This option prevents signers to decline the document during the signing process.")] = None,
+        hide_save: Annotated[Optional[StrictBool], Field(description="This option prevents signers to save their changes during the signing process and continue signing later.")] = None,
+        document_expiry_settings_expiry_date_type: Annotated[Optional[StrictStr], Field(description="This property represents the type for the expiry date")] = None,
+        document_expiry_settings_expiry_value: Annotated[Optional[StrictInt], Field(description="This property is used to set the expiry value based on the expiry type")] = None,
+        document_expiry_settings_enable_default_expiry_alert: Annotated[Optional[StrictBool], Field(description="This property will send the expiry alert email before the day of expiry for the pending signers.")] = None,
+        document_expiry_settings_enable_auto_reminder: Annotated[Optional[StrictBool], Field(description="When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.")] = None,
+        document_expiry_settings_reminder_days: Annotated[Optional[Annotated[int, Field(le=180, strict=True, ge=1)]], Field(description="Remind in terms of days.")] = None,
+        document_expiry_settings_reminder_count: Annotated[Optional[StrictInt], Field(description="Number of reminder count.")] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
         signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
@@ -776,21 +776,21 @@ class BrandingApi:
         :type allow_custom_field_creation: bool
         :param show_shared_custom_fields:
         :type show_shared_custom_fields: bool
-        :param hide_decline:
+        :param hide_decline: This option prevents signers to decline the document during the signing process.
         :type hide_decline: bool
-        :param hide_save:
+        :param hide_save: This option prevents signers to save their changes during the signing process and continue signing later.
         :type hide_save: bool
-        :param document_expiry_settings_expiry_date_type:
+        :param document_expiry_settings_expiry_date_type: This property represents the type for the expiry date
         :type document_expiry_settings_expiry_date_type: str
-        :param document_expiry_settings_expiry_value:
+        :param document_expiry_settings_expiry_value: This property is used to set the expiry value based on the expiry type
         :type document_expiry_settings_expiry_value: int
-        :param document_expiry_settings_enable_default_expiry_alert:
+        :param document_expiry_settings_enable_default_expiry_alert: This property will send the expiry alert email before the day of expiry for the pending signers.
         :type document_expiry_settings_enable_default_expiry_alert: bool
-        :param document_expiry_settings_enable_auto_reminder:
+        :param document_expiry_settings_enable_auto_reminder: When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.
         :type document_expiry_settings_enable_auto_reminder: bool
-        :param document_expiry_settings_reminder_days:
+        :param document_expiry_settings_reminder_days: Remind in terms of days.
         :type document_expiry_settings_reminder_days: int
-        :param document_expiry_settings_reminder_count:
+        :param document_expiry_settings_reminder_count: Number of reminder count.
         :type document_expiry_settings_reminder_count: int
         :param custom_domain_settings_domain_name:
         :type custom_domain_settings_domain_name: str
@@ -1093,7 +1093,7 @@ class BrandingApi:
     @validate_call
     def delete_brand(
         self,
-        brand_id: Annotated[StrictStr, Field(description="brand Id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1110,7 +1110,7 @@ class BrandingApi:
         """Delete the brand.
 
 
-        :param brand_id: brand Id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1161,7 +1161,7 @@ class BrandingApi:
     @validate_call
     def delete_brand_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(description="brand Id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1178,7 +1178,7 @@ class BrandingApi:
         """Delete the brand.
 
 
-        :param brand_id: brand Id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1229,7 +1229,7 @@ class BrandingApi:
     @validate_call
     def delete_brand_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(description="brand Id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1246,7 +1246,7 @@ class BrandingApi:
         """Delete the brand.
 
 
-        :param brand_id: brand Id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1397,7 +1397,7 @@ class BrandingApi:
     @validate_call
     def edit_brand(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         brand_name: Optional[StrictStr] = None,
         brand_logo: Optional[Union[StrictBytes, StrictStr]] = None,
         background_color: Optional[StrictStr] = None,
@@ -1417,14 +1417,14 @@ class BrandingApi:
         show_built_in_form_fields: Optional[StrictBool] = None,
         allow_custom_field_creation: Optional[StrictBool] = None,
         show_shared_custom_fields: Optional[StrictBool] = None,
-        hide_decline: Optional[StrictBool] = None,
-        hide_save: Optional[StrictBool] = None,
-        document_expiry_settings_expiry_date_type: Optional[StrictStr] = None,
-        document_expiry_settings_expiry_value: Optional[StrictInt] = None,
-        document_expiry_settings_enable_default_expiry_alert: Optional[StrictBool] = None,
-        document_expiry_settings_enable_auto_reminder: Optional[StrictBool] = None,
-        document_expiry_settings_reminder_days: Optional[Annotated[int, Field(le=180, strict=True, ge=1)]] = None,
-        document_expiry_settings_reminder_count: Optional[StrictInt] = None,
+        hide_decline: Annotated[Optional[StrictBool], Field(description="This option prevents signers to decline the document during the signing process.")] = None,
+        hide_save: Annotated[Optional[StrictBool], Field(description="This option prevents signers to save their changes during the signing process and continue signing later.")] = None,
+        document_expiry_settings_expiry_date_type: Annotated[Optional[StrictStr], Field(description="This property represents the type for the expiry date")] = None,
+        document_expiry_settings_expiry_value: Annotated[Optional[StrictInt], Field(description="This property is used to set the expiry value based on the expiry type")] = None,
+        document_expiry_settings_enable_default_expiry_alert: Annotated[Optional[StrictBool], Field(description="This property will send the expiry alert email before the day of expiry for the pending signers.")] = None,
+        document_expiry_settings_enable_auto_reminder: Annotated[Optional[StrictBool], Field(description="When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.")] = None,
+        document_expiry_settings_reminder_days: Annotated[Optional[Annotated[int, Field(le=180, strict=True, ge=1)]], Field(description="Remind in terms of days.")] = None,
+        document_expiry_settings_reminder_count: Annotated[Optional[StrictInt], Field(description="Number of reminder count.")] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
         signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
@@ -1447,7 +1447,7 @@ class BrandingApi:
         """Edit the brand.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param brand_name:
         :type brand_name: str
@@ -1487,21 +1487,21 @@ class BrandingApi:
         :type allow_custom_field_creation: bool
         :param show_shared_custom_fields:
         :type show_shared_custom_fields: bool
-        :param hide_decline:
+        :param hide_decline: This option prevents signers to decline the document during the signing process.
         :type hide_decline: bool
-        :param hide_save:
+        :param hide_save: This option prevents signers to save their changes during the signing process and continue signing later.
         :type hide_save: bool
-        :param document_expiry_settings_expiry_date_type:
+        :param document_expiry_settings_expiry_date_type: This property represents the type for the expiry date
         :type document_expiry_settings_expiry_date_type: str
-        :param document_expiry_settings_expiry_value:
+        :param document_expiry_settings_expiry_value: This property is used to set the expiry value based on the expiry type
         :type document_expiry_settings_expiry_value: int
-        :param document_expiry_settings_enable_default_expiry_alert:
+        :param document_expiry_settings_enable_default_expiry_alert: This property will send the expiry alert email before the day of expiry for the pending signers.
         :type document_expiry_settings_enable_default_expiry_alert: bool
-        :param document_expiry_settings_enable_auto_reminder:
+        :param document_expiry_settings_enable_auto_reminder: When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.
         :type document_expiry_settings_enable_auto_reminder: bool
-        :param document_expiry_settings_reminder_days:
+        :param document_expiry_settings_reminder_days: Remind in terms of days.
         :type document_expiry_settings_reminder_days: int
-        :param document_expiry_settings_reminder_count:
+        :param document_expiry_settings_reminder_count: Number of reminder count.
         :type document_expiry_settings_reminder_count: int
         :param custom_domain_settings_domain_name:
         :type custom_domain_settings_domain_name: str
@@ -1598,7 +1598,7 @@ class BrandingApi:
     @validate_call
     def edit_brand_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         brand_name: Optional[StrictStr] = None,
         brand_logo: Optional[Union[StrictBytes, StrictStr]] = None,
         background_color: Optional[StrictStr] = None,
@@ -1618,14 +1618,14 @@ class BrandingApi:
         show_built_in_form_fields: Optional[StrictBool] = None,
         allow_custom_field_creation: Optional[StrictBool] = None,
         show_shared_custom_fields: Optional[StrictBool] = None,
-        hide_decline: Optional[StrictBool] = None,
-        hide_save: Optional[StrictBool] = None,
-        document_expiry_settings_expiry_date_type: Optional[StrictStr] = None,
-        document_expiry_settings_expiry_value: Optional[StrictInt] = None,
-        document_expiry_settings_enable_default_expiry_alert: Optional[StrictBool] = None,
-        document_expiry_settings_enable_auto_reminder: Optional[StrictBool] = None,
-        document_expiry_settings_reminder_days: Optional[Annotated[int, Field(le=180, strict=True, ge=1)]] = None,
-        document_expiry_settings_reminder_count: Optional[StrictInt] = None,
+        hide_decline: Annotated[Optional[StrictBool], Field(description="This option prevents signers to decline the document during the signing process.")] = None,
+        hide_save: Annotated[Optional[StrictBool], Field(description="This option prevents signers to save their changes during the signing process and continue signing later.")] = None,
+        document_expiry_settings_expiry_date_type: Annotated[Optional[StrictStr], Field(description="This property represents the type for the expiry date")] = None,
+        document_expiry_settings_expiry_value: Annotated[Optional[StrictInt], Field(description="This property is used to set the expiry value based on the expiry type")] = None,
+        document_expiry_settings_enable_default_expiry_alert: Annotated[Optional[StrictBool], Field(description="This property will send the expiry alert email before the day of expiry for the pending signers.")] = None,
+        document_expiry_settings_enable_auto_reminder: Annotated[Optional[StrictBool], Field(description="When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.")] = None,
+        document_expiry_settings_reminder_days: Annotated[Optional[Annotated[int, Field(le=180, strict=True, ge=1)]], Field(description="Remind in terms of days.")] = None,
+        document_expiry_settings_reminder_count: Annotated[Optional[StrictInt], Field(description="Number of reminder count.")] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
         signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
@@ -1648,7 +1648,7 @@ class BrandingApi:
         """Edit the brand.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param brand_name:
         :type brand_name: str
@@ -1688,21 +1688,21 @@ class BrandingApi:
         :type allow_custom_field_creation: bool
         :param show_shared_custom_fields:
         :type show_shared_custom_fields: bool
-        :param hide_decline:
+        :param hide_decline: This option prevents signers to decline the document during the signing process.
         :type hide_decline: bool
-        :param hide_save:
+        :param hide_save: This option prevents signers to save their changes during the signing process and continue signing later.
         :type hide_save: bool
-        :param document_expiry_settings_expiry_date_type:
+        :param document_expiry_settings_expiry_date_type: This property represents the type for the expiry date
         :type document_expiry_settings_expiry_date_type: str
-        :param document_expiry_settings_expiry_value:
+        :param document_expiry_settings_expiry_value: This property is used to set the expiry value based on the expiry type
         :type document_expiry_settings_expiry_value: int
-        :param document_expiry_settings_enable_default_expiry_alert:
+        :param document_expiry_settings_enable_default_expiry_alert: This property will send the expiry alert email before the day of expiry for the pending signers.
         :type document_expiry_settings_enable_default_expiry_alert: bool
-        :param document_expiry_settings_enable_auto_reminder:
+        :param document_expiry_settings_enable_auto_reminder: When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.
         :type document_expiry_settings_enable_auto_reminder: bool
-        :param document_expiry_settings_reminder_days:
+        :param document_expiry_settings_reminder_days: Remind in terms of days.
         :type document_expiry_settings_reminder_days: int
-        :param document_expiry_settings_reminder_count:
+        :param document_expiry_settings_reminder_count: Number of reminder count.
         :type document_expiry_settings_reminder_count: int
         :param custom_domain_settings_domain_name:
         :type custom_domain_settings_domain_name: str
@@ -1799,7 +1799,7 @@ class BrandingApi:
     @validate_call
     def edit_brand_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         brand_name: Optional[StrictStr] = None,
         brand_logo: Optional[Union[StrictBytes, StrictStr]] = None,
         background_color: Optional[StrictStr] = None,
@@ -1819,14 +1819,14 @@ class BrandingApi:
         show_built_in_form_fields: Optional[StrictBool] = None,
         allow_custom_field_creation: Optional[StrictBool] = None,
         show_shared_custom_fields: Optional[StrictBool] = None,
-        hide_decline: Optional[StrictBool] = None,
-        hide_save: Optional[StrictBool] = None,
-        document_expiry_settings_expiry_date_type: Optional[StrictStr] = None,
-        document_expiry_settings_expiry_value: Optional[StrictInt] = None,
-        document_expiry_settings_enable_default_expiry_alert: Optional[StrictBool] = None,
-        document_expiry_settings_enable_auto_reminder: Optional[StrictBool] = None,
-        document_expiry_settings_reminder_days: Optional[Annotated[int, Field(le=180, strict=True, ge=1)]] = None,
-        document_expiry_settings_reminder_count: Optional[StrictInt] = None,
+        hide_decline: Annotated[Optional[StrictBool], Field(description="This option prevents signers to decline the document during the signing process.")] = None,
+        hide_save: Annotated[Optional[StrictBool], Field(description="This option prevents signers to save their changes during the signing process and continue signing later.")] = None,
+        document_expiry_settings_expiry_date_type: Annotated[Optional[StrictStr], Field(description="This property represents the type for the expiry date")] = None,
+        document_expiry_settings_expiry_value: Annotated[Optional[StrictInt], Field(description="This property is used to set the expiry value based on the expiry type")] = None,
+        document_expiry_settings_enable_default_expiry_alert: Annotated[Optional[StrictBool], Field(description="This property will send the expiry alert email before the day of expiry for the pending signers.")] = None,
+        document_expiry_settings_enable_auto_reminder: Annotated[Optional[StrictBool], Field(description="When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.")] = None,
+        document_expiry_settings_reminder_days: Annotated[Optional[Annotated[int, Field(le=180, strict=True, ge=1)]], Field(description="Remind in terms of days.")] = None,
+        document_expiry_settings_reminder_count: Annotated[Optional[StrictInt], Field(description="Number of reminder count.")] = None,
         custom_domain_settings_domain_name: Optional[StrictStr] = None,
         custom_domain_settings_from_name: Optional[StrictStr] = None,
         signature_frame_settings_enable_signature_frame: Optional[StrictBool] = None,
@@ -1849,7 +1849,7 @@ class BrandingApi:
         """Edit the brand.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param brand_name:
         :type brand_name: str
@@ -1889,21 +1889,21 @@ class BrandingApi:
         :type allow_custom_field_creation: bool
         :param show_shared_custom_fields:
         :type show_shared_custom_fields: bool
-        :param hide_decline:
+        :param hide_decline: This option prevents signers to decline the document during the signing process.
         :type hide_decline: bool
-        :param hide_save:
+        :param hide_save: This option prevents signers to save their changes during the signing process and continue signing later.
         :type hide_save: bool
-        :param document_expiry_settings_expiry_date_type:
+        :param document_expiry_settings_expiry_date_type: This property represents the type for the expiry date
         :type document_expiry_settings_expiry_date_type: str
-        :param document_expiry_settings_expiry_value:
+        :param document_expiry_settings_expiry_value: This property is used to set the expiry value based on the expiry type
         :type document_expiry_settings_expiry_value: int
-        :param document_expiry_settings_enable_default_expiry_alert:
+        :param document_expiry_settings_enable_default_expiry_alert: This property will send the expiry alert email before the day of expiry for the pending signers.
         :type document_expiry_settings_enable_default_expiry_alert: bool
-        :param document_expiry_settings_enable_auto_reminder:
+        :param document_expiry_settings_enable_auto_reminder: When auto reminder is enabled, you can select how often to remind in terms of days and select the maximum number of reminders.
         :type document_expiry_settings_enable_auto_reminder: bool
-        :param document_expiry_settings_reminder_days:
+        :param document_expiry_settings_reminder_days: Remind in terms of days.
         :type document_expiry_settings_reminder_days: int
-        :param document_expiry_settings_reminder_count:
+        :param document_expiry_settings_reminder_count: Number of reminder count.
         :type document_expiry_settings_reminder_count: int
         :param custom_domain_settings_domain_name:
         :type custom_domain_settings_domain_name: str
@@ -2212,7 +2212,7 @@ class BrandingApi:
     @validate_call
     def get_brand(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2229,7 +2229,7 @@ class BrandingApi:
         """Get the specific brand details.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2281,7 +2281,7 @@ class BrandingApi:
     @validate_call
     def get_brand_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2298,7 +2298,7 @@ class BrandingApi:
         """Get the specific brand details.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2350,7 +2350,7 @@ class BrandingApi:
     @validate_call
     def get_brand_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(description="The brand id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2367,7 +2367,7 @@ class BrandingApi:
         """Get the specific brand details.
 
 
-        :param brand_id: The brand id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2480,7 +2480,7 @@ class BrandingApi:
     @validate_call
     def reset_default_brand(
         self,
-        brand_id: Annotated[StrictStr, Field(description="brand Id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2497,7 +2497,7 @@ class BrandingApi:
         """Reset default brand.
 
 
-        :param brand_id: brand Id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2548,7 +2548,7 @@ class BrandingApi:
     @validate_call
     def reset_default_brand_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(description="brand Id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2565,7 +2565,7 @@ class BrandingApi:
         """Reset default brand.
 
 
-        :param brand_id: brand Id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2616,7 +2616,7 @@ class BrandingApi:
     @validate_call
     def reset_default_brand_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(description="brand Id.")],
+        brand_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2633,7 +2633,7 @@ class BrandingApi:
         """Reset default brand.
 
 
-        :param brand_id: brand Id. (required)
+        :param brand_id: (required)
         :type brand_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

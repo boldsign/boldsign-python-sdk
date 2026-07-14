@@ -41,6 +41,7 @@ Name | Type | Description | Notes
 **allowed_signature_types** | **List[str]** |  | [optional] 
 **group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
 **enable_allow_sign_everywhere** | **bool** |  | [optional] 
+**document_time_zone** | **str** |  | [optional] 
 
 ## Example
 

@@ -104,7 +104,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.CustomFieldApi(api_client)
-    brand_id = 'brand_id_example' # str | The brand id.
+    brand_id = 'brand_id_example' # str | 
 
     try:
         # List the custom fields respective to the brand id.
@@ -122,7 +122,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **brand_id** | **str**| The brand id. | 
+ **brand_id** | **str**|  | 
 
 ### Return type
 
@@ -171,7 +171,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.CustomFieldApi(api_client)
-    custom_field_id = 'custom_field_id_example' # str | The custom field id.
+    custom_field_id = 'custom_field_id_example' # str | 
 
     try:
         # Delete the custom field.
@@ -189,7 +189,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **custom_field_id** | **str**| The custom field id. | 
+ **custom_field_id** | **str**|  | 
 
 ### Return type
 
@@ -240,7 +240,7 @@ configuration = boldsign.Configuration(
 with boldsign.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = boldsign.CustomFieldApi(api_client)
-    custom_field_id = 'custom_field_id_example' # str | The custom field id.
+    custom_field_id = 'custom_field_id_example' # str | 
     brand_custom_field_details = boldsign.BrandCustomFieldDetails() # BrandCustomFieldDetails | The custom field details.
 
     try:
@@ -259,7 +259,7 @@ with boldsign.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **custom_field_id** | **str**| The custom field id. | 
+ **custom_field_id** | **str**|  | 
  **brand_custom_field_details** | [**BrandCustomFieldDetails**](BrandCustomFieldDetails.md)| The custom field details. | 
 
 ### Return type

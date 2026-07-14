@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **on_behalf_of** | **str** |  | [optional] 
 **phone_number** | [**PhoneNumber**](PhoneNumber.md) |  | [optional] 
 **identity_verification_settings** | [**IdentityVerificationSettings**](IdentityVerificationSettings.md) |  | [optional] 
+**kba_settings** | [**KbaSettings**](KbaSettings.md) |  | [optional] 
 **authentication_retry_count** | **int** |  | [optional] 
 **authentication_settings** | [**AuthenticationSettings**](AuthenticationSettings.md) |  | [optional] 
 

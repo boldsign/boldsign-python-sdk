@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from boldsign.models.authentication_settings import AuthenticationSettings
 from boldsign.models.form_field import FormField
 from boldsign.models.identity_verification_settings import IdentityVerificationSettings
+from boldsign.models.kba_settings import KbaSettings
 from boldsign.models.phone_number import PhoneNumber
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from typing import Optional, Set, Tuple
@@ -45,6 +46,7 @@ class DocumentSigner(BaseModel):
     delivery_mode: Optional[StrictStr] = Field(default=None, alias="deliveryMode")
     authentication_code: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(default=None, alias="authenticationCode")
     identity_verification_settings: Optional[IdentityVerificationSettings] = Field(default=None, alias="identityVerificationSettings")
+    kba_settings: Optional[KbaSettings] = Field(default=None, alias="kbaSettings")
     signer_order: Optional[StrictInt] = Field(default=None, alias="signerOrder")
     enable_email_otp: Optional[StrictBool] = Field(default=None, alias="enableEmailOTP")
     signer_type: Optional[StrictStr] = Field(default=None, alias="signerType")
@@ -60,7 +62,7 @@ class DocumentSigner(BaseModel):
     authentication_retry_count: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = Field(default=None, alias="authenticationRetryCount")
     enable_qes: Optional[StrictBool] = Field(default=None, alias="enableQes")
     authentication_settings: Optional[AuthenticationSettings] = Field(default=None, alias="authenticationSettings")
-    __properties: ClassVar[List[str]] = ["id", "name", "emailAddress", "privateMessage", "authenticationType", "phoneNumber", "deliveryMode", "authenticationCode", "identityVerificationSettings", "signerOrder", "enableEmailOTP", "signerType", "hostEmail", "signerRole", "allowFieldConfiguration", "formFields", "language", "locale", "signType", "groupId", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "authenticationSettings"]
+    __properties: ClassVar[List[str]] = ["id", "name", "emailAddress", "privateMessage", "authenticationType", "phoneNumber", "deliveryMode", "authenticationCode", "identityVerificationSettings", "kbaSettings", "signerOrder", "enableEmailOTP", "signerType", "hostEmail", "signerRole", "allowFieldConfiguration", "formFields", "language", "locale", "signType", "groupId", "recipientNotificationSettings", "authenticationRetryCount", "enableQes", "authenticationSettings"]
 
     @field_validator('authentication_type')
     def authentication_type_validate_enum(cls, value):
@@ -68,8 +70,8 @@ class DocumentSigner(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification']):
-            raise ValueError("must be one of enum values ('None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification')")
+        if value not in set(['None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification', 'KBA']):
+            raise ValueError("must be one of enum values ('None', 'EmailOTP', 'AccessCode', 'SMSOTP', 'IdVerification', 'KBA')")
         return value
 
     @field_validator('delivery_mode')
@@ -206,6 +208,7 @@ class DocumentSigner(BaseModel):
             "deliveryMode": obj.get("deliveryMode"),
             "authenticationCode": obj.get("authenticationCode"),
             "identityVerificationSettings": IdentityVerificationSettings.from_dict(obj["identityVerificationSettings"]) if obj.get("identityVerificationSettings") is not None else None,
+            "kbaSettings": KbaSettings.from_dict(obj["kbaSettings"]) if obj.get("kbaSettings") is not None else None,
             "signerOrder": obj.get("signerOrder"),
             "enableEmailOTP": obj.get("enableEmailOTP"),
             "signerType": obj.get("signerType"),
@@ -246,6 +249,7 @@ class DocumentSigner(BaseModel):
             "delivery_mode": "(str,)",
             "authentication_code": "(str,)",
             "identity_verification_settings": "(IdentityVerificationSettings,)",
+            "kba_settings": "(KbaSettings,)",
             "signer_order": "(int,)",
             "enable_email_otp": "(bool,)",
             "signer_type": "(str,)",
