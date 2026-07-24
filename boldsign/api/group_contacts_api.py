@@ -100,6 +100,7 @@ class GroupContactsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateGroupContactResponse",
             '401': "ErrorResult",
+            '403': "ErrorResult",
             '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(
@@ -168,6 +169,7 @@ class GroupContactsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateGroupContactResponse",
             '401': "ErrorResult",
+            '403': "ErrorResult",
             '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(
@@ -236,6 +238,7 @@ class GroupContactsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateGroupContactResponse",
             '401': "ErrorResult",
+            '403': "ErrorResult",
             '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(
@@ -1327,6 +1330,7 @@ class GroupContactsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': "ErrorResult",
+            '403': "ErrorResult",
             '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(
@@ -1399,6 +1403,7 @@ class GroupContactsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': "ErrorResult",
+            '403': "ErrorResult",
             '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(
@@ -1471,6 +1476,7 @@ class GroupContactsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': "ErrorResult",
+            '403': "ErrorResult",
             '400': "ErrorResult",
         }
         response_data = self.api_client.call_api(

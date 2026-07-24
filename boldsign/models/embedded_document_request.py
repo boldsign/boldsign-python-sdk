@@ -127,8 +127,8 @@ class EmbeddedDocumentRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Combined', 'Individually']):
-            raise ValueError("must be one of enum values ('Combined', 'Individually')")
+        if value not in set(['Combined', 'Individually', 'UserPreference']):
+            raise ValueError("must be one of enum values ('Combined', 'Individually', 'UserPreference')")
         return value
 
     @field_validator('allowed_signature_types')

@@ -4876,6 +4876,7 @@ class DocumentApi:
         self,
         document_id: StrictStr,
         on_behalf_of: Optional[StrictStr] = None,
+        format: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4896,6 +4897,8 @@ class DocumentApi:
         :type document_id: str
         :param on_behalf_of:
         :type on_behalf_of: str
+        :param format:
+        :type format: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4921,6 +4924,7 @@ class DocumentApi:
         _param = self._download_document_serialize(
             document_id=document_id,
             on_behalf_of=on_behalf_of,
+            format=format,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4948,6 +4952,7 @@ class DocumentApi:
         self,
         document_id: StrictStr,
         on_behalf_of: Optional[StrictStr] = None,
+        format: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4968,6 +4973,8 @@ class DocumentApi:
         :type document_id: str
         :param on_behalf_of:
         :type on_behalf_of: str
+        :param format:
+        :type format: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4993,6 +5000,7 @@ class DocumentApi:
         _param = self._download_document_serialize(
             document_id=document_id,
             on_behalf_of=on_behalf_of,
+            format=format,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5020,6 +5028,7 @@ class DocumentApi:
         self,
         document_id: StrictStr,
         on_behalf_of: Optional[StrictStr] = None,
+        format: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5040,6 +5049,8 @@ class DocumentApi:
         :type document_id: str
         :param on_behalf_of:
         :type on_behalf_of: str
+        :param format:
+        :type format: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5065,6 +5076,7 @@ class DocumentApi:
         _param = self._download_document_serialize(
             document_id=document_id,
             on_behalf_of=on_behalf_of,
+            format=format,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5087,6 +5099,7 @@ class DocumentApi:
         self,
         document_id,
         on_behalf_of,
+        format,
         _request_auth,
         _content_type,
         _headers,
@@ -5114,6 +5127,10 @@ class DocumentApi:
         if on_behalf_of is not None:
             
             _query_params.append(('onBehalfOf', on_behalf_of))
+            
+        if format is not None:
+            
+            _query_params.append(('format', format))
             
         # process the header parameters
         # process the form parameters
