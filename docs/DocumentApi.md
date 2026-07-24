@@ -939,7 +939,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **download_document**
-> io.IOBase download_document(document_id, on_behalf_of=on_behalf_of)
+> io.IOBase download_document(document_id, on_behalf_of=on_behalf_of, format=format)
 
 Download the document.
 
@@ -963,10 +963,11 @@ with boldsign.ApiClient(configuration) as api_client:
     api_instance = boldsign.DocumentApi(api_client)
     document_id = 'document_id_example' # str | 
     on_behalf_of = 'on_behalf_of_example' # str |  (optional)
+    format = 'format_example' # str |  (optional)
 
     try:
         # Download the document.
-        api_response = api_instance.download_document(document_id, on_behalf_of=on_behalf_of)
+        api_response = api_instance.download_document(document_id, on_behalf_of=on_behalf_of, format=format)
         print("The response of DocumentApi->download_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -982,6 +983,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **document_id** | **str**|  | 
  **on_behalf_of** | **str**|  | [optional] 
+ **format** | **str**|  | [optional] 
 
 ### Return type
 
