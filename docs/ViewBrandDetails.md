@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **custom_domain_settings** | [**CustomDomainSettings**](CustomDomainSettings.md) |  | [optional] 
 **is_domain_verified** | **bool** |  | [optional] 
 **signature_frame_settings** | [**SignatureFrameSettings**](SignatureFrameSettings.md) |  | [optional] 
+**hide_reassign** | **bool** |  | [optional] [default to False]
 
 ## Example
 

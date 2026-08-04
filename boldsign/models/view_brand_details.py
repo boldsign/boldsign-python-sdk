@@ -59,7 +59,8 @@ class ViewBrandDetails(BaseModel):
     custom_domain_settings: Optional[CustomDomainSettings] = Field(default=None, alias="customDomainSettings")
     is_domain_verified: Optional[StrictBool] = Field(default=None, alias="isDomainVerified")
     signature_frame_settings: Optional[SignatureFrameSettings] = Field(default=None, alias="signatureFrameSettings")
-    __properties: ClassVar[List[str]] = ["brandId", "brandLogo", "brandName", "backgroundColor", "buttonColor", "buttonTextColor", "emailDisplayName", "disclaimerTitle", "disclaimerDescription", "redirectUrl", "isDefault", "canHideTagLine", "combineAuditTrail", "combineAttachments", "excludeAuditTrailFromEmail", "emailSignedDocument", "documentTimeZone", "showBuiltInFormFields", "allowCustomFieldCreation", "showSharedCustomFields", "hideDecline", "hideSave", "documentExpirySettings", "customDomainSettings", "isDomainVerified", "signatureFrameSettings"]
+    hide_reassign: Optional[StrictBool] = Field(default=False, alias="hideReassign")
+    __properties: ClassVar[List[str]] = ["brandId", "brandLogo", "brandName", "backgroundColor", "buttonColor", "buttonTextColor", "emailDisplayName", "disclaimerTitle", "disclaimerDescription", "redirectUrl", "isDefault", "canHideTagLine", "combineAuditTrail", "combineAttachments", "excludeAuditTrailFromEmail", "emailSignedDocument", "documentTimeZone", "showBuiltInFormFields", "allowCustomFieldCreation", "showSharedCustomFields", "hideDecline", "hideSave", "documentExpirySettings", "customDomainSettings", "isDomainVerified", "signatureFrameSettings", "hideReassign"]
 
     @field_validator('email_signed_document')
     def email_signed_document_validate_enum(cls, value):
@@ -171,7 +172,8 @@ class ViewBrandDetails(BaseModel):
             "documentExpirySettings": DocumentExpirySettings.from_dict(obj["documentExpirySettings"]) if obj.get("documentExpirySettings") is not None else None,
             "customDomainSettings": CustomDomainSettings.from_dict(obj["customDomainSettings"]) if obj.get("customDomainSettings") is not None else None,
             "isDomainVerified": obj.get("isDomainVerified"),
-            "signatureFrameSettings": SignatureFrameSettings.from_dict(obj["signatureFrameSettings"]) if obj.get("signatureFrameSettings") is not None else None
+            "signatureFrameSettings": SignatureFrameSettings.from_dict(obj["signatureFrameSettings"]) if obj.get("signatureFrameSettings") is not None else None,
+            "hideReassign": obj.get("hideReassign") if obj.get("hideReassign") is not None else False
         })
         return _obj
 
@@ -214,6 +216,7 @@ class ViewBrandDetails(BaseModel):
             "custom_domain_settings": "(CustomDomainSettings,)",
             "is_domain_verified": "(bool,)",
             "signature_frame_settings": "(SignatureFrameSettings,)",
+            "hide_reassign": "(bool,)",
         }
 
     @classmethod
