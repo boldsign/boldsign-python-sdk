@@ -35,7 +35,8 @@ class ExistingFormField(BaseModel):
     id: Optional[StrictStr] = None
     value: Optional[StrictStr] = None
     is_read_only: Optional[StrictBool] = Field(default=None, alias="isReadOnly")
-    __properties: ClassVar[List[str]] = ["index", "name", "id", "value", "isReadOnly"]
+    template_order: Optional[StrictInt] = Field(default=None, description="Used to apply a prefilled form field value to a specific occurrence of a template when the same template is included multiple times. Values start at 1. Supported only by the Merge and Send API.", alias="templateOrder")
+    __properties: ClassVar[List[str]] = ["index", "name", "id", "value", "isReadOnly", "templateOrder"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,7 +117,8 @@ class ExistingFormField(BaseModel):
             "name": obj.get("name"),
             "id": obj.get("id"),
             "value": obj.get("value"),
-            "isReadOnly": obj.get("isReadOnly")
+            "isReadOnly": obj.get("isReadOnly"),
+            "templateOrder": obj.get("templateOrder")
         })
         return _obj
 
@@ -138,6 +140,7 @@ class ExistingFormField(BaseModel):
             "id": "(str,)",
             "value": "(str,)",
             "is_read_only": "(bool,)",
+            "template_order": "(int,)",
         }
 
     @classmethod
