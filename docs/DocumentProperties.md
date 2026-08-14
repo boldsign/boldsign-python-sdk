@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **application_id** | **str** |  | [optional] 
 **labels** | **List[str]** |  | [optional] 
 **disable_emails** | **bool** |  | [optional] 
+**disable_sms** | **bool** |  | [optional] 
 **enable_print_and_sign** | **bool** |  | [optional] 
 **enable_reassign** | **bool** |  | [optional] 
 **disable_expiry_alert** | **bool** |  | [optional] 

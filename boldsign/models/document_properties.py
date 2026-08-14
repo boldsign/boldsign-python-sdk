@@ -70,6 +70,7 @@ class DocumentProperties(BaseModel):
     application_id: Optional[StrictStr] = Field(default=None, alias="applicationId")
     labels: Optional[List[StrictStr]] = None
     disable_emails: Optional[StrictBool] = Field(default=None, alias="disableEmails")
+    disable_sms: Optional[StrictBool] = Field(default=None, alias="disableSMS")
     enable_print_and_sign: Optional[StrictBool] = Field(default=None, alias="enablePrintAndSign")
     enable_reassign: Optional[StrictBool] = Field(default=None, alias="enableReassign")
     disable_expiry_alert: Optional[StrictBool] = Field(default=None, alias="disableExpiryAlert")
@@ -90,7 +91,7 @@ class DocumentProperties(BaseModel):
     is_combined_audit: Optional[StrictBool] = Field(default=None, alias="isCombinedAudit")
     is_combined_attachment: Optional[StrictBool] = Field(default=None, alias="isCombinedAttachment")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
-    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "inEditingMode", "displayStatus", "enableAllowSignEverywhere", "isCombinedAudit", "isCombinedAttachment", "documentTimeZone"]
+    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "disableSMS", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "inEditingMode", "displayStatus", "enableAllowSignEverywhere", "isCombinedAudit", "isCombinedAttachment", "documentTimeZone"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -246,6 +247,7 @@ class DocumentProperties(BaseModel):
             "applicationId": obj.get("applicationId"),
             "labels": obj.get("labels"),
             "disableEmails": obj.get("disableEmails"),
+            "disableSMS": obj.get("disableSMS"),
             "enablePrintAndSign": obj.get("enablePrintAndSign"),
             "enableReassign": obj.get("enableReassign"),
             "disableExpiryAlert": obj.get("disableExpiryAlert"),
@@ -310,6 +312,7 @@ class DocumentProperties(BaseModel):
             "application_id": "(str,)",
             "labels": "(List[str],)",
             "disable_emails": "(bool,)",
+            "disable_sms": "(bool,)",
             "enable_print_and_sign": "(bool,)",
             "enable_reassign": "(bool,)",
             "disable_expiry_alert": "(bool,)",
