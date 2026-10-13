@@ -153,6 +153,8 @@ class TemplateRole(BaseModel):
                                 data.append((f'{key}[{dict_key}][{idx}]', item))
                         else:
                             data.append((f'{key}[{dict_key}]', str(dict_value)))
+            elif hasattr(value, "isoformat"):
+                data.append((key, value.isoformat()))
             else:
                 data.append((key, json.dumps(value, ensure_ascii=False)))
 
