@@ -72,7 +72,8 @@ class EditDocumentRequest(BaseModel):
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
     enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
-    __properties: ClassVar[List[str]] = ["files", "title", "message", "signers", "cc", "enableSigningOrder", "enableAuditTrailLocalization", "expiryDateType", "expiryValue", "reminderSettings", "disableEmails", "disableSMS", "brandId", "hideDocumentId", "labels", "disableExpiryAlert", "enablePrintAndSign", "enableReassign", "useTextTags", "textTagDefinitions", "documentInfo", "onBehalfOf", "documentDownloadOption", "metaData", "recipientNotificationSettings", "formGroups", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["files", "title", "message", "signers", "cc", "enableSigningOrder", "enableAuditTrailLocalization", "expiryDateType", "expiryValue", "reminderSettings", "disableEmails", "disableSMS", "brandId", "hideDocumentId", "labels", "disableExpiryAlert", "enablePrintAndSign", "enableReassign", "useTextTags", "textTagDefinitions", "documentInfo", "onBehalfOf", "documentDownloadOption", "metaData", "recipientNotificationSettings", "formGroups", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone", "allowCommenting"]
 
     @field_validator('expiry_date_type')
     def expiry_date_type_validate_enum(cls, value):
@@ -213,7 +214,8 @@ class EditDocumentRequest(BaseModel):
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
             "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
             "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
-            "documentTimeZone": obj.get("documentTimeZone")
+            "documentTimeZone": obj.get("documentTimeZone"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -262,6 +264,7 @@ class EditDocumentRequest(BaseModel):
             "group_signer_settings": "(GroupSignerSettings,)",
             "enable_allow_sign_everywhere": "(bool,)",
             "document_time_zone": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod

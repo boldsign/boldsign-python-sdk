@@ -311,10 +311,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -322,12 +363,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -722,10 +763,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -733,12 +815,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -1063,10 +1145,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -1074,12 +1197,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -1404,10 +1527,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -1415,12 +1579,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -1732,10 +1896,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -1743,12 +1948,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -2059,10 +2264,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -2070,12 +2316,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -2665,10 +2911,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -2676,12 +2963,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -3381,10 +3668,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -3392,12 +3720,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -3760,10 +4088,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -3771,12 +4140,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -4808,10 +5177,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -4819,12 +5229,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -5132,10 +5542,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -5143,12 +5594,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -5469,10 +5920,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -5480,12 +5972,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters
@@ -5816,10 +6308,51 @@ class TemplateApi:
         else:
             # Handle a single object
             for param_name, param_type in body_param.openapi_types().items():
+                serialized_param_name = (
+                    body_param.__class__.model_fields[param_name].alias
+                    or param_name
+                )
                 param_value = getattr(body_param, param_name)
                 if param_value is None:
                     continue
+                if isinstance(param_value, list):
+                    for index, item in enumerate(param_value):
+                        if not hasattr(item, "openapi_types"):
+                            continue
+                        contains_file_field = False
+                        for key, value_type in item.openapi_types().items():
+                            if "io.IOBase" in value_type:
+                                contains_file_field = True
 
+                                file_value = getattr(item, key, None)
+
+                                if file_value:
+                                    _content_type = "multipart/form-data"
+                                    has_files = True
+
+                                    excluded_json_fields.add(
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    )
+
+                                    _files[
+                                        f"{serialized_param_name}[{index}].{key}"
+                                    ] = file_value
+                        if contains_file_field:
+                            has_files = True
+                            excluded_json_fields.add(param_name)
+
+                            for key, value in item.to_dict().items():
+                                if key == "file" or value is None:
+                                    continue
+
+                                _form_params.append(
+                                    (
+                                        f"{serialized_param_name}[{index}].{key}",
+                                        json.dumps(value, ensure_ascii=False)
+                                        if isinstance(value, (list, dict))
+                                        else value
+                                    )
+                                )
                 if "io.IOBase" in param_type:
                     has_files = True
                     _content_type = "multipart/form-data"
@@ -5827,12 +6360,12 @@ class TemplateApi:
 
                     if isinstance(param_value, list):
                         for index, item in enumerate(param_value):
-                            _files[f'{param_name}[{index}]'] = item
+                            _files[f'{serialized_param_name}[{index}]'] = item
                     else:
-                        _files[param_name] = param_value
+                        _files[serialized_param_name] = param_value
 
             if has_files is True:
-                _form_params = body_param.to_json_form_params(excluded_json_fields)
+                _form_params.extend( body_param.to_json_form_params(excluded_json_fields) )
 
         # process the path parameters
         # process the query parameters

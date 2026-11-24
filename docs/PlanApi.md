@@ -12,6 +12,8 @@ Method | HTTP request | Description
 
 Gets the Api credits details.
 
+Deprecated: use /v1-beta/plan/credits instead. The response and behaviour of this operation are unchanged and will be removed in a future version.
+
 ### Example
 
 * Api Key Authentication (X-API-KEY):

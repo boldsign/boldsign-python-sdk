@@ -31,10 +31,11 @@ class TemplateFiles(BaseModel):
     TemplateFiles
     """ # noqa: E501
     document_id: Optional[StrictStr] = Field(default=None, alias="documentId")
+    id: Optional[StrictStr] = None
     document_name: Optional[StrictStr] = Field(default=None, alias="documentName")
     order: Optional[StrictInt] = None
     page_count: Optional[StrictInt] = Field(default=None, alias="pageCount")
-    __properties: ClassVar[List[str]] = ["documentId", "documentName", "order", "pageCount"]
+    __properties: ClassVar[List[str]] = ["documentId", "id", "documentName", "order", "pageCount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -114,6 +115,7 @@ class TemplateFiles(BaseModel):
 
         _obj = cls.model_validate({
             "documentId": obj.get("documentId"),
+            "id": obj.get("id"),
             "documentName": obj.get("documentName"),
             "order": obj.get("order"),
             "pageCount": obj.get("pageCount")
@@ -134,6 +136,7 @@ class TemplateFiles(BaseModel):
     def openapi_types(cls) -> Dict[str, str]:
         return {
             "document_id": "(str,)",
+            "id": "(str,)",
             "document_name": "(str,)",
             "order": "(int,)",
             "page_count": "(int,)",

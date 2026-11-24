@@ -81,7 +81,8 @@ class EmbeddedCreateTemplateRequest(BaseModel):
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
     enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
-    __properties: ClassVar[List[str]] = ["title", "redirectUrl", "showToolbar", "viewOption", "showSaveButton", "locale", "showSendButton", "showCreateButton", "showPreviewButton", "showNavigationButtons", "linkValidTill", "showTooltip", "description", "documentTitle", "documentMessage", "files", "fileUrls", "roles", "allowModifyFiles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "useTextTags", "textTagDefinitions", "autoDetectFields", "onBehalfOf", "labels", "templateLabels", "formGroups", "recipientNotificationSettings", "allowedSignatureTypes", "formFieldPermission", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["title", "redirectUrl", "showToolbar", "viewOption", "showSaveButton", "locale", "showSendButton", "showCreateButton", "showPreviewButton", "showNavigationButtons", "linkValidTill", "showTooltip", "description", "documentTitle", "documentMessage", "files", "fileUrls", "roles", "allowModifyFiles", "cc", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "enableReassign", "enablePrintAndSign", "enableSigningOrder", "documentInfo", "useTextTags", "textTagDefinitions", "autoDetectFields", "onBehalfOf", "labels", "templateLabels", "formGroups", "recipientNotificationSettings", "allowedSignatureTypes", "formFieldPermission", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone", "allowCommenting"]
 
     @field_validator('view_option')
     def view_option_validate_enum(cls, value):
@@ -231,7 +232,8 @@ class EmbeddedCreateTemplateRequest(BaseModel):
             "formFieldPermission": FormFieldPermission.from_dict(obj["formFieldPermission"]) if obj.get("formFieldPermission") is not None else None,
             "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
             "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
-            "documentTimeZone": obj.get("documentTimeZone")
+            "documentTimeZone": obj.get("documentTimeZone"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -289,6 +291,7 @@ class EmbeddedCreateTemplateRequest(BaseModel):
             "group_signer_settings": "(GroupSignerSettings,)",
             "enable_allow_sign_everywhere": "(bool,)",
             "document_time_zone": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod

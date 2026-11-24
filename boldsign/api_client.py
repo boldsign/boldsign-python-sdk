@@ -91,7 +91,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'boldsign-python-sdk/3.3.4'
+        self.user_agent = 'boldsign-python-sdk/4.0.0'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):
@@ -572,7 +572,7 @@ class ApiClient:
                 mimetypes.guess_type(filename)[0]
                 or self.get_mime_type(filedata)
             )
-            if 'files' in k:
+            if 'files' in k and '.' not in k:
                 k = 'Files'
             params.append(
                 tuple([k, tuple([filename, filedata, mimetype])])

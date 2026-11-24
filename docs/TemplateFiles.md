@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **document_id** | **str** |  | [optional] 
+**id** | **str** |  | [optional] 
 **document_name** | **str** |  | [optional] 
 **order** | **int** |  | [optional] 
 **page_count** | **int** |  | [optional] 

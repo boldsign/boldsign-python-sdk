@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**file_changes** | [**List[TemplateFileChangeForm]**](TemplateFileChangeForm.md) |  | [optional] 
 **files** | **List[io.IOBase]** |  | [optional] 
 **file_urls** | **List[str]** |  | [optional] 
 **redirect_url** | **str** |  | [optional] 
@@ -52,6 +53,7 @@ Name | Type | Description | Notes
 **group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
 **enable_allow_sign_everywhere** | **bool** |  | [optional] 
 **document_time_zone** | **str** |  | [optional] 
+**allow_commenting** | **bool** |  | [optional] 
 
 ## Example
 

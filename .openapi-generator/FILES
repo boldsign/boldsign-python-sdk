@@ -186,6 +186,9 @@ boldsign/models/template_cc.py
 boldsign/models/template_cc_webhook_model.py
 boldsign/models/template_created.py
 boldsign/models/template_event.py
+boldsign/models/template_file_change.py
+boldsign/models/template_file_change_form.py
+boldsign/models/template_file_change_json.py
 boldsign/models/template_files.py
 boldsign/models/template_form_fields.py
 boldsign/models/template_group_signer.py
@@ -399,6 +402,9 @@ docs/TemplateCC.md
 docs/TemplateCcWebhookModel.md
 docs/TemplateCreated.md
 docs/TemplateEvent.md
+docs/TemplateFileChange.md
+docs/TemplateFileChangeForm.md
+docs/TemplateFileChangeJson.md
 docs/TemplateFiles.md
 docs/TemplateFormFields.md
 docs/TemplateGroupSigner.md

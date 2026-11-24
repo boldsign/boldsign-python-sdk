@@ -53,7 +53,8 @@ class Template(BaseModel):
     template_labels: Optional[List[StrictStr]] = Field(default=None, alias="templateLabels")
     labels: Optional[List[StrictStr]] = None
     brand_id: Optional[StrictStr] = Field(default=None, alias="brandId")
-    __properties: ClassVar[List[str]] = ["documentId", "senderDetail", "ccDetails", "createdDate", "activityDate", "activityBy", "messageTitle", "status", "signerDetails", "enableSigningOrder", "templateName", "templateDescription", "accessType", "accessTid", "isTemplate", "behalfOf", "templateLabels", "labels", "brandId"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["documentId", "senderDetail", "ccDetails", "createdDate", "activityDate", "activityBy", "messageTitle", "status", "signerDetails", "enableSigningOrder", "templateName", "templateDescription", "accessType", "accessTid", "isTemplate", "behalfOf", "templateLabels", "labels", "brandId", "allowCommenting"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -170,7 +171,8 @@ class Template(BaseModel):
             "behalfOf": BehalfOf.from_dict(obj["behalfOf"]) if obj.get("behalfOf") is not None else None,
             "templateLabels": obj.get("templateLabels"),
             "labels": obj.get("labels"),
-            "brandId": obj.get("brandId")
+            "brandId": obj.get("brandId"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -206,6 +208,7 @@ class Template(BaseModel):
             "template_labels": "(List[str],)",
             "labels": "(List[str],)",
             "brand_id": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod

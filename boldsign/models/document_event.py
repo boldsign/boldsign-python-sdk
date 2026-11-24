@@ -63,7 +63,8 @@ class DocumentEvent(BaseModel):
     group_signer_settings: Optional[GroupSignerSettingsWebhookModel] = Field(default=None, alias="groupSignerSettings")
     enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
-    __properties: ClassVar[List[str]] = ["object", "documentId", "messageTitle", "documentDescription", "status", "senderDetail", "signerDetails", "ccDetails", "onBehalfOf", "createdDate", "expiryDate", "enableSigningOrder", "disableEmails", "revokeMessage", "errorMessage", "labels", "isCombinedAudit", "isCombinedAttachment", "brandId", "documentDownloadOption", "metaData", "failedDeliveryMode", "behalfOf", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["object", "documentId", "messageTitle", "documentDescription", "status", "senderDetail", "signerDetails", "ccDetails", "onBehalfOf", "createdDate", "expiryDate", "enableSigningOrder", "disableEmails", "revokeMessage", "errorMessage", "labels", "isCombinedAudit", "isCombinedAttachment", "brandId", "documentDownloadOption", "metaData", "failedDeliveryMode", "behalfOf", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone", "allowCommenting"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -199,7 +200,8 @@ class DocumentEvent(BaseModel):
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
             "groupSignerSettings": GroupSignerSettingsWebhookModel.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
             "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
-            "documentTimeZone": obj.get("documentTimeZone")
+            "documentTimeZone": obj.get("documentTimeZone"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -243,6 +245,7 @@ class DocumentEvent(BaseModel):
             "group_signer_settings": "(GroupSignerSettingsWebhookModel,)",
             "enable_allow_sign_everywhere": "(bool,)",
             "document_time_zone": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod

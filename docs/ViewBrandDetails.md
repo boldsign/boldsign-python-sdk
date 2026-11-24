@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **is_domain_verified** | **bool** |  | [optional] 
 **signature_frame_settings** | [**SignatureFrameSettings**](SignatureFrameSettings.md) |  | [optional] 
 **hide_reassign** | **bool** |  | [optional] [default to False]
+**hide_commenting** | **bool** |  | [optional] [default to True]
 
 ## Example
 
