@@ -42,7 +42,8 @@ class RecipientNotificationSettings(BaseModel):
     edit_recipient: Optional[StrictBool] = Field(default=True, alias="editRecipient")
     edit_document: Optional[StrictBool] = Field(default=True, alias="editDocument")
     viewed: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["signatureRequest", "declined", "revoked", "signed", "completed", "expired", "reassigned", "deleted", "reminders", "editRecipient", "editDocument", "viewed"]
+    comment_on_document: Optional[StrictBool] = Field(default=True, alias="commentOnDocument")
+    __properties: ClassVar[List[str]] = ["signatureRequest", "declined", "revoked", "signed", "completed", "expired", "reassigned", "deleted", "reminders", "editRecipient", "editDocument", "viewed", "commentOnDocument"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -132,7 +133,8 @@ class RecipientNotificationSettings(BaseModel):
             "reminders": obj.get("reminders") if obj.get("reminders") is not None else True,
             "editRecipient": obj.get("editRecipient") if obj.get("editRecipient") is not None else True,
             "editDocument": obj.get("editDocument") if obj.get("editDocument") is not None else True,
-            "viewed": obj.get("viewed")
+            "viewed": obj.get("viewed"),
+            "commentOnDocument": obj.get("commentOnDocument") if obj.get("commentOnDocument") is not None else True
         })
         return _obj
 
@@ -161,6 +163,7 @@ class RecipientNotificationSettings(BaseModel):
             "edit_recipient": "(bool,)",
             "edit_document": "(bool,)",
             "viewed": "(bool,)",
+            "comment_on_document": "(bool,)",
         }
 
     @classmethod

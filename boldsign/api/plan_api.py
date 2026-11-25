@@ -54,8 +54,9 @@ class PlanApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BillingViewModel:
-        """Gets the Api credits details.
+        """(Deprecated) Gets the Api credits details.
 
+        Deprecated: use /v1-beta/plan/credits instead. The response and behaviour of this operation are unchanged and will be removed in a future version.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -78,6 +79,7 @@ class PlanApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /v1/plan/apiCreditsCount is deprecated.", DeprecationWarning)
 
         _param = self._api_credits_count_serialize(
             _request_auth=_request_auth,
@@ -117,8 +119,9 @@ class PlanApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BillingViewModel]:
-        """Gets the Api credits details.
+        """(Deprecated) Gets the Api credits details.
 
+        Deprecated: use /v1-beta/plan/credits instead. The response and behaviour of this operation are unchanged and will be removed in a future version.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -141,6 +144,7 @@ class PlanApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /v1/plan/apiCreditsCount is deprecated.", DeprecationWarning)
 
         _param = self._api_credits_count_serialize(
             _request_auth=_request_auth,
@@ -180,8 +184,9 @@ class PlanApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Gets the Api credits details.
+        """(Deprecated) Gets the Api credits details.
 
+        Deprecated: use /v1-beta/plan/credits instead. The response and behaviour of this operation are unchanged and will be removed in a future version.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -204,6 +209,7 @@ class PlanApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /v1/plan/apiCreditsCount is deprecated.", DeprecationWarning)
 
         _param = self._api_credits_count_serialize(
             _request_auth=_request_auth,

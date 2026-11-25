@@ -29,6 +29,7 @@ from boldsign.models.group_signer_settings import GroupSignerSettings
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.reminder_settings import ReminderSettings
 from boldsign.models.role import Role
+from boldsign.models.template_file_change import TemplateFileChange
 from boldsign.models.text_tag_definition import TextTagDefinition
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
@@ -55,6 +56,7 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
     template_ids: Optional[List[StrictStr]] = Field(default=None, alias="templateIds")
     use_text_tags: Optional[StrictBool] = Field(default=None, alias="useTextTags")
     text_tag_definitions: Optional[List[TextTagDefinition]] = Field(default=None, alias="textTagDefinitions")
+    file_changes: Optional[List[TemplateFileChange]] = Field(default=None, alias="fileChanges")
     document_id: Optional[StrictStr] = Field(default=None, alias="documentId")
     title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=256)]] = None
     message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=5000)]] = None
@@ -90,7 +92,8 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
     enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
-    __properties: ClassVar[List[str]] = ["files", "fileUrls", "redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "sendLinkValidTill", "showTooltip", "templateIds", "useTextTags", "textTagDefinitions", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["files", "fileUrls", "redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "sendLinkValidTill", "showTooltip", "templateIds", "useTextTags", "textTagDefinitions", "fileChanges", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone", "allowCommenting"]
 
     @field_validator('send_view_option')
     def send_view_option_validate_enum(cls, value):
@@ -235,6 +238,7 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
             "templateIds": obj.get("templateIds"),
             "useTextTags": obj.get("useTextTags"),
             "textTagDefinitions": [TextTagDefinition.from_dict(_item) for _item in obj["textTagDefinitions"]] if obj.get("textTagDefinitions") is not None else None,
+            "fileChanges": [TemplateFileChange.from_dict(_item) for _item in obj["fileChanges"]] if obj.get("fileChanges") is not None else None,
             "documentId": obj.get("documentId"),
             "title": obj.get("title"),
             "message": obj.get("message"),
@@ -269,7 +273,8 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
             "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
             "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
-            "documentTimeZone": obj.get("documentTimeZone")
+            "documentTimeZone": obj.get("documentTimeZone"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -301,6 +306,7 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
             "template_ids": "(List[str],)",
             "use_text_tags": "(bool,)",
             "text_tag_definitions": "(List[TextTagDefinition],)",
+            "file_changes": "(List[TemplateFileChange],)",
             "document_id": "(str,)",
             "title": "(str,)",
             "message": "(str,)",
@@ -336,6 +342,7 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
             "group_signer_settings": "(GroupSignerSettings,)",
             "enable_allow_sign_everywhere": "(bool,)",
             "document_time_zone": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod
@@ -345,6 +352,7 @@ class EmbeddedMergeTemplateFormRequest(BaseModel):
             "file_urls",
             "template_ids",
             "text_tag_definitions",
+            "file_changes",
             "roles",
             "labels",
             "cc",

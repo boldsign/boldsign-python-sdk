@@ -91,7 +91,8 @@ class DocumentProperties(BaseModel):
     is_combined_audit: Optional[StrictBool] = Field(default=None, alias="isCombinedAudit")
     is_combined_attachment: Optional[StrictBool] = Field(default=None, alias="isCombinedAttachment")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
-    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "disableSMS", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "inEditingMode", "displayStatus", "enableAllowSignEverywhere", "isCombinedAudit", "isCombinedAttachment", "documentTimeZone"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["documentId", "brandId", "messageTitle", "documentDescription", "status", "files", "senderDetail", "signerDetails", "formGroups", "commonFields", "behalfOf", "ccDetails", "reminderSettings", "reassign", "documentHistory", "activityBy", "activityDate", "activityAction", "createdDate", "expiryDays", "expiryDate", "enableSigningOrder", "isDeleted", "revokeMessage", "declineMessage", "applicationId", "labels", "disableEmails", "disableSMS", "enablePrintAndSign", "enableReassign", "disableExpiryAlert", "hideDocumentId", "expiryDateType", "expiryValue", "documentDownloadOption", "metaData", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowedSignatureTypes", "groupSignerSettings", "inEditingMode", "displayStatus", "enableAllowSignEverywhere", "isCombinedAudit", "isCombinedAttachment", "documentTimeZone", "allowCommenting"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -109,8 +110,8 @@ class DocumentProperties(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Viewed', 'Signed', 'Reassigned', 'Declined', 'Revoked', 'Expired', 'Downloaded', 'DownloadedForPrintSign', 'InitiatePrintAndSign', 'InitiateFormSign', 'CancelPrintAndSign', 'CompletePrintAndSign', 'Reviewed', 'None', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'DocumentScheduled']):
-            raise ValueError("must be one of enum values ('Viewed', 'Signed', 'Reassigned', 'Declined', 'Revoked', 'Expired', 'Downloaded', 'DownloadedForPrintSign', 'InitiatePrintAndSign', 'InitiateFormSign', 'CancelPrintAndSign', 'CompletePrintAndSign', 'Reviewed', 'None', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'DocumentScheduled')")
+        if value not in set(['Viewed', 'Signed', 'Reassigned', 'Declined', 'Revoked', 'Expired', 'Downloaded', 'DownloadedForPrintSign', 'InitiatePrintAndSign', 'InitiateFormSign', 'CancelPrintAndSign', 'CompletePrintAndSign', 'Reviewed', 'None', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'DocumentScheduled', 'CommentAdded']):
+            raise ValueError("must be one of enum values ('Viewed', 'Signed', 'Reassigned', 'Declined', 'Revoked', 'Expired', 'Downloaded', 'DownloadedForPrintSign', 'InitiatePrintAndSign', 'InitiateFormSign', 'CancelPrintAndSign', 'CompletePrintAndSign', 'Reviewed', 'None', 'EditingInitiated', 'EditingCancelled', 'EditingCompleted', 'DocumentScheduled', 'CommentAdded')")
         return value
 
     @field_validator('expiry_date_type')
@@ -269,7 +270,8 @@ class DocumentProperties(BaseModel):
             "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
             "isCombinedAudit": obj.get("isCombinedAudit"),
             "isCombinedAttachment": obj.get("isCombinedAttachment"),
-            "documentTimeZone": obj.get("documentTimeZone")
+            "documentTimeZone": obj.get("documentTimeZone"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -335,6 +337,7 @@ class DocumentProperties(BaseModel):
             "is_combined_audit": "(bool,)",
             "is_combined_attachment": "(bool,)",
             "document_time_zone": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod

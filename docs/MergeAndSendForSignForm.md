@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **template_ids** | **List[str]** |  | [optional] 
 **use_text_tags** | **bool** |  | [optional] 
 **text_tag_definitions** | [**List[TextTagDefinition]**](TextTagDefinition.md) |  | [optional] 
+**file_changes** | [**List[TemplateFileChange]**](TemplateFileChange.md) |  | [optional] 
 **document_id** | **str** |  | [optional] 
 **title** | **str** |  | [optional] 
 **message** | **str** |  | [optional] 
@@ -45,6 +46,7 @@ Name | Type | Description | Notes
 **group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
 **enable_allow_sign_everywhere** | **bool** |  | [optional] 
 **document_time_zone** | **str** |  | [optional] 
+**allow_commenting** | **bool** |  | [optional] 
 
 ## Example
 

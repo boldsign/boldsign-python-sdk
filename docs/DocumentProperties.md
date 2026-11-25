@@ -54,6 +54,7 @@ Name | Type | Description | Notes
 **is_combined_audit** | **bool** |  | [optional] 
 **is_combined_attachment** | **bool** |  | [optional] 
 **document_time_zone** | **str** |  | [optional] 
+**allow_commenting** | **bool** |  | [optional] 
 
 ## Example
 

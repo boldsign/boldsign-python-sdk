@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.3.4"
+__version__ = "4.0.0"
 
 # import apis into sdk package
 from boldsign.api.branding_api import BrandingApi
@@ -207,6 +207,9 @@ from boldsign.models.template_cc import TemplateCC
 from boldsign.models.template_cc_webhook_model import TemplateCcWebhookModel
 from boldsign.models.template_created import TemplateCreated
 from boldsign.models.template_event import TemplateEvent
+from boldsign.models.template_file_change import TemplateFileChange
+from boldsign.models.template_file_change_form import TemplateFileChangeForm
+from boldsign.models.template_file_change_json import TemplateFileChangeJson
 from boldsign.models.template_files import TemplateFiles
 from boldsign.models.template_form_fields import TemplateFormFields
 from boldsign.models.template_group_signer import TemplateGroupSigner

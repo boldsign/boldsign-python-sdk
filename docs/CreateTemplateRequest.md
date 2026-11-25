@@ -35,6 +35,7 @@ Name | Type | Description | Notes
 **group_signer_settings** | [**GroupSignerSettings**](GroupSignerSettings.md) |  | [optional] 
 **enable_allow_sign_everywhere** | **bool** |  | [optional] 
 **document_time_zone** | **str** |  | [optional] 
+**allow_commenting** | **bool** |  | [optional] 
 
 ## Example
 

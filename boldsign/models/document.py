@@ -51,7 +51,8 @@ class Document(BaseModel):
     scheduled_send_time: Optional[StrictInt] = Field(default=None, alias="scheduledSendTime")
     in_editing_mode: Optional[StrictBool] = Field(default=None, alias="inEditingMode")
     display_status: Optional[StrictStr] = Field(default=None, alias="displayStatus")
-    __properties: ClassVar[List[str]] = ["documentId", "senderDetail", "ccDetails", "createdDate", "activityDate", "activityBy", "messageTitle", "status", "signerDetails", "expiryDate", "enableSigningOrder", "isDeleted", "labels", "cursor", "brandId", "scheduledSendTime", "inEditingMode", "displayStatus"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["documentId", "senderDetail", "ccDetails", "createdDate", "activityDate", "activityBy", "messageTitle", "status", "signerDetails", "expiryDate", "enableSigningOrder", "isDeleted", "labels", "cursor", "brandId", "scheduledSendTime", "inEditingMode", "displayStatus", "allowCommenting"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -157,7 +158,8 @@ class Document(BaseModel):
             "brandId": obj.get("brandId"),
             "scheduledSendTime": obj.get("scheduledSendTime"),
             "inEditingMode": obj.get("inEditingMode"),
-            "displayStatus": obj.get("displayStatus")
+            "displayStatus": obj.get("displayStatus"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -192,6 +194,7 @@ class Document(BaseModel):
             "scheduled_send_time": "(int,)",
             "in_editing_mode": "(bool,)",
             "display_status": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod

@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **template_labels** | **List[str]** |  | [optional] 
 **labels** | **List[str]** |  | [optional] 
 **brand_id** | **str** |  | [optional] 
+**allow_commenting** | **bool** |  | [optional] 
 
 ## Example
 

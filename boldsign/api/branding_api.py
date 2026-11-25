@@ -329,6 +329,7 @@ class BrandingApi:
         signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
         signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         hide_reassign: Annotated[Optional[StrictBool], Field(description="Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.")] = None,
+        hide_commenting: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -413,6 +414,8 @@ class BrandingApi:
         :type signature_frame_settings_show_time_stamp: bool
         :param hide_reassign: Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.
         :type hide_reassign: bool
+        :param hide_commenting:
+        :type hide_commenting: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -470,6 +473,7 @@ class BrandingApi:
             signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
             signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             hide_reassign=hide_reassign,
+            hide_commenting=hide_commenting,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -530,6 +534,7 @@ class BrandingApi:
         signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
         signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         hide_reassign: Annotated[Optional[StrictBool], Field(description="Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.")] = None,
+        hide_commenting: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -614,6 +619,8 @@ class BrandingApi:
         :type signature_frame_settings_show_time_stamp: bool
         :param hide_reassign: Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.
         :type hide_reassign: bool
+        :param hide_commenting:
+        :type hide_commenting: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -671,6 +678,7 @@ class BrandingApi:
             signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
             signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             hide_reassign=hide_reassign,
+            hide_commenting=hide_commenting,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -731,6 +739,7 @@ class BrandingApi:
         signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
         signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         hide_reassign: Annotated[Optional[StrictBool], Field(description="Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.")] = None,
+        hide_commenting: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -815,6 +824,8 @@ class BrandingApi:
         :type signature_frame_settings_show_time_stamp: bool
         :param hide_reassign: Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.
         :type hide_reassign: bool
+        :param hide_commenting:
+        :type hide_commenting: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -872,6 +883,7 @@ class BrandingApi:
             signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
             signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             hide_reassign=hide_reassign,
+            hide_commenting=hide_commenting,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -927,6 +939,7 @@ class BrandingApi:
         signature_frame_settings_show_recipient_email,
         signature_frame_settings_show_time_stamp,
         hide_reassign,
+        hide_commenting,
         _request_auth,
         _content_type,
         _headers,
@@ -1017,6 +1030,8 @@ class BrandingApi:
             _form_params.append(('SignatureFrameSettings.ShowTimeStamp', signature_frame_settings_show_time_stamp))
         if hide_reassign is not None:
             _form_params.append(('HideReassign', hide_reassign))
+        if hide_commenting is not None:
+            _form_params.append(('HideCommenting', hide_commenting))
         # process the body parameter
 
 
@@ -1447,6 +1462,7 @@ class BrandingApi:
         signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
         signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         hide_reassign: Annotated[Optional[StrictBool], Field(description="Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.")] = None,
+        hide_commenting: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1533,6 +1549,8 @@ class BrandingApi:
         :type signature_frame_settings_show_time_stamp: bool
         :param hide_reassign: Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.
         :type hide_reassign: bool
+        :param hide_commenting:
+        :type hide_commenting: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1591,6 +1609,7 @@ class BrandingApi:
             signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
             signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             hide_reassign=hide_reassign,
+            hide_commenting=hide_commenting,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1652,6 +1671,7 @@ class BrandingApi:
         signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
         signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         hide_reassign: Annotated[Optional[StrictBool], Field(description="Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.")] = None,
+        hide_commenting: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1738,6 +1758,8 @@ class BrandingApi:
         :type signature_frame_settings_show_time_stamp: bool
         :param hide_reassign: Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.
         :type hide_reassign: bool
+        :param hide_commenting:
+        :type hide_commenting: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1796,6 +1818,7 @@ class BrandingApi:
             signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
             signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             hide_reassign=hide_reassign,
+            hide_commenting=hide_commenting,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1857,6 +1880,7 @@ class BrandingApi:
         signature_frame_settings_show_recipient_email: Optional[StrictBool] = None,
         signature_frame_settings_show_time_stamp: Optional[StrictBool] = None,
         hide_reassign: Annotated[Optional[StrictBool], Field(description="Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.")] = None,
+        hide_commenting: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1943,6 +1967,8 @@ class BrandingApi:
         :type signature_frame_settings_show_time_stamp: bool
         :param hide_reassign: Enabling this option disables reassignment for all new documents. This setting cannot be changed during document creation.
         :type hide_reassign: bool
+        :param hide_commenting:
+        :type hide_commenting: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2001,6 +2027,7 @@ class BrandingApi:
             signature_frame_settings_show_recipient_email=signature_frame_settings_show_recipient_email,
             signature_frame_settings_show_time_stamp=signature_frame_settings_show_time_stamp,
             hide_reassign=hide_reassign,
+            hide_commenting=hide_commenting,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2057,6 +2084,7 @@ class BrandingApi:
         signature_frame_settings_show_recipient_email,
         signature_frame_settings_show_time_stamp,
         hide_reassign,
+        hide_commenting,
         _request_auth,
         _content_type,
         _headers,
@@ -2151,6 +2179,8 @@ class BrandingApi:
             _form_params.append(('SignatureFrameSettings.ShowTimeStamp', signature_frame_settings_show_time_stamp))
         if hide_reassign is not None:
             _form_params.append(('HideReassign', hide_reassign))
+        if hide_commenting is not None:
+            _form_params.append(('HideCommenting', hide_commenting))
         # process the body parameter
 
 

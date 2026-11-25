@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **edit_recipient** | **bool** |  | [optional] [default to True]
 **edit_document** | **bool** |  | [optional] [default to True]
 **viewed** | **bool** |  | [optional] 
+**comment_on_document** | **bool** |  | [optional] [default to True]
 
 ## Example
 

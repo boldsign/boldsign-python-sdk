@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **scheduled_send_time** | **int** |  | [optional] 
 **in_editing_mode** | **bool** |  | [optional] 
 **display_status** | **str** |  | [optional] 
+**allow_commenting** | **bool** |  | [optional] 
 
 ## Example
 

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **authentication_failed** | **bool** |  | [optional] [default to True]
 **reminders** | **bool** |  | [optional] [default to True]
 **attach_signed_document** | **bool** |  | [optional] [default to False]
+**comment_on_document** | **bool** |  | [optional] [default to True]
 
 ## Example
 

@@ -29,6 +29,7 @@ from boldsign.models.group_signer_settings import GroupSignerSettings
 from boldsign.models.recipient_notification_settings import RecipientNotificationSettings
 from boldsign.models.reminder_settings import ReminderSettings
 from boldsign.models.role import Role
+from boldsign.models.template_file_change_form import TemplateFileChangeForm
 from typing import Optional, Set, Tuple
 from typing_extensions import Self
 import io
@@ -39,6 +40,7 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
     """
     EmbeddedSendTemplateFormRequest
     """ # noqa: E501
+    file_changes: Optional[List[TemplateFileChangeForm]] = Field(default=None, alias="fileChanges")
     files: Optional[List[Union[StrictBytes, StrictStr]]] = None
     file_urls: Optional[List[StrictStr]] = Field(default=None, alias="fileUrls")
     redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
@@ -86,7 +88,8 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
     group_signer_settings: Optional[GroupSignerSettings] = Field(default=None, alias="groupSignerSettings")
     enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
-    __properties: ClassVar[List[str]] = ["files", "fileUrls", "redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "sendLinkValidTill", "showTooltip", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["fileChanges", "files", "fileUrls", "redirectUrl", "showToolbar", "sendViewOption", "showSaveButton", "locale", "showSendButton", "showPreviewButton", "showNavigationButtons", "sendLinkValidTill", "showTooltip", "documentId", "title", "message", "roles", "brandId", "labels", "disableEmails", "disableSMS", "hideDocumentId", "reminderSettings", "cc", "expiryDays", "expiryDateType", "expiryValue", "enablePrintAndSign", "enableReassign", "enableSigningOrder", "disableExpiryAlert", "documentInfo", "onBehalfOf", "isSandbox", "roleRemovalIndices", "documentDownloadOption", "metaData", "formGroups", "removeFormFields", "recipientNotificationSettings", "enableAuditTrailLocalization", "downloadFileName", "scheduledSendTime", "allowScheduledSend", "allowedSignatureTypes", "groupSignerSettings", "enableAllowSignEverywhere", "documentTimeZone", "allowCommenting"]
 
     @field_validator('send_view_option')
     def send_view_option_validate_enum(cls, value):
@@ -216,6 +219,7 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "fileChanges": [TemplateFileChangeForm.from_dict(_item) for _item in obj["fileChanges"]] if obj.get("fileChanges") is not None else None,
             "files": obj.get("files"),
             "fileUrls": obj.get("fileUrls"),
             "redirectUrl": obj.get("redirectUrl"),
@@ -262,7 +266,8 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
             "allowedSignatureTypes": obj.get("allowedSignatureTypes"),
             "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
             "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
-            "documentTimeZone": obj.get("documentTimeZone")
+            "documentTimeZone": obj.get("documentTimeZone"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -279,6 +284,7 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
     @classmethod
     def openapi_types(cls) -> Dict[str, str]:
         return {
+            "file_changes": "(List[TemplateFileChangeForm],)",
             "files": "(List[io.IOBase],)",
             "file_urls": "(List[str],)",
             "redirect_url": "(str,)",
@@ -326,11 +332,13 @@ class EmbeddedSendTemplateFormRequest(BaseModel):
             "group_signer_settings": "(GroupSignerSettings,)",
             "enable_allow_sign_everywhere": "(bool,)",
             "document_time_zone": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod
     def openapi_type_is_array(cls, property_name: str) -> bool:
         return property_name in [
+            "file_changes",
             "files",
             "file_urls",
             "roles",

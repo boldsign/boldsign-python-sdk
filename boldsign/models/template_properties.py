@@ -75,7 +75,8 @@ class TemplateProperties(BaseModel):
     sharing: Optional[TemplateSharing] = None
     enable_allow_sign_everywhere: Optional[StrictBool] = Field(default=None, alias="enableAllowSignEverywhere")
     document_time_zone: Optional[StrictStr] = Field(default=None, alias="documentTimeZone")
-    __properties: ClassVar[List[str]] = ["templateId", "title", "description", "documentTitle", "documentMessage", "files", "roles", "formGroups", "commonFields", "cCDetails", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "EnablePrintAndSign", "enableSigningOrder", "createdDate", "createdBy", "sharedTemplateDetail", "documentInfo", "labels", "templateLabels", "behalfOf", "documentDownloadOption", "recipientNotificationSettings", "formFieldPermission", "allowedSignatureTypes", "groupSignerSettings", "sharing", "enableAllowSignEverywhere", "documentTimeZone"]
+    allow_commenting: Optional[StrictBool] = Field(default=None, alias="allowCommenting")
+    __properties: ClassVar[List[str]] = ["templateId", "title", "description", "documentTitle", "documentMessage", "files", "roles", "formGroups", "commonFields", "cCDetails", "brandId", "allowMessageEditing", "allowNewRoles", "allowNewFiles", "allowModifyFiles", "enableReassign", "EnablePrintAndSign", "enableSigningOrder", "createdDate", "createdBy", "sharedTemplateDetail", "documentInfo", "labels", "templateLabels", "behalfOf", "documentDownloadOption", "recipientNotificationSettings", "formFieldPermission", "allowedSignatureTypes", "groupSignerSettings", "sharing", "enableAllowSignEverywhere", "documentTimeZone", "allowCommenting"]
 
     @field_validator('document_download_option')
     def document_download_option_validate_enum(cls, value):
@@ -207,7 +208,8 @@ class TemplateProperties(BaseModel):
             "groupSignerSettings": GroupSignerSettings.from_dict(obj["groupSignerSettings"]) if obj.get("groupSignerSettings") is not None else None,
             "sharing": TemplateSharing.from_dict(obj["sharing"]) if obj.get("sharing") is not None else None,
             "enableAllowSignEverywhere": obj.get("enableAllowSignEverywhere"),
-            "documentTimeZone": obj.get("documentTimeZone")
+            "documentTimeZone": obj.get("documentTimeZone"),
+            "allowCommenting": obj.get("allowCommenting")
         })
         return _obj
 
@@ -257,6 +259,7 @@ class TemplateProperties(BaseModel):
             "sharing": "(TemplateSharing,)",
             "enable_allow_sign_everywhere": "(bool,)",
             "document_time_zone": "(str,)",
+            "allow_commenting": "(bool,)",
         }
 
     @classmethod
